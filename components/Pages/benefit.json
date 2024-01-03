@@ -1,0 +1,56 @@
+[
+  {
+    "link": "/images/Landing/Special/chevrons-up.svg",
+    "blurLink": "/images/Landing/Special/chevrons-up.png",
+    "darkLink": "/images/Landing/Special/white-chevrons-up.svg",
+    "darkBlurLink": "/images/Landing/Special/white-chevrons-up.png",
+    "title": "High Profits",
+    "content": "An investment model trading only 8\ntried & tested products with\nmaximum results.",
+    "mobile_content": "An invest model trading only 8 tried &\ntested products with maximum results."
+  },
+  {
+    "link": "/images/Landing/Special/check-circle.svg",
+    "blurLink": "/images/Landing/Special/check-circle.png",
+    "darkLink": "/images/Landing/Special/white-check-circle.svg",
+    "darkBlurLink": "/images/Landing/Special/white-check-circle.png",
+    "title": "Cost Efficient",
+    "content": "Accessible pricing model to\na professionally managed portfolio\nwith higher returnability than any\nother generic fund.",
+    "mobile_content": "Accessible pricing model to a professionally\nmanaged portfolio with higher returnability\nthan any other generic fund."
+  },
+  {
+    "link": "/images/Landing/Special/radio.svg",
+    "blurLink": "/images/Landing/Special/radio.png",
+    "darkLink": "/images/Landing/Special/white-radio.svg",
+    "darkBlurLink": "/images/Landing/Special/white-radio.png",
+    "title": "Seamless Onboarding",
+    "content": "Join within a few clicks, no crypto\nexpertise needed.",
+    "mobile_content": "Join within a few clicks, no crypto expertise\nneeded."
+  },
+  {
+    "link": "/images/Landing/Special/lock.svg",
+    "blurLink": "/images/Landing/Special/lock.png",
+    "darkLink": "/images/Landing/Special/white-lock.svg",
+    "darkBlurLink": "/images/Landing/Special/white-lock.png",
+    "title": "Secure",
+    "content": "Transparent returns sent straight to\nyour smart wallet",
+    "mobile_content": "Transparent returns sent straight to your\nsmart wallet."
+  },
+  {
+    "link": "/images/Landing/Special/user-check.svg",
+    "blurLink": "/images/Landing/Special/user-check.png",
+    "darkLink": "/images/Landing/Special/white-user-check.svg",
+    "darkBlurLink": "/images/Landing/Special/white-user-check.png",
+    "title": "Ownership",
+    "content": "utilize digital NFTs, ensuring a secure\nand tamper-free proof of ownership,\nsurpassing the vulnerabilites of\ntraditional paper-based certificates.",
+    "mobile_content": "utilize digital NFTs, ensuring a secure and\ntamper-free proof of ownership, surpassing\nthe vulnerabilities of traditional paper-\nbased certificates."
+  },
+  {
+    "link": "/images/Landing/Special/zap.svg",
+    "blurLink": "/images/Landing/Special/zap.png",
+    "darkLink": "/images/Landing/Special/white-zap.svg",
+    "darkBlurLink": "/images/Landing/Special/white-zap.png",
+    "title": "Futuristic",
+    "content": "The investment is in Ethereum and\nprofits are returned to your smart\nwallet on the portal.",
+    "mobile_content": "The investment is in Ethereum and profits\nare returned to your smart wallet on the\nportal."
+  }
+]

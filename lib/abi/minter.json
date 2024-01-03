@@ -1,0 +1,16 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_target", "type": "address" },
+      { "internalType": "uint256", "name": "_quantity", "type": "uint256" },
+      { "internalType": "address", "name": "_to", "type": "address" },
+      { "internalType": "address", "name": "_registry", "type": "address" },
+      { "internalType": "address", "name": "_implementation", "type": "address" },
+      { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+    ],
+    "name": "purchase",
+    "outputs": [{ "internalType": "uint256", "name": "start", "type": "uint256" }],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]

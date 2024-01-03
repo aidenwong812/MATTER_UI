@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Woodford Bourne Bold";
+  src: url("/fonts/Woodford Bourne/WoodfordBournePro-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Woodford Bourne SemiBold";
+  src: url("/fonts/Woodford Bourne/WoodfordBournePro-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Woodford Bourne Regular";
+  src: url("/fonts/Woodford Bourne/WoodfordBournePro-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Woodford Bourne Medium";
+  src: url("/fonts/Woodford Bourne/WoodfordBournePro-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins Light";
+  src: url("/fonts/Poppins/Poppins-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins Medium";
+  src: url("/fonts/Poppins/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins SemiBold";
+  src: url("/fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins Bold";
+  src: url("/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+html,
+body {
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F0F8FA;
+  border-radius: 10px;
+  border: 1px solid #54B3C3;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  background-color: #54B3C3;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.scroll-snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 640px) {
+  .scroll-snap-x-mandatory {
+    scroll-padding-left: 2rem;
+    scroll-padding-right: 2rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button.xmint-btn {
+  background-color: blueviolet;
+}
+
+.swiper-pagination-bullet {
+  border: 1px solid white !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+}
