@@ -8,13 +8,15 @@ const LandingPage = () => (
             flex items-center justify-around"
     >
       <div>
-        <p className="font-bold text-[80px] leading-[100%]">OASIS</p>
-        <p className="text-[29px] text-gray_6">Web Platform</p>
+        <p className="font-bold md:text-[48px] lg:text-[64px] xl:text-[80px] leading-[100%]">
+          OASIS
+        </p>
+        <p className="md:text-[18px] lg:text-[24px] xl:text-[30px] text-gray_6">Web Platform</p>
       </div>
       <Image
         link="/images/cover_logo.svg"
         blurLink="/images/cover_logo.png"
-        containerClasses="w-[808px] aspect-[808/138]"
+        containerClasses="md:w-[363px] lg:w-[484px] xl:w-[808px] aspect-[808/138]"
         alt="not found"
       />
     </div>
