@@ -1,6 +1,8 @@
 import { usePrivy, useWallets } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import React, { createContext, useContext, useEffect, useMemo } from "react"
+import useEthPrice from "../hooks/useEthPrice"
+import useBalance from "../hooks/useBalance"
 
 const UserContext = createContext(null)
 
@@ -9,6 +11,12 @@ const UserProvider = ({ children }) => {
   const { user, ready, authenticated } = usePrivy()
   const router = useRouter()
   const pathname = router.pathname
+  const { getUsdConversion, ethPrice } = useEthPrice()
+  const { balance } = useBalance()
+
+  const usdBalance = useMemo(() => {
+    return getUsdConversion(balance || 0)
+  }, [getUsdConversion, balance])
 
   const isPrivatePage = pathname !== '/'
 
@@ -35,12 +43,18 @@ const UserProvider = ({ children }) => {
     () => ({ 
       connectedWallet, 
       username,
-      loading
+      loading,
+      getUsdConversion, 
+      ethPrice,
+      usdBalance
     }),
     [
       connectedWallet, 
       username,
-      loading
+      loading,
+      getUsdConversion, 
+      ethPrice,
+      usdBalance
     ],
   )
 
