@@ -13,10 +13,13 @@ module.exports = {
   theme: {
     colors: {
       white: '#ffffff',
+      black: '#000000',
       gray_2: "#E4E4E4",
       gray_3: "#CDCDCD",
+      gray_5: "#8C8C8C",
       gray_6: '#767676',
-      gray_8: '#1F1F1F'
+      gray_8: '#1F1F1F',
+      link: '#2A64F5'
     },
     container: {
       center: true,
