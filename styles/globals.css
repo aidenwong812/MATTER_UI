@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Poppins Bold";
-  src: url("/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-family: "Hedvig Regular";
+  src: url("/fonts/Hedvig_Letters_Sans/HedvigLettersSans-Regular.ttf") format("truetype");
 }
 
 @layer utilities {
@@ -22,8 +22,7 @@ body {
   background-color: black;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Hedvig Regular";
 }
 
 p {

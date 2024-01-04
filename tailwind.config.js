@@ -11,12 +11,16 @@ module.exports = {
     "./shared/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    colors: {
+      white: '#ffffff',
+      gray_6: '#767676'
+    },
     container: {
       center: true,
     },
     extend: {
       fontFamily: {
-       
+        hedvig: ["Hedvig Regular", "sans-serif"]
       },
       screens: {
         ios : '320px',
@@ -26,7 +30,7 @@ module.exports = {
         md: "768px",
         lg: "1024px",
         xl: "1280px",
-        "2xl":'1448px',
+        "2xl":'1440px',
         "3xl": "1920px",
       },
     },
