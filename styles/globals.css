@@ -3,38 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Woodford Bourne Bold";
-  src: url("/fonts/Woodford Bourne/WoodfordBournePro-Bold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Woodford Bourne SemiBold";
-  src: url("/fonts/Woodford Bourne/WoodfordBournePro-SemiBold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Woodford Bourne Regular";
-  src: url("/fonts/Woodford Bourne/WoodfordBournePro-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Woodford Bourne Medium";
-  src: url("/fonts/Woodford Bourne/WoodfordBournePro-Medium.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Poppins";
-  src: url("/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Poppins Light";
-  src: url("/fonts/Poppins/Poppins-Light.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Poppins Medium";
-  src: url("/fonts/Poppins/Poppins-Medium.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Poppins SemiBold";
-  src: url("/fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
-}
-@font-face {
   font-family: "Poppins Bold";
   src: url("/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
 }
@@ -104,18 +72,3 @@ a {
   box-sizing: border-box;
 }
 
-button.xmint-btn {
-  background-color: blueviolet;
-}
-
-.swiper-pagination-bullet {
-  border: 1px solid white !important;
-  background: transparent !important;
-  opacity: 1 !important;
-  width: 14px !important;
-  height: 14px !important;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: white !important;
-}
