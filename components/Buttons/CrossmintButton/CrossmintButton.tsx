@@ -33,9 +33,7 @@ const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price }) 
       projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
       collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
       environment="staging"
-      getButtonText={(connecting) =>
-        connecting ? "Connecting" : `Pay with Credit or Debit`
-      }
+      getButtonText={(connecting) => (connecting ? "Connecting" : `Pay with Credit or Debit`)}
       mintConfig={mintConfig}
       paymentMethod="fiat"
       className="oasis-crossmint-button"

@@ -1,20 +1,34 @@
-import { useAccount } from "wagmi"
 import Image from "../../../shared/Image"
 import CrossmintButton from "../../Buttons/CrossmintButton"
+import Icon from "../../../shared/Icon"
+import useIsMobile from "../../../hooks/useIsMobile"
+import useConnectedWallet from "../../../hooks/useConnectedWallet"
 
 const CheckOutCard = () => {
-  const { address } = useAccount()
+  const { connectedWallet } = useConnectedWallet()
+  const isMobile = useIsMobile()
 
   return (
-    <div className="col-span-4">
+    <div className="md:col-span-6 xl:col-span-4">
       <div
-        className="border border-gray_3 rounded-[20px]
+        className="border-0 md:border md:border-gray_3 rounded-[20px]
             px-[24px] py-[32px]"
       >
-        <p className="text-[16px] leading-[100%] tracking-[-0.4px] font-[400] pb-[8px]">
+        {isMobile && (
+          <div className="flex justify-center pb-[24px]">
+            <Icon name="cart" className="text-gray_5" size={30} />
+          </div>
+        )}
+        <p
+          className="text-[16px] leading-[100%] tracking-[-0.4px] font-[400] pb-[8px]
+        text-center md:text-left"
+        >
           Cart Total
         </p>
-        <p className="text-[28px] leading-[120%] tracking-[-0.168px] font-[400] font-bold mb-[20px]">
+        <p
+          className="text-[28px] leading-[120%] tracking-[-0.168px] font-[400] font-bold mb-[20px]
+        text-center md:text-left"
+        >
           $000.00
         </p>
         <div className="flex flex-col items-center">
@@ -37,7 +51,7 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CrossmintButton wallet={address} price={3000} quantity={1} />
+          <CrossmintButton wallet={connectedWallet} price={3000} quantity={1} />
         </div>
       </div>
     </div>

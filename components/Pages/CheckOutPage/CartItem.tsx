@@ -2,6 +2,7 @@ import { useState } from "react"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import Select from "../../../shared/Select"
+import useIsMobile from "../../../hooks/useIsMobile"
 
 const CartItem = () => {
   const [quantity, setQuanity] = useState("1")
@@ -9,13 +10,14 @@ const CartItem = () => {
     label: `${index + 1}`,
     value: `${index + 1}`,
   }))
+  const isMobile = useIsMobile()
 
   return (
     <div
       className="border-b border-b-gray_3 pb-[24px]
-        w-full flex justify-between"
+        w-full flex flex-col md:flex-row md:justify-between"
     >
-      <div className="flex gap-x-[10px]">
+      <div className="flex gap-x-[15px] md:gap-x-[10px]">
         <Image
           link="/images/cart_item.png"
           blurLink="/images/cart_item.png"
@@ -47,11 +49,24 @@ const CartItem = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-around">
+      {isMobile && (
+        <p
+          className="text-gray_6 text-[12px] tracking-[-0.3px] font-[400] leading-[100%] text-[12px] 
+      mb-[8px] mt-[16px]"
+        >
+          QTY
+        </p>
+      )}
+      <div
+        className="flex flex-row items-center gap-x-[10px] 
+      md:items-end md:flex-col md:justify-around"
+      >
         <div className="flex flex-col gap-y-[5px]">
-          <p className="text-gray_6 text-[12px] tracking-[-0.3px] font-[400] leading-[100%] text-[12px]">
-            QTY
-          </p>
+          {!isMobile && (
+            <p className="text-gray_6 text-[12px] tracking-[-0.3px] font-[400] leading-[100%] text-[12px]">
+              QTY
+            </p>
+          )}
           <Select
             id="qantity"
             name="qantity"
