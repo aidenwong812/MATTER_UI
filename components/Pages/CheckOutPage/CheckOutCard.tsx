@@ -4,11 +4,13 @@ import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import useConnectedWallet from "../../../hooks/useConnectedWallet"
 import { useUserProvider } from "../../../providers/UserProvider"
+import { useCheckOut } from "../../../providers/CheckOutProvider"
 
 const CheckOutCard = () => {
   const { connectedWallet } = useConnectedWallet()
   const isMobile = useIsMobile()
   const { usdBalance } = useUserProvider()
+  const { purchaseByPrivy } = useCheckOut()
 
   return (
     <div className="md:col-span-6 xl:col-span-4">
@@ -40,6 +42,7 @@ const CheckOutCard = () => {
                 type="button"
                 className="w-[327px] h-[56px] bg-black rounded-full
                           flex gap-x-[10px] items-center justify-center"
+                onClick={purchaseByPrivy}
               >
                 <Image
                   link="/images/privy_pay.png"

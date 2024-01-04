@@ -11,7 +11,7 @@ const UserProvider = ({ children }) => {
   const { user, ready, authenticated } = usePrivy()
   const router = useRouter()
   const pathname = router.pathname
-  const { getUsdConversion, ethPrice } = useEthPrice()
+  const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
   const { balance } = useBalance()
 
   const usdBalance = useMemo(() => {
@@ -46,7 +46,8 @@ const UserProvider = ({ children }) => {
       loading,
       getUsdConversion, 
       ethPrice,
-      usdBalance
+      usdBalance,
+      getEthConversion
     }),
     [
       connectedWallet, 
@@ -54,7 +55,8 @@ const UserProvider = ({ children }) => {
       loading,
       getUsdConversion, 
       ethPrice,
-      usdBalance
+      usdBalance,
+      getEthConversion
     ],
   )
 
@@ -64,7 +66,7 @@ const UserProvider = ({ children }) => {
 export const useUserProvider = () => {
   const context = useContext(UserContext)
   if (!context) {
-    throw new Error("useInviteCode must be used within a UserProvider")
+    throw new Error("useUserProvider must be used within a UserProvider")
   }
   return context
 }

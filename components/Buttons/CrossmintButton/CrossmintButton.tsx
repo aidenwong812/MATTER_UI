@@ -6,6 +6,7 @@ import {
   ERC6551_IMPLEMENTATION_ADDRESS,
   ERC6551_INIT_DATA,
   ERC6551_REGISTRY_ADDRESS,
+  DROP_ADDRESS,
 } from "../../../lib/consts"
 
 interface CrossmintButtonProps {
@@ -19,7 +20,7 @@ const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price }) 
     type: "erc-721",
     totalPrice: ethers.utils.formatEther(price),
     quantity,
-    _target: process.env.NEXT_PUBLIC_DROP_CONTRACT,
+    _target: DROP_ADDRESS,
     _quantity: quantity,
     _to: wallet,
     to: wallet,
