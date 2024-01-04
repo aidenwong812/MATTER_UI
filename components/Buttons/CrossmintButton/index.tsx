@@ -1,3 +1,3 @@
-import CrossmintButton from "./CrossmintButton";
+import CrossmintButton from "./CrossmintButton"
 
 export default CrossmintButton
