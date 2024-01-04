@@ -22,7 +22,7 @@ const usePrivySendTransaction = () => {
     }
 
     const uiConfig = {
-      header: "Financial Verse",
+      header: "OASIS",
       description,
       buttonText: "Sign",
     }

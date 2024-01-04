@@ -1,3 +1,5 @@
+import { useUserProvider } from "../../providers/UserProvider"
+import LoadingPage from "../Pages/LoadingPage"
 import BaseLayout from "./BaseLayout"
 import { ILayout } from "./types"
 
@@ -12,7 +14,9 @@ interface ILayoutFactory extends ILayout {
 function Layout({ children, type }: ILayoutFactory) {
   const Container = layoutContainers[type]
 
-  return <Container>{children}</Container>
+  const { loading } = useUserProvider()
+
+  return <div>{loading ? <LoadingPage /> : <Container>{children}</Container>}</div>
 }
 
 export default Layout
