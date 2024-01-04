@@ -7,7 +7,7 @@ const DropItem = () => {
 
   return (
     <div
-      className="border-b border-b-gray_3 pb-[24px]
+      className="border-b border-b-gray_3 pb-[24px] px-[20px] md:px-0
         w-full flex flex-col md:flex-row md:justify-between"
     >
       <div className="flex gap-x-[15px] md:gap-x-[10px] items-center">

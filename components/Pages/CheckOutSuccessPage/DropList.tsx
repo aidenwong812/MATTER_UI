@@ -4,7 +4,7 @@ const DropList = () => (
   <div className="md:col-span-6 xl:col-span-8">
     <div
       className="w-full flex flex-col gap-y-[24px]
-              px-[20px] md:px-0 border-t border-t-gray_3 pt-[24px]"
+              border-t border-t-gray_3 pt-[24px]"
     >
       {Array(3)
         .fill("0")
