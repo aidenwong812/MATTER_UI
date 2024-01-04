@@ -5,7 +5,6 @@ import SeoHead from "../../SeoHead"
 
 const LandingPage = () => {
   const isMobile = useIsMobile()
-
   return (
     <Layout type="base">
       <SeoHead />
