@@ -5,7 +5,6 @@ import {
   ERC6551_INIT_DATA,
   ERC6551_REGISTRY_ADDRESS,
 } from "../../../lib/consts"
-import { useInvest } from "../../../providers/InvestProvider"
 
 interface CrossmintButtonProps {
   wallet: string
@@ -13,9 +12,6 @@ interface CrossmintButtonProps {
 }
 
 const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity }) => {
-  const { referral } = useInvest()
-  const referralProjectId = "425871f2-9b99-45d6-9c9c-8b1825f28bcd"
-  const referralCollectionId = "6a032ac7-4a81-4c1f-be5e-e3b4a29cc260"
   const mintConfig = {
     type: "erc-721",
     totalPrice: "0.000001", // 0.000001 eth
@@ -27,15 +23,12 @@ const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity }) => {
     _registry: ERC6551_REGISTRY_ADDRESS,
     _implementation: ERC6551_IMPLEMENTATION_ADDRESS,
     _initData: ERC6551_INIT_DATA,
-    referralId: referral,
   }
 
   return (
     <CrossmintPayButton
-      projectId={referral ? referralProjectId : process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
-      collectionId={
-        referral ? referralCollectionId : process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID
-      }
+      projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
+      collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
       environment="staging"
       mintConfig={mintConfig}
       className="w-full rounded-full

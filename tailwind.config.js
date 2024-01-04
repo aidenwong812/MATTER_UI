@@ -16,15 +16,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        woodfordbourne_bold: ["Woodford Bourne Bold", "sans-serif"],
-        woodfordbourne: ["Woodford Bourne Regular", "sans-serif"],
-        woodfordbourne_medium: ["Woodford Bourne Medium", "sans-serif"],
-        woodfordbourne_semibold: ["Woodford Bourne SemiBold", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"],
-        poppins_light: ["Poppins Light", "sans-serif"],
-        poppins_medium: ["Poppins Medium", "sans-serif"],
-        poppins_semibold: ["Poppins SemiBold", "sans-serif"],
-        poppins_bold: ["Poppins Bold", "sans-serif"],
+       
       },
       screens: {
         ios : '320px',

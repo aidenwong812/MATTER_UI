@@ -2,7 +2,6 @@ import "../styles/globals.css"
 import "@rainbow-me/rainbowkit/styles.css"
 import "react-toastify/dist/ReactToastify.css"
 
-import { useEffect } from "react"
 import type { AppProps } from "next/app"
 import { RainbowKitProvider, getDefaultWallets, connectorsForWallets } from "@rainbow-me/rainbowkit"
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
@@ -12,8 +11,6 @@ import { SessionProvider } from "next-auth/react"
 import * as React from "react"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
-import AOS from "aos"
-import "aos/dist/aos.css"
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 
 import { ThemeProvider } from "../providers/ThemeProvider"
@@ -55,13 +52,6 @@ const privyConfig: PrivyClientConfig = {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    })
-  }, [])
-
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider modalSize="compact" chains={chains}>
