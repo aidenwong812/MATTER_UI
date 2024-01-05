@@ -14,7 +14,7 @@ interface CrossmintButtonProps {
   price: number
 }
 
-const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price }) => {
+const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity }) => {
   const mintConfig = {
     type: "erc-721",
     totalPrice: ethers.utils.formatEther(price),
