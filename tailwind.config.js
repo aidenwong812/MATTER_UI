@@ -19,7 +19,8 @@ module.exports = {
       gray_5: "#8C8C8C",
       gray_6: '#767676',
       gray_8: '#1F1F1F',
-      link: '#2A64F5'
+      link: '#2A64F5',
+      success: "#35C75A"
     },
     container: {
       center: true,
