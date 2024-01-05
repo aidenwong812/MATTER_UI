@@ -59,3 +59,42 @@ a {
   -webkit-tap-highlight-color: transparent !important;
 }
 
+.oasis-crossmint-button {
+  background-color: white !important;
+  border: 1px solid #CDCDCD !important;
+  box-shadow: none !important;
+  border-radius: 9999px !important;
+  width: 327px !important;
+  height: 56px !important;
+  position: relative;
+}
+
+.oasis-crossmint-button > img {
+  display: none;
+  position: relative;
+}
+
+.oasis-crossmint-button::after {
+  background-image: url("/images/credit_pay.png");
+  background-size: contain;
+  background-repeat: no-repeat !important;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 24px;
+  z-index: 10 !important;
+  left: 45px !important;
+}
+
+.oasis-crossmint-button:hover {
+  opacity: 1 !important;
+}
+
+.oasis-crossmint-button > span {
+  color: black !important;
+  font-family: 'Hedvig Regular';
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 120% !important;
+}
+
