@@ -1,5 +1,5 @@
 {
-  "name": "financialverse",
+  "name": "oasis",
   "private": true,
   "version": "0.1.0",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint --max-warnings 0",
     "lint:fix": "next lint --fix",
-    "prettier:fix": "npx prettier --write components lib pages hooks",
+    "prettier:fix": "npx prettier --write components lib pages hooks shared utils",
     "format": "yarn run prettier:fix && yarn run lint:fix"
   },
   "dependencies": {

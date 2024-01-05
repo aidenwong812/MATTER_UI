@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Poppins Bold";
-  src: url("/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-family: "Hedvig Regular";
+  src: url("/fonts/Hedvig_Letters_Sans/HedvigLettersSans-Regular.ttf") format("truetype");
 }
 
 @layer utilities {
@@ -19,11 +19,9 @@
 }
 html,
 body {
-  background-color: black;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Hedvig Regular";
 }
 
 p {
@@ -56,19 +54,8 @@ a {
   text-decoration: none;
 }
 
-.scroll-snap-x-mandatory {
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (min-width: 640px) {
-  .scroll-snap-x-mandatory {
-    scroll-padding-left: 2rem;
-    scroll-padding-right: 2rem;
-  }
-}
-
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent !important;
 }
 

@@ -2,13 +2,14 @@ import "../styles/globals.css"
 import "@rainbow-me/rainbowkit/styles.css"
 import "react-toastify/dist/ReactToastify.css"
 
+import { useLocalStorage } from "usehooks-ts"
 import type { AppProps } from "next/app"
 import { RainbowKitProvider, getDefaultWallets, connectorsForWallets } from "@rainbow-me/rainbowkit"
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { goerli, mainnet } from "@wagmi/core/chains"
 import { ToastContainer } from "react-toastify"
 import { SessionProvider } from "next-auth/react"
-import * as React from "react"
+import React, { useMemo } from "react"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
@@ -23,7 +24,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(myChains
 ])
 
 const { wallets } = getDefaultWallets({
-  appName: "Financial Verse",
+  appName: "OASIS",
   projectId: "68c5ce6a0bf63be0182de421f19951b8",
   chains,
 })
@@ -36,22 +37,27 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 })
 
-const privyConfig: PrivyClientConfig = {
-  loginMethods: ["email", "google", "apple"],
-  appearance: {
-    theme: "dark",
-    accentColor: "#24AACB",
-    logo: "/images/Header/Desktop/logo.png",
-  },
-  embeddedWallets: {
-    createOnLogin: "all-users",
-  },
-  fiatOnRamp: {
-    useSandbox: true,
-  },
-}
-
 function MyApp({ Component, pageProps }: AppProps) {
+  const [themeMode] = useLocalStorage<string>("theme", "light")
+
+  const privyConfig: PrivyClientConfig = useMemo(
+    () => ({
+      loginMethods: ["email", "google", "apple"],
+      appearance: {
+        theme: themeMode === "light" ? "dark" : "light",
+        accentColor: "#24AACB",
+        logo: themeMode === "light" ? "/images/light_logo.png" : "/images/logo.png",
+      },
+      embeddedWallets: {
+        createOnLogin: "all-users",
+      },
+      fiatOnRamp: {
+        useSandbox: true,
+      },
+    }),
+    [themeMode],
+  )
+
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider modalSize="compact" chains={chains}>
