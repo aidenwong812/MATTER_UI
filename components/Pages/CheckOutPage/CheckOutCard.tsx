@@ -3,10 +3,14 @@ import CrossmintButton from "../../Buttons/CrossmintButton"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import useConnectedWallet from "../../../hooks/useConnectedWallet"
+import { useUserProvider } from "../../../providers/UserProvider"
+import { useCheckOut } from "../../../providers/CheckOutProvider"
 
 const CheckOutCard = () => {
   const { connectedWallet } = useConnectedWallet()
   const isMobile = useIsMobile()
+  const { usdBalance } = useUserProvider()
+  const { purchaseByPrivy } = useCheckOut()
 
   return (
     <div className="md:col-span-6 xl:col-span-4">
@@ -32,25 +36,30 @@ const CheckOutCard = () => {
           $000.00
         </p>
         <div className="flex flex-col items-center">
-          <button
-            type="button"
-            className="w-[327px] h-[56px] bg-black rounded-full
-                        flex gap-x-[10px] items-center justify-center"
-          >
-            <Image
-              link="/images/privy_pay.png"
-              blurLink="/images/privy_pay.png"
-              containerClasses="w-[18px] h-[14px]"
-              alt="not found icon"
-            />
-            <p className="text-white text-[16px] font-[400] leading-[120%]">Pay with Crypto</p>
-          </button>
-          <p
-            className="text-black text-[16px] font-[400] leading-[150%] tracking-[-0.684px]
-            text-center my-[20px]"
-          >
-            Or
-          </p>
+          {parseFloat(usdBalance) > 0 && (
+            <>
+              <button
+                type="button"
+                className="w-[327px] h-[56px] bg-black rounded-full
+                          flex gap-x-[10px] items-center justify-center"
+                onClick={purchaseByPrivy}
+              >
+                <Image
+                  link="/images/privy_pay.png"
+                  blurLink="/images/privy_pay.png"
+                  containerClasses="w-[18px] h-[14px]"
+                  alt="not found icon"
+                />
+                <p className="text-white text-[16px] font-[400] leading-[120%]">Pay with Crypto</p>
+              </button>{" "}
+              <p
+                className="text-black text-[16px] font-[400] leading-[150%] tracking-[-0.684px]
+              text-center my-[20px]"
+              >
+                Or
+              </p>
+            </>
+          )}
           <CrossmintButton wallet={connectedWallet} price={3000} quantity={1} />
         </div>
       </div>
