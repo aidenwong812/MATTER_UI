@@ -1,12 +1,32 @@
 import { usePrivy, useWallets } from "@privy-io/react-auth"
-import React, { createContext, useContext, useMemo } from "react"
+import { useRouter } from "next/router"
+import React, { createContext, useContext, useEffect, useMemo } from "react"
+import useEthPrice from "../hooks/useEthPrice"
+import useBalance from "../hooks/useBalance"
 
 const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
   const { wallets } = useWallets()
-  const { user } = usePrivy()
+  const { user, ready, authenticated } = usePrivy()
+  const router = useRouter()
+  const pathname = router.pathname
+  const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
+  const { balance } = useBalance()
+
+  const usdBalance = useMemo(() => {
+    return getUsdConversion(balance || 0)
+  }, [getUsdConversion, balance])
+
+  const isPrivatePage = pathname !== '/'
+
+  const loading = !ready
+
   const connectedWallet = useMemo(() => wallets?.[0]?.address, [wallets])
+
+  useEffect(() => {
+    if (isPrivatePage && !authenticated && !loading) router.push("/")
+  }, [isPrivatePage, authenticated, loading])
 
   const username = useMemo(() => {
     let username = user?.google?.name
@@ -20,8 +40,24 @@ const UserProvider = ({ children }) => {
   }, [user])
 
   const value = useMemo(
-    () => ({ connectedWallet, username }),
-    [connectedWallet, username],
+    () => ({ 
+      connectedWallet, 
+      username,
+      loading,
+      getUsdConversion, 
+      ethPrice,
+      usdBalance,
+      getEthConversion
+    }),
+    [
+      connectedWallet, 
+      username,
+      loading,
+      getUsdConversion, 
+      ethPrice,
+      usdBalance,
+      getEthConversion
+    ],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
@@ -30,7 +66,7 @@ const UserProvider = ({ children }) => {
 export const useUserProvider = () => {
   const context = useContext(UserContext)
   if (!context) {
-    throw new Error("useInviteCode must be used within a UserProvider")
+    throw new Error("useUserProvider must be used within a UserProvider")
   }
   return context
 }

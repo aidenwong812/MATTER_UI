@@ -1,5 +1,5 @@
 {
-  "name": "financialverse",
+  "name": "oasis",
   "private": true,
   "version": "0.1.0",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint --max-warnings 0",
     "lint:fix": "next lint --fix",
-    "prettier:fix": "npx prettier --write components lib pages hooks",
+    "prettier:fix": "npx prettier --write components lib pages hooks shared utils",
     "format": "yarn run prettier:fix && yarn run lint:fix"
   },
   "dependencies": {
@@ -38,6 +38,7 @@
     "react-hook-form": "^7.47.0",
     "react-icons": "^4.11.0",
     "react-intersection-observer": "^9.5.2",
+    "react-loading": "^2.0.3",
     "react-toastify": "^9.1.1",
     "react-tooltip": "^5.19.0",
     "react-use": "^17.4.0",
