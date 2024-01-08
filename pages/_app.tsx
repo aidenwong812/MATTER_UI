@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       loginMethods: ["email", "google", "apple"],
       appearance: {
         theme: themeMode === "light" ? "dark" : "light",
-        accentColor: "#24AACB",
+        accentColor: "#FFFFFF",
         logo: themeMode === "light" ? "/images/light_logo.png" : "/images/logo.png",
       },
       embeddedWallets: {

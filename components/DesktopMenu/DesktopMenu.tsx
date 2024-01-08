@@ -1,3 +1,4 @@
+import CreateAccountButton from "../CreateAccountButton"
 import SignButton from "../SignButton.tsx"
 
 const DesktopMenu = () => (
@@ -8,7 +9,10 @@ const DesktopMenu = () => (
     <p>Services</p>
     <p>Digital Items</p>
     <p>Physical Products</p>
-    <SignButton />
+    <div className="flex gap-x-[10px]">
+      <SignButton />
+      <CreateAccountButton />
+    </div>
   </div>
 )
 
