@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import SignButton from "../SignButton.tsx"
 import Icon from "../../shared/Icon"
+import CreateAccountButton from "../CreateAccountButton"
 
 const MenuList = () => {
   const navClasses = "px-[32px] py-[20px] border-b border-b-gray_3"
@@ -33,8 +34,9 @@ const MenuList = () => {
         <p className={navClasses}>Services</p>
         <p className={navClasses}>Digital Items</p>
         <p className={navClasses}>Physical Products</p>
-        <div className={`${navClasses} !border-none`}>
+        <div className={`${navClasses} !border-none flex gap-x-[10px]`}>
           <SignButton />
+          <CreateAccountButton />
         </div>
       </motion.div>
     </div>

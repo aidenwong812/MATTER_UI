@@ -65,6 +65,7 @@ const CheckOutProvider = ({ children }) => {
           ERC6551_INIT_DATA,
         ],
         BigNumber.from(publicSalePrice).toHexString(),
+        "Securely Pay on Oasis",
         "Pay with Crypto",
       )
       toast.success("purchased!")

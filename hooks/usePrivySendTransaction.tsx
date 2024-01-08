@@ -11,6 +11,7 @@ const usePrivySendTransaction = () => {
     functionName,
     args,
     value = "0",
+    title = "",
     description = "",
   ) => {
     const data = new Interface(abi).encodeFunctionData(functionName, args)
@@ -22,7 +23,7 @@ const usePrivySendTransaction = () => {
     }
 
     const uiConfig = {
-      header: "OASIS",
+      header: title,
       description,
       buttonText: "Sign",
     }
