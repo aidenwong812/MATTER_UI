@@ -13,9 +13,16 @@ interface CrossmintButtonProps {
   quantity: number
   price: any
   dropAddress: string
+  buttonLabel?: string
 }
 
-const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price, dropAddress }) => {
+const CrossmintButton: FC<CrossmintButtonProps> = ({
+  wallet,
+  quantity,
+  price,
+  dropAddress,
+  buttonLabel,
+}) => {
   const mintConfig = {
     type: "erc-721",
     totalPrice: ethers.utils.formatUnits(
@@ -37,7 +44,9 @@ const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price, dr
       projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
       collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
       environment="staging"
-      getButtonText={(connecting) => (connecting ? "Connecting" : `Pay with Credit or Debit`)}
+      getButtonText={(connecting) =>
+        connecting ? "Connecting" : buttonLabel || "Pay with Credit or Debit"
+      }
       mintConfig={mintConfig}
       paymentMethod="fiat"
       className="oasis-crossmint-button"

@@ -35,7 +35,7 @@ const CheckOutCard = () => {
           ${Number(totalPrice).toFixed(4)}
         </p>
         <div className="flex flex-col items-center">
-          <CollectDropButton />
+          <CollectDropButton selectedDrop={selectedDrop} />
           <p
             className="text-black text-[16px] font-[400] leading-[150%] tracking-[-0.684px]
             text-center my-[20px]"

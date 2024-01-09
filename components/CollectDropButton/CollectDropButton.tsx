@@ -1,16 +1,20 @@
 import { FC } from "react"
 import useCollectDrop from "../../hooks/useCollectDrop"
-import { useCheckOut } from "../../providers/CheckOutProvider"
 import Image from "../../shared/Image"
 
 interface CollectDropButtonProps {
   className?: string
   disabled?: boolean
+  selectedDrop?: any
+  buttonLabel?: string
 }
 
-const CollectDropButton: FC<CollectDropButtonProps> = ({ className = "", disabled }) => {
-  const { selectedDrop } = useCheckOut()
-
+const CollectDropButton: FC<CollectDropButtonProps> = ({
+  className = "",
+  disabled,
+  selectedDrop,
+  buttonLabel,
+}) => {
   const { collectDrop } = useCollectDrop(selectedDrop?.dropAddress)
 
   return (
@@ -29,7 +33,9 @@ const CollectDropButton: FC<CollectDropButtonProps> = ({ className = "", disable
         containerClasses="w-[18px] h-[14px]"
         alt="not found icon"
       />
-      <p className="text-white text-[16px] font-[400] leading-[120%]">Pay with Crypto</p>
+      <p className="text-white text-[16px] font-[400] leading-[120%]">
+        {buttonLabel || "Pay with Crypto"}
+      </p>
     </button>
   )
 }

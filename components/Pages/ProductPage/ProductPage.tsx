@@ -1,0 +1,31 @@
+import Layout from "../../Layout"
+import SeoHead from "../../SeoHead"
+import BreadCrumb from "./BreadCrumb"
+import BuyButtons from "./BuyButtons"
+import ProductDetail from "./ProductDetail"
+import ProductPhoto from "./ProductPhoto"
+import ProductTrending from "./ProductTrending"
+import SellerInfo from "./SellerInfo"
+
+const ProductPage = () => (
+  <Layout type="base">
+    <SeoHead title="OASIS | Product" />
+    <div
+      className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen
+                  md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[90px] pb-[30px] px-[18px]"
+    >
+      <BreadCrumb />
+      <div className="w-full grid grid-cols-10 gap-x-[40px] mt-[39px]">
+        <ProductPhoto />
+        <ProductDetail />
+        <div className="col-span-3 flex flex-col gap-y-[10px]">
+          <BuyButtons />
+          <SellerInfo />
+        </div>
+        <ProductTrending />
+      </div>
+    </div>
+  </Layout>
+)
+
+export default ProductPage
