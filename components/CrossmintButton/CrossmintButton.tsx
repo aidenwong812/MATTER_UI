@@ -6,21 +6,24 @@ import {
   ERC6551_IMPLEMENTATION_ADDRESS,
   ERC6551_INIT_DATA,
   ERC6551_REGISTRY_ADDRESS,
-  DROP_ADDRESS,
 } from "../../lib/consts"
 
 interface CrossmintButtonProps {
   wallet: string
   quantity: number
-  price: number
+  price: any
+  dropAddress: string
 }
 
-const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price }) => {
+const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price, dropAddress }) => {
   const mintConfig = {
     type: "erc-721",
-    totalPrice: ethers.utils.formatEther(price),
+    totalPrice: ethers.utils.formatUnits(
+      ethers.utils.parseUnits(price.toString(), "ether").toString(),
+      "ether",
+    ),
     quantity,
-    _target: DROP_ADDRESS,
+    _target: dropAddress,
     _quantity: quantity,
     _to: wallet,
     to: wallet,
@@ -39,6 +42,7 @@ const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price }) 
       paymentMethod="fiat"
       className="oasis-crossmint-button"
       mintTo={wallet}
+      disabled={!dropAddress || !price || !quantity}
       successCallbackURL={
         typeof window !== "undefined" && `${window.location.origin}/checkout/success`
       }

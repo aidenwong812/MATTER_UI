@@ -4,13 +4,13 @@ import usePrivySendTransaction from "./usePrivySendTransaction"
 
 const use721Collect = () => {
   const { sendTransaction } = usePrivySendTransaction()
-  const collect721 = async (comment = "", dropAddress, owner, referral, totalFee) => {
+  const collect721 = async (comment = "", dropAddress, owner, quantity, referral, totalFee) => {
     await sendTransaction(
       dropAddress,
       CHAIN_ID,
       abi,
       "mintWithRewards",
-      [owner, 1, comment || "OASIS", referral],
+      [owner, quantity, comment || "OASIS", referral],
       totalFee,
       "Securely Pay on Oasis",
       "Pay with Crypto",

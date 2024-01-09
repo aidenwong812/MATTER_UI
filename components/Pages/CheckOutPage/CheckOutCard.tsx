@@ -9,7 +9,7 @@ const CheckOutCard = () => {
   const { connectedWallet } = useConnectedWallet()
   const isMobile = useIsMobile()
 
-  const { totalPrice } = useCheckOut()
+  const { totalPrice, selectedDrop } = useCheckOut()
 
   return (
     <div className="md:col-span-6 xl:col-span-4">
@@ -42,7 +42,12 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CrossmintButton wallet={connectedWallet} price={3000} quantity={1} />
+          <CrossmintButton
+            wallet={connectedWallet}
+            price={Number(totalPrice).toFixed(4)}
+            quantity={selectedDrop?.quantity}
+            dropAddress={selectedDrop?.dropAddress}
+          />
         </div>
       </div>
     </div>

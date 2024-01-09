@@ -11,7 +11,7 @@ interface CollectDropButtonProps {
 const CollectDropButton: FC<CollectDropButtonProps> = ({ className = "", disabled }) => {
   const { selectedDrop } = useCheckOut()
 
-  const { collectDrop } = useCollectDrop(selectedDrop?.contractAddress)
+  const { collectDrop } = useCollectDrop(selectedDrop?.dropAddress)
 
   return (
     <button
@@ -19,7 +19,7 @@ const CollectDropButton: FC<CollectDropButtonProps> = ({ className = "", disable
       className={`w-[327px] h-[56px] bg-black rounded-full
         flex gap-x-[10px] items-center justify-center ${className}`}
       onClick={async () => {
-        await collectDrop()
+        await collectDrop("OASIS", selectedDrop?.quantity)
       }}
       disabled={disabled}
     >
