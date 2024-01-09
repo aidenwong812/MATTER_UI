@@ -8,6 +8,7 @@ import use721Collect from "./use721Collect"
 import get721SaleStatus from "../lib/get721SaleStatus"
 import { useCallback } from "react"
 import handleTxError from "../lib/handleTxError"
+import { useRouter } from "next/router"
 
 const useCollectDrop = (dropAddress) => {
   const { prepare } = usePreparePrivyWallet()
@@ -15,6 +16,7 @@ const useCollectDrop = (dropAddress) => {
   const { connectedWallet } = useConnectedWallet()
   const createReferral = process.env.NEXT_PUBLIC_CREATE_REFERRAL
   const { collect721 } = use721Collect()
+  const router = useRouter()
 
   const collectDrop = useCallback(
     async (comment = "", quantity) => {
@@ -36,6 +38,8 @@ const useCollectDrop = (dropAddress) => {
         }
 
         await collect721(comment, dropAddress, owner, quantity, createReferral, totalFee)
+
+        router.push("/checkout/success")
       } catch (err) {
         handleTxError(err)
       }
