@@ -1,5 +1,5 @@
 import NextImage from "next/image"
-import { CSSProperties } from "react"
+import { CSSProperties, useEffect, useState } from "react"
 
 interface IImage {
   link?: string
@@ -9,15 +9,30 @@ interface IImage {
   className?: string
   blurLink?: string
   alt?: string
+  fallbackLink?: string
 }
 
-const Image = ({ link, containerClasses, containerStyle, blurLink, alt, imageClasses }: IImage) => {
+const Image = ({
+  link,
+  containerClasses,
+  containerStyle,
+  blurLink,
+  alt,
+  imageClasses,
+  fallbackLink,
+}: IImage) => {
+  const [imgSrc, setImgSrc] = useState(link)
+
+  useEffect(() => {
+    setImgSrc(link)
+  }, [link])
+
   return (
     <div className={`relative ${containerClasses || ""}`} style={containerStyle || {}}>
       {link && (
         <NextImage
           className={`absolute w-[100%] object-contain ${imageClasses}`}
-          src={link}
+          src={imgSrc}
           layout="fill"
           alt={alt || "not found image"}
           placeholder="blur"
@@ -26,6 +41,14 @@ const Image = ({ link, containerClasses, containerStyle, blurLink, alt, imageCla
             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcMXP2OQAGOQKc/DqDigAAAABJRU5ErkJggg=="
           }
           unoptimized
+          onLoadingComplete={(result) => {
+            if (result.naturalWidth === 0) {
+              setImgSrc(fallbackLink)
+            }
+          }}
+          onError={() => {
+            setImgSrc(fallbackLink)
+          }}
         />
       )}
     </div>

@@ -1,50 +1,69 @@
-import { useState } from "react"
+import { useMemo } from "react"
+import { ethers } from "ethers"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import Select from "../../../shared/Select"
 import useIsMobile from "../../../hooks/useIsMobile"
+import { useDropProvider } from "../../../providers/DropProvider"
+import { useUserProvider } from "../../../providers/UserProvider"
+import { useCheckOut } from "../../../providers/CheckOutProvider"
 
-const CartItem = () => {
-  const [quantity, setQuanity] = useState("1")
-  const quantites = Array.from({ length: 5 }).map((_, index) => ({
-    label: `${index + 1}`,
-    value: `${index + 1}`,
+const CartItem = ({ index }) => {
+  const quantites = Array.from({ length: 5 }).map((_, i) => ({
+    label: `${i + 1}`,
+    value: i + 1,
   }))
   const isMobile = useIsMobile()
+  const { imageUri, animationUri, dropName, sellerName, saleDetails, dropAddress, fundsRecipient } =
+    useDropProvider()
+  const { handleSelectedDrop, feed, handleChangeQuantity } = useCheckOut()
+
+  const ethPrice = useMemo(() => {
+    if (!saleDetails) return 0
+    return ethers.utils.formatUnits(saleDetails?.publicSalePrice.toString(), "ether")
+  }, [saleDetails])
+
+  const { getUsdConversion } = useUserProvider()
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
-      className="border-b border-b-gray_3 pb-[24px]
-        w-full flex flex-col md:flex-row md:justify-between"
+      className="border-b border-b-gray_3 py-[24px] hover:bg-gray_3
+        transition duration-[300ms]
+        w-full flex flex-col md:flex-row md:justify-between cursor-pointer"
+      onClick={() =>
+        handleSelectedDrop(dropAddress, fundsRecipient, ethPrice, feed[index].quantity)
+      }
     >
-      <div className="flex gap-x-[15px] md:gap-x-[10px]">
+      <div className="flex gap-x-[15px] md:gap-x-[10px] pl-[10px]">
         <Image
-          link="/images/cart_item.png"
-          blurLink="/images/cart_item.png"
+          link={imageUri || animationUri || "/images/cart_item.png"}
+          blurLink={imageUri || animationUri || "/images/cart_item.png"}
+          fallbackLink="/images/cart_item.png"
           containerClasses="w-[150px] aspect-[1/1]"
           alt="not found item"
         />
         <div className="flex flex-col justify-between">
           <div>
             <p className="text-[16px] text-black font-[400] tracking-[-0.6px] leading-[100%] pb-[8px]">
-              Category
+              ERC721
             </p>
             <p className="text-[28px] text-black font-[400] tracking-[-0.168px] leading-[120%]">
-              Item Name
+              {dropName}
             </p>
           </div>
           <div className="flex gap-x-[5px] items-center">
             <Icon name="check" className="text-gray_6" size={16} />
             <p className="text-[14px] text-gray_6 font-[400] tracking-[-0.14px] leading-[120%]">
-              Seller Name
+              {sellerName}
             </p>
           </div>
           <div>
             <p className="text-[16px] text-black font-[400] tracking-[-0.4px] leading-[100%] pb-[8px]">
-              US $00
+              USD ${getUsdConversion(ethPrice)}
             </p>
             <p className="text-[16px] text-black font-[400] tracking-[-0.4px] leading-[100%]">
-              ETH 0.000
+              ETH {ethPrice || ""}
             </p>
           </div>
         </div>
@@ -59,7 +78,7 @@ const CartItem = () => {
       )}
       <div
         className="flex flex-row items-center gap-x-[10px] 
-      md:items-end md:flex-col md:justify-around"
+      md:items-end md:flex-col md:justify-around pr-[10px]"
       >
         <div className="flex flex-col gap-y-[5px]">
           {!isMobile && (
@@ -70,9 +89,9 @@ const CartItem = () => {
           <Select
             id="qantity"
             name="qantity"
-            value={quantity || ""}
+            value={feed[index]?.quantity || ""}
             className="!w-[100px]"
-            onChange={(e) => setQuanity(e.target.value)}
+            onChange={(e) => handleChangeQuantity(e.target.value, index)}
             options={quantites}
           />
         </div>

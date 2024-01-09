@@ -1,90 +1,60 @@
-import React, { createContext, useContext, useMemo, useState } from "react"
-import { useUserProvider } from "./UserProvider"
-import useConnectedWallet from "../hooks/useConnectedWallet"
-import useBalance from "../hooks/useBalance"
-import usePrivySendTransaction from "../hooks/usePrivySendTransaction"
-import useSaleStatus from "../hooks/useSaleStatus"
-import { MoonpayConfig } from "@privy-io/react-auth"
-import {
-  BRAND_HEX,
-  BRAND_THEME,
-  CHAIN_ID,
-  DROP_ADDRESS,
-  ERC6551_IMPLEMENTATION_ADDRESS,
-  ERC6551_INIT_DATA,
-  ERC6551_REGISTRY_ADDRESS,
-} from "../lib/consts"
-import abi from "../lib/abi/minter.json"
-import { BigNumber } from "ethers"
-import { useRouter } from "next/router"
-import { toast } from "react-toastify"
-import usePreparePrivyWallet from "../hooks/usePreparePrivyWallet"
-import handleTxError from "../lib/handleTxError"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import getDefaultFeed from "../lib/getDefaultFeeds"
 
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
-  const { push } = useRouter()
-  const { prepare } = usePreparePrivyWallet()
-  const [totalPrice, setTotalPrice] = useState(2)
-  const { getEthConversion } = useUserProvider()
-  const { privyWallet, connectedWallet } = useConnectedWallet()
-  const { balance } = useBalance()
-  const ethConvertedAmount = useMemo(() => getEthConversion(totalPrice), [totalPrice, getEthConversion])
-  const hasBalanceToPurchase = ethConvertedAmount < parseFloat(balance)
-  const { sendTransaction } = usePrivySendTransaction()
-  const { publicSalePrice } = useSaleStatus()
+  const [feed, setFeed] = useState([])
+  const [selectedDrop, setSelectedDrop] = useState(null)
 
-  const fund = async () => {
-    const fundWalletConfig = {
-      currencyCode: "ETH_ETHEREUM",
-      quoteCurrencyAmount: parseFloat(getEthConversion(totalPrice).toFixed(4)),
-      uiConfig: { accentColor: BRAND_HEX, theme: BRAND_THEME },
-    } as MoonpayConfig
-    await privyWallet.fund({ config: fundWalletConfig })
+  const totalPrice = useMemo(() => {
+    if (!selectedDrop) return 0
+    return parseFloat(selectedDrop?.price) * selectedDrop?.quantity
+  }, [selectedDrop])
+
+  const handleChangeQuantity = (value, i) => {
+    const temp = [...feed]
+    temp[i].quantity = value
+    setFeed(temp)
   }
 
-  const purchaseByPrivy = async () => {
-    if (!prepare()) return
-    if (!hasBalanceToPurchase || totalPrice <= 0) {
-      await fund()
-      return
+  useEffect(() => {
+    const init = async () => {
+      const defaultFeed = await getDefaultFeed()
+      if (!defaultFeed.length) return
+
+      setFeed(defaultFeed.slice(0, 3).map((feed) => ({
+        ...feed,
+        quantity: 1
+      })))
     }
-    try {
-      await sendTransaction(
-        process.env.NEXT_PUBLIC_MINTER,
-        CHAIN_ID,
-        abi,
-        "purchase",
-        [
-          DROP_ADDRESS,
-          1,
-          connectedWallet,
-          ERC6551_REGISTRY_ADDRESS,
-          ERC6551_IMPLEMENTATION_ADDRESS,
-          ERC6551_INIT_DATA,
-        ],
-        BigNumber.from(publicSalePrice).toHexString(),
-        "Securely Pay on Oasis",
-        "Pay with Crypto",
-      )
-      toast.success("purchased!")
-      push("/checkout/success")
-    } catch (err) {
-      handleTxError(err)
-    }
+
+    init()
+  }, [])
+
+  const handleSelectedDrop = (dropAddress, fundsRecipient, price, quantity) => {
+    setSelectedDrop({
+      dropAddress,
+      fundsRecipient,
+      price,
+      quantity
+    })
   }
 
   const value = useMemo(
-    () => ({ 
-        totalPrice,
-        setTotalPrice,
-        purchaseByPrivy
+    () => ({
+      feed,
+      handleSelectedDrop,
+      selectedDrop,
+      totalPrice,
+      handleChangeQuantity
     }),
     [
-        totalPrice,
-        setTotalPrice,
-        purchaseByPrivy
+      feed,
+      handleSelectedDrop,
+      selectedDrop,
+      totalPrice,
+      handleChangeQuantity
     ],
   )
 

@@ -7,7 +7,7 @@ import {
   ERC6551_INIT_DATA,
   ERC6551_REGISTRY_ADDRESS,
   DROP_ADDRESS,
-} from "../../../lib/consts"
+} from "../../lib/consts"
 
 interface CrossmintButtonProps {
   wallet: string
