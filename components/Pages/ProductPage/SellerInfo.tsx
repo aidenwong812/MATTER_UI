@@ -4,7 +4,7 @@ const SellerInfo = () => (
   <div className="w-full">
     <div
       className="border-0 md:border md:border-gray_3 rounded-[20px]
-        p-[24px]"
+        md:p-[24px]"
     >
       <p
         className="py-[18px] px-[20px] bg-gray_1

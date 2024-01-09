@@ -1,7 +1,7 @@
 import Image from "../../../shared/Image"
 
 const ProductPhoto = () => (
-  <div className="col-span-4">
+  <div className="md:col-span-4">
     <Image
       link="/images/product_placeholder.png"
       blurLink="/images/product_placeholder.png"

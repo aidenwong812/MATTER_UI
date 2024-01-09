@@ -1,7 +1,7 @@
 import SellerName from "../../SellerName"
 
 const ProductDetail = () => (
-  <div className="col-span-3 py-[35px] px-[24px]">
+  <div className="md:col-span-3 py-[35px] md:px-[24px]">
     <p className="text-[16px] font-[400] leading-[100%] tracking-[-0.4px]">Category</p>
     <p className="text-[28px] tracking-[-0.168px] font-[400] leading-[120%]">Item Name</p>
     <SellerName className="my-[16px]" />
