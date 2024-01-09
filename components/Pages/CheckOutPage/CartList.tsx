@@ -1,6 +1,7 @@
 import useIsMobile from "../../../hooks/useIsMobile"
 import Icon from "../../../shared/Icon"
 import CartItem from "./CartItem"
+import { demoProducts } from "./demoProducts"
 
 const CartList = () => {
   const isMobile = useIsMobile()
@@ -26,7 +27,7 @@ const CartList = () => {
           .fill("0")
           .map((_, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <CartItem key={i} />
+            <CartItem key={i} product={demoProducts[i]} />
           ))}
       </div>
     </div>
