@@ -1,4 +1,5 @@
 import { usePrivy } from "@privy-io/react-auth"
+import Icon from "../../shared/Icon"
 
 const SignButton = () => {
   const { authenticated, logout, login } = usePrivy()
@@ -15,11 +16,11 @@ const SignButton = () => {
   return (
     <button
       type="button"
-      className="md:ml-[24px] border border-gray_2 rounded-full
+      className="md:ml-[24px] rounded-full
             py-[5px] px-[20px]"
       onClick={handleClick}
     >
-      {authenticated ? "Sign Out" : "Sign In"}
+      {authenticated ? <Icon name="user" /> : "Log In"}
     </button>
   )
 }
