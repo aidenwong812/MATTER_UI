@@ -28,21 +28,14 @@ const UserProvider = ({ children }) => {
     if (isPrivatePage && !authenticated && !loading) router.push("/")
   }, [isPrivatePage, authenticated, loading])
 
-  const username = useMemo(() => {
-    let username = user?.google?.name
-
-    if (user?.email?.address) {
-      const markIndex = user.email.address.indexOf('@')
-      username = username || user.email.address.slice(0, markIndex)
-    }
-
-    return username || ""
+  const privyEmail = useMemo(() => {
+    return user?.google?.email || ""
   }, [user])
 
   const value = useMemo(
     () => ({ 
       connectedWallet, 
-      username,
+      privyEmail,
       loading,
       getUsdConversion, 
       ethPrice,
@@ -51,7 +44,7 @@ const UserProvider = ({ children }) => {
     }),
     [
       connectedWallet, 
-      username,
+      privyEmail,
       loading,
       getUsdConversion, 
       ethPrice,
