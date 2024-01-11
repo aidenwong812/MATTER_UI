@@ -1,21 +1,10 @@
-import { FC } from "react"
 import useCollectDrop from "../../hooks/useCollectDrop"
 import Image from "../../shared/Image"
+import { useCheckOut } from "../../providers/CheckOutProvider"
 
-interface CollectDropButtonProps {
-  className?: string
-  disabled?: boolean
-  selectedDrop?: any
-  buttonLabel?: string
-}
-
-const CollectDropButton: FC<CollectDropButtonProps> = ({
-  className = "",
-  disabled,
-  selectedDrop,
-  buttonLabel,
-}) => {
-  const { collectDrop } = useCollectDrop(selectedDrop?.dropAddress)
+const CollectDropButton = ({ className = "", buttonLabel = "" }) => {
+  const { selectedDrop } = useCheckOut()
+  const { collectDrop } = useCollectDrop(selectedDrop?.dropAddress, selectedDrop?.tokenId)
 
   return (
     <button
@@ -25,7 +14,7 @@ const CollectDropButton: FC<CollectDropButtonProps> = ({
       onClick={async () => {
         await collectDrop("OASIS", selectedDrop?.quantity)
       }}
-      disabled={disabled}
+      disabled={!selectedDrop?.canMint}
     >
       <Image
         link="/images/privy_pay.svg"

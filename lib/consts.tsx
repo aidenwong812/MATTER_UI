@@ -1,6 +1,6 @@
 import { keccak256, toUtf8Bytes } from "ethers/lib/utils"
 
-export const CHAIN_ID = process.env.NEXT_PUBLIC_TESTNET ? 5 : 1
+export const CHAIN_ID = process.env.NEXT_PUBLIC_TESTNET ? 84531 : 1
 export const MULTICALL_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
 // ERC6551
 export const ERC6551_REGISTRY_ADDRESS = "0x02101dfB77FDE026414827Fdc604ddAF224F0921"

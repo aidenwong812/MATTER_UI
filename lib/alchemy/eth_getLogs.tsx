@@ -12,7 +12,7 @@ export const ethGetLogs = async (chainId, contractAddress, topics) => {
     params: [
       {
         fromBlock: "0x1",
-        toBlock: "0x8b422e",
+        toBlock: "latest",
         address: contractAddress,
         topics,
       },
