@@ -23,13 +23,13 @@ const CreatePage = () => {
                         md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[90px] pb-[30px] px-[18px]
                         flex items-center justify-center"
       >
-        <div className="w-full grid grid-cols-2 gap-x-[40px]">
-          <div className="flex flex-col gap-y-[20px] items-end">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-[40px]">
+          <div className="flex flex-col gap-y-[20px] items-center md:items-end">
             {!hasContent && <AnimationUpload />}
             {/* eslint-disable-next-line  @next/next/no-img-element */}
             {cover && <img src={coverUrl} width={280} height={150} alt="not found uri" />}
           </div>
-          <div className="flex flex-col items-start gap-y-[20px]">
+          <div className="flex flex-col items-center md:items-start gap-y-[20px]">
             <p className="text-[22px]">
               {drops1155.length > 0 && !isSelectedCreated ? "Create a Product" : "Create Category"}
             </p>

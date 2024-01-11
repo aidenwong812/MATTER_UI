@@ -16,7 +16,6 @@ const CollectionProvider = ({ children }) => {
     selectedDrop?.chainId,
   )
 
-  console.log(dropsByConnectedWallet)
   const drops1155 = useMemo(() => {
     return [...dropsByConnectedWallet].sort(
       (a, b) => b.createdAt - a.createdAt,
