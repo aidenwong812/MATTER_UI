@@ -75,7 +75,7 @@ a {
 }
 
 .oasis-crossmint-button::after {
-  background-image: url("/images/credit_pay.png");
+  background-image: url("/images/credit_pay.svg");
   background-size: contain;
   background-repeat: no-repeat !important;
   position: absolute;
