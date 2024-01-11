@@ -1,7 +1,7 @@
 import useIsMobile from "../../hooks/useIsMobile"
 import Icon from "../../shared/Icon"
 import Image from "../../shared/Image"
-import DesktopMenu from "../DesktopMenu/DesktopMenu"
+import DesktopMenu from "../DesktopMenu"
 import MobileMenu from "../MobileMenu"
 
 const Header = () => {
