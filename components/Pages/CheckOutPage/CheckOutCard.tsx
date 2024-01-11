@@ -46,7 +46,7 @@ const CheckOutCard = () => {
             disabled={parseFloat(usdBalance) <= 0}
           >
             <Image
-              link="/images/privy_pay.png"
+              link="/images/privy_pay.svg"
               blurLink="/images/privy_pay.png"
               containerClasses="w-[18px] h-[14px]"
               alt="not found icon"
