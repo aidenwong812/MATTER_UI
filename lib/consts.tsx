@@ -1,6 +1,9 @@
-export const CHAIN_ID = process.env.NEXT_PUBLIC_TESTNET ? 5 : 1
+import { base, baseGoerli } from "viem/chains"
+
+export const CHAIN_ID = process.env.NEXT_PUBLIC_TESTNET ? baseGoerli.id : base.id
 export const MULTICALL_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
 export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_CONTRACT
+export const MULTICALL_3_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
 // ERC6551
 export const ERC6551_REGISTRY_ADDRESS = "0x02101dfB77FDE026414827Fdc604ddAF224F0921"
 export const ERC6551_IMPLEMENTATION_ADDRESS = "0x2d25602551487c3f3354dd80d76d54383a243358"
@@ -17,3 +20,6 @@ export const BRAND_HEX = "#24AACB"
 export const BRAND_THEME = "dark"
 
 export const CLIENT_EMAIL = "contact@nftuence.com"
+export const SEO_TITLE = "OASIS"
+export const SEO_DESCRIPTION = "OASIS"
+export const SEO_IMAGE = "/images/logo.png"

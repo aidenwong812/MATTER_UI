@@ -8,7 +8,6 @@ import useEthPrice from "../../../hooks/useEthPrice"
 
 const CartItem = ({ product = null }: any) => {
   const { getUsdConversion } = useEthPrice()
-  console.log("SWEETS product", product)
   const [quantity, setQuanity] = useState("1")
   const quantites = Array.from({ length: 5 }).map((_, index) => ({
     label: `${index + 1}`,
