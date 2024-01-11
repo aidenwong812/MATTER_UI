@@ -1,9 +1,7 @@
 import useCollectDrop from "../../hooks/useCollectDrop"
 import Image from "../../shared/Image"
-import { useCheckOut } from "../../providers/CheckOutProvider"
 
-const CollectDropButton = ({ className = "", buttonLabel = "" }) => {
-  const { selectedDrop } = useCheckOut()
+const CollectDropButton = ({ className = "", buttonLabel = "", selectedDrop }) => {
   const { collectDrop } = useCollectDrop(selectedDrop?.dropAddress, selectedDrop?.tokenId)
 
   return (
