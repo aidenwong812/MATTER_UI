@@ -1,7 +1,7 @@
 import useCollectDrop from "../../hooks/useCollectDrop"
 import Image from "../../shared/Image"
 
-const CollectDropButton = ({ className = "", buttonLabel = "", selectedDrop }) => {
+const CollectDropButton = ({ className = "", buttonLabel = "", selectedDrop = null }) => {
   const { collectDrop } = useCollectDrop(selectedDrop?.dropAddress, selectedDrop?.tokenId)
 
   return (
