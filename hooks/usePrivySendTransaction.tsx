@@ -1,4 +1,4 @@
-import { usePrivy } from "@privy-io/react-auth"
+import { UnsignedTransactionRequest, usePrivy } from "@privy-io/react-auth"
 import { Interface } from "ethers/lib/utils"
 
 const usePrivySendTransaction = () => {
@@ -13,6 +13,7 @@ const usePrivySendTransaction = () => {
     value = "0",
     title = "",
     description = "",
+    gasLimit = null,
   ) => {
     const data = new Interface(abi).encodeFunctionData(functionName, args)
     const unsignedTx = {
@@ -20,6 +21,9 @@ const usePrivySendTransaction = () => {
       chainId,
       data,
       value,
+    } as UnsignedTransactionRequest
+    if (gasLimit) {
+      unsignedTx.gasLimit = gasLimit
     }
 
     const uiConfig = {

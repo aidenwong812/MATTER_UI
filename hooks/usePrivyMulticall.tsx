@@ -9,19 +9,19 @@ const usePrivyMulticall = () => {
   const [error, setError] = useState<Error | null>(null)
   const { sendTransaction } = usePrivySendTransaction()
 
-  const aggregate3Value = async (calls) => {
+  const aggregate3Value = async (calls, msgValueString = "0") => {
     console.log("sweets calls", calls)
     try {
-      const publicSalePrice = "0"
       const response = await sendTransaction(
         MULTICALL_3_ADDRESS,
         CHAIN_ID,
         multicallAbi,
         "aggregate3Value",
         [calls],
-        BigNumber.from(publicSalePrice).toHexString(),
+        BigNumber.from(msgValueString).toHexString(),
         "Securely Pay on Oasis",
         "Pay with Crypto",
+        BigNumber.from("175000").toHexString(),
       )
       return response
     } catch (err) {

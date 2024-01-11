@@ -1,14 +1,18 @@
 import { useMemo, useState } from "react"
 import { useRouter } from "next/router"
+import { Interface } from "ethers/lib/utils"
 import { MoonpayConfig } from "@privy-io/react-auth"
 import { toast } from "react-toastify"
+import { BigNumber, utils } from "ethers"
 import handleTxError from "../lib/handleTxError"
 import { useUserProvider } from "../providers/UserProvider"
 import useBalance from "./useBalance"
 import useConnectedWallet from "./useConnectedWallet"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
-import { BRAND_HEX, BRAND_THEME } from "../lib/consts"
+import { BRAND_HEX, BRAND_THEME, MINT_REFERRAL } from "../lib/consts"
 import usePrivyMulticall from "./usePrivyMulticall"
+import { demoProducts } from "../components/Pages/CheckOutPage/demoProducts"
+import zora721Abi from "../lib/abi/zora721drop.json"
 
 const usePurchaseByPrivy = () => {
   const { push } = useRouter()
@@ -43,8 +47,22 @@ const usePurchaseByPrivy = () => {
       return
     }
     try {
-      const calls = []
-      const response = await aggregate3Value(calls)
+      const mintData = new Interface(zora721Abi).encodeFunctionData("mintWithRewards", [
+        connectedWallet,
+        1,
+        "matter comments",
+        MINT_REFERRAL,
+      ])
+
+      const mintWithRewardsCall = {
+        target: demoProducts[0].contractAddress, // The ERC1155 contract address
+        allowFailure: true, // Set to true if you want to allow this call to fail without reverting the entire transaction
+        value: BigNumber.from(demoProducts[0].price), // Value in wei to send with this call, adjust as needed
+        callData: mintData,
+      }
+      const calls = [mintWithRewardsCall]
+
+      const response = await aggregate3Value(calls, demoProducts[0].price)
       console.log("SWEETS RESPONSE", response)
       toast.success("purchased!")
       push("/checkout/success")
