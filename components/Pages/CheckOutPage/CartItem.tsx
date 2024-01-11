@@ -14,8 +14,16 @@ const CartItem = ({ index }) => {
     value: i + 1,
   }))
   const isMobile = useIsMobile()
-  const { imageUri, animationUri, dropName, sellerName, saleDetails, dropAddress, fundsRecipient } =
-    useDropProvider()
+  const {
+    imageUri,
+    animationUri,
+    dropName,
+    sellerName,
+    saleDetails,
+    dropAddress,
+    canMint,
+    tokenId,
+  } = useDropProvider()
   const { handleSelectedDrop, feed, handleChangeQuantity } = useCheckOut()
 
   const ethPrice = useMemo(() => {
@@ -32,7 +40,7 @@ const CartItem = ({ index }) => {
         transition duration-[300ms]
         w-full flex flex-col md:flex-row md:justify-between cursor-pointer"
       onClick={() =>
-        handleSelectedDrop(dropAddress, fundsRecipient, ethPrice, feed[index].quantity)
+        handleSelectedDrop(canMint, dropAddress, tokenId, ethPrice, feed[index].quantity)
       }
     >
       <div className="flex gap-x-[15px] md:gap-x-[10px] pl-[10px]">
@@ -46,10 +54,10 @@ const CartItem = ({ index }) => {
         <div className="flex flex-col justify-between">
           <div>
             <p className="text-[16px] text-black font-[400] tracking-[-0.6px] leading-[100%] pb-[8px]">
-              ERC721
+              {dropName}
             </p>
             <p className="text-[28px] text-black font-[400] tracking-[-0.168px] leading-[120%]">
-              {dropName}
+              {dropName} #{tokenId}
             </p>
           </div>
           <div className="flex gap-x-[5px] items-center">

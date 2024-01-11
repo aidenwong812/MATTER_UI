@@ -23,7 +23,7 @@ const CheckOutProvider = ({ children }) => {
       const defaultFeed = await getDefaultFeed()
       if (!defaultFeed.length) return
 
-      setFeed(defaultFeed.slice(0, 3).map((feed) => ({
+      setFeed(defaultFeed.slice(0, 10).map((feed) => ({
         ...feed,
         quantity: 1
       })))
@@ -32,12 +32,9 @@ const CheckOutProvider = ({ children }) => {
     init()
   }, [])
 
-  const handleSelectedDrop = (dropAddress, fundsRecipient, price, quantity) => {
+  const handleSelectedDrop = (canMint, dropAddress, tokenId, price, quantity) => {
     setSelectedDrop({
-      dropAddress,
-      fundsRecipient,
-      price,
-      quantity
+      canMint, dropAddress, tokenId, price, quantity
     })
   }
 
