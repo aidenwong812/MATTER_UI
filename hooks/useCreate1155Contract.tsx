@@ -13,12 +13,17 @@ import { useUserProvider } from "../providers/UserProvider"
 const useCreate1155Contract = () => {
   const { authenticated } = usePrivy()
   const { sendTransaction } = usePrivySendTransaction()
-  const { fundsRecipient, title } = useDeploy()
+  const { fundsRecipient, title, description, cover } = useDeploy()
   const { connectedWallet } = useUserProvider()
 
   const create1155Contract = async (chainId = CHAIN_ID) => {
     try {
-      const ipfs = await store(getZoraBlob(fundsRecipient), title, "", fundsRecipient)
+      const ipfs = await store(
+        cover || getZoraBlob(fundsRecipient),
+        title,
+        description,
+        fundsRecipient,
+      )
       const adminPermissionArgs = [0, connectedWallet, 2]
       const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
       const minterPermissionCall = new Interface(dropAbi).encodeFunctionData(
@@ -51,12 +56,18 @@ const useCreate1155Contract = () => {
           abi,
           "createContract",
           args,
+          undefined,
+          "Create a Category",
+          "OASIS",
+          "Create a Category",
+          "Created!",
         )
         return { error: response?.error }
       }
 
       return true
     } catch (err) {
+      console.log(err)
       handleTxError(err)
       return { error: err }
     }

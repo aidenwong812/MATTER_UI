@@ -1,5 +1,4 @@
 import { createContext, useState, useContext, useMemo, useEffect } from "react"
-import { useAccount } from "wagmi"
 import { useUserProvider } from "./UserProvider"
 
 const DeployContext = createContext({} as any)
@@ -7,8 +6,8 @@ const DeployContext = createContext({} as any)
 export const useDeploy = () => useContext(DeployContext)
 
 export const DeployProvider = ({ children }) => {
-  const { address } = useAccount()
-  const { zorbOwner, loadingZorbOwner, connectedWallet } = useUserProvider()
+  const { connectedWallet } = useUserProvider()
+  const [ isSelectedCreated, setIsSelectedCreated ] = useState(true)
 
   const [animationFile, setAnimationFile] = useState(null)
   const [animationSrc, setAnimationSrc] = useState(null)
@@ -16,12 +15,12 @@ export const DeployProvider = ({ children }) => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
-  const [fundsRecipient, setFundsRecipient] = useState(connectedWallet || address)
+  const [fundsRecipient, setFundsRecipient] = useState(connectedWallet)
   const [posting, setPosting] = useState(false)
 
   useEffect(() => {
-    setFundsRecipient(zorbOwner || connectedWallet || address)
-  }, [zorbOwner, connectedWallet, address])
+    setFundsRecipient(connectedWallet)
+  }, [connectedWallet])
 
   const value = useMemo(
     () => ({
@@ -39,7 +38,8 @@ export const DeployProvider = ({ children }) => {
       setFundsRecipient,
       posting,
       setPosting,
-      loadingZorbOwner,
+      isSelectedCreated,
+      setIsSelectedCreated
     }),
     [
       animationFile,
@@ -56,7 +56,8 @@ export const DeployProvider = ({ children }) => {
       setFundsRecipient,
       posting,
       setPosting,
-      loadingZorbOwner,
+      isSelectedCreated,
+      setIsSelectedCreated
     ],
   )
 

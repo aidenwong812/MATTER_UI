@@ -8,7 +8,7 @@ import { get1155Minters } from "../lib/zora/get1155Minters"
 const DropContext = createContext(null)
 
 const DropProvider = ({ children, drop }) => {
-  const { uri, contractAddress: dropAddress, type, tokenId } = drop
+  const { uri, contractAddress: dropAddress, contractName: dropContractName, type, tokenId } = drop
   const [imageUri, setImageUri] = useState("")
   const [animationUri, setAnimationUri] = useState("")
   const [fundsRecipient, setFundsRecipient] = useState("")
@@ -62,7 +62,8 @@ const DropProvider = ({ children, drop }) => {
       sellerName,
       saleDetails,
       description,
-      canMint
+      canMint,
+      dropContractName
     }),
     [
       dropAddress,
@@ -76,7 +77,8 @@ const DropProvider = ({ children, drop }) => {
       sellerName,
       saleDetails,
       description,
-      canMint
+      canMint,
+      dropContractName
     ],
   )
 

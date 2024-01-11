@@ -1,4 +1,5 @@
 import { usePrivy } from "@privy-io/react-auth"
+import { BigNumber } from "ethers"
 import { Interface } from "ethers/lib/utils"
 import { toast } from "react-toastify"
 
@@ -11,7 +12,7 @@ const usePrivySendTransaction = () => {
     abi,
     functionName,
     args,
-    value = "0",
+    value = BigNumber.from("0").toHexString(),
     title = "",
     description = "",
     buttonText = "",
@@ -32,7 +33,7 @@ const usePrivySendTransaction = () => {
     }
     const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
 
-    const successMessage = customSuccessMessage || "Purchased!"
+    const successMessage = customSuccessMessage || "Success!"
     toast.success(successMessage)
 
     return txReceipt.transactionHash

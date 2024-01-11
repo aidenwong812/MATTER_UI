@@ -42,12 +42,13 @@ const AnimationUpload = () => {
       <button
         onClick={handleClick}
         type="button"
-        className=""
+        className="border border-gray_3 p-[40px] rounded-[14px]"
       >
         <Image
-            link="/images/upload-imagination.png"
-            blurLink="/images/upload-imagination.png"
-            containerClasses="w-[160px] aspect-[1/1]"
+          link="/images/upload-imagination.png"
+          blurLink="/images/upload-imagination.png"
+          containerClasses="w-[160px] aspect-[1/1]"
+          alt="not found icon"
         />
         <motion.span
           variants={{
@@ -56,10 +57,10 @@ const AnimationUpload = () => {
           }}
         >
           <p
-            className="font-monument_extended_ultrabold text-[12px] text-white
+            className="text-[12px]
           text-center"
           >
-            Select Photo
+            Drag and drop or choose up file
           </p>
         </motion.span>
 

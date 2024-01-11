@@ -1,3 +1,3 @@
-import Zorb from "./Zorb";
+import Zorb from "./Zorb"
 
 export default Zorb

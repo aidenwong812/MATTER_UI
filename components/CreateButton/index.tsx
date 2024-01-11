@@ -1,3 +1,3 @@
-import CreateButton from "./CreateButton";
+import CreateButton from "./CreateButton"
 
 export default CreateButton

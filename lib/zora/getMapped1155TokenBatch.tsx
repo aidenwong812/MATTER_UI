@@ -1,7 +1,7 @@
 import { BigNumber } from "ethers"
 import { toUtf8String } from "ethers/lib/utils"
 
-const getMapped1155TokenBatch = (batchResults, contractAddresses) => {
+const getMapped1155TokenBatch = (batchResults, all1155Contracts) => {
   const drops = batchResults.map(
     (logs, index) =>
       logs &&
@@ -24,7 +24,8 @@ const getMapped1155TokenBatch = (batchResults, contractAddresses) => {
         })()
 
         return {
-          contractAddress: contractAddresses[index],
+          contractAddress: all1155Contracts[index].contractAddress,
+          contractName: all1155Contracts[index].contractName,
           uri: newURI,
           tokenId,
           blockNumber,

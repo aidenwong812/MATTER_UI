@@ -23,6 +23,7 @@ const CartItem = ({ index }) => {
     dropAddress,
     canMint,
     tokenId,
+    dropContractName,
   } = useDropProvider()
   const { handleSelectedDrop, feed, handleChangeQuantity } = useCheckOut()
 
@@ -54,7 +55,7 @@ const CartItem = ({ index }) => {
         <div className="flex flex-col justify-between">
           <div>
             <p className="text-[16px] text-black font-[400] tracking-[-0.6px] leading-[100%] pb-[8px]">
-              {dropName}
+              {dropContractName}
             </p>
             <p className="text-[28px] text-black font-[400] tracking-[-0.168px] leading-[120%]">
               {dropName} #{tokenId}

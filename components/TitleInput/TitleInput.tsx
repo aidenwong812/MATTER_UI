@@ -1,0 +1,23 @@
+import { useCollection } from "../../providers/CollectionProvider"
+import { useDeploy } from "../../providers/DeployProvider"
+
+const TitleInput = () => {
+  const { setTitle, isSelectedCreated } = useDeploy()
+  const { drops1155 } = useCollection()
+
+  return (
+    <input
+      className="bg-cover border-[1px] border-gray_3
+            rounded-[8px] focus:!ring-0 focus:!border-gray_3
+            w-[280px] h-[40px] samsungS8:h-[48px] pl-4
+            flex items-center justify-center"
+      type="text"
+      placeholder={
+        drops1155?.length && !isSelectedCreated ? "Enter Product Name..." : "Enter Category Name..."
+      }
+      onChange={(e) => setTitle(e.target.value)}
+    />
+  )
+}
+
+export default TitleInput

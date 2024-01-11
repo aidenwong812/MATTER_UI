@@ -1,9 +1,13 @@
-import CreatePage from "../../components/Pages/CreatePage";
-import { DeployProvider } from "../../providers/DeployProvider";
+import CreatePage from "../../components/Pages/CreatePage"
+import CollectionProvider from "../../providers/CollectionProvider"
+import { DeployProvider } from "../../providers/DeployProvider"
 
-const Create = () => 
+const Create = () => (
+  <CollectionProvider>
     <DeployProvider>
-        <CreatePage />
+      <CreatePage />
     </DeployProvider>
+  </CollectionProvider>
+)
 
 export default Create
