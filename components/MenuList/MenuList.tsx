@@ -1,14 +1,12 @@
 import { motion } from "framer-motion"
 import { usePrivy } from "@privy-io/react-auth"
-import { useRouter } from "next/router"
-import SignButton from "../SignButton.tsx"
+import SignButton from "../SignButton"
 import Icon from "../../shared/Icon"
 import CreateAccountButton from "../CreateAccountButton"
-import Image from "../../shared/Image"
+import CartButton from "../CartButton/CartButton"
 
 const MenuList = () => {
   const { authenticated } = usePrivy()
-  const router = useRouter()
 
   const navClasses = "px-[32px] py-[20px] border-b border-b-gray_3"
   return (
@@ -41,16 +39,7 @@ const MenuList = () => {
         <p className={navClasses}>Digital Items</p>
         <p className={navClasses}>Physical Products</p>
         <div className={`${navClasses} !border-none flex gap-x-[10px]`}>
-          {authenticated && (
-            <button type="button" className="ml-[24px]" onClick={() => router.push("/checkout")}>
-              <Image
-                link="/images/cart-shopping-regular.svg"
-                blurLink="/images/cart-shopping-regular.png"
-                containerClasses="w-[24px] aspect-[24/21]"
-                alt="not found icon"
-              />
-            </button>
-          )}
+          {authenticated && <CartButton />}
           <SignButton />
           {!authenticated && <CreateAccountButton />}
         </div>
