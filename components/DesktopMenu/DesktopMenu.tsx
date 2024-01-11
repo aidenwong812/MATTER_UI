@@ -2,7 +2,7 @@ import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import CreateAccountButton from "../CreateAccountButton"
 import SignButton from "../SignButton.tsx"
-import Icon from "../../shared/Icon"
+import Image from "../../shared/Image"
 
 const DesktopMenu = () => {
   const { authenticated } = usePrivy()
@@ -19,7 +19,12 @@ const DesktopMenu = () => {
       <div className="flex gap-x-[10px]">
         {authenticated && (
           <button type="button" className="ml-[24px]" onClick={() => router.push("/checkout")}>
-            <Icon name="cart" />
+            <Image
+              link="/images/cart-shopping-regular.png"
+              blurLink="/images/cart-shopping-regular.png"
+              containerClasses="w-[24px] aspect-[24/21]"
+              alt="not found icon"
+            />
           </button>
         )}
         <SignButton />
