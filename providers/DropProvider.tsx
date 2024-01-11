@@ -1,12 +1,9 @@
 import { createContext, useContext, useState, useMemo, useEffect } from "react"
-import { Contract } from "ethers"
-import getDefaultProvider from "../lib/getDefaultProvider"
-import abi from "../lib/abi/abi-ERC721Drop.json"
 import getIpfsLink from "../lib/getIpfsLink"
-import metadataAbi from "../lib/abi/abi-EditionMetadataRenderer.json"
 import { CHAIN_ID } from "../lib/consts"
-import getEnsForAddress from "../lib/getEnsForAddress"
-import truncateAddress from "../lib"
+import axios from "axios"
+import get1155SaleStatus from "../lib/get1155SaleStatus"
+import { get1155Minters } from "../lib/zora/get1155Minters"
 
 const DropContext = createContext(null)
 
@@ -19,35 +16,36 @@ const DropProvider = ({ children, drop }) => {
   const [dropName, setDropName] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [saleDetails, setSaleDetail] = useState(null)
-
-  const tokenContract = useMemo(() => {
-    return new Contract(dropAddress, abi, getDefaultProvider(CHAIN_ID))
-  }, [dropAddress])
+  const [description, setDescription] = useState("")
+  const [canMint, setCanMint] = useState(false)
 
   useEffect(() => {
-    const init = async () => {
+    const init1155Uri = async () => {
       setIsLoading(true)
-      const saleDetails = await tokenContract.saleDetails()
-      setSaleDetail(saleDetails)
-      const config = await tokenContract.config()
-      const ensAddress = await getEnsForAddress(config.fundsRecipient)
-      setFundsRecipient(config.fundsRecipient)
-      setSellerName(ensAddress || truncateAddress(config.fundsRecipient))
-      const name = await tokenContract.name()
-      const metadataRenderer = await tokenContract.metadataRenderer()
-      const metadataRendererContract = new Contract(
-        metadataRenderer,
-        metadataAbi,
-        getDefaultProvider(CHAIN_ID),
-      )
-      const URI = await metadataRendererContract.tokenInfos(dropAddress)
-      setImageUri(getIpfsLink(URI.imageURI))
-      setAnimationUri(getIpfsLink(URI.animationURI))
-      setDropName(name)
+      try {
+        const response = await axios.get(getIpfsLink(uri))
+        const saleDetails = await get1155SaleStatus(dropAddress, tokenId)
+        const { data } = response
+        setImageUri(getIpfsLink(data.image))
+        setAnimationUri(getIpfsLink(data.animation_url))
+        setDropName(data?.name?.contractName || data?.name)
+        setDescription(data.description)
+        setSaleDetail(saleDetails)
+
+        const minters = await get1155Minters(dropAddress, tokenId, CHAIN_ID)
+
+        if (minters.length < 1) {
+          setCanMint(false)
+          return
+        }
+
+        setCanMint(true)
+        // eslint-disable-next-line no-empty
+      } catch (err) {}
       setIsLoading(false)
     }
     if (!dropAddress) return
-    init()
+    init1155Uri()
     return
   }, [dropAddress, type, uri])
 
@@ -62,7 +60,9 @@ const DropProvider = ({ children, drop }) => {
       dropName,
       fundsRecipient,
       sellerName,
-      saleDetails
+      saleDetails,
+      description,
+      canMint
     }),
     [
       dropAddress,
@@ -74,7 +74,9 @@ const DropProvider = ({ children, drop }) => {
       dropName,
       fundsRecipient,
       sellerName,
-      saleDetails
+      saleDetails,
+      description,
+      canMint
     ],
   )
 

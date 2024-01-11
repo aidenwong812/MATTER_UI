@@ -8,7 +8,6 @@ import { useCheckOut } from "../../../providers/CheckOutProvider"
 const CheckOutCard = () => {
   const { connectedWallet } = useConnectedWallet()
   const isMobile = useIsMobile()
-
   const { totalPrice, selectedDrop } = useCheckOut()
 
   return (
