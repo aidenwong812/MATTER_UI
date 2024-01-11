@@ -17,7 +17,7 @@ const use1155Collect = () => {
   ) => {
     const minterArguments = defaultAbiCoder.encode(
       ["address", "string"],
-      [owner, comment || "🪄🪄🪄"],
+      [owner, comment || "OASIS"],
     )
 
     await sendTransaction(
@@ -27,9 +27,10 @@ const use1155Collect = () => {
       "mintWithRewards",
       [minterAddress, tokenId, 1, minterArguments, referral],
       totalFee,
-      "1 EDITION",
-      comment ? "Comment" : "Collect",
-      comment ? "Commented!" : "Collected!",
+      "Securely Pay on Oasis",
+      "Pay with Crypto",
+      "Purchase",
+      "Purchased!",
     )
   }
 
