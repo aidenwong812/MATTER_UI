@@ -18,6 +18,7 @@ const CheckOutProvider = ({ children }) => {
     setFeed(temp)
   }
 
+  console.log(selectedDrop)
   useEffect(() => {
     const init = async () => {
       const defaultFeed = await getDefaultFeed()

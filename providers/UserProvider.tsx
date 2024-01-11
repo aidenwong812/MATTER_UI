@@ -1,13 +1,14 @@
-import { usePrivy, useWallets } from "@privy-io/react-auth"
+import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import React, { createContext, useContext, useEffect, useMemo } from "react"
 import useEthPrice from "../hooks/useEthPrice"
 import useBalance from "../hooks/useBalance"
+import useConnectedWallet from "../hooks/useConnectedWallet"
 
 const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
-  const { wallets } = useWallets()
+  const { connectedWallet } = useConnectedWallet()
   const { user, ready, authenticated } = usePrivy()
   const router = useRouter()
   const pathname = router.pathname
@@ -21,8 +22,6 @@ const UserProvider = ({ children }) => {
   const isPrivatePage = pathname !== '/'
 
   const loading = !ready
-
-  const connectedWallet = useMemo(() => wallets?.[0]?.address, [wallets])
 
   useEffect(() => {
     if (isPrivatePage && !authenticated && !loading) router.push("/")
