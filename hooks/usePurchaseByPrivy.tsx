@@ -8,7 +8,6 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
 import { MINT_REFERRAL } from "../lib/consts"
 import usePrivyMulticall from "./usePrivyMulticall"
-import { demoProducts } from "../components/Pages/CheckOutPage/demoProducts"
 import zora721Abi from "../lib/abi/zora721drop.json"
 
 const usePurchaseByPrivy = () => {
@@ -27,15 +26,15 @@ const usePurchaseByPrivy = () => {
       ]),
     [connectedWallet],
   )
-  const calls = demoProducts.map((product) => ({
-    target: product.contractAddress,
-    allowFailure: false, // Set to true if you want to allow this call to fail without reverting the entire transaction
-    value: BigNumber.from(product.price),
-    callData: mintData,
-  }))
-  const totalPrice = calls.reduce((acc, call) => acc.add(call.value), BigNumber.from(0))
 
-  const purchaseByPrivy = async () => {
+  const purchaseByPrivy = async (cart, totalPrice) => {
+    const calls = cart.map((product) => ({
+      target: product.contractAddress,
+      allowFailure: false, // Set to true if you want to allow this call to fail without reverting the entire transaction
+      value: BigNumber.from(product.price),
+      callData: mintData,
+    }))
+
     console.log("SWEETS USE MULTICALL", connectedWallet)
     if (!prepare()) return
     try {
@@ -52,7 +51,7 @@ const usePurchaseByPrivy = () => {
     }
   }
 
-  return { purchaseByPrivy, totalPrice }
+  return { purchaseByPrivy }
 }
 
 export default usePurchaseByPrivy
