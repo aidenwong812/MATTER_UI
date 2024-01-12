@@ -1,32 +1,21 @@
 import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui"
 import { FC } from "react"
 import { ethers } from "ethers"
+import { useCheckOut } from "../../../providers/CheckOutProvider"
+import useConnectedWallet from "../../../hooks/useConnectedWallet"
+import getMulticallFromCart from "../../../lib/getMulticallFromCart"
+import getMintData from "../../../lib/zora/getMintData"
 
-import {
-  ERC6551_IMPLEMENTATION_ADDRESS,
-  ERC6551_INIT_DATA,
-  ERC6551_REGISTRY_ADDRESS,
-  DROP_ADDRESS,
-} from "../../../lib/consts"
+const CrossmintButton: FC = () => {
+  const { connectedWallet } = useConnectedWallet()
+  const { cart, totalPrice } = useCheckOut()
 
-interface CrossmintButtonProps {
-  wallet: string
-  quantity: number
-  price: number
-}
-
-const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price }) => {
   const mintConfig = {
     type: "erc-721",
-    totalPrice: ethers.utils.formatEther(price),
-    quantity,
-    _target: DROP_ADDRESS,
-    _quantity: quantity,
-    _to: wallet,
-    to: wallet,
-    _registry: ERC6551_REGISTRY_ADDRESS,
-    _implementation: ERC6551_IMPLEMENTATION_ADDRESS,
-    _initData: ERC6551_INIT_DATA,
+    totalPrice: ethers.utils.formatEther(totalPrice),
+    quantity: 1,
+    cart: getMulticallFromCart(cart, getMintData(connectedWallet)),
+    to: connectedWallet,
   }
 
   return (
@@ -38,7 +27,7 @@ const CrossmintButton: FC<CrossmintButtonProps> = ({ wallet, quantity, price }) 
       mintConfig={mintConfig}
       paymentMethod="fiat"
       className="oasis-crossmint-button"
-      mintTo={wallet}
+      mintTo={connectedWallet}
       successCallbackURL={
         typeof window !== "undefined" && `${window.location.origin}/checkout/success`
       }

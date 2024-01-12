@@ -3,12 +3,10 @@ import Image from "../../../shared/Image"
 import CrossmintButton from "../../Buttons/CrossmintButton"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
-import useConnectedWallet from "../../../hooks/useConnectedWallet"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 import useEthPrice from "../../../hooks/useEthPrice"
 
 const CheckOutCard = () => {
-  const { connectedWallet } = useConnectedWallet()
   const isMobile = useIsMobile()
   const { getUsdConversion } = useEthPrice()
   const { cart, purchaseByPrivy, totalPrice } = useCheckOut()
@@ -62,7 +60,7 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CrossmintButton wallet={connectedWallet} price={3000} quantity={1} />
+          <CrossmintButton />
         </div>
       </div>
     </div>
