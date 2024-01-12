@@ -1,16 +1,20 @@
+import { formatEther } from "viem"
 import Image from "../../../shared/Image"
 import CrossmintButton from "../../Buttons/CrossmintButton"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
-import useConnectedWallet from "../../../hooks/useConnectedWallet"
-import { useUserProvider } from "../../../providers/UserProvider"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
+import useEthPrice from "../../../hooks/useEthPrice"
 
 const CheckOutCard = () => {
-  const { connectedWallet } = useConnectedWallet()
   const isMobile = useIsMobile()
-  const { usdBalance } = useUserProvider()
-  const { purchaseByPrivy } = useCheckOut()
+  const { getUsdConversion } = useEthPrice()
+  const { cart, purchaseByPrivy, totalPrice } = useCheckOut()
+  const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))
+
+  const handleCryptoPurchase = async () => {
+    await purchaseByPrivy(cart, totalPrice)
+  }
 
   return (
     <div className="md:col-span-6 xl:col-span-4">
@@ -33,17 +37,14 @@ const CheckOutCard = () => {
           className="text-[28px] leading-[120%] tracking-[-0.168px] font-[400] font-bold mb-[20px]
         text-center md:text-left"
         >
-          $000.00
+          ${usdPrice}
         </p>
         <div className="flex flex-col items-center">
           <button
             type="button"
-            className={`w-[327px] h-[56px] bg-black rounded-full
-              flex gap-x-[10px] items-center justify-center ${
-                parseFloat(usdBalance) <= 0 ? "cursor-not-allowed" : ""
-              }`}
-            onClick={purchaseByPrivy}
-            disabled={parseFloat(usdBalance) <= 0}
+            className="w-[327px] h-[56px] bg-black rounded-full
+              flex gap-x-[10px] items-center justify-center"
+            onClick={handleCryptoPurchase}
           >
             <Image
               link="/images/privy_pay.svg"
@@ -59,7 +60,7 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CrossmintButton wallet={connectedWallet} price={3000} quantity={1} />
+          <CrossmintButton />
         </div>
       </div>
     </div>

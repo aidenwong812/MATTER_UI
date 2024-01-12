@@ -1,16 +1,20 @@
 import { useState } from "react"
+import { formatEther } from "viem"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import Select from "../../../shared/Select"
 import useIsMobile from "../../../hooks/useIsMobile"
+import useEthPrice from "../../../hooks/useEthPrice"
 
-const CartItem = () => {
+const CartItem = ({ product = null }: any) => {
+  const { getUsdConversion } = useEthPrice()
   const [quantity, setQuanity] = useState("1")
   const quantites = Array.from({ length: 5 }).map((_, index) => ({
     label: `${index + 1}`,
     value: `${index + 1}`,
   }))
   const isMobile = useIsMobile()
+  const ethPrice = formatEther(product.price).toString()
 
   return (
     <div
@@ -19,8 +23,8 @@ const CartItem = () => {
     >
       <div className="flex gap-x-[15px] md:gap-x-[10px]">
         <Image
-          link="/images/cart_item.png"
-          blurLink="/images/cart_item.png"
+          link={product.image || "/images/cart_item.png"}
+          blurLink={product.image || "/images/cart_item.png"}
           containerClasses="w-[150px] aspect-[1/1]"
           alt="not found item"
         />
@@ -30,21 +34,21 @@ const CartItem = () => {
               Category
             </p>
             <p className="text-[28px] text-black font-[400] tracking-[-0.168px] leading-[120%]">
-              Item Name
+              {product.title || "Item Name"}
             </p>
           </div>
           <div className="flex gap-x-[5px] items-center">
             <Icon name="check" className="text-gray_6" size={16} />
             <p className="text-[14px] text-gray_6 font-[400] tracking-[-0.14px] leading-[120%]">
-              Seller Name
+              {product.sellerName || "Seller Name"}
             </p>
           </div>
           <div>
             <p className="text-[16px] text-black font-[400] tracking-[-0.4px] leading-[100%] pb-[8px]">
-              US $00
+              US ${getUsdConversion(ethPrice) || "00"}
             </p>
             <p className="text-[16px] text-black font-[400] tracking-[-0.4px] leading-[100%]">
-              ETH 0.000
+              ETH {ethPrice || "0.000"}
             </p>
           </div>
         </div>
