@@ -9,12 +9,14 @@ import getMintData from "../../../lib/zora/getMintData"
 const CrossmintButton: FC = () => {
   const { connectedWallet } = useConnectedWallet()
   const { cart, totalPrice } = useCheckOut()
+  const multicalls = getMulticallFromCart(cart, getMintData(connectedWallet))
+  const totalPriceEth = ethers.utils.formatEther(totalPrice)
 
   const mintConfig = {
     type: "erc-721",
-    totalPrice: ethers.utils.formatEther(totalPrice),
+    totalPrice: totalPriceEth,
     quantity: 1,
-    cart: getMulticallFromCart(cart, getMintData(connectedWallet)),
+    cart: multicalls,
     to: connectedWallet,
   }
 
