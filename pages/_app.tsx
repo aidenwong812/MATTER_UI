@@ -1,5 +1,4 @@
 import "../styles/globals.css"
-import "@rainbow-me/rainbowkit/styles.css"
 import "react-toastify/dist/ReactToastify.css"
 
 import { useLocalStorage } from "usehooks-ts"
