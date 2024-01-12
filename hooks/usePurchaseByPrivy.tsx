@@ -41,6 +41,10 @@ const usePurchaseByPrivy = () => {
     try {
       const response = await aggregate3Value(calls, totalPrice.toString())
       console.log("SWEETS RESPONSE", response)
+      const { error } = response as any
+      if (error) {
+        return
+      }
       toast.success("purchased!")
       push("/checkout/success")
     } catch (err) {
