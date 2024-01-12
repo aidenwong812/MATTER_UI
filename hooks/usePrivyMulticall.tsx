@@ -21,7 +21,7 @@ const usePrivyMulticall = () => {
         BigNumber.from(msgValueString).toHexString(),
         "Securely Pay on Oasis",
         "Pay with Crypto",
-        BigNumber.from("175000").toHexString(),
+        BigNumber.from("175000").mul(BigNumber.from(calls.length)).toHexString(),
       )
       return response
     } catch (err) {
