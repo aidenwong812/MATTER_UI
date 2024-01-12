@@ -10,7 +10,6 @@ const usePrivyMulticall = () => {
   const { sendTransaction } = usePrivySendTransaction()
 
   const aggregate3Value = async (calls, msgValueString = "0") => {
-    console.log("sweets calls", calls)
     try {
       const response = await sendTransaction(
         MULTICALL_3_ADDRESS,
@@ -25,10 +24,8 @@ const usePrivyMulticall = () => {
       )
       return response
     } catch (err) {
-      console.log("SWEETS MULTICALL ERROR", err)
       handleTxError(err)
       setError(err)
-
       return { error: err }
     }
   }

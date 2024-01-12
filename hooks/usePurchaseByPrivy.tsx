@@ -17,11 +17,9 @@ const usePurchaseByPrivy = () => {
 
   const purchaseByPrivy = async (cart, totalPrice) => {
     const calls = getMulticallFromCart(cart, mintData)
-    console.log("SWEETS USE MULTICALL", connectedWallet)
     if (!prepare()) return
     try {
       const response = await aggregate3Value(calls, totalPrice.toString())
-      console.log("SWEETS RESPONSE", response)
       const { error } = response as any
       if (error) {
         return
