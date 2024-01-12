@@ -19,8 +19,9 @@ export const USDC_SCALE = 1000000
 // BRANDING
 export const BRAND_HEX = "#24AACB"
 export const BRAND_THEME = "dark"
-
 export const CLIENT_EMAIL = "contact@nftuence.com"
 export const SEO_TITLE = "OASIS"
 export const SEO_DESCRIPTION = "OASIS"
 export const SEO_IMAGE = "/images/logo.png"
+// CHECKOUT
+export const GAS_LIMIT_CHECKOUT_PER_ITEM = "175000"
