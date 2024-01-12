@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { useRouter } from "next/router"
 import { Interface } from "ethers/lib/utils"
 import { toast } from "react-toastify"
@@ -28,9 +28,9 @@ const usePurchaseByPrivy = () => {
     [connectedWallet],
   )
   const calls = demoProducts.map((product) => ({
-    target: product.contractAddress, // The ERC1155 contract address
+    target: product.contractAddress,
     allowFailure: false, // Set to true if you want to allow this call to fail without reverting the entire transaction
-    value: BigNumber.from(product.price), // Value in wei to send with this call, adjust as needed
+    value: BigNumber.from(product.price),
     callData: mintData,
   }))
   const totalPrice = calls.reduce((acc, call) => acc.add(call.value), BigNumber.from(0))
