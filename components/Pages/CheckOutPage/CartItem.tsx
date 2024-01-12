@@ -22,9 +22,6 @@ const CartItem = ({ product = null }: any) => {
       className="border-b border-b-gray_3 py-[24px] hover:bg-gray_3
         transition duration-[300ms]
         w-full flex flex-col md:flex-row md:justify-between cursor-pointer"
-      onClick={() =>
-        handleSelectedDrop(canMint, dropAddress, tokenId, ethPrice, feed[index].quantity)
-      }
     >
       <div className="flex gap-x-[15px] md:gap-x-[10px] pl-[10px]">
         <Image
@@ -36,7 +33,7 @@ const CartItem = ({ product = null }: any) => {
         <div className="flex flex-col justify-between">
           <div>
             <p className="text-[16px] text-black font-[400] tracking-[-0.6px] leading-[100%] pb-[8px]">
-              {dropName}
+              {product.title || "Item Name"}
             </p>
             <p className="text-[28px] text-black font-[400] tracking-[-0.168px] leading-[120%]">
               {product.title || "Item Name"}
@@ -79,9 +76,9 @@ const CartItem = ({ product = null }: any) => {
           <Select
             id="qantity"
             name="qantity"
-            value={feed[index]?.quantity || ""}
+            value={quantity}
             className="!w-[100px]"
-            onChange={(e) => handleChangeQuantity(e.target.value, index)}
+            onChange={(e) => setQuanity(e.target.value)}
             options={quantites}
           />
         </div>

@@ -1,6 +1,6 @@
 import { formatEther } from "viem"
 import Image from "../../../shared/Image"
-import CrossmintButton from "../../Buttons/CrossmintButton"
+import CrossmintButton from "../../CrossmintButton"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
