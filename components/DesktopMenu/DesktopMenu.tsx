@@ -1,13 +1,10 @@
 import { usePrivy } from "@privy-io/react-auth"
-import { useRouter } from "next/router"
 import CreateAccountButton from "../CreateAccountButton"
-import SignButton from "../SignButton.tsx"
-import Icon from "../../shared/Icon"
+import SignButton from "../SignButton"
+import CartButton from "../CartButton"
 
 const DesktopMenu = () => {
   const { authenticated } = usePrivy()
-  const router = useRouter()
-
   return (
     <div
       className="flex gap-x-[32px] items-center justify-end
@@ -17,11 +14,7 @@ const DesktopMenu = () => {
       <p>Digital Items</p>
       <p>Physical Products</p>
       <div className="flex gap-x-[10px]">
-        {authenticated && (
-          <button type="button" className="ml-[24px]" onClick={() => router.push("/checkout")}>
-            <Icon name="cart" />
-          </button>
-        )}
+        {authenticated && <CartButton />}
         <SignButton />
         {!authenticated && <CreateAccountButton />}
       </div>

@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { SEO_DESCRIPTION, SEO_TITLE, SEO_IMAGE } from "../../utils/consts"
+import { SEO_DESCRIPTION, SEO_IMAGE, SEO_TITLE } from "../../lib/consts"
 
 const SeoHead = (props: any) => {
   const { description, image, title } = props

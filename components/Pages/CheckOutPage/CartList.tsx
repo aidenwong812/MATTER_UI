@@ -3,6 +3,7 @@ import { useCheckOut } from "../../../providers/CheckOutProvider"
 import DropProvider from "../../../providers/DropProvider"
 import Icon from "../../../shared/Icon"
 import CartItem from "./CartItem"
+import { demoProducts } from "./demoProducts"
 
 const CartList = () => {
   const isMobile = useIsMobile()
@@ -25,12 +26,12 @@ const CartList = () => {
         className="w-full flex flex-col
               px-[20px] md:px-0 border-t border-t-gray_3"
       >
-        {feed.map((drop, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <DropProvider key={i} drop={drop}>
-            <CartItem index={i} />
-          </DropProvider>
-        ))}
+        {Array(3)
+          .fill("0")
+          .map((_, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <CartItem key={i} product={demoProducts[i]} />
+          ))}
       </div>
     </div>
   )

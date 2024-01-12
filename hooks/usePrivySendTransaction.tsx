@@ -1,4 +1,4 @@
-import { usePrivy } from "@privy-io/react-auth"
+import { UnsignedTransactionRequest, usePrivy } from "@privy-io/react-auth"
 import { Interface } from "ethers/lib/utils"
 import { toast } from "react-toastify"
 
@@ -14,8 +14,7 @@ const usePrivySendTransaction = () => {
     value = "0",
     title = "",
     description = "",
-    buttonText = "",
-    customSuccessMessage = null,
+    gasLimit = null,
   ) => {
     const data = new Interface(abi).encodeFunctionData(functionName, args)
     const unsignedTx = {
@@ -23,17 +22,16 @@ const usePrivySendTransaction = () => {
       chainId,
       data,
       value,
+    } as UnsignedTransactionRequest
+    if (gasLimit) {
+      unsignedTx.gasLimit = gasLimit
     }
 
     const uiConfig = {
       header: title,
       description,
-      buttonText,
     }
     const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
-
-    const successMessage = customSuccessMessage || "Purchased!"
-    toast.success(successMessage)
 
     return txReceipt.transactionHash
   }
