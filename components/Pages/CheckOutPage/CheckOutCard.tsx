@@ -3,13 +3,11 @@ import CrossmintButton from "../../Buttons/CrossmintButton"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import useConnectedWallet from "../../../hooks/useConnectedWallet"
-import { useUserProvider } from "../../../providers/UserProvider"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 
 const CheckOutCard = () => {
   const { connectedWallet } = useConnectedWallet()
   const isMobile = useIsMobile()
-  const { usdBalance } = useUserProvider()
   const { purchaseByPrivy } = useCheckOut()
 
   return (
@@ -38,12 +36,9 @@ const CheckOutCard = () => {
         <div className="flex flex-col items-center">
           <button
             type="button"
-            className={`w-[327px] h-[56px] bg-black rounded-full
-              flex gap-x-[10px] items-center justify-center ${
-                parseFloat(usdBalance) <= 0 ? "cursor-not-allowed" : ""
-              }`}
+            className="w-[327px] h-[56px] bg-black rounded-full
+              flex gap-x-[10px] items-center justify-center"
             onClick={purchaseByPrivy}
-            disabled={parseFloat(usdBalance) <= 0}
           >
             <Image
               link="/images/privy_pay.svg"
