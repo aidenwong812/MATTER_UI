@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { BigNumber } from "ethers"
-import { CHAIN_ID, MULTICALL_3_ADDRESS } from "../lib/consts"
+import { CHAIN_ID, GAS_LIMIT_CHECKOUT_PER_ITEM, MULTICALL_3_ADDRESS } from "../lib/consts"
 import multicallAbi from "../lib/abi/multicall.json"
 import handleTxError from "../lib/handleTxError"
 import usePrivySendTransaction from "./usePrivySendTransaction"
@@ -20,7 +20,7 @@ const usePrivyMulticall = () => {
         BigNumber.from(msgValueString).toHexString(),
         "Securely Pay on Oasis",
         "Pay with Crypto",
-        BigNumber.from("175000").mul(BigNumber.from(calls.length)).toHexString(),
+        BigNumber.from(GAS_LIMIT_CHECKOUT_PER_ITEM).mul(BigNumber.from(calls.length)).toHexString(),
       )
       return response
     } catch (err) {
