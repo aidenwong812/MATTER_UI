@@ -1,10 +1,10 @@
 import { formatEther } from "viem"
 import Image from "../../../shared/Image"
-import CrossmintButton from "../../Buttons/CrossmintButton"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 import useEthPrice from "../../../hooks/useEthPrice"
+import CreditCardPayButton from "../../CreditCardPayButton"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()
@@ -60,7 +60,7 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CrossmintButton />
+          <CreditCardPayButton />
         </div>
       </div>
     </div>
