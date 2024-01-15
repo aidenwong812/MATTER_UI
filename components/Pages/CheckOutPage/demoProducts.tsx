@@ -12,7 +12,7 @@ export const demoProducts = [
     image:
       "https://nftstorage.link/ipfs/bafkreiez4oe6lr2wmiyak3umdk6wys6yjsls3ghnmxa4d6p6eyscofjqwq",
     price: "777000000000000",
-    sellerName: "oasis",
+    sellerName: "matter",
     contractAddress: "0x8e67eD7C977d5160C5EDB6508e3135fBd6b3b629",
   },
   {

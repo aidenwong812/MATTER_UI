@@ -47,9 +47,9 @@ const CheckOutCard = () => {
             onClick={handleCryptoPurchase}
           >
             <Image
-              link="/images/privy_pay.svg"
-              blurLink="/images/privy_pay.png"
-              containerClasses="w-[18px] h-[14px]"
+              link="/images/matter_mini_logo.svg"
+              blurLink="/images/matter_mini_logo.png"
+              containerClasses="w-[19px] h-[14px]"
               alt="not found icon"
             />
             <p className="text-white text-[16px] font-[400] leading-[120%]">Pay with Crypto</p>
