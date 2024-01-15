@@ -48,7 +48,7 @@ const InformationSelect = () => {
       <p className="text-[12px] text-gray_6 py-[24px]  mb-[32px] cursor-pointer">
         {`By tapping "Submit Payment",`} I agree to the{" "}
         <Link href="/terms">
-          <span className="underline">Temrs of Sale</span>
+          <span className="underline">Terms of Sale</span>
         </Link>
         .
       </p>
