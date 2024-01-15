@@ -1,4 +1,5 @@
 import Image from "../../shared/Image"
+import CreditCardInformation from "./CreditCardInformation"
 import DeliveryInformation from "./DeliveryInfomation"
 
 const InformationSelect = () => (
@@ -17,31 +18,7 @@ const InformationSelect = () => (
       alt="not found icon"
     />
     <DeliveryInformation />
-    <div
-      className="flex justify-between items-center w-full
-              p-[24px] border-b border-b-gray_3"
-    >
-      <p
-        className="text-black font-[400] text-[16px] leading-[100%]
-                  tracking-[-0.4px]"
-      >
-        Payment
-      </p>
-      <button className="flex items-center gap-x-[15px]" type="button">
-        <p
-          className="text-error_500 text-[16px] font-[400]
-                      tracking-[-0.4px] leading-[100%]"
-        >
-          Add Card Details
-        </p>
-        <Image
-          link="/images/plus.svg"
-          blurLink="/images/plus.png"
-          containerClasses="w-[14px] aspect-[1/1]"
-          alt="not found icon"
-        />
-      </button>
-    </div>
+    <CreditCardInformation />
     <div
       className="flex justify-between items-center w-full
               p-[24px] border-b border-b-gray_3"

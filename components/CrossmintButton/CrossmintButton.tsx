@@ -1,10 +1,10 @@
 import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui"
 import { FC } from "react"
 import { ethers } from "ethers"
-import { useCheckOut } from "../../../providers/CheckOutProvider"
-import useConnectedWallet from "../../../hooks/useConnectedWallet"
-import getMulticallFromCart from "../../../lib/getMulticallFromCart"
-import getMintData from "../../../lib/zora/getMintData"
+import { useCheckOut } from "../../providers/CheckOutProvider"
+import useConnectedWallet from "../../hooks/useConnectedWallet"
+import getMulticallFromCart from "../../lib/getMulticallFromCart"
+import getMintData from "../../lib/zora/getMintData"
 
 const CrossmintButton: FC = () => {
   const { connectedWallet } = useConnectedWallet()
