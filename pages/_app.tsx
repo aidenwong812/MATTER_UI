@@ -18,7 +18,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       appearance: {
         theme: themeMode === "light" ? "dark" : "light",
         accentColor: "#FFFFFF",
-        logo: themeMode === "light" ? "/images/light_logo.png" : "/images/logo.png",
+        logo:
+          themeMode === "light" ? "/images/matter_logo_white.png" : "/images/matter_logo_white.png",
       },
       embeddedWallets: {
         createOnLogin: "all-users",
