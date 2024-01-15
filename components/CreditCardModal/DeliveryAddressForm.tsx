@@ -134,7 +134,7 @@ const DeliveryAddressForm = () => {
         className="w-full h-[47px] bg-black rounded-full
                     flex gap-x-[10px] items-center justify-center mb-[16px]"
       >
-        <p className="text-white text-[16px] font-[400] leading-[120%]">Confirm Delivery Address</p>
+        <p className="text-white text-[16px] leading-[120%]">Confirm Delivery Address</p>
       </button>
     </Form>
   )

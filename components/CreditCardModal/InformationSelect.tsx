@@ -1,4 +1,5 @@
 import { formatEther } from "viem"
+import Link from "next/link"
 import Image from "../../shared/Image"
 import CreditCardInformation from "./CreditCardInformation"
 import DeliveryInformation from "./DeliveryInfomation"
@@ -44,8 +45,12 @@ const InformationSelect = () => {
           ${usdPrice}
         </p>
       </div>
-      <p className="text-[12px] text-gray_6 py-[24px]  mb-[32px]">
-        {`By tapping "Submit Payment", I agree to the Temrs of Sale.`}
+      <p className="text-[12px] text-gray_6 py-[24px]  mb-[32px] cursor-pointer">
+        {`By tapping "Submit Payment",`} I agree to the{" "}
+        <Link href="/terms">
+          <span className="underline">Temrs of Sale</span>
+        </Link>
+        .
       </p>
       <button
         type="button"
