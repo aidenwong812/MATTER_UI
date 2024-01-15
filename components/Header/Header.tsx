@@ -15,9 +15,9 @@ const Header = () => {
     >
       <div className="flex gap-x-[40px]">
         <Image
-          link="/images/logo.svg"
+          link="/images/matter_logo.svg"
           blurLink="/images/logo.png"
-          containerClasses="w-[82px] aspect-[82/14]"
+          containerClasses="w-[121px] aspect-[121/28]"
           alt="not found logo"
         />
         {!isMobile && (
