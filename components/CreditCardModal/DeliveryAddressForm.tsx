@@ -3,6 +3,9 @@ import { useMemo } from "react"
 import Input from "../../shared/Input"
 import { useCheckOut } from "../../providers/CheckOutProvider"
 import Select from "../../shared/Select"
+import Form from "../../shared/Form"
+import { validation } from "./validation"
+import { MODAL_SCREEN } from "../../hooks/useCreditCardModal"
 
 const DeliveryAddressForm = () => {
   const {
@@ -24,7 +27,11 @@ const DeliveryAddressForm = () => {
     deliveryPhoneNumber,
     deliveryCountry,
     setDeliveryCountry,
+    setModalScreen,
   } = useCheckOut()
+
+  const handleConfirm = () => setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
+
   const countryData = useMemo(
     () =>
       countries()
@@ -37,13 +44,19 @@ const DeliveryAddressForm = () => {
   )
 
   return (
-    <>
+    <Form
+      className="w-full flex flex-col gap-y-[10px] items-center
+    justify-center my-[16px] px-[20px]"
+      validationSchema={validation}
+      onSubmit={handleConfirm}
+    >
       <Input
         id="delivery_first_name"
-        name="delivery_last_name"
+        name="delivery_first_name"
         placeholder="First Name"
         value={deliveryFirstName}
         onChange={(e) => setDeliveryFirstName(e.target.value)}
+        hookToForm
       />
       <Input
         id="delivery_last_name"
@@ -51,6 +64,7 @@ const DeliveryAddressForm = () => {
         placeholder="Last Name"
         value={deliveryLastName}
         onChange={(e) => setDeliveryLastName(e.target.value)}
+        hookToForm
       />
       <Input
         id="delivery_address1"
@@ -58,6 +72,7 @@ const DeliveryAddressForm = () => {
         placeholder="Address Line 1"
         value={deliveryAddress1}
         onChange={(e) => setDeliveryAddress1(e.target.value)}
+        hookToForm
       />
       <Input
         id="delivery_address2"
@@ -65,6 +80,7 @@ const DeliveryAddressForm = () => {
         placeholder="Address Line 2 (Optional)"
         value={deliveryAddress2}
         onChange={(e) => setDeliveryAddress2(e.target.value)}
+        hookToForm
       />
       <Input
         id="delivery_zip_code"
@@ -72,6 +88,7 @@ const DeliveryAddressForm = () => {
         placeholder="Zip Code"
         value={deliveryZipCode}
         onChange={(e) => setDeliveryZipCode(e.target.value)}
+        hookToForm
       />
       <div className="grid grid-cols-12 w-full gap-x-[15px]">
         <div className="col-span-8">
@@ -81,6 +98,7 @@ const DeliveryAddressForm = () => {
             placeholder="State / Province"
             value={deliveryState}
             onChange={(e) => setDeliveryState(e.target.value)}
+            hookToForm
           />
         </div>
         <div className="col-span-4">
@@ -91,6 +109,7 @@ const DeliveryAddressForm = () => {
             className="!w-[100px]"
             onChange={(e) => setDeliveryCountryCode(e.target.value)}
             options={countryData}
+            hookToForm
           />
         </div>
       </div>
@@ -100,6 +119,7 @@ const DeliveryAddressForm = () => {
         placeholder="Phone Number"
         value={deliveryPhoneNumber}
         onChange={(e) => setDeliveryPhoneNumber(e.target.value)}
+        hookToForm
       />
       <Input
         id="delivery_country"
@@ -107,8 +127,16 @@ const DeliveryAddressForm = () => {
         placeholder="Country"
         value={deliveryCountry}
         onChange={(e) => setDeliveryCountry(e.target.value)}
+        hookToForm
       />
-    </>
+      <button
+        type="submit"
+        className="w-full h-[47px] bg-black rounded-full
+                    flex gap-x-[10px] items-center justify-center mb-[16px]"
+      >
+        <p className="text-white text-[16px] font-[400] leading-[120%]">Confirm Delivery Address</p>
+      </button>
+    </Form>
   )
 }
 

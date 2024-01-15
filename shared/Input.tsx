@@ -12,7 +12,6 @@ interface IInput {
   type: "text" | "password" | "url" | "number"
   clasNameError?: string
   disabled?: boolean
-  label?: string
 }
 
 function Input({
@@ -24,7 +23,6 @@ function Input({
   className,
   clasNameError,
   disabled,
-  label,
   placeholder,
 }: IInput) {
   const formContext = useFormContext()
@@ -64,7 +62,7 @@ function Input({
       />
 
       {isFullyHooked && fieldError && fieldError?.message && (
-        <p className="text-red text-[14px] pt-[8px]">{fieldError?.message as string}</p>
+        <p className="text-error_500 text-[12px] pt-[4px]">{fieldError?.message as string}</p>
       )}
     </div>
   )
