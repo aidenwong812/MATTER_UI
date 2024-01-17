@@ -5,7 +5,7 @@ import useConnectedWallet from "../../hooks/useConnectedWallet"
 import getMulticallFromCart from "../../lib/getMulticallFromCart"
 import getMintData from "../../lib/zora/getMintData"
 
-const CrossmintButton = ({buttonLabel = ""}) => {
+const CrossmintButton = ({ buttonLabel = "" }) => {
   const { connectedWallet } = useConnectedWallet()
   const { cart, totalPrice } = useCheckOut()
   const multicalls = getMulticallFromCart(cart, getMintData(connectedWallet))
