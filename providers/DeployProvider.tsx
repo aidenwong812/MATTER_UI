@@ -9,7 +9,6 @@ import createProduct from "../lib/firebase/createProduct"
 const DeployContext = createContext({} as any)
 
 export const useDeploy = () => useContext(DeployContext)
-
 export const DeployProvider = ({ children }) => {
   const router = useRouter()
   const [ isSelectedCreated, setIsSelectedCreated ] = useState(true)
