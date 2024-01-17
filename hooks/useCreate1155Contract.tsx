@@ -60,7 +60,6 @@ const useCreate1155Contract = () => {
           "Create a Category",
           "OASIS",
           "Create a Category",
-          "Created!",
         )
         return { error: response?.error }
       }
