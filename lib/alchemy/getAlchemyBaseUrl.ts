@@ -7,7 +7,7 @@ import {
   optimismGoerli,
   polygon,
   polygonMumbai,
-} from "@wagmi/core/chains"
+} from "viem/chains"
 
 const ETH = "https://eth-mainnet.g.alchemy.com/"
 const GOERLI = "https://eth-goerli.g.alchemy.com/"

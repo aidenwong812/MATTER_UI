@@ -15,7 +15,6 @@ const use721Collect = () => {
       "Securely Pay on Oasis",
       "Pay with Crypto",
       "Purchase",
-      "Purchased!",
     )
   }
 

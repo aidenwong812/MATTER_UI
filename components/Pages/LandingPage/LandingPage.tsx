@@ -15,15 +15,15 @@ const LandingPage = () => {
         {!isMobile && (
           <div>
             <p className="font-bold md:text-[48px] lg:text-[64px] xl:text-[80px] leading-[100%]">
-              OASIS
+              Matter
             </p>
             <p className="md:text-[18px] lg:text-[24px] xl:text-[30px] text-gray_6">Web Platform</p>
           </div>
         )}
         <Image
-          link="/images/cover_logo.svg"
-          blurLink="/images/cover_logo.png"
-          containerClasses="w-[300px] md:w-[363px] lg:w-[484px] xl:w-[808px] aspect-[808/138]"
+          link="/images/matter_logo.svg"
+          blurLink="/images/matter_logo.png"
+          containerClasses="w-[300px] md:w-[363px] lg:w-[484px] xl:w-[808px] aspect-[121/28]"
           alt="not found"
         />
       </div>

@@ -1,7 +1,6 @@
 import { toast } from "react-toastify"
 import { BigNumber } from "ethers"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
-import useBalance from "./useBalance"
 import { zoraFee } from "../lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
 import { useCallback } from "react"
@@ -12,7 +11,6 @@ import use1155Collect from "./use1155Collect"
 
 const useCollectDrop = (dropAddress, tokenId) => {
   const { prepare } = usePreparePrivyWallet()
-  const { balance } = useBalance()
   const { connectedWallet } = useConnectedWallet()
   const createReferral = process.env.NEXT_PUBLIC_CREATE_REFERRAL
   const { collect1155 } = use1155Collect()
@@ -26,7 +24,7 @@ const useCollectDrop = (dropAddress, tokenId) => {
         const totalFee = BigNumber.from(saleStatus?.publicSalePrice).add(zoraFee).toHexString()
         const owner = connectedWallet
         const totalFeeAsNumber = parseFloat(totalFee)
-        const hasBalanceToPurchase = totalFeeAsNumber !== parseFloat(balance)
+        const hasBalanceToPurchase = totalFeeAsNumber !== parseFloat("1.0")
 
         if (!prepare()) return
         if (!hasBalanceToPurchase) {
