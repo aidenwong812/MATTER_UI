@@ -1,58 +1,29 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react"
-import getDefaultFeed from "../lib/getDefaultFeeds"
+import React, { createContext, useContext, useMemo, useState } from "react"
+import { BigNumber } from "ethers"
+import usePurchaseByPrivy from "../hooks/usePurchaseByPrivy"
+import { demoProducts } from "../components/Pages/CheckOutPage/demoProducts"
+import useCreditCardModal from "../hooks/useCreditCardModal"
 
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
-  const [feed, setFeed] = useState([])
-  const [selectedDrop, setSelectedDrop] = useState(null)
+  const creditCardModal = useCreditCardModal()
 
-  const totalPrice = useMemo(() => {
-    if (!selectedDrop) return 0
-    return parseFloat(selectedDrop?.price) * selectedDrop?.quantity
-  }, [selectedDrop])
-
-  const handleChangeQuantity = (value, i) => {
-    const temp = [...feed]
-    temp[i].quantity = value
-    setFeed(temp)
-  }
-
-  useEffect(() => {
-    const init = async () => {
-      const defaultFeed = await getDefaultFeed()
-      if (!defaultFeed.length) return
-
-      setFeed(defaultFeed.slice(0, 10).map((feed) => ({
-        ...feed,
-        quantity: 1
-      })))
-    }
-
-    init()
-  }, [])
-
-  const handleSelectedDrop = (canMint, dropAddress, tokenId, price, quantity) => {
-    setSelectedDrop({
-      canMint, dropAddress, tokenId, price, quantity
-    })
-  }
+  const purchaseByPrivy = usePurchaseByPrivy()
+  const cart = demoProducts
+  const totalPrice = cart.reduce(
+    (acc, call) => acc.add(BigNumber.from(call.price)),
+    BigNumber.from(0),
+  )
 
   const value = useMemo(
     () => ({
-      feed,
-      handleSelectedDrop,
-      selectedDrop,
+      cart,
+      ...purchaseByPrivy,
+      ...creditCardModal,
       totalPrice,
-      handleChangeQuantity
     }),
-    [
-      feed,
-      handleSelectedDrop,
-      selectedDrop,
-      totalPrice,
-      handleChangeQuantity
-    ],
+    [cart, purchaseByPrivy, totalPrice, creditCardModal],
   )
 
   return <CheckOutContext.Provider value={value}>{children}</CheckOutContext.Provider>

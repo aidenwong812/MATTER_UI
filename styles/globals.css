@@ -39,14 +39,14 @@ body::-webkit-scrollbar {
 ::-webkit-scrollbar-track {
   background: #F0F8FA;
   border-radius: 10px;
-  border: 1px solid #54B3C3;
+  border: 1px solid #E4E4E4;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   border: 3px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
-  background-color: #54B3C3;
+  background-color: #CDCDCD;
 }
 
 a {

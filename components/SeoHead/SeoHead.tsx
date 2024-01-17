@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { SEO_DESCRIPTION, SEO_TITLE, SEO_IMAGE } from "../../utils/consts"
+import { SEO_DESCRIPTION, SEO_IMAGE, SEO_TITLE } from "../../lib/consts"
 
 const SeoHead = (props: any) => {
   const { description, image, title } = props
@@ -7,7 +7,7 @@ const SeoHead = (props: any) => {
     <Head>
       <title>{title || SEO_TITLE}</title>
       <meta name="description" content={description || SEO_DESCRIPTION} />
-      <link rel="icon" href="/images/logo.png" />
+      <link rel="icon" href="/images/matter_mini_logo.png" />
       <meta name="og:title" content={title || SEO_TITLE} />
       <meta property="og:image" content={image} />
       <meta name="twitter:card" content="summary_large_image" />

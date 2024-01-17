@@ -12,7 +12,6 @@ interface IInput {
   type: "text" | "password" | "url" | "number"
   clasNameError?: string
   disabled?: boolean
-  label?: string
 }
 
 function Input({
@@ -24,7 +23,6 @@ function Input({
   className,
   clasNameError,
   disabled,
-  label,
   placeholder,
 }: IInput) {
   const formContext = useFormContext()
@@ -43,9 +41,9 @@ function Input({
       <input
         {...(id && { id: id })}
         value={value}
-        className={`text-black w-full border border-gray_600 placeholder:!text-black
-          rounded-[0.5rem] focus:ring-0 focus:border focus:border-blue
-          h-[54px] w-[323px]
+        className={`text-black border border-gray_3 placeholder:!text-gray_4
+          rounded-[0.5rem] focus:ring-0 focus:!border-gray_6
+          w-full h-[47px]
           ${className ? className : ""} ${
           hookToForm && fieldError && fieldError?.message ? `${clasNameError} border-red` : ""
         }`}
@@ -64,7 +62,7 @@ function Input({
       />
 
       {isFullyHooked && fieldError && fieldError?.message && (
-        <p className="text-red text-[14px] pt-[8px]">{fieldError?.message as string}</p>
+        <p className="text-error_500 text-[12px] pt-[4px]">{fieldError?.message as string}</p>
       )}
     </div>
   )
