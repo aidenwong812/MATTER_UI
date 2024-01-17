@@ -1,12 +1,12 @@
 import { createContext, useContext, useMemo, useState } from "react"
-import { useUserProvider } from "./UserProvider"
 import use1155Drops from "../hooks/use1155Drops"
 import useCheckAdminOrRole from "../hooks/useCheckAdminOrRole"
+import useConnectedWallet from "../hooks/useConnectedWallet"
 
 const CollectionContext = createContext(null)
 
 const CollectionProvider = ({ children }) => {
-  const { connectedWallet } = useUserProvider()
+  const { connectedWallet } = useConnectedWallet()
   const [selectedDrop, setSelectedDrop] = useState(null)
 
   const { drops: dropsByConnectedWallet, fetch1155Drops: fetch1155DropByConnectedWallet } =

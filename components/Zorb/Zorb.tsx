@@ -1,10 +1,10 @@
 import { useMemo } from "react"
 import { zorbImageDataURI } from "@zoralabs/zorb"
 import Image from "next/image"
-import { useUserProvider } from "../../providers/UserProvider"
+import useConnectedWallet from "../../hooks/useConnectedWallet"
 
 const Zorb = ({ address = "", size = 50 }) => {
-  const { connectedWallet } = useUserProvider()
+  const { connectedWallet } = useConnectedWallet()
 
   const zorbImage = useMemo(
     () => zorbImageDataURI(address || connectedWallet),

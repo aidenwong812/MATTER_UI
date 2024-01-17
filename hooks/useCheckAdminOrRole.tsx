@@ -1,10 +1,10 @@
 import handleTxError from "../lib/handleTxError"
 import { useCallback, useEffect, useState } from "react"
 import { getPermissions } from "../lib/getPermissions"
-import { useUserProvider } from "../providers/UserProvider"
+import useConnectedWallet from "./useConnectedWallet"
 
 const useCheckAdminOrRole = (dropAddress, chainId) => {
-  const { connectedWallet } = useUserProvider()
+  const { connectedWallet } = useConnectedWallet()
 
   const [hasMinterRole, setHasMinterRole] = useState(false)
   const [hasAdminRole, setHasAdminRole] = useState(false)

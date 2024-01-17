@@ -1,12 +1,12 @@
 import { createContext, useState, useContext, useMemo, useEffect } from "react"
-import { useUserProvider } from "./UserProvider"
+import useConnectedWallet from "../hooks/useConnectedWallet"
 
 const DeployContext = createContext({} as any)
 
 export const useDeploy = () => useContext(DeployContext)
 
 export const DeployProvider = ({ children }) => {
-  const { connectedWallet } = useUserProvider()
+  const { connectedWallet } = useConnectedWallet()
   const [ isSelectedCreated, setIsSelectedCreated ] = useState(true)
 
   const [animationFile, setAnimationFile] = useState(null)

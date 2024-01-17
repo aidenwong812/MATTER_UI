@@ -2,12 +2,10 @@ import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import React, { createContext, useContext, useEffect, useMemo } from "react"
 import useEthPrice from "../hooks/useEthPrice"
-import useConnectedWallet from "../hooks/useConnectedWallet"
 
 const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
-  const { connectedWallet } = useConnectedWallet()
   const { user, ready, authenticated } = usePrivy()
   const router = useRouter()
   const pathname = router.pathname
@@ -27,7 +25,6 @@ const UserProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({ 
-      connectedWallet, 
       privyEmail,
       loading,
       getUsdConversion, 
@@ -35,7 +32,6 @@ const UserProvider = ({ children }) => {
       getEthConversion
     }),
     [
-      connectedWallet, 
       privyEmail,
       loading,
       getUsdConversion, 

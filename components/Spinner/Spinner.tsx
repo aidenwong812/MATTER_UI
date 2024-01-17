@@ -1,9 +1,9 @@
 import { motion } from "framer-motion"
 import Zorb from "../Zorb"
-import { useUserProvider } from "../../providers/UserProvider"
+import useConnectedWallet from "../../hooks/useConnectedWallet"
 
 const Spinner = ({ size = 50, address = "" }) => {
-  const { connectedWallet } = useUserProvider()
+  const { connectedWallet } = useConnectedWallet()
 
   return (
     <motion.div

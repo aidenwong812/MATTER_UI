@@ -8,13 +8,13 @@ import { getZoraBlob, store } from "../lib/ipfs"
 import getZora1155ProxyAddress from "../lib/zora/getZora1155ProxyAddress"
 import { CHAIN_ID } from "../lib/consts"
 import { useDeploy } from "../providers/DeployProvider"
-import { useUserProvider } from "../providers/UserProvider"
+import useConnectedWallet from "./useConnectedWallet"
 
 const useCreate1155Contract = () => {
   const { authenticated } = usePrivy()
   const { sendTransaction } = usePrivySendTransaction()
   const { fundsRecipient, title, description, cover } = useDeploy()
-  const { connectedWallet } = useUserProvider()
+  const { connectedWallet } = useConnectedWallet()
 
   const create1155Contract = async (chainId = CHAIN_ID) => {
     try {
