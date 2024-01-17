@@ -1,5 +1,4 @@
 import Image from "../../../shared/Image"
-import CrossmintButton from "../../CrossmintButton"
 
 const BuyButtons = () => {
   const handleCryptoPurchase = async () => {}
@@ -22,7 +21,7 @@ const BuyButtons = () => {
             containerClasses="w-[19px] h-[14px]"
             alt="not found icon"
           />
-          <p className="text-white text-[16px] font-[400] leading-[120%]">Pay with Crypto</p>
+          <p className="text-white text-[16px] font-[400] leading-[120%]">Buy with Crypto</p>
         </button>{" "}
         <p
           className="text-black text-[16px] font-[400] leading-[150%] tracking-[-0.684px]
@@ -30,7 +29,21 @@ const BuyButtons = () => {
         >
           Or
         </p>
-        <CrossmintButton buttonLabel="Buy with Credit or Debit" />
+        <button
+          type="button"
+          className="border border-gray_3
+                  w-[327px] aspect-[327/56] rounded-full
+                  flex justify-center items-center
+                  gap-x-[10px]"
+        >
+          <Image
+            link="/images/credit_pay.svg"
+            blurLink="/images/credit_pay.png"
+            containerClasses="w-[24px] aspect-[1/1]"
+            alt="not found icon"
+          />
+          Buy with Credit or Debit
+        </button>
       </div>
     </div>
   )
