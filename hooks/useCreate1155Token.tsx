@@ -6,34 +6,39 @@ import usePrivySendTransaction from "./usePrivySendTransaction"
 import getDefaultProvider from "../lib/getDefaultProvider"
 import getSalesConfig from "../lib/zora/getSalesConfig"
 import { store } from "../lib/ipfs"
-import { useDeploy } from "../providers/DeployProvider"
-import { useCollection } from "../providers/CollectionProvider"
+import useConnectedWallet from "./useConnectedWallet"
+import { CHAIN_ID } from "../lib/consts"
 
 const useCreate1155Token = () => {
   const { authenticated } = usePrivy()
   const { sendTransaction } = usePrivySendTransaction()
-  const { title, cover, description, animationFile, fundsRecipient } = useDeploy()
-  const { selectedDrop } = useCollection()
+  const { connectedWallet } = useConnectedWallet()
 
-  const create1155Token = async (chainId) => {
+  const create1155Token = async (
+    collectionAddress,
+    title,
+    cover,
+    description,
+    animationFile,
+    chainId = CHAIN_ID,
+  ) => {
     try {
       const file = cover || animationFile
-      const dropAddress = selectedDrop?.value
 
-      if (!file || !title || !dropAddress || !fundsRecipient) return
+      if (!file || !title || !collectionAddress || !connectedWallet) return { error: "error" }
 
-      const contract = new Contract(dropAddress, abi, getDefaultProvider(chainId))
+      const contract = new Contract(collectionAddress, abi, getDefaultProvider(chainId))
 
       const nextTokenId = await contract.nextTokenId()
 
-      const data = getSalesConfig(nextTokenId, fundsRecipient)
+      const data = getSalesConfig(nextTokenId, connectedWallet)
       const callSaleArgs = [nextTokenId, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, data]
 
       const maxUint256 = BigNumber.from(
         "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
       )
       const formattedDescription = description.replace(/\n/g, "\\n")
-      const ipfs = await store(file, title, formattedDescription, fundsRecipient)
+      const ipfs = await store(file, title, formattedDescription, connectedWallet)
       const setupNewTokenArgs = [`ipfs://${ipfs}`, maxUint256]
 
       const calls = [
@@ -42,11 +47,13 @@ const useCreate1155Token = () => {
       ]
 
       if (authenticated) {
-        const response: any = await sendTransaction(dropAddress, chainId, abi, "multicall", [calls])
+        const response: any = await sendTransaction(collectionAddress, chainId, abi, "multicall", [
+          calls,
+        ])
         return { error: response?.error }
       }
 
-      return true
+      return `ipfs://${ipfs}`
     } catch (err) {
       handleTxError(err)
       return { error: err }

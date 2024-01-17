@@ -1,20 +1,20 @@
 import { ChangeEventHandler, useEffect } from "react"
 import { useFormContext } from "react-hook-form"
 
-interface IInput {
+interface ITextArea {
   id?: string
   name?: string
   value?: any
   className?: string
-  onChange?: ChangeEventHandler<HTMLInputElement>
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>
   placeholder?: string
   hookToForm: boolean
-  type: "text" | "password" | "url" | "number"
   classNameError?: string
   disabled?: boolean
+  rows?: number
 }
 
-function Input({
+function TextArea({
   id,
   name,
   value,
@@ -24,7 +24,8 @@ function Input({
   classNameError,
   disabled,
   placeholder,
-}: IInput) {
+  rows = 2,
+}: ITextArea) {
   const formContext = useFormContext()
   const isFullyHooked = name && hookToForm && formContext
 
@@ -38,12 +39,11 @@ function Input({
 
   return (
     <div className="relative w-full">
-      <input
+      <textarea
         {...(id && { id: id })}
         value={value}
         className={`text-black border border-gray_3 placeholder:!text-gray_4
-          rounded-[0.5rem] focus:ring-0 focus:!border-gray_6
-          w-full h-[47px]
+          rounded-[0.5rem] focus:ring-0 focus:!border-gray_6 w-full
           ${className ? className : ""} ${
           hookToForm && fieldError && fieldError?.message ? `${classNameError} border-red` : ""
         }`}
@@ -59,6 +59,7 @@ function Input({
         name={name}
         disabled={disabled}
         placeholder={placeholder || ""}
+        rows={rows}
       />
 
       {isFullyHooked && fieldError && fieldError?.message && (
@@ -68,9 +69,8 @@ function Input({
   )
 }
 
-Input.defaultProps = {
+TextArea.defaultProps = {
   hookToForm: false,
-  type: "text",
 }
 
-export default Input
+export default TextArea

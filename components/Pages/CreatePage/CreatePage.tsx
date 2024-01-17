@@ -1,17 +1,27 @@
 import { useCollection } from "../../../providers/CollectionProvider"
 import { useDeploy } from "../../../providers/DeployProvider"
+import Form from "../../../shared/Form"
+import Input from "../../../shared/Input"
+import TextArea from "../../../shared/TextArea"
 import CreateButton from "../../CreateButton"
-import DescriptionInput from "../../DescriptionInput"
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
-import TitleInput from "../../TitleInput/TitleInput"
 import AnimationUpload from "./AnimationUpload"
 import DropsSelect from "./DropsSelect"
+import { validation } from "./validations"
 
 const CreatePage = () => {
-  const { cover, animationFile, isSelectedCreated } = useDeploy()
+  const {
+    cover,
+    animationFile,
+    isSelectedCreated,
+    setTitle,
+    title,
+    setDescription,
+    description,
+    create,
+  } = useDeploy()
   const { drops1155 } = useCollection()
-
   const coverUrl = cover && URL.createObjectURL(cover)
   const hasContent = cover || animationFile
 
@@ -29,15 +39,40 @@ const CreatePage = () => {
             {/* eslint-disable-next-line  @next/next/no-img-element */}
             {cover && <img src={coverUrl} width={280} height={150} alt="not found uri" />}
           </div>
-          <div className="flex flex-col items-center md:items-start gap-y-[20px]">
+          <Form
+            className="flex flex-col items-center md:items-start gap-y-[20px]"
+            validationSchema={validation}
+            onSubmit={create}
+          >
             <p className="text-[22px]">
               {drops1155.length > 0 && !isSelectedCreated ? "Create a Product" : "Create Category"}
             </p>
             {drops1155.length > 0 && <DropsSelect />}
-            <TitleInput />
-            <DescriptionInput />
+            <Input
+              name="title"
+              id="title"
+              value={title}
+              className="!w-[280px]"
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder={
+                drops1155?.length && !isSelectedCreated
+                  ? "Enter Product Name..."
+                  : "Enter Category Name..."
+              }
+              hookToForm
+            />
+            <TextArea
+              name="description"
+              id="description"
+              rows={4}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter Description..."
+              className="!w-[280px]"
+              value={description}
+              hookToForm
+            />
             <CreateButton />
-          </div>
+          </Form>
         </div>
       </div>
     </Layout>

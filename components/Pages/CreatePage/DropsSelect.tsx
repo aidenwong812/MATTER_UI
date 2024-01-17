@@ -16,7 +16,7 @@ const DropsSelect = () => {
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div
-      className="relative w-[280px] h-[40px] samsungS8:h-[48px]
+      className="relative w-[280px] h-[40px] samsungS8:h-[48px] z-[10]
     !text-[14px] rounded-md border border-gray_3 cursor-pointer
     flex items-center px-[12px] py-[8px]"
       onClick={() => setIsOpenDropList(!isOpenDropList)}

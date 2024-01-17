@@ -11,7 +11,6 @@ const DropProvider = ({ children, drop }) => {
   const { uri, contractAddress: dropAddress, contractName: dropContractName, type, tokenId } = drop
   const [imageUri, setImageUri] = useState("")
   const [animationUri, setAnimationUri] = useState("")
-  const [fundsRecipient, setFundsRecipient] = useState("")
   const [sellerName, setSellerName] = useState("")
   const [dropName, setDropName] = useState("")
   const [isLoading, setIsLoading] = useState(true)
@@ -58,7 +57,6 @@ const DropProvider = ({ children, drop }) => {
       imageUri,
       animationUri,
       dropName,
-      fundsRecipient,
       sellerName,
       saleDetails,
       description,
@@ -73,7 +71,6 @@ const DropProvider = ({ children, drop }) => {
       imageUri,
       animationUri,
       dropName,
-      fundsRecipient,
       sellerName,
       saleDetails,
       description,

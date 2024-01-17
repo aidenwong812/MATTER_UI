@@ -16,7 +16,7 @@ const Header = () => {
       <div className="flex gap-x-[40px]">
         <Image
           link="/images/matter_logo.svg"
-          blurLink="/images/logo.png"
+          blurLink="/images/matter_logo.png"
           containerClasses="w-[121px] aspect-[121/28]"
           alt="not found logo"
         />

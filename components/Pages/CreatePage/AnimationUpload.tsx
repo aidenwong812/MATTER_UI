@@ -29,7 +29,7 @@ const AnimationUpload = () => {
       onClick={handleClick}
       type="button"
       className="border border-gray_3 p-[40px] rounded-[14px] h-full aspect-[1/1]
-      flex flex-col items-center"
+      flex flex-col items-center justify-center"
     >
       <Image
         link="/images/upload-imagination.png"
