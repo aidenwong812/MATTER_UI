@@ -1,13 +1,10 @@
 import useIsMobile from "../../../hooks/useIsMobile"
-import { useCheckOut } from "../../../providers/CheckOutProvider"
-import DropProvider from "../../../providers/DropProvider"
 import Icon from "../../../shared/Icon"
 import CartItem from "./CartItem"
 import { demoProducts } from "./demoProducts"
 
 const CartList = () => {
   const isMobile = useIsMobile()
-  const { feed } = useCheckOut()
 
   return (
     <div className="md:col-span-6 xl:col-span-8">

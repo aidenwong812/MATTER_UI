@@ -30,7 +30,6 @@ const use1155Collect = () => {
       "Securely Pay on Oasis",
       "Pay with Crypto",
       "Purchase",
-      "Purchased!",
     )
   }
 
