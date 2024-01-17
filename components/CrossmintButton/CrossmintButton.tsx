@@ -29,7 +29,7 @@ const CrossmintButton = ({ buttonLabel = "" }) => {
       }
       mintConfig={mintConfig}
       paymentMethod="fiat"
-      className="oasis-crossmint-button"
+      className="matter-crossmint-button"
       mintTo={connectedWallet}
       successCallbackURL={
         typeof window !== "undefined" && `${window.location.origin}/checkout/success`

@@ -10,14 +10,14 @@ const CollectDropButton = ({ className = "", buttonLabel = "", selectedDrop = nu
       className={`w-[327px] h-[56px] bg-black rounded-full
         flex gap-x-[10px] items-center justify-center ${className}`}
       onClick={async () => {
-        await collectDrop("OASIS", selectedDrop?.quantity)
+        await collectDrop("Matter", selectedDrop?.quantity)
       }}
       disabled={!selectedDrop?.canMint}
     >
       <Image
-        link="/images/privy_pay.svg"
-        blurLink="/images/privy_pay.png"
-        containerClasses="w-[18px] h-[14px]"
+        link="/images/matter_mini_logo.svg"
+        blurLink="/images/matter_mini_logo.png"
+        containerClasses="w-[19px] h-[14px]"
         alt="not found icon"
       />
       <p className="text-white text-[16px] font-[400] leading-[120%]">

@@ -10,7 +10,7 @@ const AccountPage = () => {
 
   return (
     <Layout type="base">
-      <SeoHead title="OASIS | Account" />
+      <SeoHead title="Matter | Account" />
       <div
         className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen
                   md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[90px] pb-[30px] px-[18px]

@@ -10,9 +10,9 @@ const use721Collect = () => {
       CHAIN_ID,
       abi,
       "mintWithRewards",
-      [owner, quantity, comment || "OASIS", referral],
+      [owner, quantity, comment || "Matter", referral],
       totalFee,
-      "Securely Pay on Oasis",
+      "Securely Pay on Matter",
       "Pay with Crypto",
       "Purchase",
     )
