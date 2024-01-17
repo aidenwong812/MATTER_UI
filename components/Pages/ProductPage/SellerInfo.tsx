@@ -8,7 +8,7 @@ const SellerInfo = () => (
     >
       <p
         className="py-[18px] px-[20px] bg-gray_1
-            leading-[120%] text-[16px]"
+            leading-[120%] text-[16px] rounded-[8px]"
       >
         Every seller on Oasis is Verified
       </p>
