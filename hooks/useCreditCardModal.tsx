@@ -16,7 +16,6 @@ const useCreditCardModal = () => {
   const [deliveryState, setDeliveryState] = useState("")
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
-  const [deliveryCountry, setDeliveryCountry] = useState("")
 
   return {
     modalScreen,
@@ -37,8 +36,6 @@ const useCreditCardModal = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
-    deliveryCountry,
-    setDeliveryCountry,
   }
 }
 
