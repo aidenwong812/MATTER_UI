@@ -24,7 +24,7 @@ const CreatePage = () => {
                         flex items-center justify-center"
       >
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-[40px]">
-          <div className="flex flex-col gap-y-[20px] items-center md:items-end">
+          <div className="flex flex-col gap-y-[20px] items-center md:items-end h-full">
             {!hasContent && <AnimationUpload />}
             {/* eslint-disable-next-line  @next/next/no-img-element */}
             {cover && <img src={coverUrl} width={280} height={150} alt="not found uri" />}
