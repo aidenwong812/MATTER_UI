@@ -28,12 +28,13 @@ const EditAccountForm = () => {
       <Form
         validationSchema={validation}
         onSubmit={handleUpdate}
-        className="my-[24px] flex flex-col gap-y-[12px]"
+        className="my-[24px] flex flex-col gap-y-[12px] w-full"
       >
         <Input
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           placeholder="User Name"
+          className="!border-black"
           id="username"
           name="username"
           hookToForm
@@ -42,6 +43,7 @@ const EditAccountForm = () => {
           value={userEmail}
           onChange={(e) => setUserEmail(e.target.value)}
           placeholder="Email"
+          className="!border-black"
           id="useremail"
           name="useremail"
           hookToForm
