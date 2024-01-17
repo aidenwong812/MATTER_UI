@@ -28,8 +28,8 @@ export const SETUP_1155_TOKEN_EVENT_SIGNATURE = keccak256(
   toUtf8Bytes("SetupNewToken(uint256,address,string,uint256)"),
 )
 export const zoraFee = "777000000000000"
-export const SEO_TITLE = "OASIS"
-export const SEO_DESCRIPTION = "OASIS"
-export const SEO_IMAGE = "/images/logo.png"
+export const SEO_TITLE = "Matter"
+export const SEO_DESCRIPTION = "Matter"
+export const SEO_IMAGE = "/images/matter_mini_logo.png"
 // CHECKOUT
 export const GAS_LIMIT_CHECKOUT_PER_ITEM = "175000"

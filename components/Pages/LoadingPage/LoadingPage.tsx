@@ -7,7 +7,7 @@ const LoadingPage = () => (
     className="w-screen h-screen relative
         flex items-center justify-center"
   >
-    <SeoHead title="OASIS | Loading..." />
+    <SeoHead title="Matter | Loading..." />
     <Image
       link="/images/mini_logo.png"
       blurLink="/images/mini_logo.png"

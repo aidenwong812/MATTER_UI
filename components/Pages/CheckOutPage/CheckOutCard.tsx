@@ -1,10 +1,10 @@
 import { formatEther } from "viem"
 import Image from "../../../shared/Image"
-import CrossmintButton from "../../CrossmintButton"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 import useEthPrice from "../../../hooks/useEthPrice"
+import CreditCardPayButton from "../../CreditCardPayButton"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()
@@ -47,9 +47,9 @@ const CheckOutCard = () => {
             onClick={handleCryptoPurchase}
           >
             <Image
-              link="/images/privy_pay.svg"
-              blurLink="/images/privy_pay.png"
-              containerClasses="w-[18px] h-[14px]"
+              link="/images/matter_mini_logo.svg"
+              blurLink="/images/matter_mini_logo.png"
+              containerClasses="w-[19px] h-[14px]"
               alt="not found icon"
             />
             <p className="text-white text-[16px] font-[400] leading-[120%]">Pay with Crypto</p>
@@ -60,7 +60,7 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CrossmintButton />
+          <CreditCardPayButton />
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ const usePrivyMulticall = () => {
         "aggregate3Value",
         [calls],
         BigNumber.from(msgValueString).toHexString(),
-        "Securely Pay on Oasis",
+        "Securely Pay on Matter",
         "Pay with Crypto",
         BigNumber.from(GAS_LIMIT_CHECKOUT_PER_ITEM).mul(BigNumber.from(calls.length)).toHexString(),
       )

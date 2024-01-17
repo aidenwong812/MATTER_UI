@@ -5,7 +5,7 @@ import DropList from "./DropList"
 
 const CheckOutSuccessPage = () => (
   <Layout type="base">
-    <SeoHead title="OASIS | SUCCESS" />
+    <SeoHead title="Matter | SUCCESS" />
     <div
       className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen
                         md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[110px]
