@@ -37,7 +37,8 @@ const DeliveryAddressForm = () => {
         .map((item) => ({
           label: item.label,
           value: item.value,
-        })),
+        }))
+        .filter((item) => item.value === "US"),
     [],
   )
 
@@ -114,9 +115,10 @@ const DeliveryAddressForm = () => {
       <Select
         id="delivery_country_code"
         name="delivery_country_code"
-        value={deliveryCountryCode || ""}
+        value={deliveryCountryCode || "US"}
         onChange={(e) => setDeliveryCountryCode(e.target.value)}
         options={countryData}
+        disabled
         hookToForm
       />
       <button
