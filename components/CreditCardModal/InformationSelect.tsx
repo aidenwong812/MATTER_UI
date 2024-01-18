@@ -1,6 +1,7 @@
 import { formatEther } from "viem"
 import { ethers } from "ethers"
 import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
+import { useMemo } from "react"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
 import { useCheckOut } from "../../providers/CheckOutProvider"
@@ -18,13 +19,18 @@ const InformationSelect = () => {
   const multicalls = getMulticallFromCart(cart, getMintData(connectedWallet))
   const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))
 
-  const mintConfig = {
-    type: "erc-721",
-    totalPrice: totalPriceEth,
-    quantity: 1,
-    cart: multicalls,
-    to: connectedWallet,
-  }
+  const mintConfig = useMemo(() => {
+    if (totalPriceEth && multicalls && connectedWallet) {
+      return {
+        type: "erc-721",
+        totalPrice: totalPriceEth,
+        quantity: 1,
+        cart: multicalls,
+        to: connectedWallet,
+      }
+    }
+    return null
+  }, [totalPriceEth, multicalls, connectedWallet])
 
   return (
     <div className="bg-white w-full py-[40px] flex flex-col items-center">
@@ -62,16 +68,19 @@ const InformationSelect = () => {
       >
         Card Details
       </p>
-      <div className="w-full justify-center flex">
-        <CrossmintPaymentElement
-          mintConfig={mintConfig}
-          projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
-          collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
-          environment="staging"
-          emailInputOptions={{
-            show: true,
-          }}
-        />
+      <div className="w-full justify-center flex px-[24px]">
+        {mintConfig && (
+          <CrossmintPaymentElement
+            mintConfig={mintConfig}
+            projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
+            collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
+            environment="staging"
+            paymentMethod="fiat"
+            emailInputOptions={{
+              show: true,
+            }}
+          />
+        )}
       </div>
     </div>
   )
