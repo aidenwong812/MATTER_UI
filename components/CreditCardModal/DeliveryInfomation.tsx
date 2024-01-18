@@ -23,7 +23,7 @@ const DeliveryInformation = () => {
 
   return (
     <div
-      className="flex justify-between items-center w-full mt-[32px]
+      className="flex justify-between items-center w-full
               p-[24px] border-t border-t-gray_3 border-b border-b-gray_3"
     >
       <p
