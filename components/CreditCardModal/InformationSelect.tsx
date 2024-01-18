@@ -62,13 +62,17 @@ const InformationSelect = () => {
       >
         Card Details
       </p>
-      <CrossmintPaymentElement
-        mintConfig={mintConfig}
-        projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
-        collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
-        environment="staging"
-        paymentMethod="fiat"
-      />
+      <div className="w-full justify-center flex">
+        <CrossmintPaymentElement
+          mintConfig={mintConfig}
+          projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
+          collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
+          environment="staging"
+          emailInputOptions={{
+            show: true,
+          }}
+        />
+      </div>
     </div>
   )
 }
