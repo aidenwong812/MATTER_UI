@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react"
+import FadeInWhenVisible from "../../components/FadeInWhenVisible"
 
 interface IModal {
   onClose: () => any
@@ -23,13 +24,13 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
           e.target === e.currentTarget && onClose ? await onClose() : () => {}
         }
       />
-      <div
+      <FadeInWhenVisible
         className={`relative z-[2] max-h-[90%]
       overflow-y-auto shadow-gray_shadow rounded-[10px]
       ${containerClassName || ""}`}
       >
         {children}
-      </div>
+      </FadeInWhenVisible>
     </div>
   )
 }
