@@ -25,8 +25,6 @@ const DeliveryAddressForm = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
-    deliveryCountry,
-    setDeliveryCountry,
     setModalScreen,
   } = useCheckOut()
 
@@ -82,14 +80,7 @@ const DeliveryAddressForm = () => {
         onChange={(e) => setDeliveryAddress2(e.target.value)}
         hookToForm
       />
-      <Input
-        id="delivery_zip_code"
-        name="delivery_zip_code"
-        placeholder="Zip Code"
-        value={deliveryZipCode}
-        onChange={(e) => setDeliveryZipCode(e.target.value)}
-        hookToForm
-      />
+
       <div className="grid grid-cols-12 w-full gap-x-[15px]">
         <div className="col-span-8">
           <Input
@@ -102,13 +93,12 @@ const DeliveryAddressForm = () => {
           />
         </div>
         <div className="col-span-4">
-          <Select
-            id="delivery_country_code"
-            name="delivery_country_code"
-            value={deliveryCountryCode || ""}
-            className="!w-[100px]"
-            onChange={(e) => setDeliveryCountryCode(e.target.value)}
-            options={countryData}
+          <Input
+            id="delivery_zip_code"
+            name="delivery_zip_code"
+            placeholder="Zip Code"
+            value={deliveryZipCode}
+            onChange={(e) => setDeliveryZipCode(e.target.value)}
             hookToForm
           />
         </div>
@@ -121,12 +111,12 @@ const DeliveryAddressForm = () => {
         onChange={(e) => setDeliveryPhoneNumber(e.target.value)}
         hookToForm
       />
-      <Input
-        id="delivery_country"
-        name="delivery_country"
-        placeholder="Country"
-        value={deliveryCountry}
-        onChange={(e) => setDeliveryCountry(e.target.value)}
+      <Select
+        id="delivery_country_code"
+        name="delivery_country_code"
+        value={deliveryCountryCode || ""}
+        onChange={(e) => setDeliveryCountryCode(e.target.value)}
+        options={countryData}
         hookToForm
       />
       <button
