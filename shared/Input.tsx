@@ -37,7 +37,7 @@ function Input({
   }, [value, name, formContext, hookToForm])
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full flex justify-center">
       <input
         {...(id && { id: id })}
         value={value}

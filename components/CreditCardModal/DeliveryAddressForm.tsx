@@ -86,7 +86,7 @@ const DeliveryAddressForm = () => {
           <Input
             id="delivery_state"
             name="delivery_state"
-            placeholder="State / Province"
+            placeholder="State"
             value={deliveryState}
             onChange={(e) => setDeliveryState(e.target.value)}
             hookToForm
