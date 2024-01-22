@@ -20,7 +20,7 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
         display: isVisible ? "flex" : "none",
       }}
       initial={{
-        display: isVisible ? "none" : "flex",
+        display: "none",
       }}
       transition={{
         delay: isVisible ? 0 : 0.5,

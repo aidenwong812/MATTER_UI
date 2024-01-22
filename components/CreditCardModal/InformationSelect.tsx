@@ -5,7 +5,8 @@ import Input from "../../shared/Input"
 import useCrossMintDetail from "../../hooks/useCrossMintDetail"
 
 const InformationSelect = () => {
-  const { usdPrice, mintConfig, receiptEmail, setReceiptEmail } = useCrossMintDetail()
+  const { usdPrice, mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMintDetail()
+
 
   return (
     <div className="bg-white w-full py-[40px] flex flex-col items-center">
@@ -64,6 +65,7 @@ const InformationSelect = () => {
             uiConfig={{
               borderRadius: "8px",
             }}
+            onEvent={handlePayment}
           />
         )}
       </div>
