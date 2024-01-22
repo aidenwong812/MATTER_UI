@@ -2,6 +2,8 @@ import { formatEther } from "viem"
 import { ethers } from "ethers"
 import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
 import { useMemo } from "react"
+import { useRouter } from "next/router"
+import { toast } from "react-toastify"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
 import { useCheckOut } from "../../providers/CheckOutProvider"
@@ -9,7 +11,6 @@ import useEthPrice from "../../hooks/useEthPrice"
 import useConnectedWallet from "../../hooks/useConnectedWallet"
 import getMulticallFromCart from "../../lib/getMulticallFromCart"
 import getMintData from "../../lib/zora/getMintData"
-import { useRouter } from "next/router"
 
 const InformationSelect = () => {
   const { getUsdConversion } = useEthPrice()
@@ -34,9 +35,19 @@ const InformationSelect = () => {
   }, [totalPriceEth, multicalls, connectedWallet])
 
   const handlePayment = (event) => {
-    console.log('here', event)
-    if (event.type === "payment:process.succeeded")
-      router.push("/checkout/success")
+    switch (event.type) {
+      case "payment:process.succeeded":
+        router.push("/checkout/success")
+        break
+      case "payment:process.rejected":
+        toast.info("Payment rejected")
+        break
+      case "payment:preparation.failed":
+        toast.error("Payment failed")
+        break
+      default:
+        break
+    }
   }
 
   return (
