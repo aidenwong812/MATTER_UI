@@ -2,11 +2,10 @@ import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
 import Input from "../../shared/Input"
-import useCrossMintDetail from "../../hooks/useCrossMintDetail"
+import useCrossMint from "../../hooks/useCrossMint"
 
 const InformationSelect = () => {
-  const { usdPrice, mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMintDetail()
-
+  const { usdPrice, mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMint()
 
   return (
     <div className="bg-white w-full py-[40px] flex flex-col items-center">

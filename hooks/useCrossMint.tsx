@@ -7,8 +7,11 @@ import getMulticallFromCart from "../lib/getMulticallFromCart"
 import getMintData from "../lib/zora/getMintData"
 import { formatEther } from "viem"
 import { useEffect, useMemo, useState } from "react"
+import { useRouter } from "next/router"
+import { toast } from "react-toastify"
 
-const useCrossMintDetail = () => {
+const useCrossMint = () => {
+  const router = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { user } = usePrivy()
   const { cart, totalPrice } = useCheckOut()
@@ -31,15 +34,32 @@ const useCrossMintDetail = () => {
     return null
   }, [totalPriceEth, multicalls, connectedWallet])
 
+  const handlePayment = (event) => {
+    switch (event.type) {
+      case "payment:process.succeeded":
+        router.push("/checkout/success")
+        break
+      case "payment:process.rejected":
+        toast.info("Payment rejected")
+        break
+      case "payment:preparation.failed":
+        toast.error("Payment failed")
+        break
+        break
+    }
+  }
+
   useEffect(() => {
     if (user?.email?.address) setReceiptEmail(user.email.address)
   }, [user])
+
   return {
     mintConfig,
     receiptEmail,
     usdPrice,
     setReceiptEmail,
+    handlePayment,
   }
 }
 
-export default useCrossMintDetail
+export default useCrossMint
