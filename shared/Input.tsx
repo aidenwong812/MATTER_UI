@@ -37,7 +37,7 @@ function Input({
   }, [value, name, formContext, hookToForm])
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full flex flex-col items-center">
       <input
         {...(id && { id: id })}
         value={value}
@@ -62,7 +62,9 @@ function Input({
       />
 
       {isFullyHooked && fieldError && fieldError?.message && (
-        <p className="text-error_500 text-[12px] pt-[4px]">{fieldError?.message as string}</p>
+        <p className="text-error_500 text-[12px] pt-[4px] w-full text-left">
+          {fieldError?.message as string}
+        </p>
       )}
     </div>
   )
