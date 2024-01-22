@@ -35,7 +35,7 @@ const DeliveryAddressForm = () => {
       countries()
         .getData()
         .map((item) => ({
-          label: item.value,
+          label: item.label,
           value: item.value,
         })),
     [],
