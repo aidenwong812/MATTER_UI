@@ -9,10 +9,11 @@ import useEthPrice from "../../hooks/useEthPrice"
 import useConnectedWallet from "../../hooks/useConnectedWallet"
 import getMulticallFromCart from "../../lib/getMulticallFromCart"
 import getMintData from "../../lib/zora/getMintData"
+import { useRouter } from "next/router"
 
 const InformationSelect = () => {
   const { getUsdConversion } = useEthPrice()
-
+  const router = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { cart, totalPrice } = useCheckOut()
   const totalPriceEth = ethers.utils.formatEther(totalPrice)
@@ -31,6 +32,12 @@ const InformationSelect = () => {
     }
     return null
   }, [totalPriceEth, multicalls, connectedWallet])
+
+  const handlePayment = (event) => {
+    console.log('here', event)
+    if (event.type === "payment:process.succeeded")
+      router.push("/checkout/success")
+  }
 
   return (
     <div className="bg-white w-full py-[40px] flex flex-col items-center">
@@ -79,6 +86,7 @@ const InformationSelect = () => {
             emailInputOptions={{
               show: true,
             }}
+            onEvent={handlePayment}
           />
         )}
       </div>
