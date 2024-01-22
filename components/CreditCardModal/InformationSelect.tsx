@@ -1,54 +1,11 @@
-import { formatEther } from "viem"
-import { ethers } from "ethers"
 import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
-import { useMemo } from "react"
-import { useRouter } from "next/router"
-import { toast } from "react-toastify"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
-import { useCheckOut } from "../../providers/CheckOutProvider"
-import useEthPrice from "../../hooks/useEthPrice"
-import useConnectedWallet from "../../hooks/useConnectedWallet"
-import getMulticallFromCart from "../../lib/getMulticallFromCart"
-import getMintData from "../../lib/zora/getMintData"
+import Input from "../../shared/Input"
+import useCrossMint from "../../hooks/useCrossMint"
 
 const InformationSelect = () => {
-  const { getUsdConversion } = useEthPrice()
-  const router = useRouter()
-  const { connectedWallet } = useConnectedWallet()
-  const { cart, totalPrice } = useCheckOut()
-  const totalPriceEth = ethers.utils.formatEther(totalPrice)
-  const multicalls = getMulticallFromCart(cart, getMintData(connectedWallet))
-  const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))
-
-  const mintConfig = useMemo(() => {
-    if (totalPriceEth && multicalls && connectedWallet) {
-      return {
-        type: "erc-721",
-        totalPrice: totalPriceEth,
-        quantity: 1,
-        cart: multicalls,
-        to: connectedWallet,
-      }
-    }
-    return null
-  }, [totalPriceEth, multicalls, connectedWallet])
-
-  const handlePayment = (event) => {
-    switch (event.type) {
-      case "payment:process.succeeded":
-        router.push("/checkout/success")
-        break
-      case "payment:process.rejected":
-        toast.info("Payment rejected")
-        break
-      case "payment:preparation.failed":
-        toast.error("Payment failed")
-        break
-      default:
-        break
-    }
-  }
+  const { usdPrice, mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMint()
 
   return (
     <div className="bg-white w-full py-[40px] flex flex-col items-center">
@@ -58,13 +15,15 @@ const InformationSelect = () => {
         containerClasses="w-[111px] aspect-[111/26]"
         alt="not found icon"
       />
-      <p className="mt-[30px]">Secure checkout powered by</p>
-      <Image
-        link="/images/stripe.svg"
-        blurLink="/images/stripe.png"
-        containerClasses="w-[63px] aspect-[63/30]"
-        alt="not found icon"
-      />
+      <div className="flex items-center mt-[30px]">
+        <p className="text-[12px]">Secure checkout powered by</p>
+        <Image
+          link="/images/stripe.svg"
+          blurLink="/images/stripe.png"
+          containerClasses="w-[53px] aspect-[53/25]"
+          alt="not found icon"
+        />
+      </div>
       <div className="flex justify-between items-center w-full p-[24px]">
         <p
           className="text-black font-[400] text-[16px] leading-[100%]
@@ -86,7 +45,12 @@ const InformationSelect = () => {
       >
         Card Details
       </p>
-      <div className="w-full justify-center flex px-[24px]">
+      <div className="w-full flex-col items-center flex px-[24px]">
+        <Input
+          value={receiptEmail}
+          className="w-[294px] mb-[0.82rem]"
+          onChange={(e) => setReceiptEmail(e.target.value)}
+        />
         {mintConfig && (
           <CrossmintPaymentElement
             mintConfig={mintConfig}
@@ -94,8 +58,11 @@ const InformationSelect = () => {
             collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
             environment="staging"
             paymentMethod="fiat"
-            emailInputOptions={{
-              show: true,
+            recipient={{
+              email: receiptEmail,
+            }}
+            uiConfig={{
+              borderRadius: "8px",
             }}
             onEvent={handlePayment}
           />

@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const privyConfig: PrivyClientConfig = useMemo(
     () => ({
-      loginMethods: ["email", "google", "apple"],
+      loginMethods: ["email"],
       appearance: {
         theme: themeMode === "light" ? "dark" : "light",
         accentColor: "#FFFFFF",
