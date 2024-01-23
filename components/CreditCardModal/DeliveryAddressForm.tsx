@@ -5,7 +5,6 @@ import { useCheckOut } from "../../providers/CheckOutProvider"
 import Select from "../../shared/Select"
 import Form from "../../shared/Form"
 import { validation } from "./validation"
-import { MODAL_SCREEN } from "../../hooks/useCreditCardModal"
 
 const DeliveryAddressForm = () => {
   const {
@@ -25,10 +24,8 @@ const DeliveryAddressForm = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
-    setModalScreen,
+    confirmDeliveryAddress,
   } = useCheckOut()
-
-  const handleConfirm = () => setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
 
   const countryData = useMemo(
     () =>
@@ -47,7 +44,7 @@ const DeliveryAddressForm = () => {
       className="w-full flex flex-col gap-y-[10px] items-center
     justify-center my-[16px] px-[20px]"
       validationSchema={validation}
-      onSubmit={handleConfirm}
+      onSubmit={confirmDeliveryAddress}
     >
       <Input
         id="delivery_first_name"

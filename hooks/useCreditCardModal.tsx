@@ -17,6 +17,10 @@ const useCreditCardModal = () => {
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
 
+  const confirmDeliveryAddress = async () => {
+    setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
+  }
+
   return {
     modalScreen,
     setModalScreen,
@@ -36,6 +40,7 @@ const useCreditCardModal = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
+    confirmDeliveryAddress,
   }
 }
 
