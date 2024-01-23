@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import createCustomer from "../lib/firebase/createCustomer"
 import { useUserProvider } from "../providers/UserProvider"
 import getCustomer from "../lib/firebase/getCustomer"
@@ -22,6 +22,31 @@ const useCreditCardModal = () => {
   const { userEmail } = useUserProvider()
   const [loading, setLoading] = useState(false)
 
+  const isCompletedDelivery =
+    deliveryFirstName &&
+    deliveryLastName &&
+    deliveryAddress1 &&
+    deliveryCountryCode &&
+    deliveryState &&
+    deliveryZipCode
+
+  const initialize = useCallback(async () => {
+    if (!userEmail) return
+
+    const customerData: any = await getCustomer(userEmail)
+
+    if (!customerData) return
+
+    setDeliveryFirstName(customerData.first_name)
+    setDeliveryLastName(customerData.last_name)
+    setDeliveryState(customerData.state)
+    setDeliveryPhoneNumber(customerData.phone_number)
+    setDeliveryZipCode(customerData.zip_code)
+    setDeliveryCountryCode(customerData.country_code)
+    setDeliveryAddress1(customerData.address_1)
+    setDeliveryAddress2(customerData.address_2)
+  }, [userEmail])
+
   const confirmDeliveryAddress = async () => {
     setLoading(true)
     await createCustomer({
@@ -35,29 +60,14 @@ const useCreditCardModal = () => {
       phone_number: deliveryPhoneNumber,
       country_code: deliveryCountryCode,
     })
+    await initialize()
     setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
     setLoading(false)
   }
 
   useEffect(() => {
-    const init = async () => {
-      const customerData: any = await getCustomer(userEmail)
-
-      if (!customerData) return
-
-      setDeliveryFirstName(customerData.first_name)
-      setDeliveryLastName(customerData.last_name)
-      setDeliveryState(customerData.state)
-      setDeliveryPhoneNumber(customerData.phone_number)
-      setDeliveryZipCode(customerData.zip_code)
-      setDeliveryCountryCode(customerData.country_code)
-      setDeliveryAddress1(customerData.address_1)
-      setDeliveryAddress2(customerData.address_2)
-    }
-
-    if (!userEmail) return
-    init()
-  }, [userEmail])
+    initialize()
+  }, [initialize])
 
   return {
     modalScreen,
@@ -80,6 +90,7 @@ const useCreditCardModal = () => {
     deliveryPhoneNumber,
     confirmDeliveryAddress,
     loading,
+    isCompletedDelivery,
   }
 }
 

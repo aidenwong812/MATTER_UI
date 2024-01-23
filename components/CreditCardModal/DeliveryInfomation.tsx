@@ -11,15 +11,8 @@ const DeliveryInformation = () => {
     deliveryZipCode,
     deliveryState,
     deliveryCountryCode,
+    isCompletedDelivery,
   } = useCheckOut()
-
-  const isCompletedDelivery =
-    deliveryFirstName &&
-    deliveryLastName &&
-    deliveryAddress1 &&
-    deliveryCountryCode &&
-    deliveryState &&
-    deliveryZipCode
 
   return (
     <div
