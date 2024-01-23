@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import createCustomer from "../lib/firebase/createCustomer"
 import { useUserProvider } from "../providers/UserProvider"
+import getCustomer from "../lib/firebase/getCustomer"
 
 export enum MODAL_SCREEN {
   INFORMATION_SELECT = "INFORMATION SELECT",
@@ -32,11 +33,31 @@ const useCreditCardModal = () => {
       state: deliveryState,
       zip_code: deliveryZipCode,
       phone_number: deliveryPhoneNumber,
-      country_cod3: deliveryCountryCode,
+      country_code: deliveryCountryCode,
     })
     setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
     setLoading(false)
   }
+
+  useEffect(() => {
+    const init = async () => {
+      const customerData: any = await getCustomer(userEmail)
+
+      if (!customerData) return
+
+      setDeliveryFirstName(customerData.first_name)
+      setDeliveryLastName(customerData.last_name)
+      setDeliveryState(customerData.state)
+      setDeliveryPhoneNumber(customerData.phone_number)
+      setDeliveryZipCode(customerData.zip_code)
+      setDeliveryCountryCode(customerData.country_code)
+      setDeliveryAddress1(customerData.address_1)
+      setDeliveryAddress2(customerData.address_2)
+    }
+
+    if (!userEmail) return
+    init()
+  }, [userEmail])
 
   return {
     modalScreen,
