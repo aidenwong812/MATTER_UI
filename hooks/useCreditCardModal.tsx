@@ -1,4 +1,6 @@
 import { useState } from "react"
+import createCustomer from "../lib/firebase/createCustomer"
+import { useUserProvider } from "../providers/UserProvider"
 
 export enum MODAL_SCREEN {
   INFORMATION_SELECT = "INFORMATION SELECT",
@@ -16,9 +18,24 @@ const useCreditCardModal = () => {
   const [deliveryState, setDeliveryState] = useState("")
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
+  const { userEmail } = useUserProvider()
+  const [loading, setLoading] = useState(false)
 
   const confirmDeliveryAddress = async () => {
+    setLoading(true)
+    await createCustomer({
+      email: userEmail,
+      first_name: deliveryFirstName,
+      last_name: deliveryLastName,
+      address_1: deliveryAddress1,
+      address_2: deliveryAddress2,
+      state: deliveryState,
+      zip_code: deliveryZipCode,
+      phone_number: deliveryPhoneNumber,
+      country_cod3: deliveryCountryCode,
+    })
     setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
+    setLoading(false)
   }
 
   return {
@@ -41,6 +58,7 @@ const useCreditCardModal = () => {
     setDeliveryCountryCode,
     deliveryPhoneNumber,
     confirmDeliveryAddress,
+    loading,
   }
 }
 

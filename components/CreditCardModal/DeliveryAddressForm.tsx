@@ -25,6 +25,7 @@ const DeliveryAddressForm = () => {
     setDeliveryCountryCode,
     deliveryPhoneNumber,
     confirmDeliveryAddress,
+    loading,
   } = useCheckOut()
 
   const countryData = useMemo(
@@ -120,8 +121,10 @@ const DeliveryAddressForm = () => {
       />
       <button
         type="submit"
-        className="w-full h-[47px] bg-black rounded-full
-                    flex gap-x-[10px] items-center justify-center mb-[16px]"
+        className={`w-full h-[47px] rounded-full
+        flex gap-x-[10px] items-center justify-center mb-[16px]
+        ${loading ? "bg-gray_3 cursor-not-allowed text-gray_8" : "bg-black"}`}
+        disabled={loading}
       >
         <p className="text-white text-[16px] leading-[120%]">Confirm Delivery Address</p>
       </button>
