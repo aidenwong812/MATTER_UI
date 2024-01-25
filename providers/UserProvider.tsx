@@ -7,8 +7,7 @@ const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
   const { user, ready, authenticated } = usePrivy()
-  const router = useRouter()
-  const pathname = router.pathname
+  const {push, pathname} = useRouter()
   const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
 
   const isPrivatePage = pathname !== '/'
@@ -16,7 +15,7 @@ const UserProvider = ({ children }) => {
   const loading = !ready
 
   useEffect(() => {
-    if (isPrivatePage && !authenticated && !loading) router.push("/")
+    if (isPrivatePage && !authenticated && !loading) push("/")
   }, [isPrivatePage, authenticated, loading])
 
   const privyEmail = useMemo(() => {

@@ -9,10 +9,10 @@ interface ILayoutFactory extends ILayout {
   type: keyof typeof layoutContainers
 }
 
-function Layout({ children, type }: ILayoutFactory) {
+function Layout({ children, type, className }: ILayoutFactory) {
   const Container = layoutContainers[type]
 
-  return <Container>{children}</Container>
+  return <Container className={className}>{children}</Container>
 }
 
 export default Layout

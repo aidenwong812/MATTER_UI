@@ -23,7 +23,7 @@ const DeliveryInformation = () => {
 
   return (
     <div
-      className="flex justify-between items-center w-full mt-[32px]
+      className="flex justify-between items-center w-full
               p-[24px] border-t border-t-gray_3 border-b border-b-gray_3"
     >
       <p
@@ -33,9 +33,11 @@ const DeliveryInformation = () => {
         Delivery
       </p>
       {isCompletedDelivery ? (
-        <div
+        <button
           className="text-gray_6 font-[400] text-[16px] leading-[100%] tracking-[-0.4px]
         flex flex-col items-end"
+          type="button"
+          onClick={() => setModalScreen(MODAL_SCREEN.DELIVERY_ADDRESS)}
         >
           <p>
             {deliveryFirstName} {deliveryLastName}
@@ -44,7 +46,7 @@ const DeliveryInformation = () => {
           <p>
             {deliveryZipCode}, {deliveryState}, {deliveryCountryCode}
           </p>
-        </div>
+        </button>
       ) : (
         <button
           type="button"

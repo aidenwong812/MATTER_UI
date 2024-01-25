@@ -35,9 +35,10 @@ const DeliveryAddressForm = () => {
       countries()
         .getData()
         .map((item) => ({
-          label: item.value,
+          label: item.label,
           value: item.value,
-        })),
+        }))
+        .filter((item) => item.value === "US"),
     [],
   )
 
@@ -86,7 +87,7 @@ const DeliveryAddressForm = () => {
           <Input
             id="delivery_state"
             name="delivery_state"
-            placeholder="State / Province"
+            placeholder="State"
             value={deliveryState}
             onChange={(e) => setDeliveryState(e.target.value)}
             hookToForm
@@ -114,9 +115,10 @@ const DeliveryAddressForm = () => {
       <Select
         id="delivery_country_code"
         name="delivery_country_code"
-        value={deliveryCountryCode || ""}
+        value={deliveryCountryCode || "US"}
         onChange={(e) => setDeliveryCountryCode(e.target.value)}
         options={countryData}
+        disabled
         hookToForm
       />
       <button
