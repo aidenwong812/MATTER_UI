@@ -15,7 +15,7 @@ const DeliveryAddress = () => (
       alt="not found icon"
       link="/images/stripe.svg"
       blurLink="/images/stripe.png"
-      containerClasses="w-[63px] aspect-[63/30]"
+      containerClasses="w-[53px] aspect-[53/25]"
     />
   </div>
 )

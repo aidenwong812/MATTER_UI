@@ -15,6 +15,7 @@ interface ISelect {
   placeholder?: string
   hookToForm: boolean
   options: ISelectOptions[]
+  disabled: boolean
 }
 
 function Select({
@@ -26,6 +27,7 @@ function Select({
   placeholder,
   hookToForm,
   options,
+  disabled,
 }: ISelect) {
   const formContext = useFormContext()
 
@@ -55,6 +57,7 @@ function Select({
             })
           : {})}
         name={name}
+        disabled={disabled}
       >
         {options.map((x) => (
           <option key={x.value} value={x.value}>
@@ -72,6 +75,7 @@ function Select({
 
 Select.defaultProps = {
   hookToForm: false,
+  disabled: false,
 }
 
 export default Select
