@@ -9,11 +9,11 @@ const EditAccount = () => {
   const { privyEmail } = useUserProvider()
   const { setScreenStatus } = useAccountForm()
   const { logout } = usePrivy()
-  const router = useRouter()
+  const { push } = useRouter()
 
   const handleLogout = () => {
     logout()
-    router.push("/")
+    push("/")
   }
 
   return (

@@ -11,7 +11,7 @@ import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 
 const useCrossMint = () => {
-  const router = useRouter()
+  const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { user } = usePrivy()
   const { cart, totalPrice } = useCheckOut()
@@ -37,7 +37,7 @@ const useCrossMint = () => {
   const handlePayment = (event) => {
     switch (event.type) {
       case "payment:process.succeeded":
-        router.push("/checkout/success")
+        push("/checkout/success")
         break
       case "payment:process.rejected":
         toast.info("Payment rejected")

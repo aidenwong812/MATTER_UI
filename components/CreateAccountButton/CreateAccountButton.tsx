@@ -1,10 +1,10 @@
 import { useRouter } from "next/router"
 
 const CreateAccountButton = () => {
-  const router = useRouter()
+  const { push } = useRouter()
 
   const handleClick = () => {
-    router.push("/account")
+    push("/account")
   }
 
   return (
