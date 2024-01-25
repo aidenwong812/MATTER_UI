@@ -1,13 +1,8 @@
 import { motion } from "framer-motion"
-import { usePrivy } from "@privy-io/react-auth"
-import SignButton from "../SignButton"
 import Icon from "../../shared/Icon"
-import CreateAccountButton from "../CreateAccountButton"
-import CartButton from "../CartButton/CartButton"
+import Buttons from "../Header/Buttons"
 
 const MenuList = () => {
-  const { authenticated } = usePrivy()
-
   const navClasses = "px-[32px] py-[20px] border-b border-b-gray_3"
   return (
     <div className="w-screen h-screen fixed left-0 top-[56px] z-[2] bg-red">
@@ -39,9 +34,7 @@ const MenuList = () => {
         <p className={navClasses}>Digital Items</p>
         <p className={navClasses}>Physical Products</p>
         <div className={`${navClasses} !border-none flex gap-x-[10px]`}>
-          {authenticated && <CartButton />}
-          <SignButton />
-          {!authenticated && <CreateAccountButton />}
+          <Buttons />
         </div>
       </motion.div>
     </div>

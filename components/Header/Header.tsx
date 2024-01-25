@@ -1,3 +1,4 @@
+import Link from "next/link"
 import useIsMobile from "../../hooks/useIsMobile"
 import Icon from "../../shared/Icon"
 import Image from "../../shared/Image"
@@ -14,12 +15,16 @@ const Header = () => {
           px-[40px] border-b border-b-gray_3 bg-white"
     >
       <div className="flex gap-x-[40px]">
-        <Image
-          link="/images/matter_logo.svg"
-          blurLink="/images/logo.png"
-          containerClasses="w-[121px] aspect-[121/28]"
-          alt="not found logo"
-        />
+        <Link href="/">
+          <div className="cursor-pointer flex items-center">
+            <Image
+              link="/images/matter_logo.svg"
+              blurLink="/images/logo.png"
+              containerClasses="w-[121px] aspect-[121/28]"
+              alt="not found logo"
+            />
+          </div>
+        </Link>
         {!isMobile && (
           <div className="flex items-center gap-x-[5px]">
             <Icon name="search" className="text-gray_8" size={24} />

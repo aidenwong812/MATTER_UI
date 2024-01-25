@@ -1,15 +1,11 @@
-import { formatEther } from "viem"
-import Link from "next/link"
+import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
 import Image from "../../shared/Image"
-import CreditCardInformation from "./CreditCardInformation"
 import DeliveryInformation from "./DeliveryInfomation"
-import { useCheckOut } from "../../providers/CheckOutProvider"
-import useEthPrice from "../../hooks/useEthPrice"
+import Input from "../../shared/Input"
+import useCrossMint from "../../hooks/useCrossMint"
 
 const InformationSelect = () => {
-  const { getUsdConversion } = useEthPrice()
-  const { totalPrice } = useCheckOut()
-  const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))
+  const { usdPrice, mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMint()
 
   return (
     <div className="bg-white w-full py-[40px] flex flex-col items-center">
@@ -19,19 +15,16 @@ const InformationSelect = () => {
         containerClasses="w-[111px] aspect-[111/26]"
         alt="not found icon"
       />
-      <p className="mt-[30px]">Secure checkout powered by</p>
-      <Image
-        link="/images/stripe.svg"
-        blurLink="/images/stripe.png"
-        containerClasses="w-[63px] aspect-[63/30]"
-        alt="not found icon"
-      />
-      <DeliveryInformation />
-      <CreditCardInformation />
-      <div
-        className="flex justify-between items-center w-full
-                p-[24px] border-b border-b-gray_3"
-      >
+      <div className="flex items-center mt-[30px]">
+        <p className="text-[12px]">Secure checkout powered by</p>
+        <Image
+          link="/images/stripe.svg"
+          blurLink="/images/stripe.png"
+          containerClasses="w-[53px] aspect-[53/25]"
+          alt="not found icon"
+        />
+      </div>
+      <div className="flex justify-between items-center w-full p-[24px]">
         <p
           className="text-black font-[400] text-[16px] leading-[100%]
                     tracking-[-0.4px]"
@@ -45,20 +38,36 @@ const InformationSelect = () => {
           ${usdPrice}
         </p>
       </div>
-      <p className="text-[12px] text-gray_6 py-[24px]  mb-[32px] cursor-pointer">
-        {`By tapping "Submit Payment",`} I agree to the{" "}
-        <Link href="/terms">
-          <span className="underline">Terms of Sale</span>
-        </Link>
-        .
-      </p>
-      <button
-        type="button"
-        className="border-none bg-gray_1 px-[51px] py-[16px] rounded-full
-                    font-[400] leading-[120%] text-[16px] w-[327px] text-gray_6"
+      <DeliveryInformation />
+      <p
+        className="pb-[16px] w-full text-left px-[24px]
+                    font-[400] leading-[100%] tracking-[-0.4px] mt-[16px]"
       >
-        Submit Payment
-      </button>
+        Card Details
+      </p>
+      <div className="w-full flex-col items-center flex px-[24px]">
+        <Input
+          value={receiptEmail}
+          className="w-[294px] mb-[0.82rem]"
+          onChange={(e) => setReceiptEmail(e.target.value)}
+        />
+        {mintConfig && (
+          <CrossmintPaymentElement
+            mintConfig={mintConfig}
+            projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
+            collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
+            environment="staging"
+            paymentMethod="fiat"
+            recipient={{
+              email: receiptEmail,
+            }}
+            uiConfig={{
+              borderRadius: "8px",
+            }}
+            onEvent={handlePayment}
+          />
+        )}
+      </div>
     </div>
   )
 }
