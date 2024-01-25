@@ -18,7 +18,7 @@ const CreateBusinessAccount = () => (
       className="text-[28px] font-[400] leading-[110%] tracking-[-0.7px]
             my-[24px]"
     >
-      Want to sell on Oasis?
+      Want to sell on Matter?
     </p>
     <button
       type="button"

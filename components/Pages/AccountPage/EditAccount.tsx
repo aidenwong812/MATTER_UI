@@ -33,7 +33,7 @@ const EditAccount = () => {
       >
         Username
       </p>
-      <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px]">
+      <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
         {privyEmail}
       </p>
       <button

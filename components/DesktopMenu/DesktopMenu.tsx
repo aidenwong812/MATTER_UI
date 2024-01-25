@@ -2,6 +2,7 @@ import { usePrivy } from "@privy-io/react-auth"
 import CreateAccountButton from "../CreateAccountButton"
 import SignButton from "../SignButton"
 import CartButton from "../CartButton"
+import EditAccountButton from "../EditAccountButton"
 
 const DesktopMenu = () => {
   const { authenticated } = usePrivy()
@@ -14,9 +15,17 @@ const DesktopMenu = () => {
       <p>Digital Items</p>
       <p>Physical Products</p>
       <div className="flex gap-x-[10px]">
-        {authenticated && <CartButton />}
-        <SignButton />
-        {!authenticated && <CreateAccountButton />}
+        {authenticated ? (
+          <>
+            <CartButton />
+            <EditAccountButton />
+          </>
+        ) : (
+          <>
+            <SignButton />
+            <CreateAccountButton />
+          </>
+        )}
       </div>
     </div>
   )

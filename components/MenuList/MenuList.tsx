@@ -4,6 +4,7 @@ import SignButton from "../SignButton"
 import Icon from "../../shared/Icon"
 import CreateAccountButton from "../CreateAccountButton"
 import CartButton from "../CartButton/CartButton"
+import EditAccountButton from "../EditAccountButton"
 
 const MenuList = () => {
   const { authenticated } = usePrivy()
@@ -39,9 +40,17 @@ const MenuList = () => {
         <p className={navClasses}>Digital Items</p>
         <p className={navClasses}>Physical Products</p>
         <div className={`${navClasses} !border-none flex gap-x-[10px]`}>
-          {authenticated && <CartButton />}
-          <SignButton />
-          {!authenticated && <CreateAccountButton />}
+          {authenticated ? (
+            <>
+              <CartButton />
+              <EditAccountButton />
+            </>
+          ) : (
+            <>
+              <SignButton />
+              <CreateAccountButton />
+            </>
+          )}
         </div>
       </motion.div>
     </div>
