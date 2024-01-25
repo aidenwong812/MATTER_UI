@@ -5,7 +5,7 @@ import { validation } from "../../../utils/account-form-validation"
 import Form from "../../../shared/Form"
 
 const EditAccountForm = () => {
-  const { setScreenStatus, handleUpdate, userName, setUserName, userEmail, setUserEmail } =
+  const { setScreenStatus, handleUpdate, userName, setUserName, userEmail, setUserEmail, loading, userPFP } =
     useAccountForm()
 
   return (
@@ -15,9 +15,12 @@ const EditAccountForm = () => {
     >
       <div
         className="flex bg-gray_10 justify-center items-center
-            w-[84px] rounded-full aspect-[1/1] mb-[32px]"
+            w-[84px] rounded-full aspect-[1/1] mb-[32px] relative"
       >
-        <Icon name="camera" className="text-white" />
+        {userPFP ? <></> : <Icon name="camera" className="text-white" />}
+        <input
+          type=""
+        />
       </div>
       <p
         className="leading-[110%] tracking-[-0.7px]
@@ -48,14 +51,15 @@ const EditAccountForm = () => {
           name="useremail"
           hookToForm
         />
+        <button
+          type="submit"
+          className="border border-gray_2 rounded-full
+                          w-[323px] mb-[32px] py-[15px]"
+          disabled={loading}
+        >
+          Save Changes
+        </button>
       </Form>
-      <button
-        type="button"
-        className="border border-gray_2 rounded-full
-                        w-[323px] mb-[32px] py-[15px]"
-      >
-        Save Changes
-      </button>
       <button
         type="button"
         onClick={() => setScreenStatus(Screen.SELECT_UI)}

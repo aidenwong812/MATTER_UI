@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import createCustomer from "../lib/firebase/createCustomer"
 import { useUserProvider } from "../providers/UserProvider"
 import getCustomer from "../lib/firebase/getCustomer"
@@ -19,7 +19,7 @@ const useCreditCardModal = () => {
   const [deliveryState, setDeliveryState] = useState("")
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
-  const { userEmail } = useUserProvider()
+  const { privyEmail } = useUserProvider()
   const [loading, setLoading] = useState(false)
 
   const isCompletedDelivery =
@@ -31,9 +31,9 @@ const useCreditCardModal = () => {
     deliveryZipCode
 
   const initialize = useCallback(async () => {
-    if (!userEmail) return
+    if (!privyEmail) return
 
-    const customerData: any = await getCustomer(userEmail)
+    const customerData: any = await getCustomer(privyEmail)
 
     if (!customerData) return
 
@@ -45,12 +45,12 @@ const useCreditCardModal = () => {
     setDeliveryCountryCode(customerData.country_code)
     setDeliveryAddress1(customerData.address_1)
     setDeliveryAddress2(customerData.address_2)
-  }, [userEmail])
+  }, [privyEmail])
 
   const confirmDeliveryAddress = async () => {
     setLoading(true)
     await createCustomer({
-      email: userEmail,
+      email: privyEmail,
       first_name: deliveryFirstName,
       last_name: deliveryLastName,
       address_1: deliveryAddress1,

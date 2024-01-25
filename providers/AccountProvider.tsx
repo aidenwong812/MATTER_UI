@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useMemo, useState } from "react"
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react"
+import createUser from "../lib/firebase/createUser"
+import { useUserProvider } from "./UserProvider"
 
 export enum Screen {
     SELECT_UI = "SELECT_UI",
@@ -8,26 +10,52 @@ export enum Screen {
 const AccountFormContext = createContext(null)
 
 const AccountFormProvider = ({ children }) => {
+  const { userEmail: email, privyEmail, userName: name, getUserData } = useUserProvider()
+  const [userPFP, setUserPFP] = useState("")
   const [screenStatus, setScreenStatus] = useState(Screen.SELECT_UI)
   const [userName, setUserName] = useState("")
   const [userEmail, setUserEmail] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const handleUpdate = async () => {
+    setLoading(true)
+    await createUser({
+      privy_email: privyEmail,
+      email: userEmail,
+      user_name: userName
+    })
+    await getUserData()
+    setLoading(false)
+    setScreenStatus(Screen.SELECT_UI)
+  }
+
+  useEffect(() => {
+    setUserName(name)
+    setUserEmail(email)
+  }, [name, email])
 
   const value = useMemo(
     () => ({ 
-        userName,
-        setUserName,
-        setScreenStatus,
-        screenStatus,
-        setUserEmail,
-        userEmail
+      loading,
+      userName,
+      setUserName,
+      setScreenStatus,
+      screenStatus,
+      setUserEmail,
+      userEmail,
+      handleUpdate,
+      userPFP
     }),
     [
-        userName,
-        setUserName,
-        setScreenStatus,
-        screenStatus,
-        setUserEmail,
-        userEmail
+      userName,
+      setUserName,
+      setScreenStatus,
+      screenStatus,
+      setUserEmail,
+      userEmail,
+      handleUpdate,
+      loading,
+      userPFP
     ],
   )
 

@@ -1,21 +1,44 @@
 import { usePrivy } from "@privy-io/react-auth"
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react"
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import getUser from "../lib/firebase/getUser"
 
 const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
-  const [userEmail, setUserEmail] = useState("")
-  const { user } = usePrivy()
+  const [privyEmail, setPrivyEmail] = useState("")
+  const { user, authenticated } = usePrivy()
+  const [userName, setUserName] = useState("")
+  const [userEmail,  setUserEmail] = useState("")
+
+  const getUserData = useCallback(async () => {
+    if (!authenticated || !privyEmail) return
+    const userData = await getUser(privyEmail) as any
+    if (!userData) return
+    setUserName(userData.user_name)
+    setUserEmail(userData.email)
+  }, [authenticated, privyEmail])
 
   useEffect(() => {
-    if (user?.email?.address) setUserEmail(user.email.address)
+    getUserData()
+  }, [getUserData])
+
+  useEffect(() => {
+    if (user?.email?.address) setPrivyEmail(user.email.address)
   }, [user])
 
   const value = useMemo(
     () => ({
-      userEmail,
+      privyEmail,
+      getUserData,
+      userName,
+      userEmail
     }),
-    [userEmail],
+    [
+      userEmail,
+      userName,
+      privyEmail,
+      getUserData
+    ],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
