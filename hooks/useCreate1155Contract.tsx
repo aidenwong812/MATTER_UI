@@ -57,9 +57,8 @@ const useCreate1155Contract = () => {
           "createContract",
           args,
           undefined,
-          "Create a Category",
-          "OASIS",
-          "Create a Category",
+          "Create",
+          "Matter",
         )
         return { error: response?.error }
       }
