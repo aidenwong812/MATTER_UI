@@ -8,7 +8,7 @@ import SellerInfo from "./SellerInfo"
 
 const ProductPage = () => (
   <Layout type="base">
-    <SeoHead title="OASIS | Product" />
+    <SeoHead title="Matter | Product" />
     <div
       className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen
                   md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[90px] pb-[30px] px-[18px]"
