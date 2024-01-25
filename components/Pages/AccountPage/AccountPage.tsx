@@ -9,7 +9,7 @@ const AccountPage = () => {
   const { screenStatus } = useAccountForm()
 
   return (
-    <Layout type="base">
+    <Layout type="base" className="!bg-gray_1">
       <SeoHead title="Matter | Account" />
       <div
         className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen

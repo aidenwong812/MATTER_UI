@@ -1,6 +1,5 @@
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
-import BreadCrumb from "./BreadCrumb"
 import BuyButtons from "./BuyButtons"
 import ProductDetail from "./ProductDetail"
 import ProductPhoto from "./ProductPhoto"
@@ -14,7 +13,6 @@ const ProductPage = () => (
       className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen
                   md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[90px] pb-[30px] px-[18px]"
     >
-      <BreadCrumb />
       <div className="w-full md:grid md:grid-cols-10 gap-x-[40px] mt-[39px]">
         <ProductPhoto />
         <ProductDetail />
