@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import { toast } from "react-toastify"
 import { useDeploy } from "../../../providers/DeployProvider"
 import Image from "../../../shared/Image"
 
@@ -9,11 +10,18 @@ const AnimationUpload = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     if (!file) return
+
+    if (file.size >= 2147483648) {
+      toast.error("Max Size 2GB.")
+      return
+    }
+
     if (file) {
       if (file.type.includes("image")) {
         setCover(file)
         return
       }
+
       setAnimationFile(file)
       const objectURL = URL.createObjectURL(file)
       setAnimationSrc(objectURL)
