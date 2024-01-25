@@ -5,7 +5,6 @@ import { useCheckOut } from "../../providers/CheckOutProvider"
 import Select from "../../shared/Select"
 import Form from "../../shared/Form"
 import { validation } from "./validation"
-import { MODAL_SCREEN } from "../../hooks/useCreditCardModal"
 
 const DeliveryAddressForm = () => {
   const {
@@ -25,10 +24,9 @@ const DeliveryAddressForm = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
-    setModalScreen,
+    confirmDeliveryAddress,
+    loading,
   } = useCheckOut()
-
-  const handleConfirm = () => setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
 
   const countryData = useMemo(
     () =>
@@ -47,7 +45,7 @@ const DeliveryAddressForm = () => {
       className="w-full flex flex-col gap-y-[10px] items-center
     justify-center my-[16px] px-[20px]"
       validationSchema={validation}
-      onSubmit={handleConfirm}
+      onSubmit={confirmDeliveryAddress}
     >
       <Input
         id="delivery_first_name"
@@ -123,8 +121,10 @@ const DeliveryAddressForm = () => {
       />
       <button
         type="submit"
-        className="w-full h-[47px] bg-black rounded-full
-                    flex gap-x-[10px] items-center justify-center mb-[16px]"
+        className={`w-full h-[47px] rounded-full
+        flex gap-x-[10px] items-center justify-center mb-[16px]
+        ${loading ? "bg-gray_3 cursor-not-allowed text-gray_8" : "bg-black"}`}
+        disabled={loading}
       >
         <p className="text-white text-[16px] leading-[120%]">Confirm Delivery Address</p>
       </button>

@@ -1,4 +1,7 @@
-import { useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import createCustomer from "../lib/firebase/createCustomer"
+import { useUserProvider } from "../providers/UserProvider"
+import getCustomer from "../lib/firebase/getCustomer"
 
 export enum MODAL_SCREEN {
   INFORMATION_SELECT = "INFORMATION SELECT",
@@ -16,6 +19,55 @@ const useCreditCardModal = () => {
   const [deliveryState, setDeliveryState] = useState("")
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
+  const { userEmail } = useUserProvider()
+  const [loading, setLoading] = useState(false)
+
+  const isCompletedDelivery =
+    deliveryFirstName &&
+    deliveryLastName &&
+    deliveryAddress1 &&
+    deliveryCountryCode &&
+    deliveryState &&
+    deliveryZipCode
+
+  const initialize = useCallback(async () => {
+    if (!userEmail) return
+
+    const customerData: any = await getCustomer(userEmail)
+
+    if (!customerData) return
+
+    setDeliveryFirstName(customerData.first_name)
+    setDeliveryLastName(customerData.last_name)
+    setDeliveryState(customerData.state)
+    setDeliveryPhoneNumber(customerData.phone_number)
+    setDeliveryZipCode(customerData.zip_code)
+    setDeliveryCountryCode(customerData.country_code)
+    setDeliveryAddress1(customerData.address_1)
+    setDeliveryAddress2(customerData.address_2)
+  }, [userEmail])
+
+  const confirmDeliveryAddress = async () => {
+    setLoading(true)
+    await createCustomer({
+      email: userEmail,
+      first_name: deliveryFirstName,
+      last_name: deliveryLastName,
+      address_1: deliveryAddress1,
+      address_2: deliveryAddress2,
+      state: deliveryState,
+      zip_code: deliveryZipCode,
+      phone_number: deliveryPhoneNumber,
+      country_code: deliveryCountryCode,
+    })
+    await initialize()
+    setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    initialize()
+  }, [initialize])
 
   return {
     modalScreen,
@@ -36,6 +88,9 @@ const useCreditCardModal = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
+    confirmDeliveryAddress,
+    loading,
+    isCompletedDelivery,
   }
 }
 

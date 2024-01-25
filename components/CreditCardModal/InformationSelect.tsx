@@ -3,9 +3,11 @@ import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
 import Input from "../../shared/Input"
 import useCrossMint from "../../hooks/useCrossMint"
+import { useCheckOut } from "../../providers/CheckOutProvider"
 
 const InformationSelect = () => {
   const { usdPrice, mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMint()
+  const { isCompletedDelivery } = useCheckOut()
 
   return (
     <div className="bg-white w-full py-[40px] flex flex-col items-center">
@@ -59,7 +61,7 @@ const InformationSelect = () => {
             environment="staging"
             paymentMethod="fiat"
             recipient={{
-              email: receiptEmail,
+              email: isCompletedDelivery ? receiptEmail : "",
             }}
             uiConfig={{
               borderRadius: "8px",
