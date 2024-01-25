@@ -26,8 +26,8 @@ const Navbar = () => {
               type="button"
               key={item.value}
               className={`py-[20px] px-[24px] flex justify-center items-center
-                  cursor-pointer ${
-                    item.value === selectItem ? "border-b-[2px] border-b-black" : ""
+                  cursor-pointer text-gray_6 text-[16px] ${
+                    item.value === selectItem ? "border-b-[2px] border-b-black !text-black" : ""
                   }`}
               onClick={() => setSelectedItem(item.value)}
             >
