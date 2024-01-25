@@ -1,6 +1,5 @@
 import { UnsignedTransactionRequest, usePrivy } from "@privy-io/react-auth"
 import { Interface } from "ethers/lib/utils"
-import { toast } from "react-toastify"
 
 const usePrivySendTransaction = () => {
   const { sendTransaction: privySendTransaction } = usePrivy()
@@ -32,7 +31,6 @@ const usePrivySendTransaction = () => {
       description,
     }
     const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
-
     return txReceipt.transactionHash
   }
 
