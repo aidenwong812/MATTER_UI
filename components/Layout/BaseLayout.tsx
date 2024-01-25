@@ -3,8 +3,8 @@ import { ILayout } from "./types"
 
 const BaseLayout = ({ children }: ILayout) => (
   <div
-    className="w-full flex justify-center
-      min-h-screen bg-white overflow-hidden"
+    className="w-full flex justify-center bg-gray_1
+      min-h-screen overflow-hidden"
   >
     <Header />
     {children}

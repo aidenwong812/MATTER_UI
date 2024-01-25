@@ -8,6 +8,7 @@ import { SessionProvider } from "next-auth/react"
 import React, { useMemo } from "react"
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 import { ThemeProvider } from "../providers/ThemeProvider"
+import UserProvider from "../providers/UserProvider"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [themeMode] = useLocalStorage<string>("theme", "light")
@@ -35,7 +36,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider>
       <SessionProvider>
         <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
-          <Component {...pageProps} />
+          <UserProvider>
+            <Component {...pageProps} />
+          </UserProvider>
         </PrivyProvider>
         <ToastContainer />
       </SessionProvider>
