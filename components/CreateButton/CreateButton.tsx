@@ -23,7 +23,7 @@ const CreateButton = () => {
   const post = async () => {
     if (posting) return
     if (!cover) {
-      toast.error("Please, upload a media!")
+      toast.error("Please, upload media!")
       setPosting(false)
       return
     }
