@@ -1,5 +1,5 @@
-import ConstructionPage from "../../components/Pages/ConstructionPage"
+import ServicesPage from "../../components/Pages/ServicesPage"
 
-const Services = () => <ConstructionPage pageName="Services" />
+const Services = () => <ServicesPage />
 
 export default Services

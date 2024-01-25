@@ -1,5 +1,5 @@
-import ConstructionPage from "../../components/Pages/ConstructionPage"
+import PhysicalPage from "../../components/Pages/PhysicalPage"
 
-const ProductPhysical = () => <ConstructionPage pageName="Product Physical" />
+const ProductPhysical = () => <PhysicalPage />
 
 export default ProductPhysical
