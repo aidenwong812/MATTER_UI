@@ -12,36 +12,41 @@ const CreateButton = () => {
   const buttonCss = `border border-gray_3 rounded-full h-[40px] w-[230px]
   flex gap-x-[5px] justify-center items-center text-[12px]`
   const { drops1155, fetch1155Drops, selectedDrop } = useCollection()
-  const { setPosting, posting, title, description, isSelectedCreated } = useDeploy()
+  const { setPosting, posting, title, description, isSelectedCreated, cover } = useDeploy()
   const { create1155Token } = useCreate1155Token()
   const { create1155Contract } = useCreate1155Contract()
 
   const buttonLabel = drops1155.length && !isSelectedCreated ? "Create Product" : "Create"
 
-  const storyAddress = selectedDrop?.value
+  const dorpAddress = selectedDrop?.value
 
   const post = async () => {
     if (posting) return
+    if (!cover) {
+      toast.error("Please, upload a media!")
+      setPosting(false)
+      return
+    }
+
+    if (!title) {
+      toast.error("Please, enter a title!")
+      setPosting(false)
+      return
+    }
+
+    if (!description) {
+      toast.error("Please, enter a description!")
+      setPosting(false)
+      return
+    }
 
     setPosting(true)
     if (drops1155?.length && !isSelectedCreated) {
-      if (!storyAddress) {
+      if (!dorpAddress) {
         toast.error("Please, select a collection!")
         setPosting(false)
         return
       }
-      if (!title) {
-        toast.error("Please, enter a title!")
-        setPosting(false)
-        return
-      }
-
-      if (!description) {
-        toast.error("Please, enter a description!")
-        setPosting(false)
-        return
-      }
-
       const response: any = await create1155Token(CHAIN_ID)
 
       if (response?.error) {
