@@ -17,7 +17,7 @@ const CreatePage = () => {
 
   return (
     <Layout type="base">
-      <SeoHead title="OASIS | Account" />
+      <SeoHead title="Matter | Create" />
       <div
         className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen
                         md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[90px] pb-[30px] px-[18px]
@@ -31,7 +31,7 @@ const CreatePage = () => {
           </div>
           <div className="flex flex-col items-center md:items-start gap-y-[20px]">
             <p className="text-[22px]">
-              {drops1155.length > 0 && !isSelectedCreated ? "Create a Product" : "Create Category"}
+              {drops1155.length > 0 && !isSelectedCreated ? "Create a Product" : "Create"}
             </p>
             {drops1155.length > 0 && <DropsSelect />}
             <TitleInput />

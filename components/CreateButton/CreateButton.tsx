@@ -16,7 +16,7 @@ const CreateButton = () => {
   const { create1155Token } = useCreate1155Token()
   const { create1155Contract } = useCreate1155Contract()
 
-  const buttonLabel = drops1155.length && !isSelectedCreated ? "Create Product" : "Create Category"
+  const buttonLabel = drops1155.length && !isSelectedCreated ? "Create Product" : "Create"
 
   const storyAddress = selectedDrop?.value
 
