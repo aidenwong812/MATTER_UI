@@ -29,6 +29,7 @@ const usePrivySendTransaction = () => {
     const uiConfig = {
       header: title,
       description,
+      buttonText: "Sign",
     }
     const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
     return txReceipt.transactionHash
