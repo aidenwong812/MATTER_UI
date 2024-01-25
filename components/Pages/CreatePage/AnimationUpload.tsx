@@ -20,16 +20,11 @@ const AnimationUpload = () => {
     }
   }
 
-  const handleClick = () => {
-    fileInputRef.current.click()
-  }
-
   return (
     <button
-      onClick={handleClick}
       type="button"
       className="border border-gray_3 p-[40px] rounded-[14px] h-full aspect-[1/1]
-      flex flex-col items-center"
+      flex flex-col items-center relative"
     >
       <Image
         link="/images/upload-imagination.png"
@@ -49,7 +44,7 @@ const AnimationUpload = () => {
         type="file"
         accept="image/*, .gif, .mov, application/pdf, audio/*, video/*"
         onChange={handleFileChange}
-        className="hidden"
+        className="w-full h-full absolute  left-0 top-0 z-[5] opacity-0"
       />
     </button>
   )
