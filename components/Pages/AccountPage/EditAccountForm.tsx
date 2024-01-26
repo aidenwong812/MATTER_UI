@@ -11,7 +11,7 @@ const EditAccountForm = () => {
   return (
     <div
       className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
-        py-[40px] px-[26px] flex flex-col items-center"
+        py-[40px] px-[26px] flex flex-col items-center bg-white"
     >
       <div
         className="flex bg-gray_10 justify-center items-center

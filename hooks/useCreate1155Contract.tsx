@@ -4,7 +4,7 @@ import abi from "../lib/abi/abi-Zora1155CreatorProxy.json"
 import dropAbi from "../lib/abi/abi-ERC1155Drop.json"
 import handleTxError from "../lib/handleTxError"
 import usePrivySendTransaction from "./usePrivySendTransaction"
-import { getZoraBlob, store } from "../lib/ipfs"
+import { store } from "../lib/ipfs"
 import getZora1155ProxyAddress from "../lib/zora/getZora1155ProxyAddress"
 import { CHAIN_ID } from "../lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
@@ -14,14 +14,9 @@ const useCreate1155Contract = () => {
   const { sendTransaction } = usePrivySendTransaction()
   const { connectedWallet } = useConnectedWallet()
 
-  const create1155Contract = async (title, description, cover, chainId = CHAIN_ID) => {
+  const create1155Contract = async (chainId = CHAIN_ID, cover, title, description) => {
     try {
-      const ipfs = await store(
-        cover || getZoraBlob(connectedWallet),
-        title,
-        description,
-        connectedWallet,
-      )
+      const ipfs = await store(cover, title, description)
       const adminPermissionArgs = [0, connectedWallet, 2]
       const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
       const minterPermissionCall = new Interface(dropAbi).encodeFunctionData(
@@ -35,7 +30,7 @@ const useCreate1155Contract = () => {
       const setupActions = [adminPermissionCall, minterPermissionCall]
 
       const args = [
-        `ipfs://${ipfs}`,
+        `ipfs://${ipfs.contractIpfs}`,
         title,
         {
           royaltyRecipient: "0x0000000000000000000000000000000000000000",
@@ -48,22 +43,21 @@ const useCreate1155Contract = () => {
 
       if (authenticated) {
         const factoryAddress = getZora1155ProxyAddress(chainId)
-        const response: any = await sendTransaction(
+        await sendTransaction(
           factoryAddress,
           chainId,
           abi,
           "createContract",
           args,
           undefined,
-          "Create a Category",
+          "Create",
           "Matter",
         )
-        return { error: response?.error }
+        return ipfs
       }
 
-      return true
+      return { error: true }
     } catch (err) {
-      console.log(err)
       handleTxError(err)
       return { error: err }
     }

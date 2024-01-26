@@ -14,7 +14,7 @@ const useCreditCardModal = () => {
   const [deliveryAddress2, setDeliveryAddress2] = useState("")
   const [deliveryZipCode, setDeliveryZipCode] = useState("")
   const [deliveryState, setDeliveryState] = useState("")
-  const [deliveryCountryCode, setDeliveryCountryCode] = useState("")
+  const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
 
   return {

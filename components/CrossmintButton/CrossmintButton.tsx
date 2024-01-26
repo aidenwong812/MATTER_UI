@@ -5,7 +5,7 @@ import useConnectedWallet from "../../hooks/useConnectedWallet"
 import getMulticallFromCart from "../../lib/getMulticallFromCart"
 import getMintData from "../../lib/zora/getMintData"
 
-const CrossmintButton = ({ buttonLabel = "" }) => {
+const CrossmintButton = ({ buttonLabel = "Pay with Credit or Debit" }) => {
   const { connectedWallet } = useConnectedWallet()
   const { cart, totalPrice } = useCheckOut()
   const multicalls = getMulticallFromCart(cart, getMintData(connectedWallet))
@@ -24,9 +24,7 @@ const CrossmintButton = ({ buttonLabel = "" }) => {
       projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
       collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
       environment="staging"
-      getButtonText={(connecting) =>
-        connecting ? "Connecting" : buttonLabel || "Pay with Credit or Debit"
-      }
+      getButtonText={(connecting) => (connecting ? "Connecting" : buttonLabel)}
       mintConfig={mintConfig}
       paymentMethod="fiat"
       className="matter-crossmint-button"

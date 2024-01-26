@@ -6,7 +6,9 @@ const createProduct = async (productData) => {
     ...productData,
     timestamp: Date.now(),
   }
-  await addDoc(collection(db, "products"), data)
+  const newProduct = await addDoc(collection(db, "products"), data)
+
+  return newProduct.id
 }
 
 export default createProduct
