@@ -1,61 +1,29 @@
-import { useRef } from "react"
-import { toast } from "react-toastify"
-import { useDeploy } from "../../../providers/DeployProvider"
 import Image from "../../../shared/Image"
+import MediaPicker from "../../../shared/MediaPicker"
 
-const AnimationUpload = () => {
-  const { setAnimationFile, setCover, setAnimationSrc } = useDeploy()
-  const fileInputRef = useRef(null)
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-
-    if (file.size >= 2147483648) {
-      toast.error("Max Size 2GB.")
-      return
-    }
-
-    if (file) {
-      if (file.type.includes("image")) {
-        setCover(file)
-        return
-      }
-
-      setAnimationFile(file)
-      const objectURL = URL.createObjectURL(file)
-      setAnimationSrc(objectURL)
-    }
-  }
-
-  return (
-    <button
-      type="button"
-      className="border border-gray_3 p-[40px] rounded-[14px] h-full aspect-[1/1]
-      flex flex-col items-center relative"
-    >
-      <Image
-        link="/images/upload-imagination.png"
-        blurLink="/images/upload-imagination.png"
-        containerClasses="w-[160px] aspect-[1/1]"
-        alt="not found icon"
-      />
-      <p
-        className="text-[12px]
-      text-center"
+const AnimationUpload = () => (
+  <MediaPicker hookToForm name="cover">
+    {({ files }) => (
+      <button
+        type="button"
+        className="border border-gray_3 p-[40px] rounded-[14px] w-full aspect-[1/1]
+              flex flex-col items-center"
       >
-        Drag and drop or choose up file
-      </p>
-
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*, .gif, .mov, application/pdf, audio/*, video/*"
-        onChange={handleFileChange}
-        className="w-full h-full absolute  left-0 top-0 z-[5] opacity-0"
-      />
-    </button>
-  )
-}
+        <Image
+          link={files ? URL.createObjectURL(files[0]) : "/images/upload-imagination.png"}
+          blurLink={files ? URL.createObjectURL(files[0]) : "/images/upload-imagination.png"}
+          containerClasses="w-[160px] aspect-[1/1]"
+          alt="not found icon"
+        />
+        <p
+          className="text-[12px]
+              text-center"
+        >
+          Drag and drop or choose up file
+        </p>
+      </button>
+    )}
+  </MediaPicker>
+)
 
 export default AnimationUpload

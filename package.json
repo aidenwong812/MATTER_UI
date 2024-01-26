@@ -30,6 +30,7 @@
     "firebase": "^10.7.1",
     "framer-motion": "^10.16.4",
     "joi": "^17.11.0",
+    "joi-filelist": "^1.0.0",
     "next": "^12.2.2",
     "next-api-decorators": "^2.0.2",
     "next-auth": "^4.20.1",
