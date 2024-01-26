@@ -5,7 +5,6 @@ import useEthPrice from "../../hooks/useEthPrice"
 
 const CheckOutDetail = ({ totalPrice }) => {
   const { getUsdConversion } = useEthPrice()
-
   const usdPrice = totalPrice && getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   return (
