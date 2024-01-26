@@ -14,7 +14,13 @@ const useCreate1155Contract = () => {
   const { sendTransaction } = usePrivySendTransaction()
   const { connectedWallet } = useConnectedWallet()
 
-  const create1155Contract = async (title, description, cover, chainId = CHAIN_ID) => {
+  const create1155Contract = async (
+    chainId = CHAIN_ID,
+    cover,
+    title,
+    description,
+    fundsRecipient,
+  ) => {
     try {
       const ipfs = await store(
         cover || getZoraBlob(connectedWallet),
@@ -55,7 +61,7 @@ const useCreate1155Contract = () => {
           "createContract",
           args,
           undefined,
-          "Create a Category",
+          "Create",
           "Matter",
         )
         return { error: response?.error }

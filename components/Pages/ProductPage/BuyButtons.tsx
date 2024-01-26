@@ -7,7 +7,7 @@ const BuyButtons = () => {
     <div className="w-full">
       <div
         className="flex flex-col items-center border-0 md:border md:border-gray_3 rounded-[20px]
-            md:px-[24px] py-[32px]"
+            md:px-[24px] py-[32px] bg-white"
       >
         <button
           type="button"

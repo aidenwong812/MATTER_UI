@@ -1,81 +1,35 @@
 import { createContext, useState, useContext, useMemo } from "react"
-import useCreate1155Token from "../hooks/useCreate1155Token"
 import useCreate1155Contract from "../hooks/useCreate1155Contract"
-import { useCollection } from "./CollectionProvider"
-import { toast } from "react-toastify"
+import { CHAIN_ID } from "../lib/consts"
 import { useRouter } from "next/router"
-import createProduct from "../lib/firebase/createProduct"
 
 const DeployContext = createContext({} as any)
 
 export const useDeploy = () => useContext(DeployContext)
+
 export const DeployProvider = ({ children }) => {
-  const router = useRouter()
-  const [ isSelectedCreated, setIsSelectedCreated ] = useState(true)
-  const [animationFile, setAnimationFile] = useState(null)
-  const [animationSrc, setAnimationSrc] = useState(null)
   const [cover, setCover] = useState(null)
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [creating, setCreating] = useState(false)
-  const { create1155Token } = useCreate1155Token()
   const { create1155Contract } = useCreate1155Contract()
-  const { drops1155, fetch1155Drops, selectedDrop } = useCollection()
+  const { push } = useRouter()
 
-  const buttonLabel = drops1155.length && !isSelectedCreated ? "Create Product" : "Create Category"
-  const dropAddress = selectedDrop?.value
-
-  const create = async () => {
-    if (creating || !cover) return
-
+  const create = async ({cover}) => {
+    if (creating) return
+    setCover(cover[0])
     setCreating(true)
-    if (drops1155?.length && !isSelectedCreated) {
-
-      if (!dropAddress) {
-        toast.error("Please, select a collection!")
-        setCreating(false)
-        return
-      }
-
-      const ipfsHash: any = await create1155Token(selectedDrop?.value, title, cover, description, animationFile)
-      
-      if (ipfsHash?.error) {
-        setCreating(false)
-        return
-      }
-
-      const response: any = await createProduct({
-        category: {
-          address: selectedDrop.value,
-          name: selectedDrop.label
-        },
-        name: title,
-        description
-      })
-      
-
-      if (response?.error) {
-        setCreating(false)
-        return
-      }
-    } else {
-      const response: any = await create1155Contract(title, description, cover)
-      if (response?.error) {
-        setCreating(false)
-        return
-      }
+    const response: any = await create1155Contract(CHAIN_ID, cover[0], title, description)
+    if (response?.error) {
+      setCreating(false)
+      return
     }
-    await fetch1155Drops()
-    router.push("/checkout")
+    push("/checkout")
     setCreating(false)
   }
 
   const value = useMemo(
     () => ({
-      animationFile,
-      setAnimationFile,
-      animationSrc,
-      setAnimationSrc,
       cover,
       setCover,
       title,
@@ -84,16 +38,9 @@ export const DeployProvider = ({ children }) => {
       setDescription,
       creating,
       setCreating,
-      isSelectedCreated,
-      setIsSelectedCreated,
-      create,
-      buttonLabel
+      create
     }),
     [
-      animationFile,
-      setAnimationFile,
-      animationSrc,
-      setAnimationSrc,
       cover,
       setCover,
       title,
@@ -102,9 +49,7 @@ export const DeployProvider = ({ children }) => {
       setDescription,
       creating,
       setCreating,
-      isSelectedCreated,
-      setIsSelectedCreated,
-      buttonLabel
+      create
     ],
   )
 
