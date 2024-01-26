@@ -1,17 +1,17 @@
-import { useCheckOut } from "../../providers/CheckOutProvider"
 import Image from "../../shared/Image"
-import { MODAL_SCREEN } from "../../hooks/useCreditCardModal"
+import { FORM_MODE } from "../../hooks/useDeliveryFormData"
+import { useDeliveryForm } from "../../providers/DeliveryFormProvider"
 
 const DeliveryInformation = () => {
   const {
-    setModalScreen,
+    setFormMode,
     deliveryFirstName,
     deliveryLastName,
     deliveryAddress1,
     deliveryZipCode,
     deliveryState,
     deliveryCountryCode,
-  } = useCheckOut()
+  } = useDeliveryForm()
 
   const isCompletedDelivery =
     deliveryFirstName &&
@@ -37,7 +37,7 @@ const DeliveryInformation = () => {
           className="text-gray_6 font-[400] text-[16px] leading-[100%] tracking-[-0.4px]
         flex flex-col items-end"
           type="button"
-          onClick={() => setModalScreen(MODAL_SCREEN.DELIVERY_ADDRESS)}
+          onClick={() => setFormMode(FORM_MODE.EDIT_MODE)}
         >
           <p>
             {deliveryFirstName} {deliveryLastName}
@@ -51,7 +51,7 @@ const DeliveryInformation = () => {
         <button
           type="button"
           className="flex items-center gap-x-[15px]"
-          onClick={() => setModalScreen(MODAL_SCREEN.DELIVERY_ADDRESS)}
+          onClick={() => setFormMode(FORM_MODE.EDIT_MODE)}
         >
           <p
             className="text-error_500 text-[16px] font-[400]

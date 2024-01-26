@@ -5,11 +5,13 @@ import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 import useEthPrice from "../../../hooks/useEthPrice"
 import CreditCardPayButton from "../../CreditCardPayButton"
+import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()
   const { getUsdConversion } = useEthPrice()
-  const { cart, purchaseByPrivy, totalPrice } = useCheckOut()
+  const { cart, totalPrice } = useCheckOut()
+  const { purchaseByPrivy } = usePurchaseByPrivy()
   const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   const handleCryptoPurchase = async () => {
@@ -60,7 +62,7 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CreditCardPayButton />
+          <CreditCardPayButton cart={cart} totalPrice={totalPrice} />
         </div>
       </div>
     </div>

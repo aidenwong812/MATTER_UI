@@ -1,11 +1,11 @@
 import countries from "react-select-country-list"
 import { useMemo } from "react"
 import Input from "../../shared/Input"
-import { useCheckOut } from "../../providers/CheckOutProvider"
 import Select from "../../shared/Select"
 import Form from "../../shared/Form"
 import { validation } from "./validation"
-import { MODAL_SCREEN } from "../../hooks/useCreditCardModal"
+import { FORM_MODE } from "../../hooks/useDeliveryFormData"
+import { useDeliveryForm } from "../../providers/DeliveryFormProvider"
 
 const DeliveryAddressForm = () => {
   const {
@@ -25,10 +25,10 @@ const DeliveryAddressForm = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
-    setModalScreen,
-  } = useCheckOut()
+    setFormMode,
+  } = useDeliveryForm()
 
-  const handleConfirm = () => setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
+  const handleConfirm = () => setFormMode(FORM_MODE.EDIT_MODE)
 
   const countryData = useMemo(
     () =>

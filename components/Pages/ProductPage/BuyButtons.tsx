@@ -1,7 +1,15 @@
+import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
+import { useProduct } from "../../../providers/ProductProvider"
 import Image from "../../../shared/Image"
+import CreditCardPayButton from "../../CreditCardPayButton"
 
 const BuyButtons = () => {
-  const handleCryptoPurchase = async () => {}
+  const { product, productPrice } = useProduct()
+  const { purchaseByPrivy } = usePurchaseByPrivy()
+
+  const handleCryptoPurchase = async () => {
+    await purchaseByPrivy(product, productPrice)
+  }
 
   return (
     <div className="w-full">
@@ -29,21 +37,11 @@ const BuyButtons = () => {
         >
           Or
         </p>
-        <button
-          type="button"
-          className="border border-gray_3
-                  w-[327px] aspect-[327/56] rounded-full
-                  flex justify-center items-center
-                  gap-x-[10px]"
-        >
-          <Image
-            link="/images/credit_pay.svg"
-            blurLink="/images/credit_pay.png"
-            containerClasses="w-[24px] aspect-[1/1]"
-            alt="not found icon"
-          />
-          Buy with Credit or Debit
-        </button>
+        <CreditCardPayButton
+          cart={product}
+          totalPrice={productPrice}
+          buttonLabel="Buy with Credit or Debit"
+        />
       </div>
     </div>
   )
