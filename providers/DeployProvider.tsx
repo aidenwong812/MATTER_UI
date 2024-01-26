@@ -2,6 +2,7 @@ import { createContext, useState, useContext, useMemo } from "react"
 import useCreate1155Contract from "../hooks/useCreate1155Contract"
 import { CHAIN_ID } from "../lib/consts"
 import { useRouter } from "next/router"
+import createProduct from "../lib/firebase/createProduct"
 
 const DeployContext = createContext({} as any)
 
@@ -19,12 +20,19 @@ export const DeployProvider = ({ children }) => {
     if (creating) return
     setCover(cover[0])
     setCreating(true)
-    const response: any = await create1155Contract(CHAIN_ID, cover[0], title, description)
-    if (response?.error) {
+    const ipfs: any = await create1155Contract(CHAIN_ID, cover[0], title, description)
+    if (ipfs?.error) {
       setCreating(false)
       return
     }
-    push("/checkout")
+    console.log(ipfs, title, description)
+    
+    const productId = await createProduct({
+      cover: ipfs.coverIpfs,
+      title,
+      description
+    })
+    push(`/product/${productId}`)
     setCreating(false)
   }
 
