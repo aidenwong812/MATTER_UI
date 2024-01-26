@@ -17,14 +17,14 @@ const useDeliveryFormData = () => {
   const [deliveryState, setDeliveryState] = useState("")
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
-  const { userEmail } = useUserProvider()
+  const { privyEmail } = useUserProvider()
   const [loading, setLoading] = useState(false)
   const [formMode, setFormMode] = useState(FORM_MODE.VISIBLE_MODE)
 
   const confirmDeliveryAddress = async () => {
     setLoading(true)
     await createCustomer({
-      email: userEmail,
+      email: privyEmail,
       first_name: deliveryFirstName,
       last_name: deliveryLastName,
       address_1: deliveryAddress1,
@@ -40,7 +40,7 @@ const useDeliveryFormData = () => {
 
   useEffect(() => {
     const init = async () => {
-      const customerData: any = await getCustomer(userEmail)
+      const customerData: any = await getCustomer(privyEmail)
 
       if (!customerData) return
 
@@ -54,9 +54,9 @@ const useDeliveryFormData = () => {
       setDeliveryAddress2(customerData.address_2)
     }
 
-    if (!userEmail) return
+    if (!privyEmail) return
     init()
-  }, [userEmail])
+  }, [privyEmail])
 
   return {
     deliveryFirstName,

@@ -4,15 +4,13 @@ import useDeliveryFormData from "../hooks/useDeliveryFormData"
 const DeliveryFormContext = createContext(null)
 
 const DeliveryFormProvider = ({ children }) => {
-   const deliveryFormData = useDeliveryFormData()
+  const deliveryFormData = useDeliveryFormData()
 
   const value = useMemo(
     () => ({
-        ...deliveryFormData
+      ...deliveryFormData,
     }),
-    [
-      deliveryFormData
-    ],
+    [deliveryFormData],
   )
 
   return <DeliveryFormContext.Provider value={value}>{children}</DeliveryFormContext.Provider>

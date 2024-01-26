@@ -11,7 +11,7 @@ const UserProvider = ({ children }) => {
   const { pathname, push } = useRouter()
   const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
 
-  const isPrivatePage = pathname !== '/'
+  const isPrivatePage = pathname !== "/"
 
   const loading = !ready
 
@@ -26,22 +26,15 @@ const UserProvider = ({ children }) => {
   }, [user])
 
   const value = useMemo(
-    () => ({ 
-      connectedWallet, 
+    () => ({
+      connectedWallet,
       privyEmail,
       loading,
-      getUsdConversion, 
+      getUsdConversion,
       ethPrice,
-      getEthConversion
+      getEthConversion,
     }),
-    [
-      connectedWallet, 
-      privyEmail,
-      loading,
-      getUsdConversion, 
-      ethPrice,
-      getEthConversion
-    ],
+    [connectedWallet, privyEmail, loading, getUsdConversion, ethPrice, getEthConversion],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
