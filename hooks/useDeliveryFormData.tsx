@@ -21,7 +21,6 @@ const useDeliveryFormData = () => {
   const [loading, setLoading] = useState(false)
   const [formMode, setFormMode] = useState(FORM_MODE.VISIBLE_MODE)
 
-  
   const isCompletedDelivery =
     deliveryFirstName &&
     deliveryLastName &&
