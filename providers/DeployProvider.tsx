@@ -7,7 +7,6 @@ export const useDeploy = () => useContext(DeployContext)
 
 export const DeployProvider = ({ children }) => {
   const { connectedWallet } = useConnectedWallet()
-  const [ isSelectedCreated, setIsSelectedCreated ] = useState(true)
 
   const [animationFile, setAnimationFile] = useState(null)
   const [animationSrc, setAnimationSrc] = useState(null)
@@ -38,8 +37,6 @@ export const DeployProvider = ({ children }) => {
       setFundsRecipient,
       posting,
       setPosting,
-      isSelectedCreated,
-      setIsSelectedCreated
     }),
     [
       animationFile,
@@ -56,8 +53,6 @@ export const DeployProvider = ({ children }) => {
       setFundsRecipient,
       posting,
       setPosting,
-      isSelectedCreated,
-      setIsSelectedCreated
     ],
   )
 

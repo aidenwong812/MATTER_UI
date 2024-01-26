@@ -1,4 +1,3 @@
-import { useCollection } from "../../../providers/CollectionProvider"
 import { useDeploy } from "../../../providers/DeployProvider"
 import CreateButton from "../../CreateButton"
 import DescriptionInput from "../../DescriptionInput"
@@ -6,11 +5,9 @@ import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
 import TitleInput from "../../TitleInput/TitleInput"
 import AnimationUpload from "./AnimationUpload"
-import DropsSelect from "./DropsSelect"
 
 const CreatePage = () => {
-  const { cover, animationFile, isSelectedCreated } = useDeploy()
-  const { drops1155 } = useCollection()
+  const { cover, animationFile } = useDeploy()
 
   const coverUrl = cover && URL.createObjectURL(cover)
   const hasContent = cover || animationFile
@@ -30,10 +27,7 @@ const CreatePage = () => {
             {cover && <img src={coverUrl} width={280} height={150} alt="not found uri" />}
           </div>
           <div className="flex flex-col items-center md:items-start gap-y-[20px]">
-            <p className="text-[22px]">
-              {drops1155.length > 0 && !isSelectedCreated ? "Create a Product" : "Create"}
-            </p>
-            {drops1155.length > 0 && <DropsSelect />}
+            <p className="text-[22px]">Create</p>
             <TitleInput />
             <DescriptionInput />
             <CreateButton />
