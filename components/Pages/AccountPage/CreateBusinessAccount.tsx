@@ -3,7 +3,7 @@ import Image from "../../../shared/Image"
 const CreateBusinessAccount = () => (
   <div
     className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
-        py-[40px] px-[26px] flex flex-col items-center"
+        py-[40px] px-[26px] flex flex-col items-center bg-white"
   >
     <div className="flex gap-x-[10px] items-center">
       <Image
@@ -18,7 +18,7 @@ const CreateBusinessAccount = () => (
       className="text-[28px] font-[400] leading-[110%] tracking-[-0.7px]
             my-[24px]"
     >
-      Want to sell on Oasis?
+      Want to sell on Matter?
     </p>
     <button
       type="button"
