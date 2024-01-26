@@ -1,4 +1,5 @@
 import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
+import { useMemo } from "react"
 import Input from "../../shared/Input"
 import useCrossMint from "../../hooks/useCrossMint"
 import useDeliveryFormData from "../../hooks/useDeliveryFormData"
@@ -10,14 +11,19 @@ const CrossMintCheckOut = ({ cart, totalPrice }) => {
     totalPrice,
   })
 
+  const recipient = useMemo(
+    () => (isCompletedDelivery ? receiptEmail : ""),
+    [isCompletedDelivery, receiptEmail],
+  )
+
   return (
     <>
       <Input
         value={receiptEmail}
-        className="w-[294px] mb-[0.82rem]"
+        className="max-w-[294px] mb-[0.82rem]"
         onChange={(e) => setReceiptEmail(e.target.value)}
       />
-      {mintConfig && receiptEmail && (
+      {mintConfig && (
         <CrossmintPaymentElement
           mintConfig={mintConfig}
           projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
@@ -25,7 +31,7 @@ const CrossMintCheckOut = ({ cart, totalPrice }) => {
           environment="staging"
           paymentMethod="fiat"
           recipient={{
-            email: isCompletedDelivery ? receiptEmail : "",
+            email: recipient,
           }}
           uiConfig={{
             borderRadius: "8px",

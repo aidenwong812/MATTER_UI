@@ -14,7 +14,7 @@ const CheckOutModal = ({ isVisible, handleClose, cart, totalPrice }) => {
         <div className="bg-white w-full py-[40px] flex flex-col items-center">
           <CheckOutDetail totalPrice={totalPrice} />
           <div className="w-full flex-col items-center flex px-[24px]">
-            {isVisible && <CrossMintCheckOut cart={cart} totalPrice={totalPrice} />}
+            <CrossMintCheckOut cart={cart} totalPrice={totalPrice} />
           </div>
         </div>
       )}
