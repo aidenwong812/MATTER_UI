@@ -14,13 +14,7 @@ const useCreate1155Contract = () => {
   const { sendTransaction } = usePrivySendTransaction()
   const { connectedWallet } = useConnectedWallet()
 
-  const create1155Contract = async (
-    chainId = CHAIN_ID,
-    cover,
-    title,
-    description,
-    fundsRecipient,
-  ) => {
+  const create1155Contract = async (chainId = CHAIN_ID, cover, title, description) => {
     try {
       const ipfs = await store(
         cover || getZoraBlob(connectedWallet),
