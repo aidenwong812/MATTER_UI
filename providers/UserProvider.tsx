@@ -1,7 +1,7 @@
-import { usePrivy } from "@privy-io/react-auth"
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import getUser from "../lib/firebase/getUser"
 import getIpfsLink from "../lib/getIpfsLink"
+import { usePrivy } from "@privy-io/react-auth"
 
 const UserContext = createContext(null)
 

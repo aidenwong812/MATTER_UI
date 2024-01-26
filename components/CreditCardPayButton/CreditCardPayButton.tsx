@@ -1,8 +1,9 @@
 import { useState } from "react"
 import Image from "../../shared/Image"
-import CreditCardModal from "../CreditCardModal"
+import CheckOutModal from "../CheckOutModal"
+import DeliveryFormProvider from "../../providers/DeliveryFormProvider"
 
-const CreditCardPayButton = () => {
+const CreditCardPayButton = ({ cart, totalPrice, buttonLabel = "Pay with Credit or Debit" }) => {
   const [isOpenCreditCardModal, setIsOpenCreditCardModal] = useState(false)
 
   return (
@@ -21,12 +22,16 @@ const CreditCardPayButton = () => {
           containerClasses="w-[24px] aspect-[1/1]"
           alt="not found icon"
         />
-        Pay with Credit or Debit
+        {buttonLabel}
       </button>
-      <CreditCardModal
-        isVisible={isOpenCreditCardModal}
-        handleClose={() => setIsOpenCreditCardModal(false)}
-      />
+      <DeliveryFormProvider>
+        <CheckOutModal
+          isVisible={isOpenCreditCardModal}
+          handleClose={() => setIsOpenCreditCardModal(false)}
+          cart={cart}
+          totalPrice={totalPrice}
+        />
+      </DeliveryFormProvider>
     </>
   )
 }
