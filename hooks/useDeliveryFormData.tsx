@@ -3,14 +3,12 @@ import createCustomer from "../lib/firebase/createCustomer"
 import { useUserProvider } from "../providers/UserProvider"
 import getCustomer from "../lib/firebase/getCustomer"
 
-export enum MODAL_SCREEN {
-  INFORMATION_SELECT = "INFORMATION SELECT",
-  DELIVERY_ADDRESS = "DELIVERY_ADDRESS",
-  CARD_DETAIL = "CARD_DETAIL",
+export enum FORM_MODE {
+  EDIT_MODE = "EDIT_MODE",
+  VISIBLE_MODE = "VISIBLE_MODE",
 }
 
-const useCreditCardModal = () => {
-  const [modalScreen, setModalScreen] = useState(MODAL_SCREEN.INFORMATION_SELECT)
+const useDeliveryFormData = () => {
   const [deliveryFirstName, setDeliveryFirstName] = useState("")
   const [deliveryLastName, setDeliveryLastName] = useState("")
   const [deliveryAddress1, setDeliveryAddress1] = useState("")
@@ -21,6 +19,7 @@ const useCreditCardModal = () => {
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
   const { userEmail } = useUserProvider()
   const [loading, setLoading] = useState(false)
+  const [formMode, setFormMode] = useState(FORM_MODE.VISIBLE_MODE)
 
   const confirmDeliveryAddress = async () => {
     setLoading(true)
@@ -35,7 +34,7 @@ const useCreditCardModal = () => {
       phone_number: deliveryPhoneNumber,
       country_code: deliveryCountryCode,
     })
-    setModalScreen(MODAL_SCREEN.INFORMATION_SELECT)
+    setFormMode(FORM_MODE.VISIBLE_MODE)
     setLoading(false)
   }
 
@@ -60,8 +59,6 @@ const useCreditCardModal = () => {
   }, [userEmail])
 
   return {
-    modalScreen,
-    setModalScreen,
     deliveryFirstName,
     setDeliveryPhoneNumber,
     setDeliveryFirstName,
@@ -80,7 +77,9 @@ const useCreditCardModal = () => {
     deliveryPhoneNumber,
     confirmDeliveryAddress,
     loading,
+    formMode,
+    setFormMode,
   }
 }
 
-export default useCreditCardModal
+export default useDeliveryFormData

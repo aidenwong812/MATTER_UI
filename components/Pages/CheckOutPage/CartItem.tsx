@@ -17,11 +17,13 @@ const CartItem = ({ product = null }: any) => {
   const ethPrice = formatEther(product.price).toString()
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
-      className="border-b border-b-gray_3 pb-[24px]
-        w-full flex flex-col md:flex-row md:justify-between"
+      className="border-b border-b-gray_3 py-[24px] hover:bg-gray_3
+        transition duration-[300ms]
+        w-full flex flex-col md:flex-row md:justify-between cursor-pointer"
     >
-      <div className="flex gap-x-[15px] md:gap-x-[10px]">
+      <div className="flex gap-x-[15px] md:gap-x-[10px] pl-[10px]">
         <Image
           link={product.image || "/images/cart_item.png"}
           blurLink={product.image || "/images/cart_item.png"}
@@ -31,7 +33,7 @@ const CartItem = ({ product = null }: any) => {
         <div className="flex flex-col justify-between">
           <div>
             <p className="text-[16px] text-black font-[400] tracking-[-0.6px] leading-[100%] pb-[8px]">
-              Category
+              {product.title || "Item Name"}
             </p>
             <p className="text-[28px] text-black font-[400] tracking-[-0.168px] leading-[120%]">
               {product.title || "Item Name"}
@@ -63,7 +65,7 @@ const CartItem = ({ product = null }: any) => {
       )}
       <div
         className="flex flex-row items-center gap-x-[10px] 
-      md:items-end md:flex-col md:justify-around"
+      md:items-end md:flex-col md:justify-around pr-[10px]"
       >
         <div className="flex flex-col gap-y-[5px]">
           {!isMobile && (
@@ -74,7 +76,7 @@ const CartItem = ({ product = null }: any) => {
           <Select
             id="qantity"
             name="qantity"
-            value={quantity || ""}
+            value={quantity}
             className="!w-[100px]"
             onChange={(e) => setQuanity(e.target.value)}
             options={quantites}

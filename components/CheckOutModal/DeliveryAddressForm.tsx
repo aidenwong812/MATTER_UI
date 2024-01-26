@@ -1,10 +1,11 @@
 import countries from "react-select-country-list"
 import { useMemo } from "react"
 import Input from "../../shared/Input"
-import { useCheckOut } from "../../providers/CheckOutProvider"
 import Select from "../../shared/Select"
 import Form from "../../shared/Form"
 import { validation } from "./validation"
+import { FORM_MODE } from "../../hooks/useDeliveryFormData"
+import { useDeliveryForm } from "../../providers/DeliveryFormProvider"
 
 const DeliveryAddressForm = () => {
   const {
@@ -26,7 +27,7 @@ const DeliveryAddressForm = () => {
     deliveryPhoneNumber,
     confirmDeliveryAddress,
     loading,
-  } = useCheckOut()
+  } = useDeliveryForm()
 
   const countryData = useMemo(
     () =>

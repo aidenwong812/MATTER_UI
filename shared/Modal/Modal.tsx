@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react"
-import FadeInWhenVisible from "../../components/FadeInWhenVisible"
 import { motion } from "framer-motion"
 
 interface IModal {
