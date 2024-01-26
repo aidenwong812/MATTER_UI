@@ -17,9 +17,9 @@ const useCreate1155Contract = () => {
   const create1155Contract = async (
     chainId = CHAIN_ID,
     cover,
-    fundsRecipient,
     title,
     description,
+    fundsRecipient,
   ) => {
     try {
       const ipfs = await store(
