@@ -9,17 +9,17 @@ const EditAccount = () => {
   const { privyEmail } = useUserProvider()
   const { setScreenStatus } = useAccountForm()
   const { logout } = usePrivy()
-  const router = useRouter()
+  const { push } = useRouter()
 
   const handleLogout = () => {
     logout()
-    router.push("/")
+    push("/")
   }
 
   return (
     <div
       className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
-        py-[40px] px-[26px] flex flex-col items-center"
+        py-[40px] px-[26px] flex flex-col items-center bg-white"
     >
       <div
         className="flex bg-gray_10 justify-center items-center
@@ -33,7 +33,7 @@ const EditAccount = () => {
       >
         Username
       </p>
-      <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px]">
+      <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
         {privyEmail}
       </p>
       <button

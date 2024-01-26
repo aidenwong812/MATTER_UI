@@ -3,7 +3,7 @@ import Image from "../../../shared/Image"
 const CreateBusinessAccount = () => (
   <div
     className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
-        py-[40px] px-[26px] flex flex-col items-center"
+        py-[40px] px-[26px] flex flex-col items-center bg-white"
   >
     <div className="flex gap-x-[10px] items-center">
       <Image

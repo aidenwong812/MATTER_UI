@@ -35,11 +35,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <SessionProvider>
-        <UserProvider>
-          <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
+        <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
+          <UserProvider>
             <Component {...pageProps} />
-          </PrivyProvider>
-        </UserProvider>
+          </UserProvider>
+        </PrivyProvider>
         <ToastContainer />
       </SessionProvider>
     </ThemeProvider>
