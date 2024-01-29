@@ -1,7 +1,8 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
-import getUser from "../lib/firebase/getUser"
-import getIpfsLink from "../lib/getIpfsLink"
 import { usePrivy } from "@privy-io/react-auth"
+import { useRouter } from "next/router"
+import { createContext, useMemo, useEffect, useContext, useState, useCallback } from "react"
+import { getIpfsLink } from "onchain-magic"
+import getUser from "../lib/firebase/getUser"
 
 const UserContext = createContext(null)
 
@@ -11,6 +12,7 @@ const UserProvider = ({ children }) => {
   const [userName, setUserName] = useState("")
   const [userEmail, setUserEmail] = useState("")
   const [userPFP, setUserPFP] = useState("")
+  const { pathname, push } = useRouter()
 
   const getUserData = useCallback(async () => {
     if (!authenticated || !privyEmail) return
@@ -20,7 +22,15 @@ const UserProvider = ({ children }) => {
     setUserEmail(userData.email)
     setUserPFP(getIpfsLink(userData.pfp))
   }, [authenticated, privyEmail])
+  
 
+  const isPrivatePage =
+    pathname !== "/" &&
+    pathname !== "/services" &&
+    pathname !== "/products/digital" &&
+    pathname !== "/products/physical"
+
+  
   useEffect(() => {
     getUserData()
   }, [getUserData])

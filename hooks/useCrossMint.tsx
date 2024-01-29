@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 import { useUserProvider } from "../providers/UserProvider"
 
-const useCrossMint = ({ cart, totalPrice }) => {
+const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { privyEmail } = useUserProvider()
@@ -31,7 +31,7 @@ const useCrossMint = ({ cart, totalPrice }) => {
       }
     }
     return null
-  }, [totalPriceEth, multicalls, connectedWallet])
+  }, [totalPriceEth, multicalls, connectedWallet, cart, totalPrice])
 
   const handlePayment = (event) => {
     switch (event.type) {
