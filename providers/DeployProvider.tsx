@@ -16,7 +16,7 @@ export const DeployProvider = ({ children }) => {
   const { create1155Contract } = useCreate1155Contract()
   const { push } = useRouter()
 
-  const create = async ({cover}) => {
+  const create = async ({ cover }) => {
     if (creating) return
     setCover(cover[0])
     setCreating(true)
@@ -28,7 +28,7 @@ export const DeployProvider = ({ children }) => {
     const productId = await createProduct({
       cover: ipfsCid,
       title,
-      description
+      description,
     })
     push(`/product/${productId}`)
     setCreating(false)
@@ -44,19 +44,9 @@ export const DeployProvider = ({ children }) => {
       setDescription,
       creating,
       setCreating,
-      create
+      create,
     }),
-    [
-      cover,
-      setCover,
-      title,
-      setTitle,
-      description,
-      setDescription,
-      creating,
-      setCreating,
-      create
-    ],
+    [cover, setCover, title, setTitle, description, setDescription, creating, setCreating, create],
   )
 
   return <DeployContext.Provider value={value}>{children}</DeployContext.Provider>
