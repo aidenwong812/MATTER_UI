@@ -1,4 +1,4 @@
-import ProductItem from "./ProductItem"
+import ProductItem from "../ProductItem"
 
 const ProductTrending = () => (
   <div className="mt-[40px] col-span-10">
