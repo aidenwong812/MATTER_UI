@@ -53,7 +53,7 @@ const useCreate1155Contract = () => {
           "Create",
           "Matter",
         )
-        return ipfs
+        return `ipfs://${ipfsCid}`
       }
 
       return { error: true }

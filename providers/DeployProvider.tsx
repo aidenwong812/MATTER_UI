@@ -20,15 +20,13 @@ export const DeployProvider = ({ children }) => {
     if (creating) return
     setCover(cover[0])
     setCreating(true)
-    const ipfs: any = await create1155Contract(CHAIN_ID, cover[0], title, description)
-    if (ipfs?.error) {
+    const ipfsCid: any = await create1155Contract(CHAIN_ID, cover[0], title, description)
+    if (ipfsCid?.error) {
       setCreating(false)
       return
     }
-    console.log(ipfs, title, description)
-    
     const productId = await createProduct({
-      cover: ipfs.coverIpfs,
+      cover: ipfsCid,
       title,
       description
     })
