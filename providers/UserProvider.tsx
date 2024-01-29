@@ -10,7 +10,7 @@ const UserProvider = ({ children }) => {
   const {push, pathname} = useRouter()
   const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
 
-  const isPrivatePage = pathname !== '/'
+  const isPrivatePage = pathname !== '/' && pathname !== '/services' && pathname !== '/products/digital' && pathname !== '/products/physical'
 
   const loading = !ready
 
