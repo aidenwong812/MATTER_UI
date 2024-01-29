@@ -59,7 +59,7 @@ a {
   -webkit-tap-highlight-color: transparent !important;
 }
 
-.oasis-crossmint-button {
+.matter-crossmint-button {
   background-color: white !important;
   border: 1px solid #CDCDCD !important;
   box-shadow: none !important;
@@ -69,12 +69,12 @@ a {
   position: relative;
 }
 
-.oasis-crossmint-button > img {
+.matter-crossmint-button > img {
   display: none;
   position: relative;
 }
 
-.oasis-crossmint-button::after {
+.matter-crossmint-button::after {
   background-image: url("/images/credit_pay.svg");
   background-size: contain;
   background-repeat: no-repeat !important;
@@ -86,11 +86,11 @@ a {
   left: 45px !important;
 }
 
-.oasis-crossmint-button:hover {
+.matter-crossmint-button:hover {
   opacity: 1 !important;
 }
 
-.oasis-crossmint-button > span {
+.matter-crossmint-button > span {
   color: black !important;
   font-family: 'Hedvig Regular';
   font-size: 16px !important;

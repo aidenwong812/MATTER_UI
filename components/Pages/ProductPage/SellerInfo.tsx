@@ -10,7 +10,7 @@ const SellerInfo = () => (
         className="py-[18px] px-[20px] bg-gray_1
             leading-[120%] text-[16px] rounded-[8px]"
       >
-        Every seller on Oasis is verified.
+        Every seller on Matter is verified.
       </p>
       <div className="my-[24px] flex flex-col gap-y-[8px]">
         <p className="text-[16px] leading-[120%] font-[400]">About the Seller</p>
@@ -21,7 +21,7 @@ const SellerInfo = () => (
         >{`{Seller bio}`}</p>
       </div>
       <div className="text-gray_6 font-[400] leading-[120%]">
-        Verified on Oasis since 00/00/0000
+        Verified on Matter since 00/00/0000
       </div>
     </div>
   </div>

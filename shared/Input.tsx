@@ -10,7 +10,7 @@ interface IInput {
   placeholder?: string
   hookToForm: boolean
   type: "text" | "password" | "url" | "number"
-  clasNameError?: string
+  classNameError?: string
   disabled?: boolean
 }
 
@@ -21,7 +21,7 @@ function Input({
   hookToForm,
   onChange,
   className,
-  clasNameError,
+  classNameError,
   disabled,
   placeholder,
 }: IInput) {
@@ -45,17 +45,14 @@ function Input({
           rounded-[0.5rem] focus:ring-0 focus:!border-gray_6
           w-full h-[47px]
           ${className ? className : ""} ${
-          hookToForm && fieldError && fieldError?.message ? `${clasNameError} border-red` : ""
+          hookToForm && fieldError && fieldError?.message ? `${classNameError} border-red` : ""
         }`}
-        {...(!hookToForm && {
-          value: value,
-          onChange: onChange,
-        })}
         {...(isFullyHooked
           ? formContext.register(name, {
               onChange: (e) => onChange && onChange(e),
             })
           : {})}
+        onChange={(e) => onChange && onChange(e)}
         name={name}
         disabled={disabled}
         placeholder={placeholder || ""}
