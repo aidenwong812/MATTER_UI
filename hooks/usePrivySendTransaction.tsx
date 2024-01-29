@@ -1,3 +1,4 @@
+import { BigNumber } from "ethers"
 import { UnsignedTransactionRequest, usePrivy } from "@privy-io/react-auth"
 import { Interface } from "ethers/lib/utils"
 
@@ -10,7 +11,7 @@ const usePrivySendTransaction = () => {
     abi,
     functionName,
     args,
-    value = "0",
+    value = BigNumber.from("0").toHexString(),
     title = "",
     description = "",
     gasLimit = null,

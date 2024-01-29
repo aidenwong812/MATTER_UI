@@ -1,4 +1,4 @@
-import { usePrivy, useWallets } from "@privy-io/react-auth"
+import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import React, { createContext, useContext, useEffect, useMemo } from "react"
 import useEthPrice from "../hooks/useEthPrice"
@@ -6,7 +6,6 @@ import useEthPrice from "../hooks/useEthPrice"
 const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
-  const { wallets } = useWallets()
   const { user, ready, authenticated } = usePrivy()
   const {push, pathname} = useRouter()
   const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
@@ -14,8 +13,6 @@ const UserProvider = ({ children }) => {
   const isPrivatePage = pathname !== '/'
 
   const loading = !ready
-
-  const connectedWallet = useMemo(() => wallets?.[0]?.address, [wallets])
 
   useEffect(() => {
     if (isPrivatePage && !authenticated && !loading) push("/")
@@ -27,7 +24,6 @@ const UserProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({ 
-      connectedWallet, 
       privyEmail,
       loading,
       getUsdConversion, 
@@ -35,7 +31,6 @@ const UserProvider = ({ children }) => {
       getEthConversion
     }),
     [
-      connectedWallet, 
       privyEmail,
       loading,
       getUsdConversion, 
