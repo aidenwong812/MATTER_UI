@@ -1,16 +1,20 @@
 import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
-import React, { createContext, useContext, useEffect, useMemo } from "react"
 import useEthPrice from "../hooks/useEthPrice"
+import { createContext, useMemo, useEffect, useContext } from "react"
 
 const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
   const { user, ready, authenticated } = usePrivy()
-  const {push, pathname} = useRouter()
+  const { pathname, push } = useRouter()
   const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
 
-  const isPrivatePage = pathname !== '/' && pathname !== '/services' && pathname !== '/products/digital' && pathname !== '/products/physical'
+  const isPrivatePage =
+    pathname !== "/" &&
+    pathname !== "/services" &&
+    pathname !== "/products/digital" &&
+    pathname !== "/products/physical"
 
   const loading = !ready
 
@@ -23,20 +27,14 @@ const UserProvider = ({ children }) => {
   }, [user])
 
   const value = useMemo(
-    () => ({ 
+    () => ({
       privyEmail,
       loading,
-      getUsdConversion, 
+      getUsdConversion,
       ethPrice,
-      getEthConversion
+      getEthConversion,
     }),
-    [
-      privyEmail,
-      loading,
-      getUsdConversion, 
-      ethPrice,
-      getEthConversion
-    ],
+    [privyEmail, loading, getUsdConversion, ethPrice, getEthConversion],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
