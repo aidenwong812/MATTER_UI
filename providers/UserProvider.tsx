@@ -8,7 +8,7 @@ const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
   const [privyEmail, setPrivyEmail] = useState("")
-  const { user, authenticated } = usePrivy()
+  const { user, authenticated, ready } = usePrivy()
   const [userName, setUserName] = useState("")
   const [userEmail, setUserEmail] = useState("")
   const [userPFP, setUserPFP] = useState("")
@@ -22,7 +22,8 @@ const UserProvider = ({ children }) => {
     setUserEmail(userData.email)
     setUserPFP(getIpfsLink(userData.pfp))
   }, [authenticated, privyEmail])
-  
+
+  const loading = !ready
 
   const isPrivatePage =
     pathname !== "/" &&
@@ -30,7 +31,10 @@ const UserProvider = ({ children }) => {
     pathname !== "/products/digital" &&
     pathname !== "/products/physical"
 
-  
+  useEffect(() => {
+    if (isPrivatePage && !authenticated && !loading) push("/")
+  }, [isPrivatePage, authenticated, loading])
+
   useEffect(() => {
     getUserData()
   }, [getUserData])
