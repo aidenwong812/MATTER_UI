@@ -14,15 +14,9 @@ const useCreate1155Contract = () => {
   const { sendTransaction } = usePrivySendTransaction()
   const { connectedWallet } = useConnectedWallet()
 
-  const create1155Contract = async (
-    chainId = CHAIN_ID,
-    cover,
-    title,
-    description,
-    fundsRecipient,
-  ) => {
+  const create1155Contract = async (chainId = CHAIN_ID, cover, title, description) => {
     try {
-      const ipfs = await store(cover, title, description, fundsRecipient)
+      const ipfsCid = await store(cover, title, description, connectedWallet)
       const adminPermissionArgs = [0, connectedWallet, 2]
       const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
       const minterPermissionCall = new Interface(dropAbi).encodeFunctionData(
@@ -36,20 +30,20 @@ const useCreate1155Contract = () => {
       const setupActions = [adminPermissionCall, minterPermissionCall]
 
       const args = [
-        `ipfs://${ipfs}`,
+        `ipfs://${ipfsCid}`,
         title,
         {
           royaltyRecipient: "0x0000000000000000000000000000000000000000",
           royaltyMintSchedule: 0,
           royaltyBPS: 0,
         },
-        fundsRecipient,
+        connectedWallet,
         setupActions,
       ]
 
       if (authenticated) {
         const factoryAddress = getZora1155ProxyAddress(chainId)
-        const response: any = await sendTransaction(
+        await sendTransaction(
           factoryAddress,
           chainId,
           abi,
@@ -59,12 +53,11 @@ const useCreate1155Contract = () => {
           "Create",
           "Matter",
         )
-        return { error: response?.error }
+        return `ipfs://${ipfsCid}`
       }
 
-      return true
+      return { error: true }
     } catch (err) {
-      console.log(err)
       handleTxError(err)
       return { error: err }
     }
