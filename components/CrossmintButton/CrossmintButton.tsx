@@ -27,7 +27,7 @@ const CrossmintButton = ({ buttonLabel = "Pay with Credit or Debit" }) => {
       getButtonText={(connecting) => (connecting ? "Connecting" : buttonLabel)}
       mintConfig={mintConfig}
       paymentMethod="fiat"
-      className="oasis-crossmint-button"
+      className="matter-crossmint-button"
       mintTo={connectedWallet}
       successCallbackURL={
         typeof window !== "undefined" && `${window.location.origin}/checkout/success`
