@@ -20,8 +20,8 @@ const CartList = () => {
         </div>
       )}
       <div
-        className="w-full flex flex-col gap-y-[24px]
-              px-[20px] md:px-0 border-t border-t-gray_3 pt-[24px]"
+        className="w-full flex flex-col
+              px-[20px] md:px-0 border-t border-t-gray_3"
       >
         {Array(3)
           .fill("0")

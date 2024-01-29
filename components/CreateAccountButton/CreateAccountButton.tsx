@@ -1,15 +1,10 @@
-import { usePrivy } from "@privy-io/react-auth"
+import { useRouter } from "next/router"
 
 const CreateAccountButton = () => {
-  const { authenticated, logout, login } = usePrivy()
+  const { push } = useRouter()
 
   const handleClick = () => {
-    if (authenticated) {
-      logout()
-      return
-    }
-
-    login()
+    push("/account")
   }
 
   return (
