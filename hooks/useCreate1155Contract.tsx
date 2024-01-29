@@ -4,7 +4,7 @@ import abi from "../lib/abi/abi-Zora1155CreatorProxy.json"
 import dropAbi from "../lib/abi/abi-ERC1155Drop.json"
 import handleTxError from "../lib/handleTxError"
 import usePrivySendTransaction from "./usePrivySendTransaction"
-import { store } from "../lib/ipfs"
+import { store } from "onchain-magic"
 import getZora1155ProxyAddress from "../lib/zora/getZora1155ProxyAddress"
 import { CHAIN_ID } from "../lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
@@ -16,7 +16,7 @@ const useCreate1155Contract = () => {
 
   const create1155Contract = async (chainId = CHAIN_ID, cover, title, description) => {
     try {
-      const ipfs = await store(cover, title, description)
+      const ipfsCid = await store(cover, title, description, connectedWallet)
       const adminPermissionArgs = [0, connectedWallet, 2]
       const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
       const minterPermissionCall = new Interface(dropAbi).encodeFunctionData(
@@ -30,7 +30,7 @@ const useCreate1155Contract = () => {
       const setupActions = [adminPermissionCall, minterPermissionCall]
 
       const args = [
-        `ipfs://${ipfs.contractIpfs}`,
+        `ipfs://${ipfsCid}`,
         title,
         {
           royaltyRecipient: "0x0000000000000000000000000000000000000000",
