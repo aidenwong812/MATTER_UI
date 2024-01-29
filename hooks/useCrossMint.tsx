@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 
-const useCrossMint = ({ cart, totalPrice }) => {
+const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { user } = usePrivy()

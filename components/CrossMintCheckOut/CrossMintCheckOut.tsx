@@ -5,10 +5,10 @@ import useDeliveryFormData from "../../hooks/useDeliveryFormData"
 
 const CrossMintCheckOut = ({ cart, totalPrice }) => {
   const { isCompletedDelivery } = useDeliveryFormData()
-  const { mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMint({
+  const { mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMint(
     cart,
     totalPrice,
-  })
+  )
 
   return (
     <>
