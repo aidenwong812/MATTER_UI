@@ -1,7 +1,7 @@
 import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import useEthPrice from "../hooks/useEthPrice"
-import { createContext, useMemo, useEffect, useContext } from 'react'
+import { createContext, useMemo, useEffect, useContext } from "react"
 
 const UserContext = createContext(null)
 
@@ -23,20 +23,14 @@ const UserProvider = ({ children }) => {
   }, [user])
 
   const value = useMemo(
-    () => ({ 
+    () => ({
       privyEmail,
       loading,
       getUsdConversion,
       ethPrice,
       getEthConversion,
     }),
-    [
-      privyEmail,
-      loading,
-      getUsdConversion, 
-      ethPrice,
-      getEthConversion
-    ],
+    [privyEmail, loading, getUsdConversion, ethPrice, getEthConversion],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
