@@ -5,7 +5,6 @@ import dropAbi from "../lib/abi/abi-ERC1155Drop.json"
 import handleTxError from "../lib/handleTxError"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import { store } from "onchain-magic"
-import { getZoraBlob } from "../lib/getZoraBlob"
 import getZora1155ProxyAddress from "../lib/zora/getZora1155ProxyAddress"
 import { CHAIN_ID } from "../lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
@@ -23,12 +22,7 @@ const useCreate1155Contract = () => {
     fundsRecipient,
   ) => {
     try {
-      const ipfs = await store(
-        cover || getZoraBlob(fundsRecipient),
-        title,
-        description,
-        fundsRecipient,
-      )
+      const ipfs = await store(cover, title, description, fundsRecipient)
       const adminPermissionArgs = [0, connectedWallet, 2]
       const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
       const minterPermissionCall = new Interface(dropAbi).encodeFunctionData(
