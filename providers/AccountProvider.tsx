@@ -29,7 +29,7 @@ const AccountFormProvider = ({ children }) => {
       privy_email: userData.privyEmail,
       email: userEmail,
       user_name: userName,
-      ...(pfp && { pfp }),
+      ...(pfp && { pfp: `ipfs://${pfp}` }),
     })
 
     await userData.getUserData()
