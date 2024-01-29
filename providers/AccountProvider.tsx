@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react"
-import createUser from "../lib/firebase/createUser"
 import { useUserProvider } from "./UserProvider"
 import { uploadToIpfs } from "onchain-magic"
 import createCustomer from "../lib/firebase/createCustomer"
