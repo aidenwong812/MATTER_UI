@@ -31,7 +31,7 @@ const useCrossMint = (cart, totalPrice) => {
       }
     }
     return null
-  }, [totalPriceEth, multicalls, connectedWallet])
+  }, [totalPriceEth, multicalls, connectedWallet, cart, totalPrice])
 
   const handlePayment = (event) => {
     switch (event.type) {
