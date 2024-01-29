@@ -6,7 +6,7 @@ const AnimationUpload = () => (
     {({ files }) => (
       <button
         type="button"
-        className="border border-gray_3 p-[40px] rounded-[14px] w-full aspect-[1/1]
+        className="border border-gray_3 p-[40px] rounded-[14px] w-full md:w-[400px] aspect-[1/1]
               flex flex-col items-center"
       >
         <Image
@@ -19,7 +19,8 @@ const AnimationUpload = () => (
           className="text-[12px]
               text-center"
         >
-          Drag and drop or choose up file
+          Drag and drop or choose a file. Image, video, audio, PDF, GLB, and HTML supported. Max
+          Size 2GB.
         </p>
       </button>
     )}

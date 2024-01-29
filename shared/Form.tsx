@@ -29,9 +29,7 @@ function Form({
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       await formMethods.handleSubmit(onSubmit, onError)(event)
-    } catch (err) {
-      console.error(err)
-    }
+    } catch (err) {}
   }
 
   return (
