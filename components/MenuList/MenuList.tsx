@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import Link from "next/link"
 import Icon from "../../shared/Icon"
 import Buttons from "../Header/Buttons"
 
@@ -30,9 +31,15 @@ const MenuList = () => {
             className="border-none focus:ring-0 px-1"
           />
         </div>
-        <p className={navClasses}>Services</p>
-        <p className={navClasses}>Digital Items</p>
-        <p className={navClasses}>Physical Products</p>
+        <Link href="/services">
+          <p className={navClasses}>Services</p>
+        </Link>
+        <Link href="/products/digital">
+          <p className={navClasses}>Digital Items</p>
+        </Link>
+        <Link href="/products/physical">
+          <p className={navClasses}>Physical Products</p>
+        </Link>
         <div className={`${navClasses} !border-none flex gap-x-[10px]`}>
           <Buttons />
         </div>

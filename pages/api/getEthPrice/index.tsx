@@ -9,7 +9,6 @@ const getEthPrice = async () => {
     )
   } catch (ex) {
     response = { data: false }
-    console.error(ex)
   }
   return response
 }
