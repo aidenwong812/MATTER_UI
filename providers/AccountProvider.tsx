@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react"
 import createUser from "../lib/firebase/createUser"
 import { useUserProvider } from "./UserProvider"
-import uploadPfpToIpfs from "../lib/uploadPfpToIpfs"
+import { uploadToIpfs } from "onchain-magic"
+import createCustomer from "../lib/firebase/createCustomer"
 
 export enum Screen {
   SELECT_UI = "SELECT_UI",
@@ -22,9 +23,9 @@ const AccountFormProvider = ({ children }) => {
   const handleUpdate = async () => {
     setLoading(true)
     let pfp = ""
-    if (userPFP) pfp = await uploadPfpToIpfs(userPFP)
+    if (userPFP) pfp = await uploadToIpfs(userPFP)
 
-    await createUser({
+    await createCustomer({
       privy_email: userData.privyEmail,
       email: userEmail,
       user_name: userName,

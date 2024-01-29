@@ -2,7 +2,7 @@ import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import { createContext, useMemo, useEffect, useContext, useState, useCallback } from "react"
 import { getIpfsLink } from "onchain-magic"
-import getUser from "../lib/firebase/getUser"
+import getCustomer from "../lib/firebase/getCustomer"
 
 const UserContext = createContext(null)
 
@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
 
   const getUserData = useCallback(async () => {
     if (!authenticated || !privyEmail) return
-    const userData = (await getUser(privyEmail)) as any
+    const userData = (await getCustomer(privyEmail)) as any
     if (!userData) return
     setUserName(userData.user_name)
     setUserEmail(userData.email)
