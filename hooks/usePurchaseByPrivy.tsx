@@ -16,6 +16,8 @@ const usePurchaseByPrivy = () => {
   const mintData = useMemo(() => getMintData(connectedWallet), [connectedWallet])
 
   const purchaseByPrivy = async (cart, totalPrice) => {
+    if (!cart) return
+
     const calls = getMulticallFromCart(cart, mintData)
     if (!prepare()) return
     try {

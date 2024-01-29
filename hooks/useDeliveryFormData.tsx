@@ -1,13 +1,11 @@
 import { useState } from "react"
 
-export enum MODAL_SCREEN {
-  INFORMATION_SELECT = "INFORMATION SELECT",
-  DELIVERY_ADDRESS = "DELIVERY_ADDRESS",
-  CARD_DETAIL = "CARD_DETAIL",
+export enum FORM_MODE {
+  EDIT_MODE = "EDIT_MODE",
+  VISIBLE_MODE = "VISIBLE_MODE",
 }
 
-const useCreditCardModal = () => {
-  const [modalScreen, setModalScreen] = useState(MODAL_SCREEN.INFORMATION_SELECT)
+const useDeliveryFormData = () => {
   const [deliveryFirstName, setDeliveryFirstName] = useState("")
   const [deliveryLastName, setDeliveryLastName] = useState("")
   const [deliveryAddress1, setDeliveryAddress1] = useState("")
@@ -16,10 +14,9 @@ const useCreditCardModal = () => {
   const [deliveryState, setDeliveryState] = useState("")
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
+  const [formMode, setFormMode] = useState(FORM_MODE.VISIBLE_MODE)
 
   return {
-    modalScreen,
-    setModalScreen,
     deliveryFirstName,
     setDeliveryPhoneNumber,
     setDeliveryFirstName,
@@ -36,7 +33,9 @@ const useCreditCardModal = () => {
     deliveryCountryCode,
     setDeliveryCountryCode,
     deliveryPhoneNumber,
+    formMode,
+    setFormMode,
   }
 }
 
-export default useCreditCardModal
+export default useDeliveryFormData

@@ -1,14 +1,20 @@
-import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
+import { useMemo } from "react"
+import { formatEther } from "viem"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
-import Input from "../../shared/Input"
-import useCrossMint from "../../hooks/useCrossMint"
+import useEthPrice from "../../hooks/useEthPrice"
 
-const InformationSelect = () => {
-  const { usdPrice, mintConfig, receiptEmail, setReceiptEmail, handlePayment } = useCrossMint()
+const CheckOutDetail = ({ totalPrice }) => {
+  const { getUsdConversion } = useEthPrice()
+
+  const usdPrice = useMemo(() => {
+    if (!totalPrice) return null
+    return getUsdConversion(formatEther(totalPrice.toBigInt()))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalPrice])
 
   return (
-    <div className="bg-white w-full py-[40px] flex flex-col items-center">
+    <>
       <Image
         link="/images/matter.svg"
         blurLink="/images/matter.svg"
@@ -45,31 +51,8 @@ const InformationSelect = () => {
       >
         Card Details
       </p>
-      <div className="w-full flex-col items-center flex px-[24px]">
-        <Input
-          value={receiptEmail}
-          className="w-[294px] mb-[0.82rem]"
-          onChange={(e) => setReceiptEmail(e.target.value)}
-        />
-        {mintConfig && (
-          <CrossmintPaymentElement
-            mintConfig={mintConfig}
-            projectId={process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID}
-            collectionId={process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}
-            environment="staging"
-            paymentMethod="fiat"
-            recipient={{
-              email: receiptEmail,
-            }}
-            uiConfig={{
-              borderRadius: "8px",
-            }}
-            onEvent={handlePayment}
-          />
-        )}
-      </div>
-    </div>
+    </>
   )
 }
 
-export default InformationSelect
+export default CheckOutDetail
