@@ -16,20 +16,9 @@ const useCrossMint = ({ cart, totalPrice }) => {
   const [receiptEmail, setReceiptEmail] = useState("")
   const { getUsdConversion } = useEthPrice()
 
-  const multicalls = useMemo(() => {
-    if (!cart) return []
-    return getMulticallFromCart(cart, getMintData(connectedWallet))
-  }, [cart])
-
-  const totalPriceEth = useMemo(() => {
-    if (!totalPrice) return
-    return ethers.utils.formatEther(totalPrice)
-  }, [totalPrice])
-
-  const usdPrice = useMemo(() => {
-    if (!totalPrice) return
-    return getUsdConversion(formatEther(totalPrice.toBigInt()))
-  }, [totalPrice])
+  const multicalls = cart && getMulticallFromCart(cart, getMintData(connectedWallet))
+  const totalPriceEth = totalPrice && ethers.utils.formatEther(totalPrice)
+  const usdPrice = totalPrice && getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   const mintConfig = useMemo(() => {
     if (totalPriceEth && multicalls && connectedWallet) {
