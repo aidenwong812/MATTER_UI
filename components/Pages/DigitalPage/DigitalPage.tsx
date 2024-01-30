@@ -22,7 +22,7 @@ const DigitalPage = () => {
             on Matter.
           </p>
         ) : (
-          <GradientText className="text-[70px]">Shop digital items on Oasis</GradientText>
+          <GradientText className="text-[70px]">Shop digital items on Matter.</GradientText>
         )}
         <Navbar />
         <p
