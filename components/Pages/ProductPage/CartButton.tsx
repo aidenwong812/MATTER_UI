@@ -12,7 +12,7 @@ const CartButton = () => {
       >
         <button
           type="button"
-          className="w-[327px] h-[56px] bg-black rounded-full
+          className="w-full xl:w-[327px] h-[56px] bg-black rounded-full
             flex gap-x-[10px] items-center justify-center"
           onClick={addCart}
           disabled={loading}
