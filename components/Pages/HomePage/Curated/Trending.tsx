@@ -1,5 +1,5 @@
 import useIsMobile from "../../../../hooks/useIsMobile"
-import TrendingList from "./TrendingList"
+import TrendingList from "../TrendingList/TrendingList"
 import TrendingSlides from "./TrendingSlides"
 
 const Trending = () => {
