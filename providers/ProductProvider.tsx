@@ -1,19 +1,47 @@
-import React, { createContext, useContext, useMemo } from "react"
-import { demoProduct } from "../components/Pages/ProductPage/demoProduct"
-import { BigNumber } from "ethers"
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import createCart from "../lib/firebase/createCart"
+import { useRouter } from "next/router"
+import getDocument from "../lib/firebase/getDocument"
 
 const ProductContext = createContext(null)
 
 const ProductProvider = ({ children }) => {
-  const product = [demoProduct]
-  const productPrice = BigNumber.from(demoProduct.price)
+  const { query, push } = useRouter()
+  const productId = query.id
+  const [productData, setProductData] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const getProductData = useCallback(async () => {
+    if (!productId) return null
+
+    const data = await getDocument("products", productId)
+    setProductData(data)
+  }, [productId])
+
+  const addCart = async () => {
+    if (!productId && !productData) return
+
+    setLoading(true)
+    await createCart({
+      productId: productData?.id,
+      sellerId: productData?.customerId,
+    })
+    setLoading(false)
+    push("/checkout")
+  }
+
+  useEffect(() => {
+    getProductData()
+  }, [getProductData])
 
   const value = useMemo(
     () => ({
-      product,
-      productPrice,
+      addCart,
+      productData,
+      loading,
+      setLoading,
     }),
-    [product, productPrice],
+    [setLoading, loading, productData, addCart],
   )
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
