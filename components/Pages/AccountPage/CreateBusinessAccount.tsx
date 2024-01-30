@@ -1,6 +1,6 @@
 import Image from "../../../shared/Image"
 
-const CreateBusinessAccount = () => (
+const CreateBusinessAccount = ({ onClick }) => (
   <div
     className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
         py-[40px] px-[26px] flex flex-col items-center bg-white"
@@ -24,6 +24,7 @@ const CreateBusinessAccount = () => (
       type="button"
       className="border border-gray_2 rounded-full
                         py-[10px] px-[20px]"
+      onClick={onClick}
     >
       Create a Business Account
     </button>

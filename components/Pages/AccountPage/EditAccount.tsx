@@ -1,6 +1,7 @@
 import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
-import { Screen, useAccountForm } from "../../../providers/AccountProvider"
+import { useAccountForm } from "../../../providers/AccountProvider"
+import { Screen } from "../../../hooks/usePersonalAccount"
 import { useUserProvider } from "../../../providers/UserProvider"
 import Icon from "../../../shared/Icon"
 import Image from "../../../shared/Image"
