@@ -12,7 +12,7 @@ import { useUserProvider } from "../providers/UserProvider"
 const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
-  const { privyEmail } = useUserProvider()
+  const { userData } = useUserProvider()
   const [receiptEmail, setReceiptEmail] = useState("")
   const { getUsdConversion } = useEthPrice()
 
@@ -47,8 +47,8 @@ const useCrossMint = (cart, totalPrice) => {
   }
 
   useEffect(() => {
-    if (privyEmail) setReceiptEmail(privyEmail)
-  }, [privyEmail])
+    if (userData?.privy_email) setReceiptEmail(userData?.privy_email)
+  }, [userData])
 
   return {
     mintConfig,

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { useUserProvider } from "../providers/UserProvider"
+import createBusinessAccount from "../lib/firebase/createBusiness"
+import { useRouter } from "next/router"
 
 const useBusinessAccount = ({ setLoading }) => {
-  const { privyEmail } = useUserProvider()
+  const { userData } = useUserProvider()
   const [isEditableEmail, setIsEditableEmail] = useState(false)
   const [emailForVerify, setEmailForVerify] = useState(false)
   const [verifyCode, setVerifyCode] = useState("")
@@ -10,15 +12,27 @@ const useBusinessAccount = ({ setLoading }) => {
   const [businessSite, setBusinessSite] = useState("")
   const [isAgreeForUpdate, setIsAgreeForUpdate] = useState(false)
   const [isApprovedPrivacy, setIsApprovedPrivacy] = useState(false)
+  const { push } = useRouter()
 
-  const handleCreateBusinessAccount = () => {
+  const handleCreateBusinessAccount = async () => {
     setLoading(true)
+    await createBusinessAccount(
+      {
+        businessName: publicBusinessName,
+        website: businessSite,
+        customerId: userData?.id,
+      },
+      userData?.id,
+    )
+    push("/dashboard")
     setLoading(false)
   }
 
   useEffect(() => {
-    if (privyEmail) setEmailForVerify(privyEmail)
-  }, [privyEmail])
+    setEmailForVerify(userData?.privy_email)
+    setBusinessSite(userData?.business?.website)
+    setPublicBusinessName(userData?.business?.businessName)
+  }, [userData])
 
   return {
     isEditableEmail,

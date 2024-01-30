@@ -64,7 +64,7 @@ const InputForm = () => {
       <Input
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
-        placeholder="Public Business Name"
+        placeholder="User Name"
         className="!border-gray_6 !bg-white"
         id="username"
         name="username"

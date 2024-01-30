@@ -1,7 +1,6 @@
 import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
 import { createContext, useMemo, useEffect, useContext, useState, useCallback } from "react"
-import { getIpfsLink } from "onchain-magic"
 import getCustomer from "../lib/firebase/getCustomer"
 
 const UserContext = createContext(null)
@@ -9,18 +8,14 @@ const UserContext = createContext(null)
 const UserProvider = ({ children }) => {
   const [privyEmail, setPrivyEmail] = useState("")
   const { user, authenticated, ready } = usePrivy()
-  const [userName, setUserName] = useState("")
-  const [userEmail, setUserEmail] = useState("")
-  const [userPFP, setUserPFP] = useState("")
+  const [userData, setUserData] = useState(null)
   const { pathname, push } = useRouter()
 
   const getUserData = useCallback(async () => {
     if (!authenticated || !privyEmail) return
-    const userData = (await getCustomer(privyEmail)) as any
-    if (!userData) return
-    setUserName(userData.user_name)
-    setUserEmail(userData.email)
-    setUserPFP(getIpfsLink(userData.pfp))
+    const data = (await getCustomer(privyEmail)) as any
+    if (!data) return
+    setUserData(data)
   }, [authenticated, privyEmail])
 
   const loading = !ready
@@ -47,11 +42,9 @@ const UserProvider = ({ children }) => {
     () => ({
       privyEmail,
       getUserData,
-      userName,
-      userEmail,
-      userPFP,
+      userData,
     }),
-    [userEmail, userName, privyEmail, getUserData, userPFP],
+    [userData, privyEmail, getUserData],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>

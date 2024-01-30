@@ -9,7 +9,7 @@ export enum Screen {
 }
 
 const usePersonalAccount = ({ setLoading }) => {
-  const userData = useUserProvider()
+  const { userData } = useUserProvider()
 
   const [userPFP, setUserPFP] = useState("")
   const [userPFPSrc, setUserPFPSrc] = useState("")
@@ -35,9 +35,9 @@ const usePersonalAccount = ({ setLoading }) => {
   }
 
   useEffect(() => {
-    setUserName(userData.userName)
-    setUserEmail(userData.userEmail)
-    setUserPFPSrc(userData.userPFP)
+    setUserName(userData?.user_name)
+    setUserEmail(userData?.email)
+    setUserPFPSrc(userData?.pfp)
   }, [userData])
 
   return {

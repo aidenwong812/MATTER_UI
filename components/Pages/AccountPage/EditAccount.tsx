@@ -7,7 +7,7 @@ import Icon from "../../../shared/Icon"
 import Image from "../../../shared/Image"
 
 const EditAccount = () => {
-  const { privyEmail, userPFP, userName } = useUserProvider()
+  const { userData } = useUserProvider()
   const { setScreenStatus } = useAccountForm()
   const { logout } = usePrivy()
   const { push } = useRouter()
@@ -26,9 +26,9 @@ const EditAccount = () => {
         className="flex bg-gray_10 justify-center items-center
             w-[84px] rounded-full aspect-[1/1] mb-[32px]"
       >
-        {userPFP ? (
+        {userData?.pfp ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={userPFP} alt="not found pfp" className="rounded-full" />
+          <img src={userData?.pfp} alt="not found pfp" className="rounded-full" />
         ) : (
           <Icon name="camera" className="text-white" />
         )}
@@ -37,10 +37,10 @@ const EditAccount = () => {
         className="leading-[110%] tracking-[-0.7px]
             text-[28px] font-[400] text-center"
       >
-        {userName}
+        {userData?.first_name} {userData?.last_name}
       </p>
       <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
-        {privyEmail}
+        {userData?.privy_email}
       </p>
       <button
         type="button"
