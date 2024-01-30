@@ -1,5 +1,5 @@
-import LandingPage from "../components/Pages/LandingPage"
+import HomePage from "../components/Pages/HomePage"
 
-const Landing = () => <LandingPage />
+const Home = () => <HomePage />
 
-export default Landing
+export default Home

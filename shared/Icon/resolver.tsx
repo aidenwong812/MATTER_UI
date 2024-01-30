@@ -3,10 +3,12 @@ import { FiShoppingCart } from "react-icons/fi"
 import { BsPatchCheckFill } from "react-icons/bs"
 import { FaCheck, FaCameraRetro } from "react-icons/fa"
 import { FiUser } from "react-icons/fi"
-import { FaBoxArchive } from "react-icons/fa6"
+import { FaBoxArchive, FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6"
 import { IoMdExit } from "react-icons/io"
 
 export const Icons = {
+  arrowLeft: FaArrowLeftLong,
+  arrowRight: FaArrowRightLong,
   exit: IoMdExit,
   search: IoMdSearch,
   cart: FiShoppingCart,
