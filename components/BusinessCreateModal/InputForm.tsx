@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Input from "../../shared/Input"
 import { useAccountForm } from "../../providers/AccountProvider"
 import Form from "../../shared/Form"
@@ -97,13 +98,21 @@ const InputForm = () => {
           checked={isApprovedPrivacy}
         />
         <p className="text-[16px] leading-[150%] tracking-[-0.384px]">
-          I agree to the Matter Privacy Policy and Terms of Use.
+          I agree to the Matter{" "}
+          <Link href="/privacy">
+            <span className="underline">Privacy Policy</span>
+          </Link>{" "}
+          and
+          <Link href="/terms">
+            <span className="underline"> Terms of Use</span>
+          </Link>
+          .
         </p>
       </div>
       <button
         type="submit"
         className="border border-black rounded-full bg-black
-            w-[323px] py-[15px] text-white"
+            w-full py-[15px] text-white"
         disabled={loading || (!isAgreeForUpdate && !isApprovedPrivacy)}
       >
         Create Account

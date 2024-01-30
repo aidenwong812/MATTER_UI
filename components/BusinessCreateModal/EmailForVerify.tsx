@@ -14,9 +14,7 @@ const EmailForVerify = () => {
                 !text-gray_6 focus:!ring-0 focus:!boder-gray_2 focus:!outline-none"
         />
       ) : (
-        <p className="text-[16px] leading-[100%] tracking-[-0.4px] pl-[5px] text-gray_6">
-          {emailForVerify}
-        </p>
+        <p className="text-[16px] leading-[100%] tracking-[-0.4px] text-gray_6">{emailForVerify}</p>
       )}
       <button
         type="button"
