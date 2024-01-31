@@ -47,15 +47,12 @@ function Input({
           ${className ? className : ""} ${
           hookToForm && fieldError && fieldError?.message ? `${classNameError} border-red` : ""
         }`}
-        {...(!hookToForm && {
-          value: value,
-          onChange: onChange,
-        })}
         {...(isFullyHooked
           ? formContext.register(name, {
               onChange: (e) => onChange && onChange(e),
             })
           : {})}
+        onChange={(e) => onChange && onChange(e)}
         name={name}
         disabled={disabled}
         placeholder={placeholder || ""}
