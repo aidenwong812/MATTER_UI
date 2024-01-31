@@ -7,6 +7,7 @@ import useIsMobile from "../../../hooks/useIsMobile"
 import Curated from "./Curated"
 import data from "./data.json"
 import Trending from "./Trending"
+import Newest from "./Newest"
 
 const HomePage = () => {
   const isMobile = useIsMobile()
@@ -32,6 +33,7 @@ const HomePage = () => {
         <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         {selectedTab === data[0].value && <Curated />}
         {selectedTab === data[1].value && <Trending />}
+        {selectedTab === data[2].value && <Newest />}
       </div>
     </Layout>
   )
