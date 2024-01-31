@@ -1,3 +1,3 @@
-import NewestList from "./NewestList";
+import NewestList from "./NewestList"
 
 export default NewestList

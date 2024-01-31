@@ -1,3 +1,3 @@
-import Newest from "./Newest";
+import Newest from "./Newest"
 
 export default Newest
