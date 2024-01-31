@@ -19,7 +19,7 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
         visibility: isVisible ? "visible" : "hidden",
       }}
       initial={{
-        visibility: "visible",
+        visibility: "hidden",
       }}
       transition={{
         delay: isVisible ? 0 : 0.5,
@@ -41,11 +41,10 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
           y: isVisible ? 0 : 100,
         }}
         initial={{
-          opacity: isVisible ? 0 : 1,
-          y: isVisible ? 100 : 0,
+          opacity: 0,
         }}
         transition={{
-          duration: 1,
+          duration: 0.5,
         }}
       >
         {children}

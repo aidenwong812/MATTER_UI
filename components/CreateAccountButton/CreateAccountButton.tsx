@@ -1,18 +1,13 @@
-import { useRouter } from "next/router"
+import { usePrivy } from "@privy-io/react-auth"
 
 const CreateAccountButton = () => {
-  const { push } = useRouter()
-
-  const handleClick = () => {
-    push("/account")
-  }
-
+  const { login } = usePrivy()
   return (
     <button
       type="button"
       className="border border-gray_2 rounded-full
               py-[5px] px-[20px]"
-      onClick={handleClick}
+      onClick={login}
     >
       Create Account
     </button>
