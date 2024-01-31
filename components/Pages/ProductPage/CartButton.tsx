@@ -9,7 +9,7 @@ const CartButton = () => {
   const handleClick = async () => {
     if (authenticated) {
       await addCart()
-      toast.success("Added To Cart.")
+      toast.success("Added to cart.")
       return
     }
     login()
