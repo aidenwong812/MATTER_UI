@@ -13,7 +13,7 @@ const AccountPage = () => {
   const [isOpenBusinessModal, setIsOpenBusinessModal] = useState(false)
 
   return (
-    <Layout type="base" className="!bg-[url('/images/create-background.png')] !bg-center !bg-cover">
+    <Layout type="base" className="!bg-gray_1">
       <SeoHead title="Matter | Account" />
       <div
         className="w-full xl:w-[1440px] lg:w-[1280px] md:w-[1024px] min-h-screen
