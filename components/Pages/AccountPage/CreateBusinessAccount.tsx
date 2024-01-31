@@ -12,7 +12,7 @@ const CreateBusinessAccount = ({ onClick }) => (
         containerClasses="w-[19px] aspect-[19/14]"
         alt="not found icon"
       />
-      <p className="tracking-[6px] font-[400] text-[12px] leading-[120%]">Business</p>
+      <p className="tracking-[6px] font-[400] text-[12px] leading-[120%]">BUSINESS</p>
     </div>
     <p
       className="text-[28px] font-[400] leading-[110%] tracking-[-0.7px]
