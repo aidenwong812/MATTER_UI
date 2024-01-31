@@ -9,7 +9,10 @@ const createCustomer = async (customerData) => {
       timestamp: Date.now(),
     }
 
-    const q = query(collection(db, "customers"), where("email", "==", customerData.email))
+    const q = query(
+      collection(db, "customers"),
+      where("privy_email", "==", customerData.privy_email),
+    )
 
     const querySnapshot = await getDocs(q)
 

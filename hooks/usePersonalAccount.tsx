@@ -25,8 +25,8 @@ const usePersonalAccount = ({ setLoading }) => {
 
     const response: any = await createCustomer({
       privy_email: privyEmail,
-      email: userEmail,
-      user_name: userName,
+      ...(userEmail && { email: userEmail }),
+      ...(userName && { user_name: userName }),
       ...(pfp && { pfp: `ipfs://${pfp}` }),
     })
 
