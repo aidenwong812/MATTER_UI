@@ -42,7 +42,7 @@ const usePersonalAccount = ({ setLoading }) => {
 
   useEffect(() => {
     setUserName(userData?.user_name)
-    setUserEmail(userData?.email)
+    setUserEmail(userData?.email || privyEmail)
     setUserPFPSrc(getIpfsLink(userData?.pfp))
   }, [userData])
 
