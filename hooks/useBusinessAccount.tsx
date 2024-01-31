@@ -27,7 +27,7 @@ const useBusinessAccount = ({ setLoading }) => {
       },
       userData?.id,
     )
-    toast.success("Successfully applied. Typically review time: 2-3 Days.")
+    toast.success("Successfully applied. Typical review time: 2-3 Days.")
     push("/dashboard")
     setLoading(false)
   }
