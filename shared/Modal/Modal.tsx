@@ -42,10 +42,9 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
         }}
         initial={{
           opacity: 0,
-          y: isVisible ? 100 : 0,
         }}
         transition={{
-          duration: 1,
+          duration: 0.5,
         }}
       >
         {children}
