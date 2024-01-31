@@ -10,7 +10,7 @@ export enum Screen {
 }
 
 const usePersonalAccount = ({ setLoading }) => {
-  const { userData, getUserData } = useUserProvider()
+  const { userData, getUserData, privyEmail } = useUserProvider()
 
   const [userPFP, setUserPFP] = useState("")
   const [userPFPSrc, setUserPFPSrc] = useState("")
@@ -24,7 +24,7 @@ const usePersonalAccount = ({ setLoading }) => {
     if (userPFP) pfp = await uploadToIpfs(userPFP)
 
     const response: any = await createCustomer({
-      privy_email: userData.privy_email,
+      privy_email: privyEmail,
       email: userEmail,
       user_name: userName,
       ...(pfp && { pfp: `ipfs://${pfp}` }),
