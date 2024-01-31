@@ -33,7 +33,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        hedvig: ["Hedvig Regular", "sans-serif"]
+        hedvig: ["Hedvig Regular", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"]
       },
       screens: {
         ios : '320px',
