@@ -1,13 +1,15 @@
 import { usePrivy } from "@privy-io/react-auth"
+import { toast } from "react-toastify"
 import { useProduct } from "../../../providers/ProductProvider"
 
 const CartButton = () => {
   const { addCart, loading } = useProduct()
   const { authenticated, login } = usePrivy()
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (authenticated) {
-      addCart()
+      await addCart()
+      toast.success("Add To Cart!")
       return
     }
     login()
