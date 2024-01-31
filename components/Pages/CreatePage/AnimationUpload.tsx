@@ -6,13 +6,13 @@ const AnimationUpload = () => (
     {({ files }) => (
       <button
         type="button"
-        className="border border-gray_3 p-[40px] rounded-[14px] w-full md:w-[400px] aspect-[1/1]
-              flex flex-col items-center"
+        className="border border-gray_3 p-[40px] rounded-[14px] w-full md:w-[300px] aspect-[1/1]
+              flex flex-col items-center justify-center"
       >
         <Image
-          link={files ? URL.createObjectURL(files[0]) : "/images/upload-imagination.png"}
-          blurLink={files ? URL.createObjectURL(files[0]) : "/images/upload-imagination.png"}
-          containerClasses="w-[160px] aspect-[1/1]"
+          link={files ? URL.createObjectURL(files[0]) : "/images/upload-imagination.svg"}
+          blurLink={files ? URL.createObjectURL(files[0]) : "/images/upload-imagination.svg"}
+          containerClasses="w-[80px] aspect-[1/1]"
           alt="not found icon"
         />
         <p
