@@ -14,9 +14,11 @@ const createBusinessAccount = async (businessData, customerId) => {
 
   if (querySnapshot.size > 0) {
     await updateDoc(doc(db, "business", querySnapshot.docs[0].id), businessData)
-    return
+    return querySnapshot.docs[0].id
   }
-  await addDoc(collection(db, "business"), data)
+
+  const newDoc = await addDoc(collection(db, "business"), data)
+  return newDoc.id
 }
 
 export default createBusinessAccount
