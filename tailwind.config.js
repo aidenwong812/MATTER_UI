@@ -24,6 +24,8 @@ module.exports = {
       gray_8: '#1F1F1F',
       link: '#2A64F5',
       success: "#35C75A",
+      success_1: "#CFF2D8",
+      success_6: "#32862B",
       error_500: "#CA462A"
     },
     container: {
