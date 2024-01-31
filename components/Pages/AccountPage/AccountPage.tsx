@@ -10,7 +10,7 @@ import BusinessCreateModal from "../../BusinessCreateModal"
 
 const AccountPage = () => {
   const { screenStatus } = useAccountForm()
-  const [isOpenBusinessModal, setIsOpenBusinessModal] = useState(true)
+  const [isOpenBusinessModal, setIsOpenBusinessModal] = useState(false)
 
   return (
     <Layout type="base" className="!bg-[url('/images/create-background.png')] !bg-center !bg-cover">
