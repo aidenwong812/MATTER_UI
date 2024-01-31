@@ -1,36 +1,30 @@
 import "../styles/globals.css"
 import "react-toastify/dist/ReactToastify.css"
 
-import { useLocalStorage } from "usehooks-ts"
 import type { AppProps } from "next/app"
 import { ToastContainer } from "react-toastify"
 import { SessionProvider } from "next-auth/react"
-import React, { useMemo } from "react"
+import React from "react"
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 import { ThemeProvider } from "../providers/ThemeProvider"
 import UserProvider from "../providers/UserProvider"
 
+const privyConfig: PrivyClientConfig = {
+  loginMethods: ["email"],
+  appearance: {
+    theme: "dark",
+    accentColor: "#FFFFFF",
+    logo: "/images/matter_logo_white.svg",
+  },
+  embeddedWallets: {
+    createOnLogin: "all-users",
+  },
+  fiatOnRamp: {
+    useSandbox: true,
+  },
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
-  const [themeMode] = useLocalStorage<string>("theme", "light")
-
-  const privyConfig: PrivyClientConfig = useMemo(
-    () => ({
-      loginMethods: ["email"],
-      appearance: {
-        theme: themeMode === "light" ? "dark" : "light",
-        accentColor: "#FFFFFF",
-        logo: themeMode === "light" ? "/images/matter_logo_white.svg" : "/images/matter_logo.svg",
-      },
-      embeddedWallets: {
-        createOnLogin: "all-users",
-      },
-      fiatOnRamp: {
-        useSandbox: true,
-      },
-    }),
-    [themeMode],
-  )
-
   return (
     <ThemeProvider>
       <SessionProvider>
