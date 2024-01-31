@@ -1,5 +1,5 @@
 import useIsMobile from "../../../../hooks/useIsMobile"
-import NewestList from "./NewestList"
+import NewestList from "../NewestList"
 import NewestSlides from "./NewestSlides"
 
 const Newest = () => {
