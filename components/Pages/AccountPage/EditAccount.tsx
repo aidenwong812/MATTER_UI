@@ -26,8 +26,12 @@ const EditAccount = () => {
             w-[84px] rounded-full aspect-[1/1] mb-[32px]"
       >
         {userPFP ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={userPFP} alt="not found pfp" className="rounded-full" />
+          <Image
+            link={userPFP}
+            blurLink={userPFP}
+            alt="not found icon"
+            containerClasses="w-[84px] aspect-[1/1] rounded-full overflow-hidden"
+          />
         ) : (
           <Icon name="camera" className="text-white" />
         )}
