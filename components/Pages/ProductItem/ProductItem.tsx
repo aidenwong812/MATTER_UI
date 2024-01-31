@@ -7,7 +7,7 @@ const ProductItem = ({ imageClasses = "" }) => (
       alt="not found photo"
       link="/images/product_placeholder.png"
       blurLink="/images/product_placeholder.png"
-      containerClasses={`w-full aspect-[1/1] ${imageClasses}`}
+      containerClasses={`w-full aspect-[1/1] md:aspect-[1/1] ${imageClasses}`}
       imageClasses="!object-cover"
     />
     <div className="w-full pl-[10px] md:pl-0">

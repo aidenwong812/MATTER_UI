@@ -22,13 +22,12 @@ const HomePage = () => {
       >
         {isMobile ? (
           <p className="text-[28px] leading-[120%] tracking-[-0.168px] text-center">
-            Shop over 1.2 million <br />
-            products on blockchain.
+            Shop products and
+            <br />
+            services.
           </p>
         ) : (
-          <GradientText className="text-[70px]">
-            Shop over 1.2 million products on blockchain.
-          </GradientText>
+          <GradientText className="text-[70px]">Shop products and services.</GradientText>
         )}
         <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         {selectedTab === data[0].value && <Curated />}

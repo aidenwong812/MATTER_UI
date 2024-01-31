@@ -11,7 +11,7 @@ const CuratedProducts = () => (
     </p>
     <div className="w-full grid grid-cols-2 md:grid-cols-5 gap-[40px] mt-[40px] md:px-[18px]">
       <div className="col-span-2 md:col-span-3">
-        <ProductItem imageClasses="!aspect-[auto] h-[246px] md:!h-full !flex-grow" />
+        <ProductItem imageClasses="!aspect-[3/2] md:!h-full !flex-grow" />
       </div>
       <div className="col-span-2 grid grid-cols-2 gap-x-[10px] gap-y-[40px] md:gap-[40px]">
         {Array(4)

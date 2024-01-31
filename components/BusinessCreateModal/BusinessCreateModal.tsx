@@ -1,6 +1,5 @@
 import Image from "../../shared/Image"
 import Modal from "../../shared/Modal"
-import EmailForVerify from "./EmailForVerify"
 import InputForm from "./InputForm"
 
 const BusinessCreateModal = ({ isVisible, toggleModal }) => (
@@ -16,12 +15,8 @@ const BusinessCreateModal = ({ isVisible, toggleModal }) => (
         <p className="leading-[140%] tracking-[6px] text-[12px] text-black">BUSINESS</p>
       </div>
       <p className="leading-[110%] tracking-[-0.7px] text-[28px] mt-[32px]">
-        Set up your business account.
+        Apply to become a seller.
       </p>
-      <p className="text-[16px] leading-[100%] tracking-[-0.4px] mt-[20px] mb-[9px]">
-        {`We've sent to a code to`}
-      </p>
-      <EmailForVerify />
       <InputForm />
     </div>
   </Modal>

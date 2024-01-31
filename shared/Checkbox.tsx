@@ -20,15 +20,9 @@ const Checkbox = ({ checked, onChange, id, className, label, ...rest }: ICheckbo
       >
         <div
           className="border-gray_3 w-[20px] h-[20px]
-          rounded-[6px] bg-white border-[1.5px]"
+          rounded-[6px] bg-white border-[1.5px] p-[2px]"
         >
-          {checked && (
-            <div
-              className="w-full h-full
-              bg-gradient-to-r from-[#A1EA04] to-[#DAEB02]
-              rounded-[2px] shadow-[0px_0px_10px_10px_#a1ea041a]"
-            />
-          )}
+          {checked && <div className="w-full h-full rounded-[4px] bg-gray_5" />}
         </div>
       </button>
     </>
