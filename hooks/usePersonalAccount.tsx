@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import createCustomer from "../lib/firebase/createCustomer"
 import { uploadToIpfs } from "onchain-magic"
 import { useUserProvider } from "../providers/UserProvider"
+import { toast } from "react-toastify"
 
 export enum Screen {
   SELECT_UI = "SELECT_UI",
@@ -9,7 +10,7 @@ export enum Screen {
 }
 
 const usePersonalAccount = ({ setLoading }) => {
-  const { userData } = useUserProvider()
+  const { userData, getUserData } = useUserProvider()
 
   const [userPFP, setUserPFP] = useState("")
   const [userPFPSrc, setUserPFPSrc] = useState("")
@@ -22,14 +23,19 @@ const usePersonalAccount = ({ setLoading }) => {
     let pfp = ""
     if (userPFP) pfp = await uploadToIpfs(userPFP)
 
-    await createCustomer({
-      privy_email: userData.privyEmail,
+    const response: any = await createCustomer({
+      privy_email: userData.privy_email,
       email: userEmail,
       user_name: userName,
       ...(pfp && { pfp: `ipfs://${pfp}` }),
     })
 
-    await userData.getUserData()
+    if (response?.error) {
+      setLoading(false)
+      return
+    }
+
+    await getUserData()
     setLoading(false)
     setScreenStatus(Screen.SELECT_UI)
   }

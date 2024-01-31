@@ -88,7 +88,7 @@ const EditAccountForm = () => {
                           w-[323px] mb-[32px] py-[15px]"
           disabled={loading}
         >
-          Save Changes
+          {loading ? "Saving..." : "Save Changes"}
         </button>
       </Form>
       <button
