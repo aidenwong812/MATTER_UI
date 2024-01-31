@@ -15,6 +15,7 @@ export const DeployProvider = ({ children }) => {
   const [creating, setCreating] = useState(false)
   const [productType, setProductType] = useState("")
   const [productCategory, setProductCategory] = useState("")
+  const [priceInUsd, setPriceInUsd] = useState("")
   const { create1155Contract } = useCreate1155Contract()
   const { push } = useRouter()
 
@@ -31,6 +32,8 @@ export const DeployProvider = ({ children }) => {
       cover: ipfsCid,
       title,
       description,
+      productType,
+      productCategory,
     })
     push(`/dashboard?tab=listings`)
     setCreating(false)
@@ -51,6 +54,8 @@ export const DeployProvider = ({ children }) => {
       setProductType,
       productCategory,
       setProductCategory,
+      priceInUsd,
+      setPriceInUsd,
     }),
     [
       cover,
@@ -66,6 +71,8 @@ export const DeployProvider = ({ children }) => {
       setProductType,
       productCategory,
       setProductCategory,
+      priceInUsd,
+      setPriceInUsd,
     ],
   )
 

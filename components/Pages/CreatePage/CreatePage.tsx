@@ -73,6 +73,8 @@ const CreatePage = () => {
     setProductType,
     productCategory,
     setProductCategory,
+    priceInUsd,
+    setPriceInUsd,
   } = useDeploy()
 
   const getCategoryOptions = (type) => {
@@ -123,7 +125,7 @@ const CreatePage = () => {
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter Product Name..."
+              placeholder="Enter Listing Name..."
               id="title"
               name="title"
               hookToForm
@@ -134,6 +136,15 @@ const CreatePage = () => {
               placeholder="Enter Description..."
               id="description"
               name="description"
+              hookToForm
+            />
+            <Input
+              value={priceInUsd}
+              onChange={(e) => setPriceInUsd(e.target.value)}
+              placeholder="Enter USD price..."
+              id="price"
+              name="price"
+              type="number"
               hookToForm
             />
             <Select
