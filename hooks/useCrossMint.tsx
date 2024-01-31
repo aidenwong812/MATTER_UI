@@ -1,4 +1,3 @@
-import { usePrivy } from "@privy-io/react-auth"
 import useEthPrice from "./useEthPrice"
 import useConnectedWallet from "./useConnectedWallet"
 import { ethers } from "ethers"
@@ -8,11 +7,12 @@ import { formatEther } from "viem"
 import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
+import { useUserProvider } from "../providers/UserProvider"
 
 const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
-  const { user } = usePrivy()
+  const { privyEmail } = useUserProvider()
   const [receiptEmail, setReceiptEmail] = useState("")
   const { getUsdConversion } = useEthPrice()
 
@@ -47,8 +47,8 @@ const useCrossMint = (cart, totalPrice) => {
   }
 
   useEffect(() => {
-    if (user?.email?.address) setReceiptEmail(user.email.address)
-  }, [user])
+    if (privyEmail) setReceiptEmail(privyEmail)
+  }, [privyEmail])
 
   return {
     mintConfig,

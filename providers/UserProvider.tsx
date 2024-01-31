@@ -1,14 +1,29 @@
 import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
-import useEthPrice from "../hooks/useEthPrice"
-import { createContext, useMemo, useEffect, useContext } from "react"
+import { createContext, useMemo, useEffect, useContext, useState, useCallback } from "react"
+import { getIpfsLink } from "onchain-magic"
+import getCustomer from "../lib/firebase/getCustomer"
 
 const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
-  const { user, ready, authenticated } = usePrivy()
+  const [privyEmail, setPrivyEmail] = useState("")
+  const { user, authenticated, ready } = usePrivy()
+  const [userName, setUserName] = useState("")
+  const [userEmail, setUserEmail] = useState("")
+  const [userPFP, setUserPFP] = useState("")
   const { pathname, push } = useRouter()
-  const { getUsdConversion, ethPrice, getEthConversion } = useEthPrice()
+
+  const getUserData = useCallback(async () => {
+    if (!authenticated || !privyEmail) return
+    const userData = (await getCustomer(privyEmail)) as any
+    if (!userData) return
+    setUserName(userData.user_name)
+    setUserEmail(userData.email)
+    setUserPFP(getIpfsLink(userData.pfp))
+  }, [authenticated, privyEmail])
+
+  const loading = !ready
 
   const isPrivatePage =
     pathname !== "/" &&
@@ -16,25 +31,27 @@ const UserProvider = ({ children }) => {
     pathname !== "/products/digital" &&
     pathname !== "/products/physical"
 
-  const loading = !ready
-
   useEffect(() => {
     if (isPrivatePage && !authenticated && !loading) push("/")
   }, [isPrivatePage, authenticated, loading])
 
-  const privyEmail = useMemo(() => {
-    return user?.google?.email || ""
+  useEffect(() => {
+    getUserData()
+  }, [getUserData])
+
+  useEffect(() => {
+    if (user?.email?.address) setPrivyEmail(user.email.address)
   }, [user])
 
   const value = useMemo(
     () => ({
       privyEmail,
-      loading,
-      getUsdConversion,
-      ethPrice,
-      getEthConversion,
+      getUserData,
+      userName,
+      userEmail,
+      userPFP,
     }),
-    [privyEmail, loading, getUsdConversion, ethPrice, getEthConversion],
+    [userEmail, userName, privyEmail, getUserData, userPFP],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>

@@ -5,8 +5,30 @@ import { validation } from "../../../utils/account-form-validation"
 import Form from "../../../shared/Form"
 
 const EditAccountForm = () => {
-  const { setScreenStatus, handleUpdate, userName, setUserName, userEmail, setUserEmail } =
-    useAccountForm()
+  const {
+    setScreenStatus,
+    handleUpdate,
+    userName,
+    setUserName,
+    userEmail,
+    setUserEmail,
+    loading,
+    setUserPFP,
+    userPFPSrc,
+    setUserPFPSrc,
+  } = useAccountForm()
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    if (file) {
+      if (file.type.includes("image")) {
+        setUserPFP(file)
+        setUserPFPSrc(URL.createObjectURL(file))
+      }
+    }
+  }
 
   return (
     <div
@@ -15,9 +37,20 @@ const EditAccountForm = () => {
     >
       <div
         className="flex bg-gray_10 justify-center items-center
-            w-[84px] rounded-full aspect-[1/1] mb-[32px]"
+            w-[84px] rounded-full aspect-[1/1] mb-[32px] relative"
       >
-        <Icon name="camera" className="text-white" />
+        {userPFPSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={userPFPSrc} alt="not found pfp." className="rounded-full" />
+        ) : (
+          <Icon name="camera" className="text-white" />
+        )}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="w-full h-full absolute  left-0 top-0 z-[5] opacity-0"
+        />
       </div>
       <p
         className="leading-[110%] tracking-[-0.7px]
@@ -48,14 +81,15 @@ const EditAccountForm = () => {
           name="useremail"
           hookToForm
         />
+        <button
+          type="submit"
+          className="border border-gray_2 rounded-full
+                          w-[323px] mb-[32px] py-[15px]"
+          disabled={loading}
+        >
+          Save Changes
+        </button>
       </Form>
-      <button
-        type="button"
-        className="border border-gray_2 rounded-full
-                        w-[323px] mb-[32px] py-[15px]"
-      >
-        Save Changes
-      </button>
       <button
         type="button"
         onClick={() => setScreenStatus(Screen.SELECT_UI)}

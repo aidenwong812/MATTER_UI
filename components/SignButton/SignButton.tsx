@@ -20,7 +20,7 @@ const SignButton = () => {
             py-[5px] px-[20px]"
       onClick={handleClick}
     >
-      {authenticated ? <Icon name="user" /> : "Log In"}
+      {authenticated ? <Icon name="exit" /> : "Log In"}
     </button>
   )
 }

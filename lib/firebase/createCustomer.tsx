@@ -12,7 +12,10 @@ const createCustomer = async (customerData) => {
   const querySnapshot = await getDocs(q)
 
   if (querySnapshot.size > 0) {
-    await updateDoc(doc(db, "customers", querySnapshot.docs[0].id), customerData)
+    await updateDoc(doc(db, "customers", querySnapshot.docs[0].id), {
+      ...querySnapshot.docs[0].data(),
+      ...customerData,
+    })
     return
   }
   await addDoc(collection(db, "customers"), data)
