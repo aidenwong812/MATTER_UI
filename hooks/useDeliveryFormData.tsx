@@ -45,7 +45,7 @@ const useDeliveryFormData = () => {
   const initialize = useCallback(async () => {
     if (!userData?.privy_email) return
 
-    const customerData: any = await getCustomer(userData?.privy_email)
+    const customerData: any = await getCustomer(userData?.privy_email || privyEmail)
 
     if (!customerData) return
 
