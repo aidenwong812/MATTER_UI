@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Slider from "../../../../shared/Slider"
-import TrendingItem from "./TrendingItem"
+import TrendingItem from "../TrendingItem/TrendingItem"
 import Icon from "../../../../shared/Icon"
 
 const TrendingSlides = () => {

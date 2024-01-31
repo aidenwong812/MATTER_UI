@@ -1,12 +1,16 @@
+import { useState } from "react"
 import GradientText from "../../GradientText"
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
 import Navbar from "./Navbar"
 import useIsMobile from "../../../hooks/useIsMobile"
 import Curated from "./Curated"
+import data from "./data.json"
+import Trending from "./Trending"
 
 const HomePage = () => {
   const isMobile = useIsMobile()
+  const [selectedTab, setSelectedTab] = useState(data[0].value)
 
   return (
     <Layout type="base">
@@ -25,8 +29,9 @@ const HomePage = () => {
         ) : (
           <GradientText className="text-[70px]">Shop products and services.</GradientText>
         )}
-        <Navbar />
-        <Curated />
+        <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+        {selectedTab === data[0].value && <Curated />}
+        {selectedTab === data[1].value && <Trending />}
       </div>
     </Layout>
   )
