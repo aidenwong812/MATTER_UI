@@ -44,7 +44,7 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
           opacity: 0,
         }}
         transition={{
-          duration: 1,
+          duration: 0.5,
         }}
       >
         {children}
