@@ -29,7 +29,8 @@ const UserProvider = ({ children }) => {
     pathname !== "/" &&
     pathname !== "/services" &&
     pathname !== "/products/digital" &&
-    pathname !== "/products/physical"
+    pathname !== "/products/physical" &&
+    pathname !== "/product"
 
   useEffect(() => {
     if (isPrivatePage && !authenticated && !loading) push("/")

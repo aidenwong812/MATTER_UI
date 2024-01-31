@@ -1,6 +1,6 @@
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
-import BuyButtons from "./BuyButtons"
+import CartButton from "./CartButton"
 import ProductDetail from "./ProductDetail"
 import ProductPhoto from "./ProductPhoto"
 import ProductTrending from "./ProductTrending"
@@ -17,7 +17,7 @@ const ProductPage = () => (
         <ProductPhoto />
         <ProductDetail />
         <div className="col-span-10 md:col-span-3 flex flex-col gap-y-[10px]">
-          <BuyButtons />
+          <CartButton />
           <SellerInfo />
         </div>
         <ProductTrending />
