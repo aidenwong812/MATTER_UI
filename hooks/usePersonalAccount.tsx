@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import createCustomer from "../lib/firebase/createCustomer"
-import { uploadToIpfs } from "onchain-magic"
+import { getIpfsLink, uploadToIpfs } from "onchain-magic"
 import { useUserProvider } from "../providers/UserProvider"
 import { toast } from "react-toastify"
 
@@ -43,7 +43,7 @@ const usePersonalAccount = ({ setLoading }) => {
   useEffect(() => {
     setUserName(userData?.user_name)
     setUserEmail(userData?.email)
-    setUserPFPSrc(userData?.pfp)
+    setUserPFPSrc(getIpfsLink(userData?.pfp))
   }, [userData])
 
   return {
