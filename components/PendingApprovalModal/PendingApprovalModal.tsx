@@ -22,9 +22,6 @@ const PendingApprovalModal = () => (
       <p className="text-[12px] leading-[100%] tracking-[-0.3px] text-gray_6 mb-[20px]">
         Typical wait time: 2 Business Days
       </p>
-      <p className="text-[12px] leading-[100%] tracking-[-0.3px] text-gray_6">
-        Have questions? Email business@oasismarket.xyz
-      </p>
     </div>
   </Modal>
 )
