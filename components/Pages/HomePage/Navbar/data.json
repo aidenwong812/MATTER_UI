@@ -1,0 +1,14 @@
+[
+  {
+    "value": "curated",
+    "label": "Curated"
+  },
+  {
+    "value": "trending",
+    "label": "Trending"
+  },
+  {
+    "value": "newest",
+    "label": "Newest"
+  }
+]
