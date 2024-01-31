@@ -22,6 +22,8 @@ const useBusinessAccount = ({ setLoading }) => {
         businessName: publicBusinessName,
         website: businessSite,
         customerId: userData?.id,
+        agreeToPrivacyAndTerms: true,
+        marketingSelected: true,
       },
       userData?.id,
     )
