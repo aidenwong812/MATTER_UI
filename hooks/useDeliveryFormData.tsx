@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import createCustomer from "../lib/firebase/createCustomer"
 import { useUserProvider } from "../providers/UserProvider"
 import getCustomer from "../lib/firebase/getCustomer"
@@ -21,13 +21,25 @@ const useDeliveryFormData = () => {
   const [loading, setLoading] = useState(false)
   const [formMode, setFormMode] = useState(FORM_MODE.VISIBLE_MODE)
 
-  const isCompletedDelivery =
-    deliveryFirstName &&
-    deliveryLastName &&
-    deliveryAddress1 &&
-    deliveryCountryCode &&
-    deliveryState &&
-    deliveryZipCode
+  const isCompletedDelivery = useMemo(() => {
+    if (
+      deliveryAddress1 &&
+      deliveryFirstName &&
+      deliveryCountryCode &&
+      deliveryLastName &&
+      deliveryZipCode &&
+      deliveryState
+    )
+      return true
+    return false
+  }, [
+    deliveryFirstName,
+    deliveryLastName,
+    deliveryAddress1,
+    deliveryCountryCode,
+    deliveryState,
+    deliveryZipCode,
+  ])
 
   const initialize = useCallback(async () => {
     if (!userData?.privy_email) return
