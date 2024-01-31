@@ -1,4 +1,5 @@
-import { Screen, useAccountForm } from "../../../providers/AccountProvider"
+import { useAccountForm } from "../../../providers/AccountProvider"
+import { Screen } from "../../../hooks/usePersonalAccount"
 import Icon from "../../../shared/Icon"
 import Input from "../../../shared/Input"
 import { validation } from "../../../utils/account-form-validation"

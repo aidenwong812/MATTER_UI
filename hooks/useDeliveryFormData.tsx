@@ -17,7 +17,7 @@ const useDeliveryFormData = () => {
   const [deliveryState, setDeliveryState] = useState("")
   const [deliveryCountryCode, setDeliveryCountryCode] = useState("US")
   const [deliveryPhoneNumber, setDeliveryPhoneNumber] = useState("")
-  const { privyEmail } = useUserProvider()
+  const { userData } = useUserProvider()
   const [loading, setLoading] = useState(false)
   const [formMode, setFormMode] = useState(FORM_MODE.VISIBLE_MODE)
 
@@ -42,9 +42,9 @@ const useDeliveryFormData = () => {
   ])
 
   const initialize = useCallback(async () => {
-    if (!privyEmail) return
+    if (!userData?.privy_email) return
 
-    const customerData: any = await getCustomer(privyEmail)
+    const customerData: any = await getCustomer(userData?.privy_email)
 
     if (!customerData) return
 
@@ -56,12 +56,12 @@ const useDeliveryFormData = () => {
     setDeliveryCountryCode(customerData.country_code)
     setDeliveryAddress1(customerData.address_1)
     setDeliveryAddress2(customerData.address_2)
-  }, [privyEmail])
+  }, [userData])
 
   const confirmDeliveryAddress = async () => {
     setLoading(true)
     await createCustomer({
-      email: privyEmail,
+      email: userData?.privy_email,
       first_name: deliveryFirstName,
       last_name: deliveryLastName,
       address_1: deliveryAddress1,

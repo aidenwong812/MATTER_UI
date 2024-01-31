@@ -3,15 +3,28 @@ import { db } from "./db"
 
 const getCustomer = async (userEmail) => {
   try {
-    const q = query(collection(db, "customers"), where("email", "==", userEmail))
+    const q1 = query(collection(db, "customers"), where("email", "==", userEmail))
 
-    const querySnapshot = await getDocs(q)
+    const querySnapshot1 = await getDocs(q1)
 
-    if (querySnapshot.size > 0)
+    if (querySnapshot1.size > 0) {
+      const q2 = query(
+        collection(db, "business"),
+        where("customerId", "==", querySnapshot1.docs[0].id),
+      )
+      const querySnapshot2 = await getDocs(q2)
+
       return {
-        id: querySnapshot.docs[0].id,
-        ...querySnapshot.docs[0].data(),
+        id: querySnapshot1.docs[0].id,
+        ...querySnapshot1.docs[0].data(),
+        business: querySnapshot2.size
+          ? {
+              id: querySnapshot2.docs[0].id,
+              ...querySnapshot2.docs[0].data(),
+            }
+          : null,
       }
+    }
 
     return null
   } catch (error) {
