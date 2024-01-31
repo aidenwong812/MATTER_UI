@@ -16,7 +16,6 @@ const EditAccount = () => {
     logout()
     push("/")
   }
-
   return (
     <div
       className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
@@ -26,9 +25,13 @@ const EditAccount = () => {
         className="flex bg-gray_10 justify-center items-center
             w-[84px] rounded-full aspect-[1/1] mb-[32px]"
       >
-        {userData?.pfp ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={userData?.pfp} alt="not found pfp" className="rounded-full" />
+        {userData?.userPFP ? (
+          <Image
+            link={userData?.userPFP}
+            blurLink={userData?.userPFP}
+            alt="not found icon"
+            containerClasses="w-[84px] aspect-[1/1] rounded-full overflow-hidden"
+          />
         ) : (
           <Icon name="camera" className="text-white" />
         )}

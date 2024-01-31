@@ -14,7 +14,7 @@ const DashboardPage = () => {
                   md:px-[24px] lg:px-[32px] xl:px-[40px] pt-[90px] pb-[30px] px-[18px]
                   flex flex-col items-center justify-center gap-y-[10px]"
       >
-        {!userData?.business?.isApproved && <PendingApprovalModal />}
+        {userData && !userData?.business?.isApproved && <PendingApprovalModal />}
       </div>
     </Layout>
   )
