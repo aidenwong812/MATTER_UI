@@ -44,7 +44,7 @@ const usePersonalAccount = ({ setLoading }) => {
     setUserName(userData?.user_name)
     setUserEmail(userData?.email || privyEmail)
     setUserPFPSrc(getIpfsLink(userData?.pfp))
-  }, [userData])
+  }, [userData, privyEmail])
 
   return {
     userName,
