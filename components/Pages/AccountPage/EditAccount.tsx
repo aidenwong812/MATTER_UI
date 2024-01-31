@@ -16,7 +16,6 @@ const EditAccount = () => {
     logout()
     push("/")
   }
-
   return (
     <div
       className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
@@ -28,8 +27,8 @@ const EditAccount = () => {
       >
         {userData?.userPFP ? (
           <Image
-            link={userData?.userPFP }
-            blurLink={userData?.userPFP }
+            link={userData?.userPFP}
+            blurLink={userData?.userPFP}
             alt="not found icon"
             containerClasses="w-[84px] aspect-[1/1] rounded-full overflow-hidden"
           />
