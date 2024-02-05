@@ -7,6 +7,7 @@ import Navbar from "./Navbar"
 import data from "./data.json"
 import Sales from "./Sales"
 import Listing from "./Listing"
+import PayoutActivity from "./PayoutActivity"
 
 const DashboardPage = () => {
   const { userData } = useUserProvider()
@@ -20,6 +21,7 @@ const DashboardPage = () => {
         <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         {selectedTab === data[0].value && <Sales />}
         {selectedTab === data[1].value && <Listing />}
+        {selectedTab === data[2].value && <PayoutActivity />}
       </div>
     </Layout>
   )
