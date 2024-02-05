@@ -3,13 +3,10 @@ import Input from "../../shared/Input"
 import { useAccountForm } from "../../providers/AccountProvider"
 import Form from "../../shared/Form"
 import { validation } from "../../utils/business-form-validation"
-import Image from "../../shared/Image"
 import Checkbox from "../../shared/Checkbox"
 
 const InputForm = () => {
   const {
-    verifyCode,
-    setVerifyCode,
     publicBusinessName,
     setPublicBusinessName,
     userName,
@@ -30,28 +27,6 @@ const InputForm = () => {
       onSubmit={handleCreateBusinessAccount}
       className="flex flex-col gap-y-[12px] w-full my-[24px]"
     >
-      <div className="relative">
-        <Input
-          value={verifyCode}
-          onChange={(e) => setVerifyCode(e.target.value)}
-          placeholder="Code"
-          className="!border-gray_6 !bg-white"
-          id="verifycode"
-          name="verifycode"
-          hookToForm
-        />
-        <button type="button" className="!absolute top-[10px] right-[10px]">
-          <Image
-            link="/images/reload.svg"
-            blurLink="/images/reload.png"
-            containerClasses="w-[24px] aspect-[1/1]"
-            alt="not found icon"
-          />
-        </button>
-      </div>
-      <p className="text-gray_6 tracking-[-0.3px] leading-[100%] text-[12px] text-right mt-[-8px]">
-        Resend in 28
-      </p>
       <Input
         value={publicBusinessName}
         onChange={(e) => setPublicBusinessName(e.target.value)}
@@ -115,7 +90,7 @@ const InputForm = () => {
             w-full py-[15px] text-white"
         disabled={loading || (!isAgreeForUpdate && !isApprovedPrivacy)}
       >
-        Create Account
+        Apply Now
       </button>
     </Form>
   )

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useUserProvider } from "../providers/UserProvider"
 import createBusinessAccount from "../lib/firebase/createBusiness"
 import { useRouter } from "next/router"
+import { toast } from "react-toastify"
 
 const useBusinessAccount = ({ setLoading }) => {
   const { userData } = useUserProvider()
@@ -21,9 +22,12 @@ const useBusinessAccount = ({ setLoading }) => {
         businessName: publicBusinessName,
         website: businessSite,
         customerId: userData?.id,
+        agreeToPrivacyAndTerms: true,
+        marketingSelected: true,
       },
       userData?.id,
     )
+    toast.success("Successfully applied. Typical review time: 2-3 Days.")
     push("/dashboard")
     setLoading(false)
   }

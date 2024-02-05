@@ -24,7 +24,7 @@ const ProductProvider = ({ children }) => {
     setLoading(true)
     await createCart({
       productId: productData?.id,
-      sellerId: productData?.customerId,
+      customerId: productData?.customerId,
     })
     setLoading(false)
     push("/checkout")
