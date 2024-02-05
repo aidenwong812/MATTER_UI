@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useMemo } from "react"
+import { useRouter } from "next/router"
 import useCreate1155Contract from "../hooks/useCreate1155Contract"
 import { CHAIN_ID } from "../lib/consts"
-import { useRouter } from "next/router"
 import createProduct from "../lib/firebase/createProduct"
 
 const DeployContext = createContext({} as any)
@@ -13,6 +13,9 @@ export const DeployProvider = ({ children }) => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [creating, setCreating] = useState(false)
+  const [productType, setProductType] = useState("")
+  const [productCategory, setProductCategory] = useState("")
+  const [priceInUsd, setPriceInUsd] = useState("")
   const { create1155Contract } = useCreate1155Contract()
   const { push } = useRouter()
 
@@ -29,6 +32,8 @@ export const DeployProvider = ({ children }) => {
       cover: ipfsCid,
       title,
       description,
+      productType,
+      productCategory,
     })
     push(`/dashboard?tab=listings`)
     setCreating(false)
@@ -45,8 +50,30 @@ export const DeployProvider = ({ children }) => {
       creating,
       setCreating,
       create,
+      productType,
+      setProductType,
+      productCategory,
+      setProductCategory,
+      priceInUsd,
+      setPriceInUsd,
     }),
-    [cover, setCover, title, setTitle, description, setDescription, creating, setCreating, create],
+    [
+      cover,
+      setCover,
+      title,
+      setTitle,
+      description,
+      setDescription,
+      creating,
+      setCreating,
+      create,
+      productType,
+      setProductType,
+      productCategory,
+      setProductCategory,
+      priceInUsd,
+      setPriceInUsd,
+    ],
   )
 
   return <DeployContext.Provider value={value}>{children}</DeployContext.Provider>
