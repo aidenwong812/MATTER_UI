@@ -2,64 +2,13 @@ import { useDeploy } from "../../../providers/DeployProvider"
 import Form from "../../../shared/Form"
 import Input from "../../../shared/Input"
 import Select from "../../../shared/Select"
-import { validation } from "../../../utils/create-form-validation"
+import { validation } from "../../../lib/validations/create-form-validation"
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
 import Spinner from "../../Spinner/Spinner"
 import AnimationUpload from "./AnimationUpload"
-
-const productTypes = [
-  {
-    label: "Physical Product",
-    value: "Physical",
-  },
-  {
-    label: "Digital Product",
-    value: "Digital",
-  },
-  {
-    label: "Service",
-    value: "Service",
-  },
-]
-
-const serviceCategories = [
-  { label: "Transportation", value: "Transportation" },
-  { label: "Medical", value: "Medical" },
-  { label: "Home Repair", value: "HomeRepair" },
-  { label: "Food", value: "Food" },
-  { label: "Automotive", value: "Automotive" },
-  { label: "Beauty", value: "Beauty" },
-  { label: "Technology", value: "Technology" },
-  { label: "Pet", value: "Pet" },
-  { label: "Marketing", value: "Marketing" },
-  { label: "Other", value: "OtherService" },
-]
-
-const digitalCategories = [
-  { label: "Music", value: "Music" },
-  { label: "Ebooks", value: "Ebooks" },
-  { label: "Video Games", value: "VideoGames" },
-  { label: "Apps", value: "Apps" },
-  { label: "Movies & TV", value: "MoviesTV" },
-  { label: "Art", value: "Art" },
-  { label: "Courses", value: "Courses" },
-  { label: "Tickets", value: "Tickets" },
-  { label: "Collectibles", value: "Collectibles" },
-  { label: "Other", value: "OtherDigital" },
-]
-
-const physicalCategories = [
-  { label: "Apparel", value: "Apparel" },
-  { label: "Home & Kitchen", value: "HomeKitchen" },
-  { label: "Furniture", value: "Furniture" },
-  { label: "Toys & Games", value: "ToysGames" },
-  { label: "Beauty", value: "Beauty" },
-  { label: "Books", value: "Books" },
-  { label: "Jewelry & Watches", value: "JewelryWatches" },
-  { label: "Pet Supplies", value: "PetSupplies" },
-  { label: "Other", value: "OtherPhysical" },
-]
+import { productTypes } from "../../../lib/consts"
+import ContentUpload from "./ContentUpload"
 
 const CreatePage = () => {
   const {
@@ -75,20 +24,8 @@ const CreatePage = () => {
     setProductCategory,
     priceInUsd,
     setPriceInUsd,
+    getCategoryOptions,
   } = useDeploy()
-
-  const getCategoryOptions = (type) => {
-    switch (type) {
-      case "Physical":
-        return physicalCategories
-      case "Digital":
-        return digitalCategories
-      case "Service":
-        return serviceCategories
-      default:
-        return []
-    }
-  }
 
   return (
     <Layout type="base">
@@ -113,7 +50,7 @@ const CreatePage = () => {
               <div>
                 <p>Upload the content your customer</p>
                 <p>will receive upon purchase.</p>
-                <AnimationUpload />
+                <ContentUpload />
               </div>
             )}
           </div>

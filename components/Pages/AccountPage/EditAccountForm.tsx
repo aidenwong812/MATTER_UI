@@ -2,7 +2,7 @@ import { useAccountForm } from "../../../providers/AccountProvider"
 import { Screen } from "../../../hooks/usePersonalAccount"
 import Icon from "../../../shared/Icon"
 import Input from "../../../shared/Input"
-import { validation } from "../../../utils/account-form-validation"
+import { validation } from "../../../lib/validations/account-form-validation"
 import Form from "../../../shared/Form"
 
 const EditAccountForm = () => {

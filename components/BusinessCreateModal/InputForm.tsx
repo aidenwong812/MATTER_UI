@@ -2,7 +2,7 @@ import Link from "next/link"
 import Input from "../../shared/Input"
 import { useAccountForm } from "../../providers/AccountProvider"
 import Form from "../../shared/Form"
-import { validation } from "../../utils/business-form-validation"
+import { validation } from "../../lib/validations/business-form-validation"
 import Checkbox from "../../shared/Checkbox"
 
 const InputForm = () => {
