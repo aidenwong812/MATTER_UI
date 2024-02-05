@@ -1,6 +1,6 @@
 import { createHandler, Get, Query } from "next-api-decorators"
-import getCustomerByUserName from "../../../lib/firebase/getCustomerByUserName"
-import createBusinessAccount from "../../../lib/firebase/createBusiness"
+import { addDoc, collection } from "firebase/firestore"
+import { db } from "../../../lib/firebase/db"
 
 class CreateBusinessAccount {
   @Get()
@@ -8,28 +8,17 @@ class CreateBusinessAccount {
     try {
       const { displayName, userName, website, agreeToPrivacyAndTerms, marketingSelected } = query
 
-      const customerId = await getCustomerByUserName(userName)
-
-      if (!customerId)
-        return {
-          success: false,
-          result: null,
-        }
-
-      const productId = await createBusinessAccount(
-        {
-          businessName: displayName,
-          customerId,
-          website,
-          agreeToPrivacyAndTerms: Boolean(agreeToPrivacyAndTerms),
-          marketingSelected: Boolean(marketingSelected),
-        },
-        customerId,
-      )
+      const newDoc = await addDoc(collection(db, "business"), {
+        businessName: displayName,
+        userName,
+        website,
+        agreeToPrivacyAndTerms: agreeToPrivacyAndTerms.toLowerCase() === "true",
+        marketingSelected: marketingSelected.toLowerCase() === "true",
+      })
 
       return {
         success: true,
-        result: productId,
+        result: newDoc.id,
       }
     } catch (error) {
       return {
