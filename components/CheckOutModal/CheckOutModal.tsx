@@ -10,14 +10,15 @@ const CheckOutModal = ({ isVisible, handleClose, cart, totalPrice }) => {
 
   return (
     <Modal isVisible={isVisible} onClose={handleClose} containerClassName="w-full md:w-[375px]">
-      {formMode === FORM_MODE.VISIBLE_MODE && (
-        <div className="bg-white w-full py-[40px] flex flex-col items-center">
-          <CheckOutDetail totalPrice={totalPrice} />
-          <div className="w-full flex-col items-center flex px-[24px]">
-            {isVisible && <CrossMintCheckOut cart={cart} totalPrice={totalPrice} />}
-          </div>
+      <div
+        className={`bg-white w-full py-[40px] flex flex-col items-center 
+      ${formMode === FORM_MODE.VISIBLE_MODE ? "visible" : "hidden"}`}
+      >
+        <CheckOutDetail totalPrice={totalPrice} />
+        <div className="w-full flex-col items-center flex px-[24px]">
+          <CrossMintCheckOut cart={cart} totalPrice={totalPrice} />
         </div>
-      )}
+      </div>
       {formMode === FORM_MODE.EDIT_MODE && <DeliveryAddress />}
     </Modal>
   )

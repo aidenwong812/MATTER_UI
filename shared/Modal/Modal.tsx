@@ -13,13 +13,13 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
     <motion.div
       className={`fixed top-0 left-0 w-screen h-screen 
         z-40 px-[20px] md:px-0
-        justify-center items-center pt-[56px]
+        justify-center items-center pt-[56px] flex
       `}
       animate={{
-        display: isVisible ? "flex" : "none",
+        visibility: isVisible ? "visible" : "hidden",
       }}
       initial={{
-        display: "none",
+        visibility: "hidden",
       }}
       transition={{
         delay: isVisible ? 0 : 0.5,
@@ -41,11 +41,10 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
           y: isVisible ? 0 : 100,
         }}
         initial={{
-          opacity: isVisible ? 0 : 1,
-          y: isVisible ? 100 : 0,
+          opacity: 0,
         }}
         transition={{
-          duration: 1,
+          duration: 0.5,
         }}
       >
         {children}

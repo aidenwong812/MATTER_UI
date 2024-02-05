@@ -7,16 +7,11 @@
   src: url("/fonts/Hedvig_Letters_Sans/HedvigLettersSans-Regular.ttf") format("truetype");
 }
 
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
 html,
 body {
   padding: 0;
@@ -27,9 +22,6 @@ body {
 p {
   margin: 0;
   padding: 0;
-}
-body::-webkit-scrollbar {
-  display: none;
 }
 
 ::-webkit-scrollbar {
@@ -96,5 +88,10 @@ a {
   font-size: 16px !important;
   font-weight: 400 !important;
   line-height: 120% !important;
+}
+
+.trending-number {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #000;
 }
 

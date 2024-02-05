@@ -1,27 +1,23 @@
 import React, { createContext, useContext, useMemo, useState } from "react"
-
-export enum Screen {
-  SELECT_UI = "SELECT_UI",
-  EDIT_FORM = "EDIT_FORM",
-}
+import usePersonalAccount from "../hooks/usePersonalAccount"
+import useBusinessAccount from "../hooks/useBusinessAccount"
 
 const AccountFormContext = createContext(null)
 
 const AccountFormProvider = ({ children }) => {
-  const [screenStatus, setScreenStatus] = useState(Screen.SELECT_UI)
-  const [userName, setUserName] = useState("")
-  const [userEmail, setUserEmail] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const personalAccount = usePersonalAccount({ setLoading })
+  const businessAccount = useBusinessAccount({ setLoading })
 
   const value = useMemo(
     () => ({
-      userName,
-      setUserName,
-      setScreenStatus,
-      screenStatus,
-      setUserEmail,
-      userEmail,
+      ...personalAccount,
+      ...businessAccount,
+      loading,
+      setLoading,
     }),
-    [userName, setUserName, setScreenStatus, screenStatus, setUserEmail, userEmail],
+    [personalAccount, businessAccount, loading, setLoading],
   )
 
   return <AccountFormContext.Provider value={value}>{children}</AccountFormContext.Provider>

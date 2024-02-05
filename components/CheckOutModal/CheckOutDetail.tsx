@@ -1,4 +1,3 @@
-import { useMemo } from "react"
 import { formatEther } from "viem"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
@@ -6,12 +5,7 @@ import useEthPrice from "../../hooks/useEthPrice"
 
 const CheckOutDetail = ({ totalPrice }) => {
   const { getUsdConversion } = useEthPrice()
-
-  const usdPrice = useMemo(() => {
-    if (!totalPrice) return null
-    return getUsdConversion(formatEther(totalPrice.toBigInt()))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalPrice])
+  const usdPrice = totalPrice && getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   return (
     <>

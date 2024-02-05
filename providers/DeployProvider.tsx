@@ -25,12 +25,12 @@ export const DeployProvider = ({ children }) => {
       setCreating(false)
       return
     }
-    const productId = await createProduct({
+    await createProduct({
       cover: ipfsCid,
       title,
       description,
     })
-    push(`/product/${productId}`)
+    push(`/dashboard?tab=listings`)
     setCreating(false)
   }
 

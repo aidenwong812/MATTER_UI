@@ -1,4 +1,3 @@
-import { usePrivy } from "@privy-io/react-auth"
 import useEthPrice from "./useEthPrice"
 import useConnectedWallet from "./useConnectedWallet"
 import { ethers } from "ethers"
@@ -8,28 +7,18 @@ import { formatEther } from "viem"
 import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
+import { useUserProvider } from "../providers/UserProvider"
 
-const useCrossMint = ({ cart, totalPrice }) => {
+const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
-  const { user } = usePrivy()
+  const { userData } = useUserProvider()
   const [receiptEmail, setReceiptEmail] = useState("")
   const { getUsdConversion } = useEthPrice()
 
-  const multicalls = useMemo(() => {
-    if (!cart) return []
-    return getMulticallFromCart(cart, getMintData(connectedWallet))
-  }, [cart])
-
-  const totalPriceEth = useMemo(() => {
-    if (!totalPrice) return
-    return ethers.utils.formatEther(totalPrice)
-  }, [totalPrice])
-
-  const usdPrice = useMemo(() => {
-    if (!totalPrice) return
-    return getUsdConversion(formatEther(totalPrice.toBigInt()))
-  }, [totalPrice])
+  const multicalls = cart && getMulticallFromCart(cart, getMintData(connectedWallet))
+  const totalPriceEth = totalPrice && ethers.utils.formatEther(totalPrice)
+  const usdPrice = totalPrice && getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   const mintConfig = useMemo(() => {
     if (totalPriceEth && multicalls && connectedWallet) {
@@ -42,7 +31,7 @@ const useCrossMint = ({ cart, totalPrice }) => {
       }
     }
     return null
-  }, [totalPriceEth, multicalls, connectedWallet])
+  }, [totalPriceEth, multicalls, connectedWallet, cart, totalPrice])
 
   const handlePayment = (event) => {
     switch (event.type) {
@@ -58,8 +47,8 @@ const useCrossMint = ({ cart, totalPrice }) => {
   }
 
   useEffect(() => {
-    if (user?.email?.address) setReceiptEmail(user.email.address)
-  }, [user])
+    if (userData?.privy_email) setReceiptEmail(userData?.privy_email)
+  }, [userData])
 
   return {
     mintConfig,

@@ -1,6 +1,6 @@
 import Image from "../../../shared/Image"
 
-const CreateBusinessAccount = () => (
+const CreateBusinessAccount = ({ onClick }) => (
   <div
     className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
         py-[40px] px-[26px] flex flex-col items-center bg-white"
@@ -12,7 +12,7 @@ const CreateBusinessAccount = () => (
         containerClasses="w-[19px] aspect-[19/14]"
         alt="not found icon"
       />
-      <p className="tracking-[6px] font-[400] text-[12px] leading-[120%]">Business</p>
+      <p className="tracking-[6px] font-[400] text-[12px] leading-[120%]">BUSINESS</p>
     </div>
     <p
       className="text-[28px] font-[400] leading-[110%] tracking-[-0.7px]
@@ -24,6 +24,7 @@ const CreateBusinessAccount = () => (
       type="button"
       className="border border-gray_2 rounded-full
                         py-[10px] px-[20px]"
+      onClick={onClick}
     >
       Create a Business Account
     </button>

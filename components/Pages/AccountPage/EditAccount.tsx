@@ -1,12 +1,14 @@
 import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
-import { Screen, useAccountForm } from "../../../providers/AccountProvider"
+import { getIpfsLink } from "onchain-magic"
+import { useAccountForm } from "../../../providers/AccountProvider"
+import { Screen } from "../../../hooks/usePersonalAccount"
 import { useUserProvider } from "../../../providers/UserProvider"
 import Icon from "../../../shared/Icon"
 import Image from "../../../shared/Image"
 
 const EditAccount = () => {
-  const { privyEmail } = useUserProvider()
+  const { userData } = useUserProvider()
   const { setScreenStatus } = useAccountForm()
   const { logout } = usePrivy()
   const { push } = useRouter()
@@ -15,7 +17,6 @@ const EditAccount = () => {
     logout()
     push("/")
   }
-
   return (
     <div
       className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
@@ -25,16 +26,25 @@ const EditAccount = () => {
         className="flex bg-gray_10 justify-center items-center
             w-[84px] rounded-full aspect-[1/1] mb-[32px]"
       >
-        <Icon name="camera" className="text-white" />
+        {userData?.pfp ? (
+          <Image
+            link={getIpfsLink(userData?.pfp)}
+            blurLink={getIpfsLink(userData?.pfp)}
+            alt="not found icon"
+            containerClasses="w-[84px] aspect-[1/1] rounded-full overflow-hidden"
+          />
+        ) : (
+          <Icon name="camera" className="text-white" />
+        )}
       </div>
       <p
         className="leading-[110%] tracking-[-0.7px]
             text-[28px] font-[400] text-center"
       >
-        Username
+        {userData?.first_name} {userData?.last_name}
       </p>
       <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
-        {privyEmail}
+        {userData?.privy_email}
       </p>
       <button
         type="button"

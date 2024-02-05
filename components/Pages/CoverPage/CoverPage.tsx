@@ -3,7 +3,7 @@ import Image from "../../../shared/Image"
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
 
-const LandingPage = () => {
+const CoverPage = () => {
   const isMobile = useIsMobile()
   return (
     <Layout type="base">
@@ -31,4 +31,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default CoverPage
