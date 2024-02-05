@@ -18,13 +18,12 @@ const ServicesPage = () => {
       >
         {isMobile ? (
           <p className="text-[28px] leading-[120%] tracking-[-0.168px] text-center">
-            Find verified <br />
-            service providers.
+            Shop services
+            <br />
+            on Matter.
           </p>
         ) : (
-          <GradientText className="text-[70px]">
-            Find verified service providers on Matter.
-          </GradientText>
+          <GradientText className="text-[70px]">Shop services on Matter.</GradientText>
         )}
         <Navbar />
         <p
