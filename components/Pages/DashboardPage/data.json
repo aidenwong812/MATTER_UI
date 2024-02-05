@@ -1,0 +1,14 @@
+[
+  {
+    "value": "sales",
+    "label": "Sales"
+  },
+  {
+    "value": "listings",
+    "label": "Listings"
+  },
+  {
+    "value": "payout-activity",
+    "label": "Payout Activity"
+  }
+]
