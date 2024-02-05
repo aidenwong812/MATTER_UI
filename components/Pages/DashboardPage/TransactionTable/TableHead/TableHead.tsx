@@ -1,5 +1,5 @@
 const TableHead = () => {
-  const itemClasses = "text-gray_5 text-[12px] leading-[16px] px-[20px] py-[16px]"
+  const itemClasses = "text-gray_5 text-[12px] leading-[16px] md:px-[20px] md:py-[16px] p-[10px]"
   return (
     <thead className="border-b border-b-gray_1">
       <tr>
