@@ -1,9 +1,9 @@
 import Link from "next/link"
 import useIsMobile from "../../hooks/useIsMobile"
-import Icon from "../../shared/Icon"
 import Image from "../../shared/Image"
 import DesktopMenu from "../DesktopMenu"
 import MobileMenu from "../MobileMenu"
+import LookupInput from "./LookupInput"
 
 const Header = () => {
   const isMobile = useIsMobile()
@@ -25,16 +25,7 @@ const Header = () => {
             />
           </div>
         </Link>
-        {!isMobile && (
-          <div className="flex items-center gap-x-[5px]">
-            <Icon name="search" className="text-gray_8" size={24} />
-            <input
-              type="text"
-              placeholder="Find Stuff..."
-              className="border-none focus:ring-0 px-1"
-            />
-          </div>
-        )}
+        <LookupInput />
       </div>
       {isMobile ? <MobileMenu /> : <DesktopMenu />}
     </nav>

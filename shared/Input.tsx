@@ -24,6 +24,7 @@ function Input({
   classNameError,
   disabled,
   placeholder,
+  type = "text",
 }: IInput) {
   const formContext = useFormContext()
   const isFullyHooked = name && hookToForm && formContext
@@ -41,6 +42,7 @@ function Input({
       <input
         {...(id && { id: id })}
         value={value}
+        type={type}
         className={`text-black border border-gray_3 placeholder:!text-gray_4
           rounded-[0.5rem] focus:ring-0 focus:!border-gray_6
           w-full h-[47px]

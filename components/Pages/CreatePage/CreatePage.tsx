@@ -1,14 +1,31 @@
 import { useDeploy } from "../../../providers/DeployProvider"
 import Form from "../../../shared/Form"
 import Input from "../../../shared/Input"
-import { validation } from "../../../utils/create-form-validation"
+import Select from "../../../shared/Select"
+import { validation } from "../../../lib/validations/create-form-validation"
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
 import Spinner from "../../Spinner/Spinner"
 import AnimationUpload from "./AnimationUpload"
+import { productTypes } from "../../../lib/consts"
+import ContentUpload from "./ContentUpload"
 
 const CreatePage = () => {
-  const { title, setTitle, description, setDescription, creating, create } = useDeploy()
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    creating,
+    create,
+    productType,
+    setProductType,
+    productCategory,
+    setProductCategory,
+    priceInUsd,
+    setPriceInUsd,
+    getCategoryOptions,
+  } = useDeploy()
 
   return (
     <Layout type="base">
@@ -24,7 +41,18 @@ const CreatePage = () => {
           onSubmit={create}
         >
           <div className="flex flex-col gap-y-[20px] items-center md:items-end h-full">
-            <AnimationUpload />
+            <div>
+              Listing image or video.
+              <AnimationUpload />
+            </div>
+
+            {productType === "Digital" && (
+              <div>
+                <p>Upload the content your customer</p>
+                <p>will receive upon purchase.</p>
+                <ContentUpload />
+              </div>
+            )}
           </div>
           <div
             className="flex flex-col items-center md:items-start gap-y-[20px]
@@ -34,7 +62,7 @@ const CreatePage = () => {
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter Product Name..."
+              placeholder="Enter Listing Name..."
               id="title"
               name="title"
               hookToForm
@@ -45,6 +73,31 @@ const CreatePage = () => {
               placeholder="Enter Description..."
               id="description"
               name="description"
+              hookToForm
+            />
+            <Input
+              value={priceInUsd}
+              onChange={(e) => setPriceInUsd(e.target.value)}
+              placeholder="Enter USD price..."
+              id="price"
+              name="price"
+              type="number"
+              hookToForm
+            />
+            <Select
+              id="product_type"
+              name="product_type"
+              value={productType}
+              onChange={(e) => setProductType(e.target.value)}
+              options={productTypes}
+              hookToForm
+            />
+            <Select
+              id="product_category"
+              name="product_category"
+              value={productCategory}
+              onChange={(e) => setProductCategory(e.target.value)}
+              options={getCategoryOptions(productType)}
               hookToForm
             />
             <button

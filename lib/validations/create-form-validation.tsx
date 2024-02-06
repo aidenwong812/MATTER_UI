@@ -22,6 +22,10 @@ export const validation = JoiBase.object({
   description: Joi.string().messages({
     "string.empty": `Please fill out this field.`,
   }),
+  product_type: Joi.allow(),
+  price: Joi.allow(),
+  product_category: Joi.allow(),
+  content: Joi.allow(),
   cover: Joi.filelist()
     .required()
     .messages({
