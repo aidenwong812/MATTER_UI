@@ -20,3 +20,56 @@ export const zoraFee = "777000000000000"
 
 // CHECKOUT
 export const GAS_LIMIT_CHECKOUT_PER_ITEM = "175000"
+
+export const productTypes = [
+  {
+    label: "Physical Product",
+    value: "Physical",
+  },
+  {
+    label: "Digital Product",
+    value: "Digital",
+  },
+  {
+    label: "Service",
+    value: "Service",
+  },
+]
+
+export const serviceCategories = [
+  { label: "Transportation", value: "Transportation" },
+  { label: "Medical", value: "Medical" },
+  { label: "Home Repair", value: "HomeRepair" },
+  { label: "Food", value: "Food" },
+  { label: "Automotive", value: "Automotive" },
+  { label: "Beauty", value: "Beauty" },
+  { label: "Technology", value: "Technology" },
+  { label: "Pet", value: "Pet" },
+  { label: "Marketing", value: "Marketing" },
+  { label: "Other", value: "OtherService" },
+]
+
+export const digitalCategories = [
+  { label: "Music", value: "Music" },
+  { label: "Ebooks", value: "Ebooks" },
+  { label: "Video Games", value: "VideoGames" },
+  { label: "Apps", value: "Apps" },
+  { label: "Movies & TV", value: "MoviesTV" },
+  { label: "Art", value: "Art" },
+  { label: "Courses", value: "Courses" },
+  { label: "Tickets", value: "Tickets" },
+  { label: "Collectibles", value: "Collectibles" },
+  { label: "Other", value: "OtherDigital" },
+]
+
+export const physicalCategories = [
+  { label: "Apparel", value: "Apparel" },
+  { label: "Home & Kitchen", value: "HomeKitchen" },
+  { label: "Furniture", value: "Furniture" },
+  { label: "Toys & Games", value: "ToysGames" },
+  { label: "Beauty", value: "Beauty" },
+  { label: "Books", value: "Books" },
+  { label: "Jewelry & Watches", value: "JewelryWatches" },
+  { label: "Pet Supplies", value: "PetSupplies" },
+  { label: "Other", value: "OtherPhysical" },
+]

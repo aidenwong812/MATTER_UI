@@ -1,8 +1,8 @@
 import Image from "../../../shared/Image"
 import MediaPicker from "../../../shared/MediaPicker"
 
-const AnimationUpload = () => (
-  <MediaPicker hookToForm name="cover">
+const ContentUpload = () => (
+  <MediaPicker hookToForm name="content">
     {({ files }) => (
       <button
         type="button"
@@ -27,4 +27,4 @@ const AnimationUpload = () => (
   </MediaPicker>
 )
 
-export default AnimationUpload
+export default ContentUpload
