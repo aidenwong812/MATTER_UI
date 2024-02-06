@@ -6,6 +6,7 @@ import SeoHead from "../../SeoHead"
 import Navbar from "./Navbar"
 import data from "./data.json"
 import Sales from "./Sales"
+import Listing from "./Listing"
 
 const DashboardPage = () => {
   const { userData } = useUserProvider()
@@ -18,6 +19,7 @@ const DashboardPage = () => {
         {userData && !userData?.business?.isApproved && <PendingApprovalModal />}
         <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         {selectedTab === data[0].value && <Sales />}
+        {selectedTab === data[1].value && <Listing />}
       </div>
     </Layout>
   )
