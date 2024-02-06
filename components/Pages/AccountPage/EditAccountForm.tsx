@@ -4,6 +4,7 @@ import Icon from "../../../shared/Icon"
 import Input from "../../../shared/Input"
 import { validation } from "../../../lib/validations/account-form-validation"
 import Form from "../../../shared/Form"
+import Image from "../../../shared/Image"
 
 const EditAccountForm = () => {
   const {
@@ -41,8 +42,12 @@ const EditAccountForm = () => {
             w-[84px] rounded-full aspect-[1/1] mb-[32px] relative"
       >
         {userPFPSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={userPFPSrc} alt="not found pfp." className="rounded-full" />
+          <Image
+            link={userPFPSrc}
+            blurLink={userPFPSrc}
+            alt="not found icon"
+            containerClasses="w-[84px] aspect-[1/1] rounded-full overflow-hidden"
+          />
         ) : (
           <Icon name="camera" className="text-white" />
         )}
@@ -88,7 +93,7 @@ const EditAccountForm = () => {
                           w-[323px] mb-[32px] py-[15px]"
           disabled={loading}
         >
-          Save Changes
+          {loading ? "Saving..." : "Save Changes"}
         </button>
       </Form>
       <button

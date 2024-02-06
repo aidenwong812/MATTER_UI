@@ -1,9 +1,9 @@
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { db } from "./db"
 
-const getCustomer = async (userEmail) => {
+const getCustomer = async (privyEmail) => {
   try {
-    const q1 = query(collection(db, "customers"), where("email", "==", userEmail))
+    const q1 = query(collection(db, "customers"), where("privy_email", "==", privyEmail))
 
     const querySnapshot1 = await getDocs(q1)
 
