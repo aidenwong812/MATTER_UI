@@ -9,6 +9,7 @@ export enum FORM_MODE {
 }
 
 const useDeliveryFormData = () => {
+  const { privyEmail } = useUserProvider()
   const [deliveryFirstName, setDeliveryFirstName] = useState("")
   const [deliveryLastName, setDeliveryLastName] = useState("")
   const [deliveryAddress1, setDeliveryAddress1] = useState("")
@@ -44,7 +45,7 @@ const useDeliveryFormData = () => {
   const initialize = useCallback(async () => {
     if (!userData?.privy_email) return
 
-    const customerData: any = await getCustomer(userData?.privy_email)
+    const customerData: any = await getCustomer(userData?.privy_email || privyEmail)
 
     if (!customerData) return
 
@@ -62,6 +63,7 @@ const useDeliveryFormData = () => {
     setLoading(true)
     await createCustomer({
       email: userData?.privy_email,
+      privy_email: privyEmail,
       first_name: deliveryFirstName,
       last_name: deliveryLastName,
       address_1: deliveryAddress1,

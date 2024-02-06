@@ -18,12 +18,12 @@ const PhysicalPage = () => {
       >
         {isMobile ? (
           <p className="text-[28px] leading-[120%] tracking-[-0.168px] text-center">
-            Order physical
+            Shop physical products
             <br />
-            products.
+            on Matter.
           </p>
         ) : (
-          <GradientText className="text-[70px]">Order physical products on Matter.</GradientText>
+          <GradientText className="text-[70px]">Shop physical products on Matter.</GradientText>
         )}
         <Navbar />
         <p

@@ -1,5 +1,6 @@
 import { usePrivy } from "@privy-io/react-auth"
 import { useRouter } from "next/router"
+import { getIpfsLink } from "onchain-magic"
 import { useAccountForm } from "../../../providers/AccountProvider"
 import { Screen } from "../../../hooks/usePersonalAccount"
 import { useUserProvider } from "../../../providers/UserProvider"
@@ -25,10 +26,10 @@ const EditAccount = () => {
         className="flex bg-gray_10 justify-center items-center
             w-[84px] rounded-full aspect-[1/1] mb-[32px]"
       >
-        {userData?.userPFP ? (
+        {userData?.pfp ? (
           <Image
-            link={userData?.userPFP}
-            blurLink={userData?.userPFP}
+            link={getIpfsLink(userData?.pfp)}
+            blurLink={getIpfsLink(userData?.pfp)}
             alt="not found icon"
             containerClasses="w-[84px] aspect-[1/1] rounded-full overflow-hidden"
           />
