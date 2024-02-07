@@ -16,7 +16,7 @@ const useMyListings = () => {
     if (!userData) return
 
     init()
-  }, [])
+  }, [userData])
 
   return {
     listingProducts,

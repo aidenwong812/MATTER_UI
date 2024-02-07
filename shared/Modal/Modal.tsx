@@ -14,6 +14,7 @@ function Modal({ children, isVisible, containerClassName, onClose }: IModal) {
       className={`fixed top-0 left-0 w-screen h-screen 
         z-40 px-[20px] md:px-0
         justify-center items-center pt-[56px] flex
+        ${isVisible ? "" : "pointer-events-none"}
       `}
       animate={{
         visibility: isVisible ? "visible" : "hidden",

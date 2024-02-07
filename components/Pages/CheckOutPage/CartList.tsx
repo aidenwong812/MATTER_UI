@@ -1,10 +1,11 @@
 import useIsMobile from "../../../hooks/useIsMobile"
+import { useCheckOut } from "../../../providers/CheckOutProvider"
 import Icon from "../../../shared/Icon"
 import CartItem from "./CartItem"
-import { demoProducts } from "./demoProducts"
 
 const CartList = () => {
   const isMobile = useIsMobile()
+  const { carts } = useCheckOut()
 
   return (
     <div className="md:col-span-6 xl:col-span-8">
@@ -23,12 +24,10 @@ const CartList = () => {
         className="w-full flex flex-col
               px-[20px] md:px-0 border-t border-t-gray_3"
       >
-        {Array(3)
-          .fill("0")
-          .map((_, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <CartItem key={i} product={demoProducts[i]} />
-          ))}
+        {carts.map((cart, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <CartItem key={i} data={cart} cartId={cart?.id} />
+        ))}
       </div>
     </div>
   )

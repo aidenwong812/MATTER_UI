@@ -1,22 +1,28 @@
 import React, { createContext, useContext, useMemo } from "react"
 import { BigNumber } from "ethers"
-import { demoProducts } from "../components/Pages/CheckOutPage/demoProducts"
+import useCartData from "../hooks/useCartData"
+import { useMatterMarket } from "./MatterMarketProvider"
+import getBigNumberString from "../lib/getBigNumberString"
 
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
-  const cart = demoProducts
-  const totalPrice = cart.reduce(
-    (acc, call) => acc.add(BigNumber.from(call.price)),
+  const { carts, getCarts } = useCartData()
+  const { getEthConversion } = useMatterMarket()
+
+  const totalPrice = carts.reduce(
+    (acc, call) =>
+      acc.add(BigNumber.from(getBigNumberString(getEthConversion(call.product.priceInUsd)))),
     BigNumber.from(0),
   )
 
   const value = useMemo(
     () => ({
-      cart,
+      carts,
       totalPrice,
+      getCarts,
     }),
-    [cart, totalPrice],
+    [carts, totalPrice, getCarts],
   )
 
   return <CheckOutContext.Provider value={value}>{children}</CheckOutContext.Provider>
