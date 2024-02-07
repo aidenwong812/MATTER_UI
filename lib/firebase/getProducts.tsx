@@ -8,6 +8,7 @@ const getProducts = async () => {
     return productsSnapshot.docs.map((product) => ({
       id: product.id,
       ...product.data(),
+      type: "product",
     }))
   } catch (error) {
     throw new Error(error)
