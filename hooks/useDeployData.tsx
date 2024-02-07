@@ -5,17 +5,19 @@ import createProduct from "../lib/firebase/createProduct"
 import { productTypes } from "../lib/consts"
 import { uploadToIpfs } from "onchain-magic"
 import { useState } from "react"
+import { useUserProvider } from "../providers/UserProvider"
 
 const useDeployData = () => {
   const [cover, setCover] = useState(null)
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
+  const [productName, setProductName] = useState("")
+  const [productDescription, setProductDescription] = useState("")
   const [creating, setCreating] = useState(false)
   const [productType, setProductType] = useState(productTypes[0].value)
-  const [productCategory, setProductCategory] = useState(physicalCategories[0])
+  const [productCategory, setProductCategory] = useState(physicalCategories[0].value)
   const [priceInUsd, setPriceInUsd] = useState("")
   const { create1155Contract } = useCreate1155Contract()
   const { push } = useRouter()
+  const { userData } = useUserProvider()
 
   const create = async ({ cover, content }) => {
     if (creating) return
@@ -23,20 +25,23 @@ const useDeployData = () => {
     setCover(cover[0])
     setCreating(true)
 
-    const ipfsCid: any = await create1155Contract(CHAIN_ID, cover[0], title, description)
-    if (ipfsCid?.error) {
+    const response = await create1155Contract(CHAIN_ID, cover[0], productName, productDescription)
+    const { error } = response as any
+    if (error) {
       setCreating(false)
       return
     }
 
     const productData = {
-      cover: ipfsCid,
-      title,
-      description,
-      priceInUsd,
+      cover: response.ipfs,
+      productName,
+      productDescription,
+      priceInUsd: parseFloat(priceInUsd),
       productType,
       productCategory,
       content: null,
+      contractAddress: response.contractAddress,
+      customerId: userData?.id,
     }
 
     if (content) {
@@ -66,10 +71,10 @@ const useDeployData = () => {
   return {
     cover,
     setCover,
-    title,
-    setTitle,
-    description,
-    setDescription,
+    productName,
+    setProductName,
+    productDescription,
+    setProductDescription,
     creating,
     setCreating,
     create,

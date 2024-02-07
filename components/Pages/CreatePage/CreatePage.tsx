@@ -9,13 +9,14 @@ import Spinner from "../../Spinner/Spinner"
 import AnimationUpload from "./AnimationUpload"
 import { productTypes } from "../../../lib/consts"
 import ContentUpload from "./ContentUpload"
+import TextArea from "../../../shared/TextArea"
 
 const CreatePage = () => {
   const {
-    title,
-    setTitle,
-    description,
-    setDescription,
+    productName,
+    setProductName,
+    productDescription,
+    setProductDescription,
     creating,
     create,
     productType,
@@ -60,19 +61,19 @@ const CreatePage = () => {
           >
             <p className="text-[22px]">Create</p>
             <Input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
               placeholder="Enter Listing Name..."
-              id="title"
-              name="title"
+              id="product_name"
+              name="product_name"
               hookToForm
             />
-            <Input
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+            <TextArea
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
               placeholder="Enter Description..."
-              id="description"
-              name="description"
+              id="product_description"
+              name="product_description"
               hookToForm
             />
             <Input
