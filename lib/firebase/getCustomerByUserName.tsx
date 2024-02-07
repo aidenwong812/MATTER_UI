@@ -3,7 +3,7 @@ import { db } from "./db"
 
 const getCustomerByUserName = async (userName) => {
   try {
-    const q = query(collection(db, "customers"), where("user_name", "==", userName))
+    const q = query(collection(db, "customers"), where("userName", "==", userName))
 
     const querySnapshot = await getDocs(q)
 

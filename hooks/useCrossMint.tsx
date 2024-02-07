@@ -1,4 +1,3 @@
-import useEthPrice from "./useEthPrice"
 import useConnectedWallet from "./useConnectedWallet"
 import { ethers } from "ethers"
 import getMulticallFromCart from "../lib/getMulticallFromCart"
@@ -8,13 +7,14 @@ import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 import { useUserProvider } from "../providers/UserProvider"
+import { useMatterMarket } from "../providers/MatterMarketProvider"
 
 const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { userData } = useUserProvider()
   const [receiptEmail, setReceiptEmail] = useState("")
-  const { getUsdConversion } = useEthPrice()
+  const { getUsdConversion } = useMatterMarket()
 
   const multicalls = cart && getMulticallFromCart(cart, getMintData(connectedWallet))
   const totalPriceEth = totalPrice && ethers.utils.formatEther(totalPrice)
@@ -47,7 +47,7 @@ const useCrossMint = (cart, totalPrice) => {
   }
 
   useEffect(() => {
-    if (userData?.privy_email) setReceiptEmail(userData?.privy_email)
+    if (userData?.privyEmail) setReceiptEmail(userData?.privyEmail)
   }, [userData])
 
   return {

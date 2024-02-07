@@ -48,16 +48,16 @@ const DeliveryAddressForm = () => {
       onSubmit={confirmDeliveryAddress}
     >
       <Input
-        id="delivery_first_name"
-        name="delivery_first_name"
+        id="delivery_firstName"
+        name="delivery_firstName"
         placeholder="First Name"
         value={deliveryFirstName}
         onChange={(e) => setDeliveryFirstName(e.target.value)}
         hookToForm
       />
       <Input
-        id="delivery_last_name"
-        name="delivery_last_name"
+        id="delivery_lastName"
+        name="delivery_lastName"
         placeholder="Last Name"
         value={deliveryLastName}
         onChange={(e) => setDeliveryLastName(e.target.value)}
@@ -93,8 +93,8 @@ const DeliveryAddressForm = () => {
         </div>
         <div className="col-span-4">
           <Input
-            id="delivery_zip_code"
-            name="delivery_zip_code"
+            id="delivery_zipCode"
+            name="delivery_zipCode"
             placeholder="Zip Code"
             value={deliveryZipCode}
             onChange={(e) => setDeliveryZipCode(e.target.value)}
@@ -103,16 +103,16 @@ const DeliveryAddressForm = () => {
         </div>
       </div>
       <Input
-        id="delivery_phone_number"
-        name="delivery_phone_number"
+        id="delivery_phoneNumber"
+        name="delivery_phoneNumber"
         placeholder="Phone Number"
         value={deliveryPhoneNumber}
         onChange={(e) => setDeliveryPhoneNumber(e.target.value)}
         hookToForm
       />
       <Select
-        id="delivery_country_code"
-        name="delivery_country_code"
+        id="delivery_countryCode"
+        name="delivery_countryCode"
         value={deliveryCountryCode || "US"}
         onChange={(e) => setDeliveryCountryCode(e.target.value)}
         options={countryData}

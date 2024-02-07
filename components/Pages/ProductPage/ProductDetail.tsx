@@ -1,12 +1,12 @@
 import { formatEther } from "viem"
 import SellerName from "../../SellerName"
-import useEthPrice from "../../../hooks/useEthPrice"
 import { useProduct } from "../../../providers/ProductProvider"
+import { useMatterMarket } from "../../../providers/MatterMarketProvider"
 
 const ProductDetail = () => {
   const { productData } = useProduct()
   const ethPrice = productData && formatEther(productData.price as any).toString()
-  const { getUsdConversion } = useEthPrice()
+  const { getUsdConversion } = useMatterMarket()
 
   return (
     <div className="md:col-span-3 py-[35px] md:px-[24px]">

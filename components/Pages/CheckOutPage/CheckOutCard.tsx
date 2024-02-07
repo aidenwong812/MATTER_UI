@@ -3,13 +3,13 @@ import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
-import useEthPrice from "../../../hooks/useEthPrice"
 import CreditCardPayButton from "../../CreditCardPayButton"
 import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
+import { useMatterMarket } from "../../../providers/MatterMarketProvider"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()
-  const { getUsdConversion } = useEthPrice()
+  const { getUsdConversion } = useMatterMarket()
   const { cart, totalPrice } = useCheckOut()
   const { purchaseByPrivy } = usePurchaseByPrivy()
   const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))

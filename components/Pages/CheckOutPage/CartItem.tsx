@@ -4,10 +4,10 @@ import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import Select from "../../../shared/Select"
 import useIsMobile from "../../../hooks/useIsMobile"
-import useEthPrice from "../../../hooks/useEthPrice"
+import { useMatterMarket } from "../../../providers/MatterMarketProvider"
 
 const CartItem = ({ product = null }: any) => {
-  const { getUsdConversion } = useEthPrice()
+  const { getUsdConversion } = useMatterMarket()
   const [quantity, setQuanity] = useState("1")
   const quantites = Array.from({ length: 5 }).map((_, index) => ({
     label: `${index + 1}`,
