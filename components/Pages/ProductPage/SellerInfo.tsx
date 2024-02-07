@@ -5,6 +5,9 @@ import SellerName from "../../SellerName"
 const SellerInfo = () => {
   const { productData } = useProduct()
 
+  const verifiedAt =
+    productData && new Date(productData?.customer?.business?.verifiedAt).toLocaleDateString()
+
   return (
     <div className="w-full">
       <div
@@ -26,7 +29,7 @@ const SellerInfo = () => {
           >{`{Seller bio}`}</p>
         </div>
         <div className="text-gray_6 font-[400] leading-[120%]">
-          Verified on Matter since 00/00/0000
+          Verified on Matter since {verifiedAt || "00/00/0000"}
         </div>
       </div>
     </div>
