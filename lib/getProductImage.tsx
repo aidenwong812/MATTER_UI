@@ -5,7 +5,7 @@ const getProductImage = async (ipfs) => {
   try {
     const response = await axios.get(getIpfsLink(ipfs))
 
-    return getIpfsLink(response.data.image)
+    return getIpfsLink(response.data.image || ipfs)
   } catch (error) {
     return ""
   }

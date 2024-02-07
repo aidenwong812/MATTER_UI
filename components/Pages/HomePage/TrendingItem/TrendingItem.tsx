@@ -1,9 +1,11 @@
+import useProductImage from "../../../../hooks/useProductImage"
 import { useMatterMarket } from "../../../../providers/MatterMarketProvider"
 import Image from "../../../../shared/Image"
 import SellerName from "../../../SellerName"
 
 const TrendingItem = ({ i, data = null }) => {
   const { getEthConversion } = useMatterMarket()
+  const { imageUrl } = useProductImage(data?.cover)
 
   const fullName =
     data?.customer?.firstName && data?.customer?.lastName
@@ -20,8 +22,8 @@ const TrendingItem = ({ i, data = null }) => {
           {i}
         </p>
         <Image
-          link="/images/trending.png"
-          blurLink="/images/trending.png"
+          link={imageUrl || "/images/trending.png"}
+          blurLink={imageUrl || "/images/trending.png"}
           containerClasses="w-[230px] aspect-[1/1] ml-[-15px]"
           alt="not found icon"
         />
