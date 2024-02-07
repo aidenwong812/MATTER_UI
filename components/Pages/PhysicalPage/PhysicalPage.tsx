@@ -4,9 +4,11 @@ import SeoHead from "../../SeoHead"
 import Navbar from "./Navbar"
 import ProductItem from "../ProductItem"
 import useIsMobile from "../../../hooks/useIsMobile"
+import { usePhysical } from "../../../providers/PhysicalProvider"
 
 const PhysicalPage = () => {
   const isMobile = useIsMobile()
+  const { products } = usePhysical()
 
   return (
     <Layout type="base">
@@ -30,15 +32,13 @@ const PhysicalPage = () => {
           className="text-[16px] md:text-[28px] leading-[120%] tracking-[-0.168px] text-gray_8 text-left pt-[20px]
         border-t border-t-gray_3 px-[18px]"
         >
-          All Digital Items
+          All Physical Items
         </p>
         <div className="w-full grid grid-cols-2 md:grid-cols-5 gap-[40px] mt-[40px] px-[18px]">
-          {Array(10)
-            .fill(0)
-            .map((_, i) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <ProductItem key={i} />
-            ))}
+          {products.map((product, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <ProductItem key={i} data={product} />
+          ))}
         </div>
       </div>
     </Layout>

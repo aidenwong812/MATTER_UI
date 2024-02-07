@@ -11,8 +11,8 @@ const ProductItem = ({ imageClasses = "", data = null }) => {
     <div className="w-full flex flex-col h-full">
       <Image
         alt="not found photo"
-        link={imageUrl}
-        blurLink={imageUrl}
+        link={imageUrl || "/images/product_placeholder.png"}
+        blurLink={imageUrl || "/images/product_placeholder.png"}
         containerClasses={`w-full aspect-[1/1] md:aspect-[1/1] ${imageClasses}`}
         imageClasses="!object-cover"
       />
