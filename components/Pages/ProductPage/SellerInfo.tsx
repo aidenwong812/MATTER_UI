@@ -1,3 +1,4 @@
+import getProductSeller from "../../../lib/getProductSeller"
 import { useProduct } from "../../../providers/ProductProvider"
 import SellerName from "../../SellerName"
 
@@ -18,7 +19,7 @@ const SellerInfo = () => {
         </p>
         <div className="my-[24px] flex flex-col gap-y-[8px]">
           <p className="text-[16px] leading-[120%] font-[400]">About the Seller</p>
-          <SellerName name={productData?.sellerName} />
+          <SellerName name={getProductSeller(productData)} />
           <p
             className="tracking-[-0.4px] leading-[100%] tracking-[-0.4px]
                   font-[400] text-gray_6"

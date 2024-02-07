@@ -2,15 +2,11 @@ import Image from "../../../shared/Image"
 import SellerName from "../../SellerName"
 import useProductImage from "../../../hooks/useProductImage"
 import { useMatterMarket } from "../../../providers/MatterMarketProvider"
+import getProductSeller from "../../../lib/getProductSeller"
 
 const ProductItem = ({ imageClasses = "", data = null }) => {
   const { imageUrl } = useProductImage(data?.cover)
   const { getEthConversion } = useMatterMarket()
-
-  const fullName =
-    data?.customer?.firstName && data?.customer?.lastName
-      ? `${data?.customer?.firstName} ${data?.customer?.lastName}`
-      : `${data?.customer?.userName || ""}`
 
   return (
     <div className="w-full flex flex-col h-full">
@@ -25,7 +21,7 @@ const ProductItem = ({ imageClasses = "", data = null }) => {
         <p className="text-[14px] font-[400] leading-[120%] tracking-[-0.14px] mt-[12px]">
           {data?.productName}
         </p>
-        <SellerName className="my-[4px]" name={`${fullName}`} />
+        <SellerName className="my-[4px]" name={`${getProductSeller(data)}`} />
         <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px]">
           USD ${data?.priceInUsd}
         </p>

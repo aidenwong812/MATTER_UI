@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import createCart from "../lib/firebase/createCart"
 import { useRouter } from "next/router"
-import getDocument from "../lib/firebase/getDocument"
+import getProductById from "../lib/firebase/getProductById"
 
 const ProductContext = createContext(null)
 
@@ -14,7 +14,7 @@ const ProductProvider = ({ children }) => {
   const getProductData = useCallback(async () => {
     if (!productId) return null
 
-    const data = await getDocument("products", productId)
+    const data = await getProductById(productId)
     setProductData(data)
   }, [productId])
 
