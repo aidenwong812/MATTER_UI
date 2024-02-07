@@ -2,10 +2,11 @@ import { useState } from "react"
 import Slider from "../../../../shared/Slider"
 import Icon from "../../../../shared/Icon"
 import ProductItem from "../../ProductItem"
+import { useHomeProducts } from "../../../../providers/HomePageProvider"
 
 const NewestSlides = () => {
   const [swiper, setSwiper] = useState(null)
-
+  const { newestProducts } = useHomeProducts()
   const prevSlide = () => swiper.slidePrev()
   const nextSlide = () => swiper.slideNext()
 
@@ -37,12 +38,10 @@ const NewestSlides = () => {
           },
         }}
       >
-        {Array(10)
-          .fill(0)
-          .map((_, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ProductItem key={i} />
-          ))}
+        {newestProducts.map((product, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <ProductItem key={i} data={product} />
+        ))}
       </Slider>
     </div>
   )

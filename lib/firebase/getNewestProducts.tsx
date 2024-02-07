@@ -1,16 +1,13 @@
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore"
 import { db } from "./db"
-import { ONE_DAY_MILLISECONDS } from "../consts"
 
 const getNewestProducts = async () => {
   try {
-    const last7DaysMillio = new Date().getTime() - 7 * ONE_DAY_MILLISECONDS
-
-    const q = query(collection(db, "products"), where("timestamp", ">=", last7DaysMillio))
+    const q = query(collection(db, "products"), orderBy("timestamp", "desc"))
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
-      const productsPromise = querySnapshot.docs.map(async (data) => {
+      const productsPromise = querySnapshot.docs.slice(0, 10).map(async (data) => {
         const customer = await getDoc(doc(db, "customers", data.data().customerId))
         return {
           id: data.id,
