@@ -3,7 +3,7 @@ import useDigitalData from "../hooks/useDigitalData"
 
 const DigitalContext = createContext({} as any)
 
-export const useServices = () => useContext(DigitalContext)
+export const useDigital = () => useContext(DigitalContext)
 
 export const DigitalProvider = ({ children }) => {
   const digitalData = useDigitalData()
