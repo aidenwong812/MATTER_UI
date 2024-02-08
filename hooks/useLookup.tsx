@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import getProducts from "../lib/firebase/getProducts"
 import getCustomers from "../lib/firebase/getCustomers"
 
 const useLookup = () => {
   const [searchKey, setSearchKey] = useState("")
   const [isVisible, setIsVisible] = useState(false)
+  const lookupRef = useRef() as any
 
   const [products, setProducts] = useState([])
   const [customers, setCustomers] = useState([])
@@ -25,12 +26,26 @@ const useLookup = () => {
   useEffect(() => {
     const data = [...products, ...customers].filter(
       (item) =>
-        item?.title?.toLowerCase().search(searchKey.toLowerCase()) >= 0 ||
+        item?.productName?.toLowerCase().search(searchKey.toLowerCase()) >= 0 ||
         item?.businessName?.toLowerCase().search(searchKey.toLowerCase()) >= 0,
     )
 
     setFilters(data)
   }, [products, customers, searchKey])
+
+  useEffect(() => {
+    const handleClose = (e) => {
+      if (!lookupRef?.current) return
+
+      if (lookupRef.current.contains(e.target)) return
+
+      setIsVisible(false)
+    }
+
+    document.addEventListener("mousedown", handleClose)
+
+    return () => document.removeEventListener("mousedown", handleClose)
+  }, [lookupRef])
 
   return {
     searchKey,
@@ -38,6 +53,7 @@ const useLookup = () => {
     filters,
     isVisible,
     setIsVisible,
+    lookupRef,
   }
 }
 

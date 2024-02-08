@@ -33,7 +33,7 @@ const usePrivySendTransaction = () => {
       buttonText: "Sign",
     }
     const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
-    return txReceipt.transactionHash
+    return txReceipt
   }
 
   return {

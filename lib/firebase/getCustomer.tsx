@@ -3,7 +3,7 @@ import { db } from "./db"
 
 const getCustomer = async (privyEmail) => {
   try {
-    const q1 = query(collection(db, "customers"), where("privy_email", "==", privyEmail))
+    const q1 = query(collection(db, "customers"), where("privyEmail", "==", privyEmail))
 
     const querySnapshot1 = await getDocs(q1)
 

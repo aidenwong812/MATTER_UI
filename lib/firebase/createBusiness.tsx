@@ -6,6 +6,7 @@ const createBusinessAccount = async (businessData, customerId) => {
     ...businessData,
     timestamp: Date.now(),
     isApproved: false,
+    verifiedAt: 0,
   }
 
   const q = query(collection(db, "business"), where("customerId", "==", customerId))

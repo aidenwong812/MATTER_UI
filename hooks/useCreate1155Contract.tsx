@@ -8,6 +8,7 @@ import { store } from "onchain-magic"
 import getZora1155ProxyAddress from "../lib/zora/getZora1155ProxyAddress"
 import { CHAIN_ID } from "../lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
+import getCreatedContractAddress from "../lib/getCreatedContractAddress"
 
 const useCreate1155Contract = () => {
   const { authenticated } = usePrivy()
@@ -43,7 +44,7 @@ const useCreate1155Contract = () => {
 
       if (authenticated) {
         const factoryAddress = getZora1155ProxyAddress(chainId)
-        await sendTransaction(
+        const response = await sendTransaction(
           factoryAddress,
           chainId,
           abi,
@@ -53,7 +54,15 @@ const useCreate1155Contract = () => {
           "Create",
           "Matter",
         )
-        return `ipfs://${ipfsCid}`
+
+        const { error } = response as any
+        if (error) return
+
+        const contractAddress = getCreatedContractAddress(response.logs)
+        return {
+          ipfs: `ipfs://${ipfsCid}`,
+          contractAddress,
+        }
       }
 
       return { error: true }

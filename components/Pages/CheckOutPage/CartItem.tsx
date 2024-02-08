@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { formatEther } from "viem"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import Select from "../../../shared/Select"
 import useIsMobile from "../../../hooks/useIsMobile"
-import useEthPrice from "../../../hooks/useEthPrice"
 
 const CartItem = ({ product = null }: any) => {
   const { getUsdConversion } = useEthPrice()

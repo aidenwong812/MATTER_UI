@@ -1,9 +1,9 @@
 import { formatEther } from "viem"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
-import useEthPrice from "../../../hooks/useEthPrice"
 import CreditCardPayButton from "../../CreditCardPayButton"
 import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
 

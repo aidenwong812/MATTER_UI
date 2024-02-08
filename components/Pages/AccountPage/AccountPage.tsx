@@ -7,10 +7,13 @@ import CreateBusinessAccount from "./CreateBusinessAccount"
 import EditAccount from "./EditAccount"
 import EditAccountForm from "./EditAccountForm"
 import BusinessCreateModal from "../../BusinessCreateModal"
+import { useUserProvider } from "../../../providers/UserProvider"
+import VisitBusinessDashboard from "./VisitBusinessDashboard"
 
 const AccountPage = () => {
   const { screenStatus } = useAccountForm()
   const [isOpenBusinessModal, setIsOpenBusinessModal] = useState(false)
+  const { userData } = useUserProvider()
 
   return (
     <Layout type="base" className="!bg-gray_1">
@@ -23,7 +26,11 @@ const AccountPage = () => {
         {screenStatus === Screen.SELECT_UI && (
           <>
             <EditAccount />
-            <CreateBusinessAccount onClick={() => setIsOpenBusinessModal(!isOpenBusinessModal)} />
+            {userData?.business ? (
+              <VisitBusinessDashboard />
+            ) : (
+              <CreateBusinessAccount onClick={() => setIsOpenBusinessModal(!isOpenBusinessModal)} />
+            )}
           </>
         )}
         {screenStatus === Screen.EDIT_FORM && <EditAccountForm />}

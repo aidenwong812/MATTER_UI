@@ -11,9 +11,9 @@ const getDocument = async (collectionName, documentId) => {
         ...docSnap.data(),
       }
 
-    throw new Error("Document is not existed")
+    return { error: true }
   } catch (error) {
-    throw new Error(error)
+    return { error }
   }
 }
 
