@@ -1,10 +1,10 @@
+import { MatterMarketProvider } from "@/providers/MatterMarketProvider"
 import ServicesPage from "../../components/Pages/ServicesPage"
-import { ServicesProvider } from "../../providers/ServicesProvider"
 
 const Services = () => (
-  <ServicesProvider>
+  <MatterMarketProvider>
     <ServicesPage />
-  </ServicesProvider>
+  </MatterMarketProvider>
 )
 
 export default Services

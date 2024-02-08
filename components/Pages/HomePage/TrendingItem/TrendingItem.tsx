@@ -1,10 +1,10 @@
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import useProductImage from "../../../../hooks/useProductImage"
-import { useMatterMarket } from "../../../../providers/MatterMarketProvider"
 import Image from "../../../../shared/Image"
 import SellerName from "../../../SellerName"
 
 const TrendingItem = ({ i, data = null }) => {
-  const { getEthConversion } = useMatterMarket()
+  const { getEthConversion } = useEthPrice()
   const { imageUrl } = useProductImage(data?.cover)
 
   const fullName =
