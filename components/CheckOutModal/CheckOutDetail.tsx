@@ -1,7 +1,7 @@
 import { formatEther } from "viem"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
-import { useEthPrice } from "../../providers/EthPriceProvider"
 
 const CheckOutDetail = ({ totalPrice }) => {
   const { getUsdConversion } = useEthPrice()

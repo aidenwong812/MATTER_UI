@@ -1,11 +1,11 @@
 import { formatEther } from "viem"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 import CreditCardPayButton from "../../CreditCardPayButton"
 import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
-import { useEthPrice } from "../../../providers/EthPriceProvider"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()

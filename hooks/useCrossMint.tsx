@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 import { useUserProvider } from "../providers/UserProvider"
-import { useEthPrice } from "../providers/EthPriceProvider"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 
 const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()

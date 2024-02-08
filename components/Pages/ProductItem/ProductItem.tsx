@@ -1,7 +1,7 @@
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../../shared/Image"
 import SellerName from "../../SellerName"
 import useProductImage from "../../../hooks/useProductImage"
-import { useEthPrice } from "../../../providers/EthPriceProvider"
 
 const ProductItem = ({ imageClasses = "", data = null }) => {
   const { imageUrl } = useProductImage(data?.cover)
