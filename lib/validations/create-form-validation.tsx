@@ -16,10 +16,10 @@ const allowImageFile = (value: string, helper: any) => {
 }
 
 export const validation = JoiBase.object({
-  title: Joi.string().messages({
+  product_name: Joi.string().messages({
     "string.empty": `Please fill out this field.`,
   }),
-  description: Joi.string().messages({
+  product_description: Joi.string().messages({
     "string.empty": `Please fill out this field.`,
   }),
   product_type: Joi.allow(),
