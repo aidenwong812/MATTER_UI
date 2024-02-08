@@ -1,15 +1,15 @@
 import { formatEther } from "viem"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 import CreditCardPayButton from "../../CreditCardPayButton"
 import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
-import { useMatterMarket } from "../../../providers/MatterMarketProvider"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()
-  const { getUsdConversion } = useMatterMarket()
+  const { getUsdConversion } = useEthPrice()
   const { cart, totalPrice } = useCheckOut()
   const { purchaseByPrivy } = usePurchaseByPrivy()
   const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))

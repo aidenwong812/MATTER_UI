@@ -1,10 +1,10 @@
+import { MatterMarketProvider } from "@/providers/MatterMarketProvider"
 import PhysicalPage from "../../components/Pages/PhysicalPage"
-import { PhysicalProvider } from "../../providers/PhysicalProvider"
 
 const ProductPhysical = () => (
-  <PhysicalProvider>
+  <MatterMarketProvider type="Physical">
     <PhysicalPage />
-  </PhysicalProvider>
+  </MatterMarketProvider>
 )
 
 export default ProductPhysical
