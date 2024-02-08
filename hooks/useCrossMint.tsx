@@ -7,14 +7,14 @@ import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 import { useUserProvider } from "../providers/UserProvider"
-import { useMatterMarket } from "../providers/MatterMarketProvider"
+import { useEthPrice } from "../providers/EthPriceProvider"
 
 const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { userData } = useUserProvider()
   const [receiptEmail, setReceiptEmail] = useState("")
-  const { getUsdConversion } = useMatterMarket()
+  const { getUsdConversion } = useEthPrice()
 
   const multicalls = cart && getMulticallFromCart(cart, getMintData(connectedWallet))
   const totalPriceEth = totalPrice && ethers.utils.formatEther(totalPrice)

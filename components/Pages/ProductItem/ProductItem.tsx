@@ -1,11 +1,11 @@
 import Image from "../../../shared/Image"
 import SellerName from "../../SellerName"
 import useProductImage from "../../../hooks/useProductImage"
-import { useMatterMarket } from "../../../providers/MatterMarketProvider"
+import { useEthPrice } from "../../../providers/EthPriceProvider"
 
 const ProductItem = ({ imageClasses = "", data = null }) => {
   const { imageUrl } = useProductImage(data?.cover)
-  const { getEthConversion } = useMatterMarket()
+  const { getEthConversion } = useEthPrice()
 
   return (
     <div className="w-full flex flex-col h-full">

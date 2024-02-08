@@ -1,10 +1,10 @@
 import { formatEther } from "viem"
 import Image from "../../shared/Image"
 import DeliveryInformation from "./DeliveryInfomation"
-import { useMatterMarket } from "../../providers/MatterMarketProvider"
+import { useEthPrice } from "../../providers/EthPriceProvider"
 
 const CheckOutDetail = ({ totalPrice }) => {
-  const { getUsdConversion } = useMatterMarket()
+  const { getUsdConversion } = useEthPrice()
   const usdPrice = totalPrice && getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   return (
