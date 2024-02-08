@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import getEthPrice from "../lib/getEthPrice"
 
-const useEthPrice = () => {
+const useEthPriceData = () => {
   const [ethPrice, setEthPrice] = useState(0)
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const useEthPrice = () => {
     init()
   }, [])
 
-  const getEthConversion = (usdAmount) => parseFloat(usdAmount) / ethPrice
+  const getEthConversion = (usdAmount) => (parseFloat(usdAmount) / ethPrice).toFixed(6)
   const getUsdConversion = (ethAmount) => (parseFloat(ethAmount) * ethPrice).toFixed(2)
 
   return {
@@ -24,4 +24,4 @@ const useEthPrice = () => {
   }
 }
 
-export default useEthPrice
+export default useEthPriceData

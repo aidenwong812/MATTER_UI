@@ -43,35 +43,35 @@ const useDeliveryFormData = () => {
   ])
 
   const initialize = useCallback(async () => {
-    if (!userData?.privy_email) return
+    if (!userData?.privyEmail) return
 
-    const customerData: any = await getCustomer(userData?.privy_email || privyEmail)
+    const customerData: any = await getCustomer(userData?.privyEmail || privyEmail)
 
     if (!customerData) return
 
-    setDeliveryFirstName(customerData.first_name)
-    setDeliveryLastName(customerData.last_name)
+    setDeliveryFirstName(customerData.firstName)
+    setDeliveryLastName(customerData.lastName)
     setDeliveryState(customerData.state)
-    setDeliveryPhoneNumber(customerData.phone_number)
-    setDeliveryZipCode(customerData.zip_code)
-    setDeliveryCountryCode(customerData.country_code)
+    setDeliveryPhoneNumber(customerData.phoneNumber)
+    setDeliveryZipCode(customerData.zipCode)
+    setDeliveryCountryCode(customerData.countryCode)
     setDeliveryAddress1(customerData.address_1)
-    setDeliveryAddress2(customerData.address_2)
+    setDeliveryAddress2(customerData.address2)
   }, [userData])
 
   const confirmDeliveryAddress = async () => {
     setLoading(true)
     await createCustomer({
-      email: userData?.privy_email,
-      privy_email: privyEmail,
-      first_name: deliveryFirstName,
-      last_name: deliveryLastName,
-      address_1: deliveryAddress1,
-      address_2: deliveryAddress2,
+      email: userData?.privyEmail,
+      privyEmail,
+      firstName: deliveryFirstName,
+      lastName: deliveryLastName,
+      address1: deliveryAddress1,
+      address2: deliveryAddress2,
       state: deliveryState,
-      zip_code: deliveryZipCode,
-      phone_number: deliveryPhoneNumber,
-      country_code: deliveryCountryCode,
+      zipCode: deliveryZipCode,
+      phoneNumber: deliveryPhoneNumber,
+      countryCode: deliveryCountryCode,
     })
     await initialize()
     setFormMode(FORM_MODE.VISIBLE_MODE)

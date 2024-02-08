@@ -1,6 +1,6 @@
 import { formatEther } from "viem"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import SellerName from "../../SellerName"
-import useEthPrice from "../../../hooks/useEthPrice"
 import { useProduct } from "../../../providers/ProductProvider"
 
 const ProductDetail = () => {

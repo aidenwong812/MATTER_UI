@@ -33,7 +33,7 @@ const useBusinessAccount = ({ setLoading }) => {
   }
 
   useEffect(() => {
-    setEmailForVerify(userData?.privy_email)
+    setEmailForVerify(userData?.privyEmail)
     setBusinessSite(userData?.business?.website)
     setPublicBusinessName(userData?.business?.businessName)
   }, [userData])

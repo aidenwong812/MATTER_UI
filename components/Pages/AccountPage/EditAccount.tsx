@@ -41,10 +41,10 @@ const EditAccount = () => {
         className="leading-[110%] tracking-[-0.7px]
             text-[28px] font-[400] text-center"
       >
-        {userData?.first_name} {userData?.last_name}
+        {userData?.firstName} {userData?.lastName}
       </p>
       <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
-        {userData?.privy_email}
+        {userData?.privyEmail}
       </p>
       <button
         type="button"

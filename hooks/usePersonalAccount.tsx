@@ -24,9 +24,9 @@ const usePersonalAccount = ({ setLoading }) => {
     if (userPFP) pfp = await uploadToIpfs(userPFP)
 
     const response: any = await createCustomer({
-      privy_email: privyEmail,
+      privyEmail: privyEmail,
       ...(userEmail && { email: userEmail }),
-      ...(userName && { user_name: userName }),
+      ...(userName && { userName: userName }),
       ...(pfp && { pfp: `ipfs://${pfp}` }),
     })
 
@@ -41,7 +41,7 @@ const usePersonalAccount = ({ setLoading }) => {
   }
 
   useEffect(() => {
-    setUserName(userData?.user_name)
+    setUserName(userData?.userName)
     setUserEmail(userData?.email || privyEmail)
     setUserPFPSrc(getIpfsLink(userData?.pfp))
   }, [userData, privyEmail])
