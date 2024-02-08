@@ -1,11 +1,11 @@
+import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../../shared/Image"
 import SellerName from "../../SellerName"
 import useProductImage from "../../../hooks/useProductImage"
-import { useMatterMarket } from "../../../providers/MatterMarketProvider"
 
 const ProductItem = ({ imageClasses = "", data = null }) => {
   const { imageUrl } = useProductImage(data?.cover)
-  const { getEthConversion } = useMatterMarket()
+  const { getEthConversion } = useEthPrice()
 
   const fullName =
     data?.customer?.firstName && data?.customer?.lastName

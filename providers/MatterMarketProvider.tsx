@@ -1,18 +1,18 @@
 import { createContext, useContext, useMemo } from "react"
-import useEthPriceData from "../hooks/useEthPriceData"
+import useMatterMarketData from "../hooks/useMatterMarketData"
 
 const MatterMarketContext = createContext({} as any)
 
 export const useMatterMarket = () => useContext(MatterMarketContext)
 
-export const MatterMarketProvider = ({ children }) => {
-  const ethPriceData = useEthPriceData()
+export const MatterMarketProvider = ({ children, type = "Service" }) => {
+  const marketData = useMatterMarketData(type)
 
   const value = useMemo(
     () => ({
-      ...ethPriceData,
+      ...marketData,
     }),
-    [ethPriceData],
+    [marketData],
   )
 
   return <MatterMarketContext.Provider value={value}>{children}</MatterMarketContext.Provider>

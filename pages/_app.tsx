@@ -8,7 +8,7 @@ import React from "react"
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 import { ThemeProvider } from "../providers/ThemeProvider"
 import UserProvider from "../providers/UserProvider"
-import { MatterMarketProvider } from "../providers/MatterMarketProvider"
+import { EthPriceProvider } from "../providers/EthPriceProvider"
 
 const privyConfig: PrivyClientConfig = {
   loginMethods: ["email"],
@@ -27,7 +27,7 @@ const privyConfig: PrivyClientConfig = {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <MatterMarketProvider>
+    <EthPriceProvider>
       <ThemeProvider>
         <SessionProvider>
           <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ToastContainer />
         </SessionProvider>
       </ThemeProvider>
-    </MatterMarketProvider>
+    </EthPriceProvider>
   )
 }
 export default MyApp

@@ -1,10 +1,10 @@
+import { MatterMarketProvider } from "@/providers/MatterMarketProvider"
 import DigitalPage from "../../components/Pages/DigitalPage"
-import { DigitalProvider } from "../../providers/DigitalProvider"
 
 const ProductDigital = () => (
-  <DigitalProvider>
+  <MatterMarketProvider type="Digital">
     <DigitalPage />
-  </DigitalProvider>
+  </MatterMarketProvider>
 )
 
 export default ProductDigital

@@ -26,6 +26,7 @@ const useDeployData = () => {
     setCreating(true)
 
     const response = await create1155Contract(CHAIN_ID, cover[0], productName, productDescription)
+
     const { error } = response as any
     if (error) {
       setCreating(false)
@@ -49,7 +50,13 @@ const useDeployData = () => {
       productData.content = `ipfs://${ipfsContentCid}`
     }
 
-    await createProduct(productData)
+    const newId = await createProduct(productData)
+    const { error: createError } = newId as any
+
+    if (createError) {
+      setCreating(false)
+      return
+    }
 
     push(`/dashboard?tab=listings`)
     setCreating(false)
