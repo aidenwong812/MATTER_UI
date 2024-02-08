@@ -1,11 +1,11 @@
 import SellerName from "../../SellerName"
-import { useProduct } from "../../../providers/ProductProvider"
-import { useMatterMarket } from "../../../providers/MatterMarketProvider"
+import { useProduct } from "@/providers/ProductProvider"
 import getProductSeller from "../../../lib/getProductSeller"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 
 const ProductDetail = () => {
   const { productData } = useProduct()
-  const { getEthConversion } = useMatterMarket()
+  const { getEthConversion } = useEthPrice()
 
   return (
     <div className="md:col-span-3 py-[35px] md:px-[24px]">
