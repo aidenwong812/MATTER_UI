@@ -1,14 +1,14 @@
+import { useMatterMarket } from "@/providers/MatterMarketProvider"
 import GradientText from "../../GradientText"
 import Layout from "../../Layout"
 import SeoHead from "../../SeoHead"
 import Navbar from "./Navbar"
 import ProductItem from "../ProductItem"
 import useIsMobile from "../../../hooks/useIsMobile"
-import { useServices } from "../../../providers/ServicesProvider"
 
 const ServicesPage = () => {
   const isMobile = useIsMobile()
-  const { products } = useServices()
+  const { products } = useMatterMarket()
 
   return (
     <Layout type="base">
