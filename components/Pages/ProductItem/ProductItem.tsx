@@ -7,6 +7,11 @@ const ProductItem = ({ imageClasses = "", data = null }) => {
   const { imageUrl } = useProductImage(data?.cover)
   const { getEthConversion } = useEthPrice()
 
+  const fullName =
+    data?.customer?.firstName && data?.customer?.lastName
+      ? `${data?.customer?.firstName} ${data?.customer?.lastName}`
+      : `${data?.customer?.userName || ""}`
+
   return (
     <div className="w-full flex flex-col h-full">
       <Image
@@ -20,10 +25,7 @@ const ProductItem = ({ imageClasses = "", data = null }) => {
         <p className="text-[14px] font-[400] leading-[120%] tracking-[-0.14px] mt-[12px]">
           {data?.productName}
         </p>
-        <SellerName
-          className="my-[4px]"
-          name={`${data?.customer?.firstName} ${data?.customer?.lastName}`}
-        />
+        <SellerName className="my-[4px]" name={`${fullName}`} />
         <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px]">
           USD ${data?.priceInUsd}
         </p>
