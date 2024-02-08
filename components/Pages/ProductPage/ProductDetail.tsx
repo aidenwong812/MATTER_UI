@@ -1,7 +1,7 @@
-import SellerName from "../../SellerName"
 import { useProduct } from "@/providers/ProductProvider"
-import getProductSeller from "../../../lib/getProductSeller"
 import { useEthPrice } from "@/providers/EthPriceProvider"
+import SellerName from "../../SellerName"
+import getProductSeller from "../../../lib/getProductSeller"
 
 const ProductDetail = () => {
   const { productData } = useProduct()
