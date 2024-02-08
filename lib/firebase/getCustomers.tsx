@@ -8,6 +8,7 @@ const getCustomers = async () => {
     return customersSnapshot.docs.map((customer) => ({
       id: customer.id,
       ...customer.data(),
+      type: "customer",
     }))
   } catch (error) {
     throw new Error(error)

@@ -1,16 +1,12 @@
 import { useEthPrice } from "@/providers/EthPriceProvider"
 import useProductImage from "../../../../hooks/useProductImage"
+import getProductSeller from "../../../../lib/getProductSeller"
 import Image from "../../../../shared/Image"
 import SellerName from "../../../SellerName"
 
 const TrendingItem = ({ i, data = null }) => {
   const { getEthConversion } = useEthPrice()
   const { imageUrl } = useProductImage(data?.cover)
-
-  const fullName =
-    data?.customer?.firstName && data?.customer?.lastName
-      ? `${data?.customer?.firstName} ${data?.customer?.lastName}`
-      : `${data?.customer?.userName || ""}`
 
   return (
     <div>
@@ -32,7 +28,7 @@ const TrendingItem = ({ i, data = null }) => {
         <p className="text-[14px] font-[400] leading-[120%] tracking-[-0.14px] mt-[12px]">
           {data?.productName} / {data?.productType}
         </p>
-        <SellerName className="my-[4px]" name={fullName} />
+        <SellerName className="my-[4px]" name={getProductSeller(data)} />
         <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px]">
           US ${data?.priceInUsd}
         </p>

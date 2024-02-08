@@ -1,15 +1,24 @@
+import { useRouter } from "next/router"
 import useIsMobile from "../../hooks/useIsMobile"
 import useLookup from "../../hooks/useLookup"
 import Icon from "../../shared/Icon"
 
 const LookupInput = () => {
   const isMobile = useIsMobile()
-  const { searchKey, setSearchKey, filters, isVisible, setIsVisible } = useLookup()
+  const { searchKey, setSearchKey, filters, isVisible, setIsVisible, lookupRef } = useLookup()
+  const { push } = useRouter()
+
+  const handleClick = (data) => {
+    if (data.type === "product") {
+      push(`product/${data.id}`)
+    }
+    setIsVisible(false)
+  }
 
   return (
     <div>
       {!isMobile && (
-        <div className="flex items-center gap-x-[5px] relative">
+        <div className="flex items-center gap-x-[5px] relative" ref={lookupRef}>
           <Icon name="search" className="text-gray_8" size={24} />
           <input
             type="text"
@@ -18,7 +27,6 @@ const LookupInput = () => {
             value={searchKey}
             onChange={(e) => setSearchKey(e.target.value)}
             onFocus={() => setIsVisible(true)}
-            onBlur={() => setIsVisible(false)}
           />
           {filters.length > 0 && isVisible && (
             <div
@@ -27,9 +35,14 @@ const LookupInput = () => {
               overflow-y-auto"
             >
               {filters.map((data) => (
-                <p className="cursor-pointer" key={data.id}>
-                  {data?.title || data?.businessName}
-                </p>
+                <button
+                  className="cursor-pointer w-full text-left"
+                  key={data.id}
+                  onClick={() => handleClick(data)}
+                  type="button"
+                >
+                  {data?.productName || data?.businessName}
+                </button>
               ))}
             </div>
           )}
