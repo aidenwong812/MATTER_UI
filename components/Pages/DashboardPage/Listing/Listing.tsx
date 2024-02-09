@@ -1,4 +1,4 @@
-import Buttons from "./Buttons"
+import NewListingButton from "../NewListingButton"
 import Listings from "./Listings"
 
 const Listing = () => (
@@ -10,7 +10,12 @@ const Listing = () => (
       <p className="text-black md:text-gray_8 text-[16px] md:text-[28px] leading-[120%] tracking-[-0.168px] mt-[12px]">
         Your Listings
       </p>
-      <Buttons />
+      <div
+        className="flex flex-col md:flex-row 
+      items-start md:items-center gap-y-[10px] md:gap-x-[15px]"
+      >
+        <NewListingButton />
+      </div>
     </div>
     <Listings />
   </div>
