@@ -35,6 +35,7 @@ const usePersonalAccount = ({ setLoading }) => {
       return
     }
 
+    toast.success("Saved Successfully.")
     await getUserData()
     setLoading(false)
     setScreenStatus(Screen.SELECT_UI)
