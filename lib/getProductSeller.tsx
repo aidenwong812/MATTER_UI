@@ -4,7 +4,9 @@ const getProductSeller = (data) => {
       ? `${data?.customer?.firstName} ${data?.customer?.lastName}`
       : `${data?.customer?.userName || ""}`
 
-  return fullName
+  const businessName = data?.business?.businessName
+
+  return businessName || fullName
 }
 
 export default getProductSeller
