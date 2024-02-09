@@ -1,11 +1,11 @@
-import useProductImage from "../../../hooks/useProductImage"
-import { useMatterMarket } from "../../../providers/MatterMarketProvider"
-import Image from "../../../shared/Image"
-import Icon from "../../../shared/Icon"
-import getProductSeller from "../../../lib/getProductSeller"
+import useProductImage from "@/hooks/useProductImage"
+import Image from "@/shared/Image"
+import Icon from "@/shared/Icon"
+import getProductSeller from "@/lib/getProductSeller"
+import { useEthPrice } from "@/providers/EthPriceProvider"
 
 const ProductDetail = ({ data }) => {
-  const { getEthConversion } = useMatterMarket()
+  const { getEthConversion } = useEthPrice()
   const productData = data?.product
   const { imageUrl } = useProductImage(productData?.cover)
 

@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useMemo } from "react"
 import { BigNumber } from "ethers"
 import useCartData from "../hooks/useCartData"
-import { useMatterMarket } from "./MatterMarketProvider"
 import getBigNumberString from "../lib/getBigNumberString"
+import { useEthPrice } from "./EthPriceProvider"
 
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
   const { carts, getCarts } = useCartData()
-  const { getEthConversion } = useMatterMarket()
+  const { getEthConversion } = useEthPrice()
 
   const totalPrice = carts.reduce(
     (acc, call) =>
