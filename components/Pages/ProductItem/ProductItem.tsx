@@ -1,4 +1,5 @@
 import { useEthPrice } from "@/providers/EthPriceProvider"
+import { useRouter } from "next/router"
 import Image from "../../../shared/Image"
 import SellerName from "../../SellerName"
 import useProductImage from "../../../hooks/useProductImage"
@@ -7,9 +8,14 @@ import getProductSeller from "../../../lib/getProductSeller"
 const ProductItem = ({ imageClasses = "", data = null }) => {
   const { imageUrl } = useProductImage(data?.cover)
   const { getEthConversion } = useEthPrice()
+  const { push } = useRouter()
 
   return (
-    <div className="w-full flex flex-col h-full">
+    <button
+      className="w-full flex flex-col h-full"
+      type="button"
+      onClick={() => push(`/product/${data.id}`)}
+    >
       <Image
         alt="not found photo"
         link={imageUrl || "/images/product_placeholder.png"}
@@ -29,7 +35,7 @@ const ProductItem = ({ imageClasses = "", data = null }) => {
           ETH {getEthConversion(data?.priceInUsd)}
         </p>
       </div>
-    </div>
+    </button>
   )
 }
 

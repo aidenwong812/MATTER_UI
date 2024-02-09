@@ -1,4 +1,5 @@
 import { useEthPrice } from "@/providers/EthPriceProvider"
+import { useRouter } from "next/router"
 import useProductImage from "../../../../hooks/useProductImage"
 import getProductSeller from "../../../../lib/getProductSeller"
 import Image from "../../../../shared/Image"
@@ -7,9 +8,10 @@ import SellerName from "../../../SellerName"
 const TrendingItem = ({ i, data = null }) => {
   const { getEthConversion } = useEthPrice()
   const { imageUrl } = useProductImage(data?.cover)
+  const { push } = useRouter()
 
   return (
-    <div>
+    <button type="button" onClick={() => push(`/product/${data.id}`)}>
       <div className="flex justify-between md:justify-start items-center">
         <p
           className={`trending-number max-w-[132px] leading-[100%] tracking-[-6.25px] text-gray_3
@@ -36,7 +38,7 @@ const TrendingItem = ({ i, data = null }) => {
           ETH {getEthConversion(data?.priceInUsd)}
         </p>
       </div>
-    </div>
+    </button>
   )
 }
 
