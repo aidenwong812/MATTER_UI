@@ -24,14 +24,17 @@ const ProductItem = ({ imageClasses = "", data = null }) => {
         imageClasses="!object-cover"
       />
       <div className="w-full pl-[10px] md:pl-0">
-        <p className="text-[14px] font-[400] leading-[120%] tracking-[-0.14px] mt-[12px]">
+        <p
+          className="text-[14px] font-[400] leading-[120%] tracking-[-0.14px] mt-[12px]
+        text-left"
+        >
           {data?.productName}
         </p>
         <SellerName className="my-[4px]" name={`${getProductSeller(data)}`} />
-        <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px]">
+        <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px] text-left">
           USD ${data?.priceInUsd}
         </p>
-        <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px]">
+        <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px] text-left">
           ETH {getEthConversion(data?.priceInUsd)}
         </p>
       </div>
