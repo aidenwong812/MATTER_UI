@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Select from "../../../shared/Select"
-import useIsMobile from "../../../hooks/useIsMobile"
+import Select from "@/shared/Select"
+import useIsMobile from "@/hooks/useIsMobile"
 import ProductDetail from "./ProductDetail"
 import RemoveCartButton from "./RemoveCartButton"
 
