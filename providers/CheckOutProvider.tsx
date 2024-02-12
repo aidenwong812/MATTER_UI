@@ -7,10 +7,10 @@ import { useEthPrice } from "./EthPriceProvider"
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
-  const { carts, getCarts } = useCartData()
+  const { cart, getCart } = useCartData()
   const { getEthConversion } = useEthPrice()
 
-  const totalPrice = carts.reduce(
+  const totalPrice = cart.reduce(
     (acc, call) =>
       acc.add(BigNumber.from(getBigNumberString(getEthConversion(call.product.priceInUsd)))),
     BigNumber.from(0),
@@ -18,11 +18,11 @@ const CheckOutProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      carts,
+      cart,
       totalPrice,
-      getCarts,
+      getCart,
     }),
-    [carts, totalPrice, getCarts],
+    [cart, totalPrice, getCart],
   )
 
   return <CheckOutContext.Provider value={value}>{children}</CheckOutContext.Provider>

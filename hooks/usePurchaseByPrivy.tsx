@@ -20,6 +20,7 @@ const usePurchaseByPrivy = () => {
 
     const calls = getMulticallFromCart(cart, mintData)
     if (!prepare()) return
+
     try {
       const response = await aggregate3Value(calls, totalPrice.toString())
       const { error } = response as any
@@ -29,6 +30,8 @@ const usePurchaseByPrivy = () => {
       toast.success("purchased!")
       push("/checkout/success")
     } catch (err) {
+      console.log("ZIAD", cart)
+
       handleTxError(err)
     }
   }
