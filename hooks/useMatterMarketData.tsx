@@ -30,6 +30,10 @@ const useMatterMarketData = (type) => {
 
   useEffect(() => {
     if (products && selectedNav) {
+      if (selectedNav === allNav.value) {
+        setFilteredProducts(products)
+        return
+      }
       const temp = products.filter((product) => product.productCategory === selectedNav)
       setFilteredProducts(temp)
     }
