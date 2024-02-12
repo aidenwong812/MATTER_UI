@@ -1,18 +1,14 @@
 import React, { createContext, useContext, useMemo } from "react"
 import { BigNumber } from "ethers"
 import useCartData from "../hooks/useCartData"
-import getBigNumberString from "../lib/getBigNumberString"
-import { useEthPrice } from "./EthPriceProvider"
 
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
   const { cart, getCart } = useCartData()
-  const { getEthConversion } = useEthPrice()
 
   const totalPrice = cart.reduce(
-    (acc, call) =>
-      acc.add(BigNumber.from(getBigNumberString(getEthConversion(call.product.priceInUsd)))),
+    (acc, call) => acc.add(BigNumber.from(call.ethPrice)),
     BigNumber.from(0),
   )
 

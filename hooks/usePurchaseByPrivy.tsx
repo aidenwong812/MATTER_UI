@@ -30,8 +30,6 @@ const usePurchaseByPrivy = () => {
       toast.success("purchased!")
       push("/checkout/success")
     } catch (err) {
-      console.log("ZIAD", cart)
-
       handleTxError(err)
     }
   }
