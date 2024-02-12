@@ -1,7 +1,7 @@
-import { base, baseGoerli } from "viem/chains"
+import { base, sepolia } from "viem/chains"
 import { keccak256, toUtf8Bytes } from "ethers/lib/utils"
 
-export const CHAIN_ID = process.env.NEXT_PUBLIC_TESTNET ? baseGoerli.id : base.id
+export const CHAIN_ID = process.env.NEXT_PUBLIC_TESTNET ? sepolia.id : base.id
 export const MULTICALL_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
 export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_CONTRACT
 export const MULTICALL_3_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
