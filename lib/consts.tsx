@@ -46,7 +46,7 @@ export const serviceCategories = [
   { label: "Technology", value: "Technology" },
   { label: "Pet", value: "Pet" },
   { label: "Marketing", value: "Marketing" },
-  { label: "Other", value: "OtherService" },
+  { label: "Other", value: "Other" },
 ]
 
 export const digitalCategories = [
@@ -59,7 +59,7 @@ export const digitalCategories = [
   { label: "Courses", value: "Courses" },
   { label: "Tickets", value: "Tickets" },
   { label: "Collectibles", value: "Collectibles" },
-  { label: "Other", value: "OtherDigital" },
+  { label: "Other", value: "Other" },
 ]
 
 export const physicalCategories = [
@@ -71,7 +71,7 @@ export const physicalCategories = [
   { label: "Books", value: "Books" },
   { label: "Jewelry & Watches", value: "JewelryWatches" },
   { label: "Pet Supplies", value: "PetSupplies" },
-  { label: "Other", value: "OtherPhysical" },
+  { label: "Other", value: "Other" },
 ]
 
 export const ONE_DAY_MILLISECONDS = 24 * 60 * 60 * 1000

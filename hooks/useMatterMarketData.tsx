@@ -22,7 +22,6 @@ const useMatterMarketData = (type) => {
   useEffect(() => {
     const init = async () => {
       const response = await getProductsByType(type)
-
       setProducts(response)
     }
     init()
