@@ -1,14 +1,17 @@
+import { useDashboard } from "@/providers/DashboardProvider"
 import TableRow from "../TableRow"
 
-const TableBody = () => (
-  <tbody>
-    {Array(20)
-      .fill(0)
-      .map((_, i) => (
+const TableBody = () => {
+  const { orders } = useDashboard()
+
+  return (
+    <tbody>
+      {orders.map((order) => (
         // eslint-disable-next-line react/no-array-index-key
-        <TableRow key={i} />
+        <TableRow key={order.id} data={order} />
       ))}
-  </tbody>
-)
+    </tbody>
+  )
+}
 
 export default TableBody

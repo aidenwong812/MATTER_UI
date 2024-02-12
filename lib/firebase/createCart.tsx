@@ -4,6 +4,7 @@ import { db } from "./db"
 const createCart = async (cartData) => {
   const data = {
     ...cartData,
+    purchased: false,
     timestamp: Date.now(),
   }
 
