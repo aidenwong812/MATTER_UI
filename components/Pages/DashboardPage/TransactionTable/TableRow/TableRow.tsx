@@ -38,6 +38,8 @@ const TableRow = () => {
           ? truncateEthAddress("0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c")
           : "0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c"}
       </td>
+      <td className={`${itemClasses}`}>
+      </td>
       <td className={itemClasses}>
         {isMobile ? (
           <>
