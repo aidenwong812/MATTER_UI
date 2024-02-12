@@ -1,11 +1,11 @@
-import { useState } from "react"
-import data from "./data.json"
+import { useMatterMarket } from "@/providers/MatterMarketProvider"
 import useIsMobile from "../../../../hooks/useIsMobile"
 import Select from "../../../../shared/Select"
 
 const Navbar = () => {
-  const [selectItem, setSelectedItem] = useState(data[0].value)
+  const { selectedNav, setSelectedNav, categories } = useMatterMarket()
   const isMobile = useIsMobile()
+
   return (
     <div>
       {isMobile ? (
@@ -14,22 +14,22 @@ const Navbar = () => {
             Digital Item Type
           </p>
           <Select
-            value={selectItem}
-            onChange={(e) => setSelectedItem(e.target.value)}
-            options={data}
+            value={selectedNav}
+            onChange={(e) => setSelectedNav(e.target.value)}
+            options={categories}
           />
         </div>
       ) : (
         <div className="flex justify-between">
-          {data.map((item) => (
+          {categories.map((item) => (
             <button
               type="button"
               key={item.value}
               className={`py-[20px] px-[24px] flex justify-center items-center
                   cursor-pointer text-gray_6 text-[16px] ${
-                    item.value === selectItem ? "border-b-[2px] border-b-black !text-black" : ""
+                    item.value === selectedNav ? "border-b-[2px] border-b-black !text-black" : ""
                   }`}
-              onClick={() => setSelectedItem(item.value)}
+              onClick={() => setSelectedNav(item.value)}
             >
               {item.label}
             </button>
