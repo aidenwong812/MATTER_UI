@@ -45,7 +45,7 @@ const useCreate1155Contract = () => {
         )
 
         const { error } = response as any
-        if (error) return false
+        if (error) return { error: true }
 
         const contractAddress = getCreatedContractAddress(response.logs)
         return {
