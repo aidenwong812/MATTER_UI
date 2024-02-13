@@ -1,707 +1,714 @@
 [
   {
+    "type": "constructor",
+    "name": "",
     "inputs": [
       {
-        "internalType": "contract IZoraCreator1155",
-        "name": "_implementation",
-        "type": "address"
+        "type": "address",
+        "name": "_zora1155Impl",
+        "internalType": "contract IZoraCreator1155"
       },
       {
-        "internalType": "contract IMinter1155",
+        "type": "address",
         "name": "_merkleMinter",
-        "type": "address"
+        "internalType": "contract IMinter1155"
       },
       {
-        "internalType": "contract IMinter1155",
+        "type": "address",
         "name": "_fixedPriceMinter",
-        "type": "address"
+        "internalType": "contract IMinter1155"
       },
       {
-        "internalType": "contract IMinter1155",
+        "type": "address",
         "name": "_redeemMinterFactory",
-        "type": "address"
+        "internalType": "contract IMinter1155"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    "outputs": [],
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "ADDRESS_DELEGATECALL_TO_NON_CONTRACT",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "ADDRESS_LOW_LEVEL_CALL_FAILED",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "Constructor_ImplCannotBeZero",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "ERC1967_NEW_IMPL_NOT_CONTRACT",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "ERC1967_NEW_IMPL_NOT_UUPS",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "ERC1967_UNSUPPORTED_PROXIABLEUUID",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "FUNCTION_MUST_BE_CALLED_THROUGH_ACTIVE_PROXY",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "FUNCTION_MUST_BE_CALLED_THROUGH_DELEGATECALL",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "INITIALIZABLE_CONTRACT_ALREADY_INITIALIZED",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "INITIALIZABLE_CONTRACT_IS_NOT_INITIALIZING",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "ONLY_OWNER",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "ONLY_PENDING_OWNER",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "OWNER_CANNOT_BE_ZERO_ADDRESS",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "UUPS_UPGRADEABLE_MUST_NOT_BE_CALLED_THROUGH_DELEGATECALL",
-    "type": "error"
+    "inputs": [],
+    "outputs": []
   },
   {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "expected",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "actual",
-        "type": "string"
-      }
-    ],
+    "type": "error",
     "name": "UpgradeToMismatchedContractName",
-    "type": "error"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "previousAdmin",
-        "type": "address"
+        "type": "string",
+        "name": "expected",
+        "internalType": "string"
       },
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "newAdmin",
-        "type": "address"
+        "type": "string",
+        "name": "actual",
+        "internalType": "string"
       }
     ],
+    "outputs": []
+  },
+  {
+    "type": "event",
     "name": "AdminChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "beacon",
-        "type": "address"
+        "type": "address",
+        "name": "previousAdmin",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "newAdmin",
+        "indexed": false,
+        "internalType": "address"
       }
     ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "BeaconUpgraded",
-    "type": "event"
+    "inputs": [
+      {
+        "type": "address",
+        "name": "beacon",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "anonymous": false
   },
   {
-    "anonymous": false,
-    "inputs": [],
+    "type": "event",
     "name": "FactorySetup",
-    "type": "event"
+    "inputs": [],
+    "outputs": [],
+    "anonymous": false
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "version",
-        "type": "uint8"
-      }
-    ],
+    "type": "event",
     "name": "Initialized",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "canceledOwner",
-        "type": "address"
+        "type": "uint8",
+        "name": "version",
+        "indexed": false,
+        "internalType": "uint8"
       }
     ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "OwnerCanceled",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
+        "type": "address",
         "name": "owner",
-        "type": "address"
+        "indexed": true,
+        "internalType": "address"
       },
       {
+        "type": "address",
+        "name": "canceledOwner",
         "indexed": true,
-        "internalType": "address",
-        "name": "pendingOwner",
-        "type": "address"
+        "internalType": "address"
       }
     ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "OwnerPending",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
+        "type": "address",
+        "name": "owner",
         "indexed": true,
-        "internalType": "address",
-        "name": "prevOwner",
-        "type": "address"
+        "internalType": "address"
       },
       {
+        "type": "address",
+        "name": "pendingOwner",
         "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
+        "internalType": "address"
       }
     ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "OwnerUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
+        "type": "address",
+        "name": "prevOwner",
         "indexed": true,
-        "internalType": "address",
-        "name": "newContract",
-        "type": "address"
+        "internalType": "address"
       },
       {
+        "type": "address",
+        "name": "newOwner",
         "indexed": true,
-        "internalType": "address",
-        "name": "creator",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "defaultAdmin",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "contractURI",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint32",
-            "name": "royaltyMintSchedule",
-            "type": "uint32"
-          },
-          {
-            "internalType": "uint32",
-            "name": "royaltyBPS",
-            "type": "uint32"
-          },
-          {
-            "internalType": "address",
-            "name": "royaltyRecipient",
-            "type": "address"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct ICreatorRoyaltiesControl.RoyaltyConfiguration",
-        "name": "defaultRoyaltyConfiguration",
-        "type": "tuple"
+        "internalType": "address"
       }
     ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "SetupNewContract",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
+        "type": "address",
+        "name": "newContract",
         "indexed": true,
-        "internalType": "address",
-        "name": "baseImpl",
-        "type": "address"
+        "internalType": "address"
       },
       {
+        "type": "address",
+        "name": "creator",
         "indexed": true,
-        "internalType": "address",
-        "name": "upgradeImpl",
-        "type": "address"
-      }
-    ],
-    "name": "UpgradeRegistered",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "baseImpl",
-        "type": "address"
+        "internalType": "address"
       },
       {
+        "type": "address",
+        "name": "defaultAdmin",
         "indexed": true,
-        "internalType": "address",
-        "name": "upgradeImpl",
-        "type": "address"
-      }
-    ],
-    "name": "UpgradeRemoved",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "implementation",
-        "type": "address"
-      }
-    ],
-    "name": "Upgraded",
-    "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "acceptOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "cancelOwnershipTransfer",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "contractName",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "contractURI",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "contractVersion",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "newContractURI",
-        "type": "string"
+        "internalType": "address"
       },
       {
-        "internalType": "string",
+        "type": "string",
+        "name": "contractURI",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "type": "string",
         "name": "name",
-        "type": "string"
+        "indexed": false,
+        "internalType": "string"
       },
       {
+        "type": "tuple",
+        "name": "defaultRoyaltyConfiguration",
         "components": [
           {
-            "internalType": "uint32",
+            "type": "uint32",
             "name": "royaltyMintSchedule",
-            "type": "uint32"
+            "internalType": "uint32"
           },
           {
-            "internalType": "uint32",
+            "type": "uint32",
             "name": "royaltyBPS",
-            "type": "uint32"
+            "internalType": "uint32"
           },
           {
-            "internalType": "address",
+            "type": "address",
             "name": "royaltyRecipient",
-            "type": "address"
+            "internalType": "address"
           }
         ],
-        "internalType": "struct ICreatorRoyaltiesControl.RoyaltyConfiguration",
-        "name": "defaultRoyaltyConfiguration",
-        "type": "tuple"
-      },
-      {
-        "internalType": "address payable",
-        "name": "defaultAdmin",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes[]",
-        "name": "setupActions",
-        "type": "bytes[]"
+        "indexed": false,
+        "internalType": "struct ICreatorRoyaltiesControl.RoyaltyConfiguration"
       }
     ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Upgraded",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "implementation",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "function",
+    "name": "acceptOwnership",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "cancelOwnershipTransfer",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "contractName",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "contractURI",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "contractVersion",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
     "name": "createContract",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        "type": "string",
+        "name": "newContractURI",
+        "internalType": "string"
+      },
+      {
+        "type": "string",
+        "name": "name",
+        "internalType": "string"
+      },
+      {
+        "type": "tuple",
+        "name": "defaultRoyaltyConfiguration",
+        "components": [
+          {
+            "type": "uint32",
+            "name": "royaltyMintSchedule",
+            "internalType": "uint32"
+          },
+          {
+            "type": "uint32",
+            "name": "royaltyBPS",
+            "internalType": "uint32"
+          },
+          {
+            "type": "address",
+            "name": "royaltyRecipient",
+            "internalType": "address"
+          }
+        ],
+        "internalType": "struct ICreatorRoyaltiesControl.RoyaltyConfiguration"
+      },
+      {
+        "type": "address",
+        "name": "defaultAdmin",
+        "internalType": "address payable"
+      },
+      {
+        "type": "bytes[]",
+        "name": "setupActions",
+        "internalType": "bytes[]"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [],
+    "type": "function",
+    "name": "createContractDeterministic",
+    "inputs": [
+      {
+        "type": "string",
+        "name": "newContractURI",
+        "internalType": "string"
+      },
+      {
+        "type": "string",
+        "name": "name",
+        "internalType": "string"
+      },
+      {
+        "type": "tuple",
+        "name": "defaultRoyaltyConfiguration",
+        "components": [
+          {
+            "type": "uint32",
+            "name": "royaltyMintSchedule",
+            "internalType": "uint32"
+          },
+          {
+            "type": "uint32",
+            "name": "royaltyBPS",
+            "internalType": "uint32"
+          },
+          {
+            "type": "address",
+            "name": "royaltyRecipient",
+            "internalType": "address"
+          }
+        ],
+        "internalType": "struct ICreatorRoyaltiesControl.RoyaltyConfiguration"
+      },
+      {
+        "type": "address",
+        "name": "defaultAdmin",
+        "internalType": "address payable"
+      },
+      {
+        "type": "bytes[]",
+        "name": "setupActions",
+        "internalType": "bytes[]"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "defaultMinters",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IMinter1155[]",
+        "type": "address[]",
         "name": "minters",
-        "type": "address[]"
+        "internalType": "contract IMinter1155[]"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
+    "name": "deterministicContractAddress",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "msgSender",
+        "internalType": "address"
+      },
+      {
+        "type": "string",
+        "name": "newContractURI",
+        "internalType": "string"
+      },
+      {
+        "type": "string",
+        "name": "name",
+        "internalType": "string"
+      },
+      {
+        "type": "address",
+        "name": "contractAdmin",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "fixedPriceMinter",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IMinter1155",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "contract IMinter1155"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "implementation",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IZoraCreator1155",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "address"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_initialOwner",
-        "type": "address"
-      }
-    ],
+    "type": "function",
     "name": "initialize",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_initialOwner",
+        "internalType": "address"
+      }
+    ],
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "isAllowedUpgrade",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "baseImpl",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "upgradeImpl",
-        "type": "address"
-      }
-    ],
-    "name": "isRegisteredUpgradePath",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
+    "type": "function",
     "name": "merkleMinter",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IMinter1155",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "contract IMinter1155"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "owner",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "address",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "address"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "pendingOwner",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "address",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "address"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "proxiableUUID",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "bytes32",
+        "type": "bytes32",
         "name": "",
-        "type": "bytes32"
+        "internalType": "bytes32"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "redeemMinterFactory",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IMinter1155",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "contract IMinter1155"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "baseImpls",
-        "type": "address[]"
-      },
-      {
-        "internalType": "address",
-        "name": "upgradeImpl",
-        "type": "address"
-      }
-    ],
-    "name": "registerUpgradePath",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "baseImpl",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "upgradeImpl",
-        "type": "address"
-      }
-    ],
-    "name": "removeUpgradePath",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
+    "type": "function",
     "name": "resignOwnership",
+    "inputs": [],
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_newOwner",
-        "type": "address"
-      }
-    ],
+    "type": "function",
     "name": "safeTransferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
+        "type": "address",
         "name": "_newOwner",
-        "type": "address"
+        "internalType": "address"
       }
     ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "newImplementation",
-        "type": "address"
+        "type": "address",
+        "name": "_newOwner",
+        "internalType": "address"
       }
     ],
-    "name": "upgradeTo",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
+    "type": "function",
+    "name": "upgradeTo",
     "inputs": [
       {
-        "internalType": "address",
+        "type": "address",
         "name": "newImplementation",
-        "type": "address"
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "upgradeToAndCall",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "newImplementation",
+        "internalType": "address"
       },
       {
-        "internalType": "bytes",
+        "type": "bytes",
         "name": "data",
-        "type": "bytes"
+        "internalType": "bytes"
       }
     ],
-    "name": "upgradeToAndCall",
     "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "zora1155Impl",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract IZoraCreator1155"
+      }
+    ],
+    "stateMutability": "view"
   }
 ]

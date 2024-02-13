@@ -20,6 +20,7 @@ const useCreate1155Contract = () => {
       const ipfsCid = await store(cover, title, description, connectedWallet)
       const adminPermissionArgs = [0, connectedWallet, 2]
       const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
+      console.log("SWEETS minterPermissionArgs", minterPermissionArgs)
       const minterPermissionCall = new Interface(dropAbi).encodeFunctionData(
         "addPermission",
         minterPermissionArgs,
@@ -44,6 +45,7 @@ const useCreate1155Contract = () => {
 
       if (authenticated) {
         const factoryAddress = getZora1155ProxyAddress(chainId)
+
         const response = await sendTransaction(
           factoryAddress,
           chainId,

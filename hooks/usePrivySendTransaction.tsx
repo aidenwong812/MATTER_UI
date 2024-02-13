@@ -21,12 +21,13 @@ const usePrivySendTransaction = () => {
       to,
       chainId,
       data,
-      value,
+      // value,
     } as UnsignedTransactionRequest
     if (gasLimit) {
       unsignedTx.gasLimit = gasLimit
     }
 
+    console.log("SWEETS UNSIGNED", unsignedTx)
     const uiConfig = {
       header: title,
       description,
