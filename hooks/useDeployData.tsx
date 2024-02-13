@@ -25,7 +25,7 @@ const useDeployData = () => {
     setCover(cover[0])
     setCreating(true)
 
-    const response = await create1155Contract(CHAIN_ID, cover[0], productName, productDescription)
+    const response = await create1155Contract(cover[0], CHAIN_ID, productName, productDescription)
 
     const { error } = response as any
     if (error) {

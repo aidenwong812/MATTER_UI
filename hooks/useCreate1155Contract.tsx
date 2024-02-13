@@ -1,59 +1,30 @@
 import { usePrivy } from "@privy-io/react-auth"
-import { Interface } from "ethers/lib/utils"
-import abi from "../lib/abi/abi-Zora1155CreatorProxy.json"
-import dropAbi from "../lib/abi/abi-ERC1155Drop.json"
-import handleTxError from "../lib/handleTxError"
-import usePrivySendTransaction from "./usePrivySendTransaction"
-import { getCallSaleData, store } from "onchain-magic"
-import getZora1155ProxyAddress from "../lib/zora/getZora1155ProxyAddress"
-import { CHAIN_ID } from "../lib/consts"
-import useConnectedWallet from "./useConnectedWallet"
-import getCreatedContractAddress from "../lib/getCreatedContractAddress"
-import { BigNumber } from "ethers"
+import { store } from "onchain-magic"
+import abi from "@/lib/abi/abi-Zora1155CreatorProxy.json"
+import handleTxError from "@/lib/handleTxError"
+import usePrivySendTransaction from "@/hooks/usePrivySendTransaction"
+import getZora1155ProxyAddress from "@/lib/zora/getZora1155ProxyAddress"
+import { CHAIN_ID } from "@/lib/consts"
+import useConnectedWallet from "@/hooks/useConnectedWallet"
+import getCreatedContractAddress from "@/lib/getCreatedContractAddress"
+import getSetupActions from "@/lib/zora/getSetupActions"
 
 const useCreate1155Contract = () => {
   const { authenticated } = usePrivy()
   const { sendTransaction } = usePrivySendTransaction()
   const { connectedWallet } = useConnectedWallet()
 
-  const create1155Contract = async (chainId = CHAIN_ID, cover, title, description) => {
+  const create1155Contract = async (cover, chainId = CHAIN_ID, title = "", description = "") => {
     try {
       const ipfsCid = await store(cover, title, description, connectedWallet)
-      const adminPermissionArgs = [0, connectedWallet, 2]
-      const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
-      console.log("SWEETS minterPermissionArgs", minterPermissionArgs)
-      const iface = new Interface(dropAbi)
-      const minterPermissionCall = iface.encodeFunctionData("addPermission", minterPermissionArgs)
-      const adminPermissionCall = iface.encodeFunctionData("addPermission", adminPermissionArgs)
-      const usdcAddress = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      const nextTokenId = 1
-      const data = getCallSaleData({
-        tokenId: nextTokenId,
-        saleStart: 0,
-        saleEnd: "18446744073709551615",
-        maxTokensPerAddress: 0,
-        pricePerToken: 100,
-        fundsRecipient: connectedWallet,
-        erc20Address: usdcAddress,
-      })
-      const callSaleArgs = [nextTokenId, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, data]
-      const setupNewTokenArgs = [`ipfs://${ipfsCid}`, 0]
-      const setupNewTokenCall = iface.encodeFunctionData("setupNewToken", setupNewTokenArgs)
-      const callSaleCall = iface.encodeFunctionData("callSale", callSaleArgs)
-      const setupActions = [
-        adminPermissionCall,
-        minterPermissionCall,
-        setupNewTokenCall,
-        callSaleCall,
-      ]
-
+      const setupActions = getSetupActions(connectedWallet, ipfsCid)
       const args = [
         `ipfs://${ipfsCid}`,
         title,
         {
-          royaltyRecipient: "0x0000000000000000000000000000000000000000",
+          royaltyRecipient: connectedWallet,
           royaltyMintSchedule: 0,
-          royaltyBPS: 0,
+          royaltyBPS: 500,
         },
         connectedWallet,
         setupActions,
@@ -74,7 +45,7 @@ const useCreate1155Contract = () => {
         )
 
         const { error } = response as any
-        if (error) return
+        if (error) return false
 
         const contractAddress = getCreatedContractAddress(response.logs)
         return {
