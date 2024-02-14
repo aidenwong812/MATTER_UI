@@ -27,7 +27,6 @@ const usePrivySendTransaction = () => {
       unsignedTx.gasLimit = gasLimit
     }
 
-    console.log("SWEETS value", value)
     const uiConfig = {
       header: title,
       description,
