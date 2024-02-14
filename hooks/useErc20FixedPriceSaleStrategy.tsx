@@ -1,4 +1,4 @@
-import { CHAIN_ID } from "@/lib/consts"
+import { CHAIN_ID, MINTER_ADDRESS } from "@/lib/consts"
 import abi from "@/lib/abi/ERC20FixedPriceSaleStrategy.json"
 import { getEncodedMinterArgs } from "onchain-magic"
 import { BigNumber } from "ethers"
@@ -10,7 +10,7 @@ const useErc20FixedPriceSaleStrategy = () => {
   const { connectedWallet } = useConnectedWallet()
 
   const requestMintBatchByPrivy = async () => {
-    const to = process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY
+    const to = MINTER_ADDRESS
     const targets = ["0xC6DF65460CeD63c5505B5935eDE7D2c955e4CB6b"]
     const ids = [1]
     const quantities = [1]

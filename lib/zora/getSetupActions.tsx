@@ -1,21 +1,18 @@
 import { Interface } from "ethers/lib/utils"
 import { getCallSaleData } from "onchain-magic"
 import dropAbi from "../abi/abi-ERC1155Drop.json"
+import { MINTER_ADDRESS, USDC_ADDRESS } from "../consts"
 
 const getSetupActions = (adminWallet, ipfsCid) => {
   //   TODO: dummy variables need replaced before mainnet launch
-  const dummyUsdcAddress = process.env.NEXT_PUBLIC_USDC_CONTRACT
+  const dummyUsdcAddress = USDC_ADDRESS
   const dummyNextTokenId = 1
   const dummySaleStart = 0
   const dummyPricePerToken = 100
 
   const adminPermissionArgs = [0, adminWallet, 2]
-  const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 2]
-  const minterPermissionArgs2 = [
-    dummyNextTokenId,
-    process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY,
-    2,
-  ]
+  const minterPermissionArgs = [0, MINTER_ADDRESS, 2]
+  const minterPermissionArgs2 = [dummyNextTokenId, MINTER_ADDRESS, 2]
   const iface = new Interface(dropAbi)
   const minterPermissionCall = iface.encodeFunctionData("addPermission", minterPermissionArgs)
   const minterPermissionCall2 = iface.encodeFunctionData("addPermission", minterPermissionArgs2)
@@ -31,7 +28,7 @@ const getSetupActions = (adminWallet, ipfsCid) => {
     fundsRecipient: adminWallet,
     erc20Address: dummyUsdcAddress,
   })
-  const callSaleArgs = [dummyNextTokenId, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, data]
+  const callSaleArgs = [dummyNextTokenId, MINTER_ADDRESS, data]
   const maxSupply = 1000000
   const setupNewTokenArgs = [`ipfs://${ipfsCid}`, maxSupply]
   const setupNewTokenCall = iface.encodeFunctionData("setupNewToken", setupNewTokenArgs)
