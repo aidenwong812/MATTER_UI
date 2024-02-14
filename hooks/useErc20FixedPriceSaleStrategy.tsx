@@ -1,8 +1,9 @@
 import { CHAIN_ID } from "@/lib/consts"
-import usePrivySendTransaction from "./usePrivySendTransaction"
 import abi from "@/lib/abi/ERC20FixedPriceSaleStrategy.json"
 import { getEncodedMinterArgs } from "onchain-magic"
 import useConnectedWallet from "./useConnectedWallet"
+import usePrivySendTransaction from "./usePrivySendTransaction"
+import { BigNumber } from "ethers"
 
 const useErc20FixedPriceSaleStrategy = () => {
   const { sendTransaction } = usePrivySendTransaction()
@@ -11,7 +12,7 @@ const useErc20FixedPriceSaleStrategy = () => {
   const requestMintBatchByPrivy = async () => {
     console.log("SWEETS requestMintBatchByPrivy")
     const to = process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY
-    const targets = ["0x97c55b1Ca948414D3287D8E6D1e3057Ff9A8F05F"]
+    const targets = ["0xC6DF65460CeD63c5505B5935eDE7D2c955e4CB6b"]
     const ids = [1]
     const quantities = [1]
     const unusedKey = 0
@@ -25,7 +26,7 @@ const useErc20FixedPriceSaleStrategy = () => {
         abi,
         "requestMintBatch",
         args,
-        "0",
+        BigNumber.from("0").toHexString(),
         "Buy with USDC",
         "Sign",
       )

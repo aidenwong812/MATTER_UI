@@ -7,13 +7,12 @@ import usePreparePrivyWallet from "./usePreparePrivyWallet"
 import usePrivyMulticall from "./usePrivyMulticall"
 import getMintData from "../lib/zora/getMintData"
 import useErc20FixedPriceSaleStrategy from "./useErc20FixedPriceSaleStrategy"
+import useUsdc from "./useUsdc"
 
 const usePurchaseByPrivy = () => {
   const { push } = useRouter()
   const { prepare } = usePreparePrivyWallet()
-  const { aggregate3Value } = usePrivyMulticall()
-  const { connectedWallet } = useConnectedWallet()
-  const mintData = useMemo(() => getMintData(connectedWallet), [connectedWallet])
+  const { approveWithPrivy, balance, minterAllowance } = useUsdc()
   const { requestMintBatchByPrivy } = useErc20FixedPriceSaleStrategy()
 
   const purchaseByPrivy = async (cart, totalPrice) => {
@@ -22,6 +21,19 @@ const usePurchaseByPrivy = () => {
     if (!prepare()) return
     try {
       // TODO: one tx to ERC20FixedPriceSaleStrategy
+      console.log("SWEETS BALANCE of USDC", balance)
+      console.log("SWEETS ALLOWANCE of USDC", minterAllowance)
+      if (!balance) return
+      const sufficientBalance = balance.gte(totalPrice)
+      console.log("SWEETS SUFFICIENT BALANCE", sufficientBalance)
+      if (!sufficientBalance) {
+        toast.error(`Insufficient balance. Total price is ${totalPrice}`)
+      }
+      const sufficientAllowance = minterAllowance.gte(totalPrice)
+      if (!sufficientAllowance) {
+        toast.error(`Insufficient allowance. please sign initial tx to grant max allowance`)
+        await approveWithPrivy()
+      }
       const response = await requestMintBatchByPrivy()
       const { error } = response as any
       if (error) {

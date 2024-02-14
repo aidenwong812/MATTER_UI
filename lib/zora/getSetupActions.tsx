@@ -4,7 +4,7 @@ import dropAbi from "../abi/abi-ERC1155Drop.json"
 
 const getSetupActions = (adminWallet, ipfsCid) => {
   //   TODO: dummy variables need replaced before mainnet launch
-  const dummyUsdcAddress = "0xAdc2baF32FC975A4Fcd0A4AE69F7040022392102"
+  const dummyUsdcAddress = process.env.NEXT_PUBLIC_USDC_CONTRACT
   const dummyNextTokenId = 1
   const dummySaleStart = 0
   const dummyPricePerToken = 100
