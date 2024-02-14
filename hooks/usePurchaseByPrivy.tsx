@@ -5,8 +5,8 @@ import handleTxError from "../lib/handleTxError"
 import useConnectedWallet from "./useConnectedWallet"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
 import usePrivyMulticall from "./usePrivyMulticall"
-import getMulticallFromCart from "../lib/getMulticallFromCart"
 import getMintData from "../lib/zora/getMintData"
+import useErc20FixedPriceSaleStrategy from "./useErc20FixedPriceSaleStrategy"
 
 const usePurchaseByPrivy = () => {
   const { push } = useRouter()
@@ -14,14 +14,15 @@ const usePurchaseByPrivy = () => {
   const { aggregate3Value } = usePrivyMulticall()
   const { connectedWallet } = useConnectedWallet()
   const mintData = useMemo(() => getMintData(connectedWallet), [connectedWallet])
+  const { requestMintBatchByPrivy } = useErc20FixedPriceSaleStrategy()
 
   const purchaseByPrivy = async (cart, totalPrice) => {
     if (!cart) return
 
-    const calls = getMulticallFromCart(cart, mintData)
     if (!prepare()) return
     try {
-      const response = await aggregate3Value(calls, totalPrice.toString())
+      // TODO: one tx to ERC20FixedPriceSaleStrategy
+      const response = await requestMintBatchByPrivy()
       const { error } = response as any
       if (error) {
         return
