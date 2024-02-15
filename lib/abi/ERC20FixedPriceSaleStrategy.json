@@ -1,0 +1,480 @@
+[
+  {
+    "type": "error",
+    "name": "CallerNotZoraCreator1155",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidMerkleProof",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "mintTo",
+        "internalType": "address"
+      },
+      {
+        "type": "bytes32[]",
+        "name": "merkleProof",
+        "internalType": "bytes32[]"
+      },
+      {
+        "type": "bytes32",
+        "name": "merkleRoot",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "MinterContractAlreadyExists",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "MinterContractDoesNotExist",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "SaleEnded",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "SaleHasNotStarted",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "UserExceedsMintLimit",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "user",
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "limit",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "requestedAmount",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "WrongValueSent",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "event",
+    "name": "MintComment",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "sender",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "tokenContract",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "quantity",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "type": "string",
+        "name": "comment",
+        "indexed": false,
+        "internalType": "string"
+      }
+    ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SaleSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "mediaContract",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "type": "tuple",
+        "name": "salesConfig",
+        "components": [
+          {
+            "type": "uint64",
+            "name": "saleStart",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint64",
+            "name": "saleEnd",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint64",
+            "name": "maxTokensPerAddress",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint96",
+            "name": "pricePerToken",
+            "internalType": "uint96"
+          },
+          {
+            "type": "address",
+            "name": "fundsRecipient",
+            "internalType": "address"
+          },
+          {
+            "type": "address",
+            "name": "erc20Address",
+            "internalType": "address"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct ERC20FixedPriceSaleStrategy.SalesConfig"
+      }
+    ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "function",
+    "name": "contractName",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "contractURI",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "contractVersion",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "getMintedPerWallet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "tokenContract",
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "internalType": "uint256"
+      },
+      {
+        "type": "address",
+        "name": "wallet",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "uint256",
+        "name": "",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "requestMint",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "target",
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "quantity",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "",
+        "internalType": "uint256"
+      },
+      {
+        "type": "bytes",
+        "name": "minterArguments",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "tuple",
+        "name": "commands",
+        "components": [
+          {
+            "type": "tuple[]",
+            "name": "commands",
+            "components": [
+              {
+                "internalType": "enum ICreatorCommands.CreatorActions",
+                "name": "method",
+                "type": "uint8"
+              },
+              {
+                "internalType": "bytes",
+                "name": "args",
+                "type": "bytes"
+              }
+            ],
+            "internalType": "struct ICreatorCommands.Command[]"
+          },
+          {
+            "type": "uint256",
+            "name": "at",
+            "internalType": "uint256"
+          }
+        ],
+        "internalType": "struct ICreatorCommands.CommandSet"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "requestMintBatch",
+    "inputs": [
+      {
+        "type": "address[]",
+        "name": "targets",
+        "internalType": "address[]"
+      },
+      {
+        "type": "uint256[]",
+        "name": "ids",
+        "internalType": "uint256[]"
+      },
+      {
+        "type": "uint256[]",
+        "name": "quantities",
+        "internalType": "uint256[]"
+      },
+      {
+        "type": "uint256",
+        "name": "",
+        "internalType": "uint256"
+      },
+      {
+        "type": "bytes[]",
+        "name": "minterArguments",
+        "internalType": "bytes[]"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "resetSale",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "sale",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "tokenContract",
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "tuple",
+        "name": "",
+        "components": [
+          {
+            "type": "uint64",
+            "name": "saleStart",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint64",
+            "name": "saleEnd",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint64",
+            "name": "maxTokensPerAddress",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint96",
+            "name": "pricePerToken",
+            "internalType": "uint96"
+          },
+          {
+            "type": "address",
+            "name": "fundsRecipient",
+            "internalType": "address"
+          },
+          {
+            "type": "address",
+            "name": "erc20Address",
+            "internalType": "address"
+          }
+        ],
+        "internalType": "struct ERC20FixedPriceSaleStrategy.SalesConfig"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setSale",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "internalType": "uint256"
+      },
+      {
+        "type": "tuple",
+        "name": "salesConfig",
+        "components": [
+          {
+            "type": "uint64",
+            "name": "saleStart",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint64",
+            "name": "saleEnd",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint64",
+            "name": "maxTokensPerAddress",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint96",
+            "name": "pricePerToken",
+            "internalType": "uint96"
+          },
+          {
+            "type": "address",
+            "name": "fundsRecipient",
+            "internalType": "address"
+          },
+          {
+            "type": "address",
+            "name": "erc20Address",
+            "internalType": "address"
+          }
+        ],
+        "internalType": "struct ERC20FixedPriceSaleStrategy.SalesConfig"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "supportsInterface",
+    "inputs": [
+      {
+        "type": "bytes4",
+        "name": "interfaceId",
+        "internalType": "bytes4"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "bool",
+        "name": "",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "pure"
+  }
+]

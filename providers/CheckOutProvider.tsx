@@ -1,28 +1,27 @@
 import React, { createContext, useContext, useMemo } from "react"
 import { BigNumber } from "ethers"
 import useCartData from "../hooks/useCartData"
-import getBigNumberString from "../lib/getBigNumberString"
-import { useEthPrice } from "./EthPriceProvider"
+import { demoProduct } from "@/components/Pages/ProductPage/demoProduct"
 
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
-  const { carts, getCarts } = useCartData()
-  const { getEthConversion } = useEthPrice()
+  const { getCart, cart: liveCart } = useCartData()
+  const cart = demoProduct
 
-  const totalPrice = carts.reduce(
-    (acc, call) =>
-      acc.add(BigNumber.from(getBigNumberString(getEthConversion(call.product.priceInUsd)))),
+  const totalPrice = cart.reduce(
+    (acc, call) => acc.add(BigNumber.from(call.price)),
     BigNumber.from(0),
   )
 
   const value = useMemo(
     () => ({
-      carts,
+      cart,
       totalPrice,
-      getCarts,
+      getCart,
+      liveCart,
     }),
-    [carts, totalPrice, getCarts],
+    [cart, totalPrice, getCart, liveCart],
   )
 
   return <CheckOutContext.Provider value={value}>{children}</CheckOutContext.Provider>
