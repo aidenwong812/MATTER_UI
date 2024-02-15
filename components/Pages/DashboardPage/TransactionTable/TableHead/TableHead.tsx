@@ -5,7 +5,8 @@ const TableHead = () => {
       <tr>
         <td className={itemClasses}>Item Name</td>
         <td className={itemClasses}>Date and Time</td>
-        <td className={itemClasses}>Traansaction on the Blockchain</td>
+        <td className={itemClasses}>Transaction on the Blockchain</td>
+        <td className={itemClasses}>Shipping Address</td>
         <td className={itemClasses}>Amount</td>
       </tr>
     </thead>
