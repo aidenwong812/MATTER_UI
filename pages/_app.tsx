@@ -6,9 +6,9 @@ import { ToastContainer } from "react-toastify"
 import { SessionProvider } from "next-auth/react"
 import React from "react"
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
-import { ThemeProvider } from "../providers/ThemeProvider"
-import UserProvider from "../providers/UserProvider"
-import { EthPriceProvider } from "../providers/EthPriceProvider"
+import { EthPriceProvider } from "@/providers/EthPriceProvider"
+import UserProvider from "@/providers/UserProvider"
+import { ThemeProvider } from "@/providers/ThemeProvider"
 
 const privyConfig: PrivyClientConfig = {
   loginMethods: ["email"],
