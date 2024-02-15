@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from "react"
 import { BigNumber } from "ethers"
-import useCartData from "../hooks/useCartData"
+import useCartData from "@/hooks/useCartData"
 import { demoProduct } from "@/components/Pages/ProductPage/demoProduct"
 
 const CheckOutContext = createContext(null)
