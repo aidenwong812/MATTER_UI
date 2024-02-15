@@ -4,7 +4,6 @@ import { keccak256, toUtf8Bytes } from "ethers/lib/utils"
 export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
 export const CHAIN_ID = IS_TESTNET ? optimismGoerli.id : base.id
 export const MULTICALL_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
-export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_CONTRACT
 export const MULTICALL_3_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
 export const MINT_REFERRAL = "0xcfBf34d385EA2d5Eb947063b67eA226dcDA3DC38"
 export const MINTER_ADDRESS = process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY
