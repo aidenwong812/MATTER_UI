@@ -1,25 +1,31 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import getListings from "../lib/firebase/getListings"
 import { useUserProvider } from "../providers/UserProvider"
+import removeDocument from "@/lib/firebase/removeDocument"
 
 const useMyListings = () => {
   const [listingProducts, setListingProducts] = useState([])
   const { userData } = useUserProvider()
 
-  useEffect(() => {
-    const init = async () => {
-      const response = await getListings(userData?.id)
+  const removeListing = async (id) => {
+    await removeDocument("products", id)
+    getListingProducts()
+  }
 
-      setListingProducts(response)
-    }
-
+  const getListingProducts = useCallback(async () => {
     if (!userData) return
+    const response = await getListings(userData?.id)
 
-    init()
+    setListingProducts(response)
   }, [userData])
+
+  useEffect(() => {
+    getListingProducts()
+  }, [getListingProducts])
 
   return {
     listingProducts,
+    removeListing,
   }
 }
 
