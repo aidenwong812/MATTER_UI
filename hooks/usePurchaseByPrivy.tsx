@@ -21,6 +21,7 @@ const usePurchaseByPrivy = () => {
       const sufficientBalance = balance.gte(totalPrice)
       if (!sufficientBalance) {
         toast.error(`Insufficient balance. Total price is ${totalPrice}`)
+        return
       }
       const sufficientAllowance = minterAllowance.gte(totalPrice)
       if (!sufficientAllowance) {
