@@ -1,6 +1,7 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
 import { db } from "./db"
 import { ONE_DAY_MILLISECONDS } from "../consts"
+import getBusinessByCustomerId from "./getBusinessByCustomerId"
 
 const getTrendingProducts = async () => {
   try {
@@ -12,6 +13,8 @@ const getTrendingProducts = async () => {
     if (querySnapshot.size > 0) {
       const productsPromise = querySnapshot.docs.map(async (data) => {
         const customer = await getDoc(doc(db, "customers", data.data().customerId))
+        const business = await getBusinessByCustomerId(data.data().customerId)
+
         return {
           id: data.id,
           ...data.data(),
@@ -19,6 +22,7 @@ const getTrendingProducts = async () => {
             id: customer.id,
             ...customer.data(),
           },
+          business,
         }
       })
 

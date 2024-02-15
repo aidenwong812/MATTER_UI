@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 import createCart from "../lib/firebase/createCart"
 import { useRouter } from "next/router"
 import getProductById from "../lib/firebase/getProductById"
+import { useUserProvider } from "./UserProvider"
 
 const ProductContext = createContext(null)
 
@@ -10,6 +11,7 @@ const ProductProvider = ({ children }) => {
   const productId = query.id
   const [productData, setProductData] = useState(null)
   const [loading, setLoading] = useState(false)
+  const { userData } = useUserProvider()
 
   const getProductData = useCallback(async () => {
     if (!productId) return null
@@ -25,6 +27,7 @@ const ProductProvider = ({ children }) => {
     await createCart({
       productId: productData?.id,
       customerId: productData?.customerId,
+      buyerId: userData?.id,
     })
     setLoading(false)
     push("/checkout")

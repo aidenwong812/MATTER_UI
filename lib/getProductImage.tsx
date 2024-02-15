@@ -7,7 +7,7 @@ const getProductImage = async (ipfs) => {
 
     return getIpfsLink(response.data.image || ipfs)
   } catch (error) {
-    return ""
+    return getIpfsLink(ipfs)
   }
 }
 

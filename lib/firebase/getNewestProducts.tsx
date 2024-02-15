@@ -1,5 +1,6 @@
 import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore"
 import { db } from "./db"
+import getBusinessByCustomerId from "./getBusinessByCustomerId"
 
 const getNewestProducts = async () => {
   try {
@@ -9,6 +10,8 @@ const getNewestProducts = async () => {
     if (querySnapshot.size > 0) {
       const productsPromise = querySnapshot.docs.slice(0, 10).map(async (data) => {
         const customer = await getDoc(doc(db, "customers", data.data().customerId))
+        const business = await getBusinessByCustomerId(data.data().customerId)
+
         return {
           id: data.id,
           ...data.data(),
@@ -16,6 +19,7 @@ const getNewestProducts = async () => {
             id: customer.id,
             ...customer.data(),
           },
+          business,
         }
       })
 

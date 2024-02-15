@@ -1,8 +1,11 @@
 import { useState } from "react"
+import { useDashboard } from "@/providers/DashboardProvider"
 import Icon from "../../../../../shared/Icon"
 
 const TableFooter = () => {
-  const lastPageIndex = 103
+  const { orders } = useDashboard()
+
+  const lastPageIndex = orders.length
   const [selectedPageIndex, setSelectedPageIndex] = useState(1)
 
   const nextPage = () => {
@@ -27,7 +30,7 @@ const TableFooter = () => {
                 className={`${selectedPageIndex === 1 ? "text-gray_4" : "text-black"}`}
               />
             </button>
-            {Array(3)
+            {Array(orders.length)
               .fill(0)
               .map((_, i) => (
                 <button
@@ -43,20 +46,26 @@ const TableFooter = () => {
                   {selectedPageIndex + i}
                 </button>
               ))}
-            <p>...</p>
-            <button
-              className={`rounded-[5px] w-[25px] h-[25px] flex justify-center items-center
-                                text-[16px] leading-[16px] `}
-              type="button"
-            >
-              {lastPageIndex}
-            </button>
+            {orders.length > 3 && (
+              <>
+                <p>...</p>
+                <button
+                  className={`rounded-[5px] w-[25px] h-[25px] flex justify-center items-center
+                                  text-[16px] leading-[16px] `}
+                  type="button"
+                >
+                  {lastPageIndex}
+                </button>
+              </>
+            )}
             <button type="button" className="w-[25px] flex items-center" onClick={nextPage}>
               <Icon
                 name="riArrowRight"
                 size={25}
                 className={`${
-                  selectedPageIndex === lastPageIndex - 2 ? "text-gray_4" : "text-black"
+                  selectedPageIndex === lastPageIndex - 2 || lastPageIndex <= 3
+                    ? "text-gray_4"
+                    : "text-black"
                 }`}
               />
             </button>

@@ -10,7 +10,7 @@ const LookupInput = () => {
 
   const handleClick = (data) => {
     if (data.type === "product") {
-      push(`product/${data.id}`)
+      push(`/product/${data.id}`)
     }
     setIsVisible(false)
   }

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react"
 import createCustomer from "../lib/firebase/createCustomer"
 import { useUserProvider } from "../providers/UserProvider"
 import getCustomer from "../lib/firebase/getCustomer"
+import { toast } from "react-toastify"
 
 export enum FORM_MODE {
   EDIT_MODE = "EDIT_MODE",
@@ -49,14 +50,14 @@ const useDeliveryFormData = () => {
 
     if (!customerData) return
 
-    setDeliveryFirstName(customerData.firstName)
-    setDeliveryLastName(customerData.lastName)
-    setDeliveryState(customerData.state)
-    setDeliveryPhoneNumber(customerData.phoneNumber)
-    setDeliveryZipCode(customerData.zipCode)
-    setDeliveryCountryCode(customerData.countryCode)
-    setDeliveryAddress1(customerData.address_1)
-    setDeliveryAddress2(customerData.address2)
+    setDeliveryFirstName(customerData.firstName || "")
+    setDeliveryLastName(customerData.lastName || "")
+    setDeliveryState(customerData.state || "")
+    setDeliveryPhoneNumber(customerData.phoneNumber || "")
+    setDeliveryZipCode(customerData.zipCode || "")
+    setDeliveryCountryCode(customerData.countryCode || "US")
+    setDeliveryAddress1(customerData.address1 || "")
+    setDeliveryAddress2(customerData.address2 || "")
   }, [userData])
 
   const confirmDeliveryAddress = async () => {
@@ -73,6 +74,7 @@ const useDeliveryFormData = () => {
       phoneNumber: deliveryPhoneNumber,
       countryCode: deliveryCountryCode,
     })
+    toast.success("Saved Successfully.")
     await initialize()
     setFormMode(FORM_MODE.VISIBLE_MODE)
     setLoading(false)
