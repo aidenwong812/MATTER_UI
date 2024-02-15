@@ -1,12 +1,10 @@
-import useConnectedWallet from "./useConnectedWallet"
+import useConnectedWallet from "@/hooks/useConnectedWallet"
 import { ethers } from "ethers"
-import getMulticallFromCart from "../lib/getMulticallFromCart"
-import getMintData from "../lib/zora/getMintData"
 import { formatEther } from "viem"
 import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
-import { useUserProvider } from "../providers/UserProvider"
+import { useUserProvider } from "@/providers/UserProvider"
 import { useEthPrice } from "@/providers/EthPriceProvider"
 
 const useCrossMint = (cart, totalPrice) => {
@@ -16,11 +14,12 @@ const useCrossMint = (cart, totalPrice) => {
   const [receiptEmail, setReceiptEmail] = useState("")
   const { getUsdConversion } = useEthPrice()
 
-  const multicalls = cart && getMulticallFromCart(cart, getMintData(connectedWallet))
   const totalPriceEth = totalPrice && ethers.utils.formatEther(totalPrice)
   const usdPrice = totalPrice && getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   const mintConfig = useMemo(() => {
+    const multicalls = []
+
     if (totalPriceEth && multicalls && connectedWallet) {
       return {
         type: "erc-721",
@@ -31,7 +30,7 @@ const useCrossMint = (cart, totalPrice) => {
       }
     }
     return null
-  }, [totalPriceEth, multicalls, connectedWallet, cart, totalPrice])
+  }, [totalPriceEth, connectedWallet])
 
   const handlePayment = (event) => {
     switch (event.type) {
@@ -42,6 +41,8 @@ const useCrossMint = (cart, totalPrice) => {
         toast.info("Payment rejected")
         break
       case "payment:preparation.failed":
+        break
+      default:
         break
     }
   }
