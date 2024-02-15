@@ -74,10 +74,13 @@ const useDeployData = () => {
   const getCategoryOptions = (type) => {
     switch (type) {
       case "Physical":
+        setProductCategory(physicalCategories[0].value)
         return physicalCategories
       case "Digital":
+        setProductCategory(digitalCategories[0].value)
         return digitalCategories
       case "Service":
+        setProductCategory(serviceCategories[0].value)
         return serviceCategories
       default:
         return []
