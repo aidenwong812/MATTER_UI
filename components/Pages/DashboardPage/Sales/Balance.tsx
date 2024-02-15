@@ -11,7 +11,9 @@ const Balance = () => {
       gap-y-[10px] gap-x-[20px]"
       >
         <div className="flex items-center gap-x-[10px]">
-          <p className="text-[56px] md:text-[70px] leading-[110%] tracking-[-1.75px]">{balance}</p>
+          <p className="text-[56px] md:text-[70px] leading-[110%] tracking-[-1.75px]">
+            {parseFloat(balance).toFixed(4)}
+          </p>
           <p className="text-[18px] leading-[28px]">ETH</p>
         </div>
         <div
