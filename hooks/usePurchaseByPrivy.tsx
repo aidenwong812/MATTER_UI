@@ -15,6 +15,7 @@ const usePurchaseByPrivy = () => {
     if (!cart) return
 
     if (!prepare()) return
+
     try {
       if (!balance) return
       const sufficientBalance = balance.gte(totalPrice)

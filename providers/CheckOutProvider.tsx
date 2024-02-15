@@ -1,11 +1,14 @@
 import React, { createContext, useContext, useMemo } from "react"
 import { BigNumber } from "ethers"
-import { demoProducts } from "../components/Pages/CheckOutPage/demoProducts"
+import useCartData from "../hooks/useCartData"
+import { demoProduct } from "@/components/Pages/ProductPage/demoProduct"
 
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
-  const cart = demoProducts
+  const { getCart, cart: liveCart } = useCartData()
+  const cart = demoProduct
+
   const totalPrice = cart.reduce(
     (acc, call) => acc.add(BigNumber.from(call.price)),
     BigNumber.from(0),
@@ -15,8 +18,10 @@ const CheckOutProvider = ({ children }) => {
     () => ({
       cart,
       totalPrice,
+      getCart,
+      liveCart,
     }),
-    [cart, totalPrice],
+    [cart, totalPrice, getCart, liveCart],
   )
 
   return <CheckOutContext.Provider value={value}>{children}</CheckOutContext.Provider>
