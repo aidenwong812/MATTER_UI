@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
-import getCartsByBuyerId from "../lib/firebase/getCartsByBuyerId"
-import { useUserProvider } from "../providers/UserProvider"
+import getCartsByBuyerId from "@/lib/firebase/getCartsByBuyerId"
+import { useUserProvider } from "@/providers/UserProvider"
 import getBigNumberString from "@/lib/getBigNumberString"
 import { useEthPrice } from "@/providers/EthPriceProvider"
 
