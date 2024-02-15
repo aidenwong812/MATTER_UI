@@ -1,11 +1,12 @@
 import { and, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
 import { db } from "./db"
+import getBusinessByCustomerId from "./getBusinessByCustomerId"
 
-const getCartsByBuyerId = async (bueryId, isPurchased = false) => {
+const getCartsByBuyerId = async (buyerId, isPurchased = false) => {
   try {
     const q = query(
       collection(db, "carts"),
-      and(where("buyerId", "==", bueryId), where("purchased", "==", isPurchased)),
+      and(where("buyerId", "==", buyerId), where("purchased", "==", isPurchased)),
     )
     const querySnapshot = await getDocs(q)
 
@@ -13,6 +14,8 @@ const getCartsByBuyerId = async (bueryId, isPurchased = false) => {
       const cartsPromise = querySnapshot.docs.map(async (data) => {
         const product = await getDoc(doc(db, "products", data.data().productId))
         const customer = await getDoc(doc(db, "customers", data.data().customerId))
+        const business = await getBusinessByCustomerId(data.data().customerId)
+
         return {
           id: data.id,
           ...data.data(),
@@ -24,6 +27,7 @@ const getCartsByBuyerId = async (bueryId, isPurchased = false) => {
             id: customer.id,
             ...customer.data(),
           },
+          business,
         }
       })
 
