@@ -50,14 +50,14 @@ const useDeliveryFormData = () => {
 
     if (!customerData) return
 
-    setDeliveryFirstName(customerData.firstName)
-    setDeliveryLastName(customerData.lastName)
-    setDeliveryState(customerData.state)
-    setDeliveryPhoneNumber(customerData.phoneNumber)
-    setDeliveryZipCode(customerData.zipCode)
-    setDeliveryCountryCode(customerData.countryCode)
-    setDeliveryAddress1(customerData.address_1)
-    setDeliveryAddress2(customerData.address2)
+    setDeliveryFirstName(customerData.firstName || "")
+    setDeliveryLastName(customerData.lastName || "")
+    setDeliveryState(customerData.state || "")
+    setDeliveryPhoneNumber(customerData.phoneNumber || "")
+    setDeliveryZipCode(customerData.zipCode || "")
+    setDeliveryCountryCode(customerData.countryCode || "US")
+    setDeliveryAddress1(customerData.address1 || "")
+    setDeliveryAddress2(customerData.address2 || "")
   }, [userData])
 
   const confirmDeliveryAddress = async () => {

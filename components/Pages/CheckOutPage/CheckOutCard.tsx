@@ -15,7 +15,8 @@ const CheckOutCard = () => {
   const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   const handleCryptoPurchase = async () => {
-    await purchaseByPrivy(cart, totalPrice)
+    const dummyTotalPrice = 100
+    await purchaseByPrivy(cart, dummyTotalPrice)
   }
 
   return (
