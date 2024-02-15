@@ -2,11 +2,11 @@ import { and, collection, doc, getDoc, getDocs, query, where } from "firebase/fi
 import { db } from "./db"
 import getBusinessByCustomerId from "./getBusinessByCustomerId"
 
-const getCartsByBuyerId = async (bueryId, isPurchased = false) => {
+const getCartsByBuyerId = async (buyerId, isPurchased = false) => {
   try {
     const q = query(
       collection(db, "carts"),
-      and(where("buyerId", "==", bueryId), where("purchased", "==", isPurchased)),
+      and(where("buyerId", "==", buyerId), where("purchased", "==", isPurchased)),
     )
     const querySnapshot = await getDocs(q)
 
