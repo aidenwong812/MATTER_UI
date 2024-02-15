@@ -1,4 +1,5 @@
 import useBalance from "@/hooks/useBalance"
+import { formatEther } from "viem"
 
 const Balance = () => {
   const { balance } = useBalance()
@@ -12,7 +13,7 @@ const Balance = () => {
       >
         <div className="flex items-center gap-x-[10px]">
           <p className="text-[56px] md:text-[70px] leading-[110%] tracking-[-1.75px]">
-            {parseFloat(balance).toFixed(4)}
+            {parseFloat(formatEther(balance)).toFixed(4)}
           </p>
           <p className="text-[18px] leading-[28px]">ETH</p>
         </div>

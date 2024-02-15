@@ -1,16 +1,30 @@
-import { useBalance as wagmiUB } from "wagmi"
-import useConnectedWallet from "./useConnectedWallet"
-import { CHAIN_ID } from "@/lib/consts"
+import { createPublicClient, http } from "viem"
+import { base, optimismGoerli } from "viem/chains"
+import useConnectedWallet from "@/hooks/useConnectedWallet"
+import { IS_TESTNET } from "@/lib/consts"
+import { useEffect, useState } from "react"
 
 const useBalance = () => {
+  const [balance, setBalance] = useState(BigInt(0))
   const { connectedWallet } = useConnectedWallet()
 
-  const { data } = wagmiUB({
-    address: connectedWallet as any,
-    chainId: CHAIN_ID,
+  const client = createPublicClient({
+    chain: IS_TESTNET ? optimismGoerli : base,
+    transport: http(),
   })
 
-  return { balance: data?.formatted }
+  useEffect(() => {
+    const init = async () => {
+      const response = await client.getBalance({
+        address: connectedWallet as any,
+      })
+      setBalance(response)
+    }
+    if (!client || !connectedWallet) return
+    init()
+  }, [client, connectedWallet])
+
+  return { balance }
 }
 
 export default useBalance
