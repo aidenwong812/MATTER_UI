@@ -15,7 +15,7 @@
   "dependencies": {
     "@crossmint/client-sdk-react-ui": "^1.1.1",
     "@hookform/resolvers": "^3.3.2",
-    "@privy-io/react-auth": "^1.44.0",
+    "@privy-io/react-auth": "^1.55.2",
     "@stripe/crypto": "^0.0.4",
     "@tailwindcss/forms": "^0.5.3",
     "@zoralabs/zorb": "^0.1.0",
@@ -32,7 +32,7 @@
     "next": "^12.2.2",
     "next-api-decorators": "^2.0.2",
     "next-auth": "^4.20.1",
-    "onchain-magic": "^0.5.6",
+    "onchain-magic": "^0.5.12",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.47.0",
@@ -45,7 +45,7 @@
     "recharts": "^2.8.0",
     "swiper": "^9.4.1",
     "usehooks-ts": "^2.9.1",
-    "viem": "^1.5.3"
+    "viem": "^2.7.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

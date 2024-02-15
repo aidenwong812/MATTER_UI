@@ -1,11 +1,16 @@
 import { useRouter } from "next/router"
-import useCreate1155Contract from "../hooks/useCreate1155Contract"
-import { CHAIN_ID, digitalCategories, physicalCategories, serviceCategories } from "../lib/consts"
-import createProduct from "../lib/firebase/createProduct"
-import { productTypes } from "../lib/consts"
+import useCreate1155Contract from "@/hooks/useCreate1155Contract"
+import {
+  CHAIN_ID,
+  digitalCategories,
+  physicalCategories,
+  serviceCategories,
+  productTypes,
+} from "@/lib/consts"
+import createProduct from "@/lib/firebase/createProduct"
 import { uploadToIpfs } from "onchain-magic"
 import { useState } from "react"
-import { useUserProvider } from "../providers/UserProvider"
+import { useUserProvider } from "@/providers/UserProvider"
 
 const useDeployData = () => {
   const [cover, setCover] = useState(null)
@@ -19,14 +24,18 @@ const useDeployData = () => {
   const { push } = useRouter()
   const { userData } = useUserProvider()
 
-  const create = async ({ cover, content }) => {
+  const create = async ({ cover: coverInput, content }) => {
     if (creating) return
 
-    setCover(cover[0])
+    setCover(coverInput[0])
     setCreating(true)
 
-    const response = await create1155Contract(CHAIN_ID, cover[0], productName, productDescription)
-
+    const response = await create1155Contract(
+      coverInput[0],
+      CHAIN_ID,
+      productName,
+      productDescription,
+    )
     const { error } = response as any
     if (error) {
       setCreating(false)
