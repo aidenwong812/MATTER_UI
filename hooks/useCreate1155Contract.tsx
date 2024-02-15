@@ -1,42 +1,30 @@
 import { usePrivy } from "@privy-io/react-auth"
-import { Interface } from "ethers/lib/utils"
-import abi from "../lib/abi/abi-Zora1155CreatorProxy.json"
-import dropAbi from "../lib/abi/abi-ERC1155Drop.json"
-import handleTxError from "../lib/handleTxError"
-import usePrivySendTransaction from "./usePrivySendTransaction"
 import { store } from "onchain-magic"
-import getZora1155ProxyAddress from "../lib/zora/getZora1155ProxyAddress"
-import { CHAIN_ID } from "../lib/consts"
-import useConnectedWallet from "./useConnectedWallet"
-import getCreatedContractAddress from "../lib/getCreatedContractAddress"
+import abi from "@/lib/abi/abi-Zora1155CreatorProxy.json"
+import handleTxError from "@/lib/handleTxError"
+import usePrivySendTransaction from "@/hooks/usePrivySendTransaction"
+import getZora1155ProxyAddress from "@/lib/zora/getZora1155ProxyAddress"
+import { CHAIN_ID } from "@/lib/consts"
+import useConnectedWallet from "@/hooks/useConnectedWallet"
+import getCreatedContractAddress from "@/lib/getCreatedContractAddress"
+import getSetupActions from "@/lib/zora/getSetupActions"
 
 const useCreate1155Contract = () => {
   const { authenticated } = usePrivy()
   const { sendTransaction } = usePrivySendTransaction()
   const { connectedWallet } = useConnectedWallet()
 
-  const create1155Contract = async (chainId = CHAIN_ID, cover, title, description) => {
+  const create1155Contract = async (cover, chainId = CHAIN_ID, title = "", description = "") => {
     try {
       const ipfsCid = await store(cover, title, description, connectedWallet)
-      const adminPermissionArgs = [0, connectedWallet, 2]
-      const minterPermissionArgs = [0, process.env.NEXT_PUBLIC_FIXED_PRICE_SALE_STRATEGY, 4]
-      const minterPermissionCall = new Interface(dropAbi).encodeFunctionData(
-        "addPermission",
-        minterPermissionArgs,
-      )
-      const adminPermissionCall = new Interface(dropAbi).encodeFunctionData(
-        "addPermission",
-        adminPermissionArgs,
-      )
-      const setupActions = [adminPermissionCall, minterPermissionCall]
-
+      const setupActions = getSetupActions(connectedWallet, ipfsCid)
       const args = [
         `ipfs://${ipfsCid}`,
         title,
         {
-          royaltyRecipient: "0x0000000000000000000000000000000000000000",
+          royaltyRecipient: connectedWallet,
           royaltyMintSchedule: 0,
-          royaltyBPS: 0,
+          royaltyBPS: 500,
         },
         connectedWallet,
         setupActions,
@@ -44,6 +32,7 @@ const useCreate1155Contract = () => {
 
       if (authenticated) {
         const factoryAddress = getZora1155ProxyAddress(chainId)
+
         const response = await sendTransaction(
           factoryAddress,
           chainId,
@@ -56,7 +45,7 @@ const useCreate1155Contract = () => {
         )
 
         const { error } = response as any
-        if (error) return
+        if (error) return { error: true }
 
         const contractAddress = getCreatedContractAddress(response.logs)
         return {
