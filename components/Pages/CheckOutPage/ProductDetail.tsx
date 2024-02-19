@@ -32,7 +32,7 @@ const ProductDetail = ({ data }) => {
         </div>
         <div>
           <p className="text-[16px] text-black font-[400] tracking-[-0.4px] leading-[100%] pb-[8px]">
-            US ${productData?.priceInUsd || "00"}
+            USD ${productData?.priceInUsd || "00"}
           </p>
         </div>
       </div>
