@@ -30,7 +30,7 @@ const TrendingItem = ({ i, data = null }) => {
         </p>
         <SellerName className="my-[4px]" name={getProductSeller(data)} />
         <p className="text-gray_6 text-[14px] font-[400] leading-[120%] tracking-[-0.14px] text-left">
-          US ${data?.priceInUsd}
+          USD ${data?.priceInUsd}
         </p>
       </div>
     </button>
