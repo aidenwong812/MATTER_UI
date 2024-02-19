@@ -1,4 +1,3 @@
-import ExportTransactionButton from "../ExportTransactionButton"
 import NewListingButton from "../NewListingButton"
 import PayoutFundsButtons from "../PayoutFundsButton"
 
@@ -9,7 +8,6 @@ const Buttons = () => (
   px-[16px] md:px-0"
   >
     <NewListingButton />
-    <ExportTransactionButton />
     <PayoutFundsButtons />
   </div>
 )
