@@ -2,10 +2,8 @@ import useProductImage from "@/hooks/useProductImage"
 import Image from "@/shared/Image"
 import Icon from "@/shared/Icon"
 import getProductSeller from "@/lib/getProductSeller"
-import { useEthPrice } from "@/providers/EthPriceProvider"
 
 const ProductDetail = ({ data }) => {
-  const { getEthConversion } = useEthPrice()
   const productData = data?.product
   const { imageUrl } = useProductImage(productData?.cover)
 
@@ -35,9 +33,6 @@ const ProductDetail = ({ data }) => {
         <div>
           <p className="text-[16px] text-black font-[400] tracking-[-0.4px] leading-[100%] pb-[8px]">
             US ${productData?.priceInUsd || "00"}
-          </p>
-          <p className="text-[16px] text-black font-[400] tracking-[-0.4px] leading-[100%]">
-            ETH {getEthConversion(productData?.priceInUsd) || "0.000"}
           </p>
         </div>
       </div>
