@@ -30,7 +30,7 @@ const useLookup = () => {
         item?.businessName?.toLowerCase().search(searchKey.toLowerCase()) >= 0,
     )
 
-    setFilters(data)
+    setFilters(data.slice(0, 10))
   }, [products, customers, searchKey])
 
   useEffect(() => {
