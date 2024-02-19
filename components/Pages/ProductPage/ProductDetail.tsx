@@ -16,7 +16,7 @@ const ProductDetail = () => {
       <SellerName className="my-[16px]" name={getProductSeller(productData)} />
       <p className="text-[16px] leading-[100%] tracking-[-0.4px] font-[400] mb-[4px]">
         {" "}
-        US ${productData?.priceInUsd || "00"}
+        USD ${productData?.priceInUsd || "00"}
       </p>
       <p className="text-[16px] font-[400] leading-[150%] tracking-[-0.384px] mt-[30px]">
         {productData?.description}
