@@ -41,6 +41,9 @@ const EditAccount = () => {
           <Icon name="camera" className="text-white" />
         )}
       </div>
+      <p className="text-[28px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
+        {userData?.business.businessName}
+      </p>
       <p
         className="leading-[110%] tracking-[-0.7px]
             text-[28px] font-[400] text-center"
@@ -49,6 +52,9 @@ const EditAccount = () => {
       </p>
       <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
         {userData?.privyEmail}
+      </p>
+      <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
+        {userData?.business.website}
       </p>
       <button
         type="button"
