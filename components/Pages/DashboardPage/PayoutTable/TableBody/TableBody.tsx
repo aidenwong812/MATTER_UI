@@ -1,14 +1,17 @@
 import TableRow from "../TableRow"
+import { useWallets } from "@privy-io/react-auth"
 
-const TableBody = () => (
-  <tbody>
-    {Array(10)
-      .fill(0)
-      .map((_, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <TableRow key={i} />
+const TableBody = (): JSX.Element => {
+
+  const { wallets } = useWallets();
+  // const { approveWithPrivy, balance, minterAllowance } = useUsdc()
+  return (
+    <tbody>
+      {wallets.map((wallet, index) => (
+        <TableRow key={index} wallet={wallet} />
       ))}
-  </tbody>
-)
+    </tbody>
+  );
+};
 
 export default TableBody

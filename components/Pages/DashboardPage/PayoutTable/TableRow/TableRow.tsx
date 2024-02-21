@@ -1,24 +1,49 @@
 import useIsMobile from "../../../../../hooks/useIsMobile"
 import truncateEthAddress from "../../../../../lib/truncatedEthAddress"
 
-const TableRow = () => {
+
+const TableRow = (props) => {
   const isMobile = useIsMobile()
 
   const itemClasses = `md:px-[20px] md:py-[16px] text-gray_7 text-[12px] leading-[16px] p-[10px] border border-gray_1`
+  
+  const connectedWallet = props.wallet?.address
+  
+  const connectedAtTimestamp = props.wallet?.connectedAt
 
+  function formatDate(dateString: any, isMobile: boolean): string {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hourCycle: 'h23', // Use PM instead of AM
+      timeZoneName: 'short', // Abbreviated Time Zone Name
+    };
+    return date.toLocaleString('en-US', options);
+  }
+  
+  const  connectedAt = formatDate(connectedAtTimestamp, isMobile);
+
+  const isConnected = props.wallet?.isConnected;
+  
   return (
     <tr>
       <td className={itemClasses}>
         {isMobile ? (
           <>
-            00/00/0000
+            {connectedAt}
             <br />
             00:00:PM
             <br />
             EST
           </>
         ) : (
-          "00/00/0000 00:00:PM EST"
+          // "00/0011/0000 00:00:PM EST"
+          connectedAt
         )}
       </td>
       <td className={itemClasses}>
@@ -32,11 +57,13 @@ const TableRow = () => {
       </td>
       <td className={`${itemClasses} !text-link`}>
         {isMobile
-          ? truncateEthAddress("0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c")
-          : "0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c"}
+          ? truncateEthAddress(connectedWallet)
+          : connectedWallet}
       </td>
       <td className={itemClasses}>
-        <p className="text-[12px] leading-[16px]">Successful</p>
+        <p className="text-[12px] leading-[16px]">
+          {isConnected ? "Successfully" : "failed"}
+        </p>
       </td>
     </tr>
   )
