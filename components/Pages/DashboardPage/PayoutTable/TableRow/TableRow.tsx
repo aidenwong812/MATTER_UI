@@ -7,10 +7,8 @@ const TableRow = (props) => {
   const itemClasses = `md:px-[20px] md:py-[16px] text-gray_7 text-[12px] leading-[16px] p-[10px] border border-gray_1`
 
   const connectedAtTimestamp = props?.wallet?.connectedAt
-
   const amount = props?.wallet?.fund
-  
-  const connectedWallet = props?.wallet?.address  
+  const connectedWallet = props?.wallet?.address
 
   function formatDate(dateString: any): string {
     const date = new Date(dateString)
@@ -29,13 +27,9 @@ const TableRow = (props) => {
   }
 
   const connectedAt = formatDate(connectedAtTimestamp)
-
   const isConnected = props?.wallet?.isConnected() ?? false;
-  console.log("isConnected",isConnected)
   const connectedDate = connectedAt.split(",")[0];
-
   const connectedTime = connectedAt.split(",")[1].split(" ")[1];
-
   const connectedTimezone = connectedAt.split(",")[1].split(" ")[2]
 
   return (
@@ -68,7 +62,7 @@ const TableRow = (props) => {
         {isMobile ? truncateEthAddress(connectedWallet) : connectedWallet}
       </td>
       <td className={itemClasses}>
-        <p className="text-[12px] leading-[16px]">{ !isConnected ? "failed" : "Successfully"}</p>
+        <p className="text-[12px] leading-[16px]">{!isConnected ? "failed" : "Successfully"}</p>
       </td>
     </tr>
   )
