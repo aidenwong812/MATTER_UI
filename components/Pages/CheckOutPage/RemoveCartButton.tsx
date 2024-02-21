@@ -2,11 +2,11 @@ import removeCart from "../../../lib/firebase/removeCart"
 import { useCheckOut } from "../../../providers/CheckOutProvider"
 
 const RemoveCartButton = ({ cartId }) => {
-  const { getCart } = useCheckOut()
+  const { getCarts } = useCheckOut()
 
   const handleRemove = async () => {
     await removeCart(cartId)
-    getCart()
+    getCarts()
   }
   return (
     <button
