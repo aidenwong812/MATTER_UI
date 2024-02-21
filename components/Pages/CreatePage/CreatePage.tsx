@@ -25,6 +25,8 @@ const CreatePage = () => {
     setProductCategory,
     priceInUsd,
     setPriceInUsd,
+    totalSupply,
+    setTotalSupply,
     getCategoryOptions,
   } = useDeploy()
 
@@ -82,6 +84,15 @@ const CreatePage = () => {
               placeholder="Enter USD price..."
               id="price"
               name="price"
+              type="number"
+              hookToForm
+            />
+            <Input
+              value={totalSupply}
+              onChange={(e) => setTotalSupply(e.target.value)}
+              placeholder="Enter total supply..."
+              id="total_supply"
+              name="total_supply"
               type="number"
               hookToForm
             />

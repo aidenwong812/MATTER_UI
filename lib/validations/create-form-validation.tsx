@@ -24,6 +24,7 @@ export const validation = JoiBase.object({
   }),
   product_type: Joi.allow(),
   price: Joi.allow(),
+  total_supply: Joi.allow(),
   product_category: Joi.allow(),
   content: Joi.allow(),
   cover: Joi.filelist()
