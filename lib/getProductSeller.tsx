@@ -1,5 +1,5 @@
 const getProductSeller = (data) => {
-  const businessName = data?.businessName
+  const businessName = data?.customer?.business?.businessName
 
   return businessName
 }
