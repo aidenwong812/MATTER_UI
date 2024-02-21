@@ -1,15 +1,11 @@
 import { useState } from "react"
-import Select from "@/shared/Select"
+import Input from "@/shared/Input"
 import useIsMobile from "@/hooks/useIsMobile"
 import ProductDetail from "./ProductDetail"
 import RemoveCartButton from "./RemoveCartButton"
 
 const CartItem = ({ data = null, cartId = null }: any) => {
   const [quantity, setQuanity] = useState("1")
-  const quantites = Array.from({ length: 5 }).map((_, index) => ({
-    label: `${index + 1}`,
-    value: `${index + 1}`,
-  }))
   const isMobile = useIsMobile()
 
   return (
@@ -40,13 +36,12 @@ const CartItem = ({ data = null, cartId = null }: any) => {
               QTY
             </p>
           )}
-          <Select
+          <Input
             id="qantity"
             name="qantity"
             value={quantity}
             className="!w-[100px]"
             onChange={(e) => setQuanity(e.target.value)}
-            options={quantites}
           />
         </div>
         <RemoveCartButton cartId={cartId} />

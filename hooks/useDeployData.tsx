@@ -54,7 +54,6 @@ const useDeployData = () => {
       content: null,
       contractAddress: response.contractAddress,
       customerId: userData?.id,
-      chainId: CHAIN_ID,
     }
 
     if (content) {
