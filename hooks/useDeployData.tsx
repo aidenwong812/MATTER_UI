@@ -20,6 +20,7 @@ const useDeployData = () => {
   const [productType, setProductType] = useState(productTypes[0].value)
   const [productCategory, setProductCategory] = useState(physicalCategories[0].value)
   const [priceInUsd, setPriceInUsd] = useState("")
+  const [totalSupply, setTotalSupply] = useState("")
   const { create1155Contract } = useCreate1155Contract()
   const { push } = useRouter()
   const { userData } = useUserProvider()
@@ -47,11 +48,13 @@ const useDeployData = () => {
       productName,
       productDescription,
       priceInUsd: parseFloat(priceInUsd),
+      totalSupply: parseFloat(totalSupply),
       productType,
       productCategory,
       content: null,
       contractAddress: response.contractAddress,
       customerId: userData?.id,
+      chainId: CHAIN_ID,
     }
 
     if (content) {
@@ -103,6 +106,8 @@ const useDeployData = () => {
     setProductCategory,
     priceInUsd,
     setPriceInUsd,
+    totalSupply,
+    setTotalSupply,
     getCategoryOptions,
   }
 }

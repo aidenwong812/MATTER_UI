@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
-import createCart from "../lib/firebase/createCart"
 import { useRouter } from "next/router"
+import useNewestProducts from "@/hooks/useNewestProducts"
+import createCart from "../lib/firebase/createCart"
 import getProductById from "../lib/firebase/getProductById"
 import { useUserProvider } from "./UserProvider"
 
@@ -12,6 +13,7 @@ const ProductProvider = ({ children }) => {
   const [productData, setProductData] = useState(null)
   const [loading, setLoading] = useState(false)
   const { userData } = useUserProvider()
+  const newestProducts = useNewestProducts()
 
   const getProductData = useCallback(async () => {
     if (!productId) return null
@@ -43,8 +45,9 @@ const ProductProvider = ({ children }) => {
       productData,
       loading,
       setLoading,
+      ...newestProducts,
     }),
-    [setLoading, loading, productData, addCart],
+    [setLoading, loading, productData, addCart, newestProducts],
   )
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

@@ -29,6 +29,21 @@ const useUsdc = () => {
     return response
   }
 
+  const payoutWithPrivy = async (address: string) => {
+    const args = [MINTER_ADDRESS, maxUint256]
+    const response = await sendTransaction(
+      address,
+      CHAIN_ID,
+      erc20Abi,
+      "approve",
+      args,
+      BigNumber.from("0").toHexString(),
+      "USDC Payout",
+      "Payout",
+    )
+    return response
+  }
+
   useEffect(() => {
     const init = async () => {
       const balanceResponse = await usdc.balanceOf(connectedWallet)
@@ -41,7 +56,7 @@ const useUsdc = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connectedWallet])
 
-  return { approveWithPrivy, balance, minterAllowance }
+  return { approveWithPrivy, payoutWithPrivy, balance, minterAllowance }
 }
 
 export default useUsdc
