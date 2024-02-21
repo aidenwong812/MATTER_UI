@@ -84,7 +84,7 @@ const CreatePage = () => {
               placeholder="Enter USD price..."
               id="price"
               name="price"
-              type="number"
+              type="text"
               hookToForm
             />
             <Input
@@ -93,7 +93,7 @@ const CreatePage = () => {
               placeholder="Enter total supply..."
               id="total_supply"
               name="total_supply"
-              type="number"
+              type="text"
               hookToForm
             />
             <Select
