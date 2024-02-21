@@ -8,6 +8,7 @@ const getListings = async (customerId) => {
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
+      console.log("query data---->",querySnapshot)
       const productsPromise = querySnapshot.docs.map(async (data) => {
         const customer = await getDoc(doc(db, "customers", data.data().customerId))
         const business = await getBusinessByCustomerId(data.data().customerId)
