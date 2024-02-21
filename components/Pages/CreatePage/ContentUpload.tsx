@@ -19,8 +19,7 @@ const ContentUpload = () => (
           className="text-[12px]
               text-center"
         >
-          Drag and drop or choose a file. Image, video, audio, PDF, GLB, and HTML supported. Max
-          Size 2GB.
+          Drag and drop or choose a file. Image, video, audio, PDF and GLB supported. Max Size 2GB.
         </p>
       </button>
     )}

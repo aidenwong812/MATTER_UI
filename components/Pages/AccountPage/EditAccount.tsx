@@ -17,6 +17,10 @@ const EditAccount = () => {
     logout()
     push("/")
   }
+  const handleRedirectToPurchases = () => {
+    push("/purchases")
+  }
+
   return (
     <div
       className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
@@ -56,15 +60,21 @@ const EditAccount = () => {
       </button>
       <div className="flex items-end justify-around w-full">
         <div className="flex flex-col items-center">
-          <Image
-            link="/images/archive.svg"
-            blurLink="/images/archive.png"
-            containerClasses="w-[25px] h-[24px]"
-            alt="not found icon"
-          />
-          <p className="text-[12px] font-[400] tracking-[-0.3px] leading-[100%] mt-[10px]">
-            Purchases
-          </p>
+          <button
+            className="flex flex-col items-center"
+            type="button"
+            onClick={handleRedirectToPurchases}
+          >
+            <Image
+              link="/images/archive.svg"
+              blurLink="/images/archive.png"
+              containerClasses="w-[25px] h-[24px]"
+              alt="not found icon"
+            />
+            <p className="text-[12px] font-[400] tracking-[-0.3px] leading-[100%] mt-[10px]">
+              Purchases
+            </p>
+          </button>
         </div>
         <button className="flex flex-col items-center" type="button" onClick={handleLogout}>
           <Image

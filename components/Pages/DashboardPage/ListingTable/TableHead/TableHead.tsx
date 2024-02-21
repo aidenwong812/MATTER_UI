@@ -7,7 +7,6 @@ const TableHead = () => {
         <td className={itemClasses}>Product Name</td>
         <td className={itemClasses}>Business Name</td>
         <td className={itemClasses}>Price(USD)</td>
-        <td className={itemClasses}>Price(ETH)</td>
         <td className={itemClasses}>Actions</td>
       </tr>
     </thead>
