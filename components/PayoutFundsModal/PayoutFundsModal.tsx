@@ -1,9 +1,15 @@
-import Input from "@/shared/Input"
 import { useState } from "react"
-import Modal from "../../shared/Modal"
+import usePayoutByPrivy from "@/hooks/usePayoutByPrivy"
+import Input from "@/shared/Input"
+import Modal from "@/shared/Modal"
 
 const PayoutFundsModal = ({ isVisible, handleClose }) => {
+  const { payoutByPrivy } = usePayoutByPrivy()
   const [coinbaseUsdcPayoutAddress, setCoinbaseUsdcPayoutAddress] = useState("")
+
+  const handlePayout = async () => {
+    await payoutByPrivy(coinbaseUsdcPayoutAddress)
+  }
 
   return (
     <Modal isVisible={isVisible} onClose={handleClose} containerClassName="w-full md:w-[375px]">
@@ -23,6 +29,7 @@ const PayoutFundsModal = ({ isVisible, handleClose }) => {
           type="button"
           className="border border-gray_2 rounded-full
                         py-[10px] px-[20px] flex items-center gap-x-[10px]"
+          onClick={handlePayout}
         >
           Payout
         </button>
