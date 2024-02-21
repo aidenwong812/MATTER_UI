@@ -13,8 +13,6 @@ const EditAccount = () => {
   const { logout } = usePrivy()
   const { push } = useRouter()
 
-  console.log(userData)
-
   const handleLogout = () => {
     logout()
     push("/")

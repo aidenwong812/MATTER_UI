@@ -17,7 +17,7 @@ const UserProvider = ({ children }) => {
     if (!data) return
     setUserData(data)
   }, [authenticated, privyEmail])
-  
+
   const loading = !ready
 
   const isPrivatePage =
@@ -37,7 +37,6 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (user?.email?.address) setPrivyEmail(user.email.address)
-    
   }, [user])
 
   const value = useMemo(
