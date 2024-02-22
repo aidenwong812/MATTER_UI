@@ -6,7 +6,9 @@ const ProductTrending = () => {
 
   return (
     <div className="mt-[40px] col-span-10">
-      <p className="text-[16px] md:text-[28px] font-[400] tracking-[-0.168px] leading-[120%] mb-[40px] md:capitalize">
+      <p
+        className="text-[16px] md:text-[28px] font-[400] tracking-[-0.168px] leading-[120%] mb-[40px] md:capitalize"
+      >
         You might also like
       </p>
       <div className="w-full grid grid-cols-2 md:grid-cols-5 gap-[40px]">
