@@ -12,6 +12,9 @@ const EditAccountForm = () => {
     handleUpdate,
     userName,
     setUserName,
+    publicBusinessName,
+    setPublicBusinessName,
+    handleCreateBusinessAccount,
     userEmail,
     setUserEmail,
     loading,
@@ -31,6 +34,11 @@ const EditAccountForm = () => {
       }
     }
   }
+  const handleUpdateAndCreateBusiness = async () => {
+    await handleUpdate()
+    await handleCreateBusinessAccount()
+  }
+  
 
   return (
     <div
@@ -66,9 +74,18 @@ const EditAccountForm = () => {
       </p>
       <Form
         validationSchema={validation}
-        onSubmit={handleUpdate}
+        onSubmit={handleUpdateAndCreateBusiness}
         className="my-[24px] flex flex-col gap-y-[12px] w-full"
       >
+        <Input
+          value={publicBusinessName}
+          onChange={(e) => setPublicBusinessName(e.target.value)}
+          placeholder="Business Name"
+          className="!border-black"
+          id="business"
+          name="business"
+          hookToForm
+        />
         <Input
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
