@@ -14,10 +14,16 @@ const useCreate1155Contract = () => {
   const { sendTransaction } = usePrivySendTransaction()
   const { connectedWallet } = useConnectedWallet()
 
-  const create1155Contract = async (cover, chainId = CHAIN_ID, title = "", description = "") => {
+  const create1155Contract = async (
+    cover,
+    chainId = CHAIN_ID,
+    title = "",
+    description = "",
+    totalSupply = "1000000",
+  ) => {
     try {
       const ipfsCid = await store(cover, title, description, connectedWallet)
-      const setupActions = getSetupActions(connectedWallet, ipfsCid)
+      const setupActions = getSetupActions(connectedWallet, ipfsCid, totalSupply)
       const args = [
         `ipfs://${ipfsCid}`,
         title,
