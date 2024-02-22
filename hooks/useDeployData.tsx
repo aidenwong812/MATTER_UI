@@ -36,6 +36,7 @@ const useDeployData = () => {
       CHAIN_ID,
       productName,
       productDescription,
+      totalSupply,
     )
     const { error } = response as any
     if (error) {

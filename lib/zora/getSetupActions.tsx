@@ -3,7 +3,7 @@ import { getCallSaleData } from "onchain-magic"
 import dropAbi from "../abi/abi-ERC1155Drop.json"
 import { MINTER_ADDRESS, USDC_ADDRESS } from "../consts"
 
-const getSetupActions = (adminWallet, ipfsCid) => {
+const getSetupActions = (adminWallet, ipfsCid, totalSupply) => {
   //   TODO: dummy variables need replaced before mainnet launch
   const dummyUsdcAddress = USDC_ADDRESS
   const dummyNextTokenId = 1
@@ -29,8 +29,7 @@ const getSetupActions = (adminWallet, ipfsCid) => {
     erc20Address: dummyUsdcAddress,
   })
   const callSaleArgs = [dummyNextTokenId, MINTER_ADDRESS, data]
-  const maxSupply = 1000000
-  const setupNewTokenArgs = [`ipfs://${ipfsCid}`, maxSupply]
+  const setupNewTokenArgs = [`ipfs://${ipfsCid}`, totalSupply]
   const setupNewTokenCall = iface.encodeFunctionData("setupNewToken", setupNewTokenArgs)
   const callSaleCall = iface.encodeFunctionData("callSale", callSaleArgs)
   const setupActions = [
