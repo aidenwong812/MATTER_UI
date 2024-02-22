@@ -62,7 +62,7 @@ const TableRow = (props) => {
         {isMobile ? truncateEthAddress(connectedWallet) : connectedWallet}
       </td>
       <td className={itemClasses}>
-        <p className="text-[12px] leading-[16px]">{!isConnected ? "failed" : "Successfully"}</p>
+        <p className="text-[12px] leading-[16px]">{!isConnected ? "failed" : "Successful"}</p>
       </td>
     </tr>
   )
