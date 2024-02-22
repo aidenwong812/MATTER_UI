@@ -13,7 +13,7 @@ const Balance = () => {
       >
         <div className="flex items-center gap-x-[10px]">
           <p className="text-[56px] md:text-[70px] leading-[110%] tracking-[-1.75px]">
-            {getShortNumberString(balance)}
+            {getShortNumberString(balance ?? 0)}
           </p>
           <p className="text-[18px] leading-[28px]">USDC</p>
         </div>
