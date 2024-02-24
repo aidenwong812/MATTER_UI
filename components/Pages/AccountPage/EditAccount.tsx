@@ -26,9 +26,18 @@ const EditAccount = () => {
       className="w-full md:w-[375px] shadow-gray_shadow rounded-[10px]
         py-[40px] px-[26px] flex flex-col items-center bg-white"
     >
+      <div className="flex gap-x-[10px] items-center">
+        <Image
+          link="/images/matter_mini_logo_black.svg"
+          blurLink="/images/matter_mini_logo_black.png"
+          containerClasses="w-[19px] aspect-[19/14]"
+          alt="not found icon"
+        />
+        <p className="tracking-[6px] font-[400] text-[12px] leading-[120%]">BUSINESS</p>
+      </div>
       <div
         className="flex bg-gray_10 justify-center items-center
-            w-[84px] rounded-full aspect-[1/1] mb-[32px]"
+            w-[84px] rounded-full aspect-[1/1] mb-[8px] mt-[32px]"
       >
         {userData?.pfp ? (
           <Image
@@ -44,11 +53,8 @@ const EditAccount = () => {
       <p className="text-[28px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
         {userData?.business.businessName}
       </p>
-      <p
-        className="leading-[110%] tracking-[-0.7px]
-            text-[28px] font-[400] text-center"
-      >
-        {userData?.firstName} {userData?.lastName}
+      <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
+        {userData?.userName}
       </p>
       <p className="text-[16px] tracking-[-0.4px] font-[400] leading-[100%] mt-[24px] text-black">
         {userData?.privyEmail}
