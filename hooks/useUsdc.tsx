@@ -30,12 +30,12 @@ const useUsdc = () => {
   }
 
   const payoutWithPrivy = async (address: string) => {
-    const args = [MINTER_ADDRESS, maxUint256]
+    const args = [address, balance]
     const response = await sendTransaction(
-      address,
+      USDC_ADDRESS,
       CHAIN_ID,
       erc20Abi,
-      "approve",
+      "transfer",
       args,
       BigNumber.from("0").toHexString(),
       "USDC Payout",

@@ -38,7 +38,6 @@ const EditAccountForm = () => {
     await handleUpdate()
     await handleCreateBusinessAccount()
   }
-  
 
   return (
     <div
