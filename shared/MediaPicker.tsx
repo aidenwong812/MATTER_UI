@@ -77,7 +77,7 @@ function MediaPicker({ id, name, children, hookToForm }: IMediaPicker) {
         {...(id && { id: id })}
         type="file"
         className="absolute w-full h-full left-0 top-0 z-[2] opacity-0 cursor-pointer"
-        accept="image/*"
+        accept="image/*, audio/*, video/*, .pdf, .glb, .zip"
         ref={filePickerRef as any}
         onChange={handleFilePicked}
       />
