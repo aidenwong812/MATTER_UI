@@ -10,22 +10,20 @@ const useCrossMint = (cart, totalPrice) => {
   const { userData } = useUserProvider()
   const [receiptEmail, setReceiptEmail] = useState("")
 
-  const totalPriceEth = totalPrice
-
   const mintConfig = useMemo(() => {
     const multicalls = []
 
-    if (totalPriceEth && multicalls && connectedWallet) {
+    if (totalPrice && multicalls && connectedWallet) {
       return {
         type: "erc-721",
-        totalPrice: totalPriceEth,
+        totalPrice,
         quantity: 1,
         cart: multicalls,
         to: connectedWallet,
       }
     }
     return null
-  }, [totalPriceEth, connectedWallet])
+  }, [totalPrice, connectedWallet])
 
   const handlePayment = (event) => {
     switch (event.type) {
