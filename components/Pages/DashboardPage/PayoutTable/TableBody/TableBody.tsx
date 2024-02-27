@@ -6,7 +6,6 @@ const TableBody = () => {
   const { wallets } = useWallets()
   wallets.filter((wallet) => wallet.walletClientType === "privy")
   const { payoutActivity } = usePayoutActivity(wallets)
-  console.log(payoutActivity)
 
   return (
     <tbody>
