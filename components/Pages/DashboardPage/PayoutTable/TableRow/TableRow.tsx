@@ -1,6 +1,7 @@
 import { formatEther } from "ethers/lib/utils"
 import useIsMobile from "@/hooks/useIsMobile"
 import truncateEthAddress from "@/lib/truncatedEthAddress"
+import { IS_TESTNET } from "@/lib/consts"
 
 const TableRow = ({ transaction }) => {
   const isMobile = useIsMobile()
@@ -10,6 +11,9 @@ const TableRow = ({ transaction }) => {
   const blockTimestamp = transaction?.metadata.blockTimestamp
   const amount = parseFloat(formatEther(transaction?.rawContract.value ?? 0)).toFixed(2)
   const hash = transaction?.hash
+  const explorer = IS_TESTNET
+    ? `https://goerli-optimism.etherscan.io/tx/${hash}`
+    : `https://basescan.org/tx/${hash}`
 
   function formatDate(dateString: any): string {
     const date = new Date(dateString)
@@ -50,13 +54,17 @@ const TableRow = ({ transaction }) => {
       <td className={itemClasses}>
         {isMobile ? (
           <>
-            {amount} <br /> USDT
+            {amount} <br /> USDC
           </>
         ) : (
-          `${amount} USDT`
+          `${amount} USDC`
         )}
       </td>
-      <td className={`${itemClasses} !text-link`}>{isMobile ? truncateEthAddress(hash) : hash}</td>
+      <td className={`${itemClasses} !text-link`}>
+        <a target="_blank" href={explorer} rel="noreferrer">
+          {isMobile ? truncateEthAddress(hash) : hash}
+        </a>
+      </td>
       <td className={itemClasses}>
         <p className="text-[12px] leading-[16px]">Successful</p>
       </td>
