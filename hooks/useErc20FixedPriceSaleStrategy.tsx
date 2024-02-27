@@ -1,10 +1,9 @@
-import { CHAIN_ID, MINTER_ADDRESS } from "@/lib/consts"
-import abi from "@/lib/abi/ERC20FixedPriceSaleStrategy.json"
 import { getEncodedMinterArgs } from "onchain-magic"
 import { BigNumber } from "ethers"
+import { CHAIN_ID, IS_TESTNET, MINTER_ADDRESS } from "@/lib/consts"
+import abi from "@/lib/abi/ERC20FixedPriceSaleStrategy.json"
 import useConnectedWallet from "@/hooks/useConnectedWallet"
 import usePrivySendTransaction from "@/hooks/usePrivySendTransaction"
-import { IS_TESTNET } from "@/lib/consts"
 
 const useErc20FixedPriceSaleStrategy = () => {
   const { sendTransaction } = usePrivySendTransaction()

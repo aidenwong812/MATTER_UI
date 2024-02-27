@@ -1,40 +1,62 @@
-import useIsMobile from "../../../../../hooks/useIsMobile"
-import truncateEthAddress from "../../../../../lib/truncatedEthAddress"
+import { formatEther } from "ethers/lib/utils"
+import useIsMobile from "@/hooks/useIsMobile"
+import truncateEthAddress from "@/lib/truncatedEthAddress"
 
-const TableRow = () => {
+const TableRow = ({ transaction }) => {
   const isMobile = useIsMobile()
 
   const itemClasses = `md:px-[20px] md:py-[16px] text-gray_7 text-[12px] leading-[16px] p-[10px] border border-gray_1`
+
+  const blockTimestamp = transaction?.metadata.blockTimestamp
+  const amount = parseFloat(formatEther(transaction?.rawContract.value ?? 0)).toFixed(2)
+  const hash = transaction?.hash
+
+  function formatDate(dateString: any): string {
+    const date = new Date(dateString)
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hourCycle: "h23", // Use PM instead of AM
+      hour12: true,
+      timeZoneName: "short", // Abbreviated Time Zone Name
+    }
+    return date.toLocaleString("en-US", options)
+  }
+
+  const timestamp = formatDate(blockTimestamp)
+  const timestampDate = timestamp.split(",")[0]
+  const timestampTime = timestamp.split(",")[1].split(" ")[1]
+  const timestampZone = timestamp.split(",")[1].split(" ")[2]
 
   return (
     <tr>
       <td className={itemClasses}>
         {isMobile ? (
           <>
-            00/00/0000
+            {timestampDate}
             <br />
-            00:00:PM
+            {timestampTime}
             <br />
-            EST
+            {timestampZone}
           </>
         ) : (
-          "00/00/0000 00:00:PM EST"
+          timestamp
         )}
       </td>
       <td className={itemClasses}>
         {isMobile ? (
           <>
-            0.000 <br /> USDT
+            {amount} <br /> USDT
           </>
         ) : (
-          "0.000 USDT"
+          `${amount} USDT`
         )}
       </td>
-      <td className={`${itemClasses} !text-link`}>
-        {isMobile
-          ? truncateEthAddress("0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c")
-          : "0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c"}
-      </td>
+      <td className={`${itemClasses} !text-link`}>{isMobile ? truncateEthAddress(hash) : hash}</td>
       <td className={itemClasses}>
         <p className="text-[12px] leading-[16px]">Successful</p>
       </td>
