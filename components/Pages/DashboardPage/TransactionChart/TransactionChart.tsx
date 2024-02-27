@@ -4,7 +4,7 @@ import { chartData } from "./data"
 import XAxisTick from "./XAxisTick"
 import YAxisTick from "./YAxisTick"
 
-const TransactionChart = ({ selectedPeriod }: { selectedPeriod: string }) => {
+const TransactionChart = () => {
   const [containerRef, { height }] = useMeasure()
 
   return (

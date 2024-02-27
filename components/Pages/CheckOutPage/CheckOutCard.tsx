@@ -1,5 +1,3 @@
-import { formatEther } from "viem"
-import { useEthPrice } from "@/providers/EthPriceProvider"
 import Image from "../../../shared/Image"
 import Icon from "../../../shared/Icon"
 import useIsMobile from "../../../hooks/useIsMobile"
@@ -9,10 +7,8 @@ import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()
-  const { getUsdConversion } = useEthPrice()
   const { cart, totalPrice } = useCheckOut()
   const { purchaseByPrivy } = usePurchaseByPrivy()
-  const usdPrice = getUsdConversion(formatEther(totalPrice.toBigInt()))
 
   const handleCryptoPurchase = async () => {
     const dummyTotalPrice = 100
@@ -40,7 +36,7 @@ const CheckOutCard = () => {
           className="text-[28px] leading-[120%] tracking-[-0.168px] font-[400] font-bold mb-[20px]
         text-center md:text-left"
         >
-          ${usdPrice}
+          ${totalPrice}
         </p>
         <div className="flex flex-col items-center">
           <button

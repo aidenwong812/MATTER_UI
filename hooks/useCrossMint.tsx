@@ -1,21 +1,16 @@
 import useConnectedWallet from "@/hooks/useConnectedWallet"
-import { ethers } from "ethers"
-import { formatEther } from "viem"
 import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 import { useUserProvider } from "@/providers/UserProvider"
-import { useEthPrice } from "@/providers/EthPriceProvider"
 
 const useCrossMint = (cart, totalPrice) => {
   const { push } = useRouter()
   const { connectedWallet } = useConnectedWallet()
   const { userData } = useUserProvider()
   const [receiptEmail, setReceiptEmail] = useState("")
-  const { getUsdConversion } = useEthPrice()
 
-  const totalPriceEth = totalPrice && ethers.utils.formatEther(totalPrice)
-  const usdPrice = totalPrice && getUsdConversion(formatEther(totalPrice.toBigInt()))
+  const totalPriceEth = totalPrice
 
   const mintConfig = useMemo(() => {
     const multicalls = []
@@ -54,7 +49,7 @@ const useCrossMint = (cart, totalPrice) => {
   return {
     mintConfig,
     receiptEmail,
-    usdPrice,
+    totalPrice,
     setReceiptEmail,
     handlePayment,
   }
