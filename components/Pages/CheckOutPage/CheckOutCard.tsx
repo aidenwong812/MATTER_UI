@@ -7,12 +7,12 @@ import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()
-  const { cart, totalPrice } = useCheckOut()
+  const { liveCart, totalPrice } = useCheckOut()
   const { purchaseByPrivy } = usePurchaseByPrivy()
 
   const handleCryptoPurchase = async () => {
     const dummyTotalPrice = 100
-    await purchaseByPrivy(cart, dummyTotalPrice)
+    await purchaseByPrivy(liveCart, dummyTotalPrice)
   }
 
   return (
@@ -59,7 +59,7 @@ const CheckOutCard = () => {
           >
             Or
           </p>
-          <CreditCardPayButton cart={cart} totalPrice={totalPrice} />
+          <CreditCardPayButton cart={liveCart} totalPrice={totalPrice} />
         </div>
       </div>
     </div>
