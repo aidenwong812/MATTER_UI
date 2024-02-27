@@ -1,51 +1,24 @@
 import useIsMobile from "../../../../../hooks/useIsMobile"
 import truncateEthAddress from "../../../../../lib/truncatedEthAddress"
 
-const TableRow = (props) => {
+const TableRow = () => {
   const isMobile = useIsMobile()
 
   const itemClasses = `md:px-[20px] md:py-[16px] text-gray_7 text-[12px] leading-[16px] p-[10px] border border-gray_1`
-
-  const connectedAtTimestamp = props?.wallet?.connectedAt
-  const amount = props?.wallet?.fund
-  const connectedWallet = props?.wallet?.address
-
-  function formatDate(dateString: any): string {
-    const date = new Date(dateString)
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hourCycle: "h23", // Use PM instead of AM
-      hour12: true,
-      timeZoneName: "short", // Abbreviated Time Zone Name
-    }
-    return date.toLocaleString("en-US", options)
-  }
-
-  const connectedAt = formatDate(connectedAtTimestamp)
-  const isConnected = props?.wallet?.isConnected() ?? false;
-  const connectedDate = connectedAt.split(",")[0];
-  const connectedTime = connectedAt.split(",")[1].split(" ")[1];
-  const connectedTimezone = connectedAt.split(",")[1].split(" ")[2]
 
   return (
     <tr>
       <td className={itemClasses}>
         {isMobile ? (
           <>
-            {connectedDate}
+            00/00/0000
             <br />
-            {connectedTime}
+            00:00:PM
             <br />
-            {connectedTimezone}
+            EST
           </>
         ) : (
-          // "00/0011/0000 00:00:PM EST"
-          connectedAt
+          "00/00/0000 00:00:PM EST"
         )}
       </td>
       <td className={itemClasses}>
@@ -54,15 +27,16 @@ const TableRow = (props) => {
             0.000 <br /> USDT
           </>
         ) : (
-          // "0.000 USDT"
-          amount
+          "0.000 USDT"
         )}
       </td>
       <td className={`${itemClasses} !text-link`}>
-        {isMobile ? truncateEthAddress(connectedWallet) : connectedWallet}
+        {isMobile
+          ? truncateEthAddress("0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c")
+          : "0xaeff3fb58a4e4d8803373c1383a27f7fcd4ef4603ca11f0ca74633c06802714c"}
       </td>
       <td className={itemClasses}>
-        <p className="text-[12px] leading-[16px]">{!isConnected ? "failed" : "Successful"}</p>
+        <p className="text-[12px] leading-[16px]">Successful</p>
       </td>
     </tr>
   )

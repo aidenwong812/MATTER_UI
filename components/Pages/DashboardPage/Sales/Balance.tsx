@@ -1,5 +1,5 @@
 import useUsdc from "@/hooks/useUsdc"
-import getShortNumberString from "@/lib/getShortNumberString"
+import { formatEther } from "ethers/lib/utils"
 
 const Balance = () => {
   const { balance } = useUsdc()
@@ -13,7 +13,7 @@ const Balance = () => {
       >
         <div className="flex items-center gap-x-[10px]">
           <p className="text-[56px] md:text-[70px] leading-[110%] tracking-[-1.75px]">
-            {getShortNumberString(balance ?? 0)}
+            {parseFloat(formatEther(balance ?? 0)).toFixed(2)}
           </p>
           <p className="text-[18px] leading-[28px]">USDC</p>
         </div>
