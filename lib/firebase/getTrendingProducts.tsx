@@ -1,13 +1,17 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
 import { db } from "./db"
-import { ONE_DAY_MILLISECONDS } from "../consts"
+import { CHAIN_ID, ONE_DAY_MILLISECONDS } from "../consts"
 import getBusinessByCustomerId from "./getBusinessByCustomerId"
 
 const getTrendingProducts = async () => {
   try {
     const last30DaysMillios = new Date().getTime() - 30 * ONE_DAY_MILLISECONDS
 
-    const q = query(collection(db, "products"), where("timestamp", ">=", last30DaysMillios))
+    const q = query(
+      collection(db, "products"),
+      where("timestamp", ">=", last30DaysMillios),
+      where("chainId", "==", CHAIN_ID),
+    )
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {

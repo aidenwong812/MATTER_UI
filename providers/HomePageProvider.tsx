@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react"
-import useTrendingProducts from "../hooks/useTrendingProducts"
-import useNewestProducts from "../hooks/useNewestProducts"
+import useTrendingProducts from "@/hooks/useTrendingProducts"
+import useNewestProducts from "@/hooks/useNewestProducts"
 
 const HomePageContext = createContext({} as any)
 

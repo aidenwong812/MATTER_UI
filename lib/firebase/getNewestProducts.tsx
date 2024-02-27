@@ -1,10 +1,15 @@
-import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore"
 import { db } from "./db"
 import getBusinessByCustomerId from "./getBusinessByCustomerId"
+import { CHAIN_ID } from "../consts"
 
 const getNewestProducts = async () => {
   try {
-    const q = query(collection(db, "products"), orderBy("timestamp", "desc"))
+    const q = query(
+      collection(db, "products"),
+      where("chainId", "==", CHAIN_ID),
+      orderBy("timestamp", "desc"),
+    )
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
