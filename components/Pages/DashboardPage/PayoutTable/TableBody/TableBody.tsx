@@ -1,10 +1,10 @@
 import useConnectedWallet from "@/hooks/useConnectedWallet"
-import usePayoutActivity from "@/hooks/usePayoutActivity"
+import useTransferHistory from "@/hooks/useTransferHistory"
 import TableRow from "../TableRow"
 
 const TableBody = () => {
   const { connectedWallet } = useConnectedWallet()
-  const { payoutActivity } = usePayoutActivity(connectedWallet)
+  const { payoutActivity } = useTransferHistory(connectedWallet)
 
   return (
     <tbody>

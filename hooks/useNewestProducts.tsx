@@ -7,6 +7,7 @@ const useNewestProducts = () => {
   useEffect(() => {
     const init = async () => {
       const response = await getNewestProducts()
+      console.log('response => ', response)
 
       setNewestProducts(response)
     }

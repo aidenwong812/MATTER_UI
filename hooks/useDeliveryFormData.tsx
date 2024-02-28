@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { toast } from "react-toastify"
 import createCustomer from "../lib/firebase/createCustomer"
 import { useUserProvider } from "../providers/UserProvider"
 import getCustomer from "../lib/firebase/getCustomer"
-import { toast } from "react-toastify"
 
 export enum FORM_MODE {
   EDIT_MODE = "EDIT_MODE",
