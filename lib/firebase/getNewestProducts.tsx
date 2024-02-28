@@ -7,13 +7,12 @@ const getNewestProducts = async () => {
   try {
     const q = query(
       collection(db, "products"),
-      where("chainId", "==", CHAIN_ID),
       orderBy("timestamp", "desc"),
     )
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
-      const productsPromise = querySnapshot.docs.slice(0, 10).map(async (data) => {
+      const productsPromise = querySnapshot.docs.filter(one => one.data().chainId === CHAIN_ID).slice(0, 10).map(async (data) => {
         const customer = await getDoc(doc(db, "customers", data.data().customerId))
         const business = await getBusinessByCustomerId(data.data().customerId)
 

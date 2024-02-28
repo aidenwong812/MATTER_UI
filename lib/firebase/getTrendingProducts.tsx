@@ -10,12 +10,11 @@ const getTrendingProducts = async () => {
     const q = query(
       collection(db, "products"),
       where("timestamp", ">=", last30DaysMillios),
-      where("chainId", "==", CHAIN_ID),
     )
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
-      const productsPromise = querySnapshot.docs.map(async (data) => {
+      const productsPromise = querySnapshot.docs.filter(one => one.data().chainId === CHAIN_ID).map(async (data) => {
         const customer = await getDoc(doc(db, "customers", data.data().customerId))
         const business = await getBusinessByCustomerId(data.data().customerId)
 
