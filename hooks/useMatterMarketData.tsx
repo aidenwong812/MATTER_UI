@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { serviceCategories, digitalCategories, physicalCategories } from "@/lib/consts"
-import getProductsByType from "../lib/firebase/getProductsByType"
+import getProductsByType from "@/lib/firebase/getProductsByType"
 
 const useMatterMarketData = (type) => {
   const [products, setProducts] = useState([])
