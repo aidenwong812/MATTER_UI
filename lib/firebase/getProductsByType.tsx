@@ -1,10 +1,15 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
 import { db } from "./db"
 import getBusinessByCustomerId from "./getBusinessByCustomerId"
+import { CHAIN_ID } from "../consts"
 
 const getProductsByType = async (type) => {
   try {
-    const q = query(collection(db, "products"), where("productType", "==", type))
+    const q = query(
+      collection(db, "products"),
+      where("chainId", "==", CHAIN_ID),
+      where("productType", "==", type),
+    )
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
