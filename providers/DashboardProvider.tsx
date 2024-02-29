@@ -9,7 +9,7 @@ const DashboardContext = createContext({} as any)
 export const useDashboard = () => useContext(DashboardContext)
 
 export const DashboardProvider = ({ children }) => {
-  const [selectedPeriod, setSelectedPeriod] = useState('today')
+  const [selectedPeriod, setSelectedPeriod] = useState("today")
 
   const myListings = useMyListings()
   const orders = useMyOrders()

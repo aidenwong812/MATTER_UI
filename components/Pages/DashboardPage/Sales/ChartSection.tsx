@@ -17,7 +17,7 @@ const ChartSection = () => {
         minute: "2-digit",
         hourCycle: "h23",
       }),
-      uv: parseFloat(formatEther(sale?.rawContract.value ?? 0)).toFixed(2)
+      uv: parseFloat(formatEther(sale?.rawContract.value ?? 0)).toFixed(2),
     }
   })
 

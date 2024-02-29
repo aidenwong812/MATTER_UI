@@ -1,8 +1,9 @@
-import { base, optimismGoerli } from "viem/chains"
+import { base, sepolia } from "viem/chains"
 import { keccak256, toUtf8Bytes } from "ethers/lib/utils"
 
 export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
-export const CHAIN_ID = IS_TESTNET ? optimismGoerli.id : base.id
+export const CHAIN = IS_TESTNET ? sepolia : base
+export const CHAIN_ID = CHAIN.id
 export const MULTICALL_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
 export const MULTICALL_3_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
 export const MINT_REFERRAL = "0xcfBf34d385EA2d5Eb947063b67eA226dcDA3DC38"

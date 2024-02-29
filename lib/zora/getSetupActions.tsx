@@ -4,8 +4,6 @@ import dropAbi from "../abi/abi-ERC1155Drop.json"
 import { MINTER_ADDRESS, USDC_ADDRESS } from "../consts"
 
 const getSetupActions = (adminWallet, ipfsCid, totalSupply) => {
-  //   TODO: dummy variables need replaced before mainnet launch
-  const dummyUsdcAddress = USDC_ADDRESS
   const dummyNextTokenId = 1
   const dummySaleStart = 0
   const dummyPricePerToken = 100
@@ -26,7 +24,7 @@ const getSetupActions = (adminWallet, ipfsCid, totalSupply) => {
     maxTokensPerAddress: openEdition,
     pricePerToken: dummyPricePerToken,
     fundsRecipient: adminWallet,
-    erc20Address: dummyUsdcAddress,
+    erc20Address: USDC_ADDRESS,
   })
   const callSaleArgs = [dummyNextTokenId, MINTER_ADDRESS, data]
   const setupNewTokenArgs = [`ipfs://${ipfsCid}`, totalSupply]
