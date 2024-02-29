@@ -1,5 +1,5 @@
-import useIsMobile from "../../../../../hooks/useIsMobile"
-import truncateEthAddress from "../../../../../lib/truncatedEthAddress"
+import useIsMobile from "@/hooks/useIsMobile"
+import truncateEthAddress from "@/lib/truncatedEthAddress"
 
 const TableRow = ({ data }) => {
   const isMobile = useIsMobile()
