@@ -10,9 +10,9 @@ const getCustomerAndBusinesses = async (customerId) => {
     return {
       customer: {
         id: customer.id,
-        ...customer.data()
+        ...customer.data(),
       },
-      business
+      business,
     }
   } catch (error) {
     return null

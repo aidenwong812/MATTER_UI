@@ -14,13 +14,14 @@ const useErc20FixedPriceSaleStrategy = () => {
     const to = MINTER_ADDRESS
     const targets = [
       IS_TESTNET
-        ? "0xC6DF65460CeD63c5505B5935eDE7D2c955e4CB6b"
+        ? "0x503E28B9789c1bFa11410D469865f7BAa5771D37"
         : "0xd0b7956771475f1f40901d2b6dbce507a629cc21",
     ]
     const ids = [1]
     const quantities = [1]
     const unusedKey = 0
-    const minterArguments = [getEncodedMinterArgs(connectedWallet, "purchased via MATTER")]
+    const minterArgument = getEncodedMinterArgs(connectedWallet, "purchased via MATTER")
+    const minterArguments = [minterArgument]
     const args = [targets, ids, quantities, unusedKey, minterArguments]
     try {
       const response = await sendTransaction(

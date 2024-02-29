@@ -14,7 +14,7 @@ const useSales = (wallet: string, selectedPeriod: string) => {
         const salesData = await getAssetTransfers(transferType, wallet)
         if (salesData) {
           const filteredSalesData = salesData.filter(
-            (one) => new Date(one.metadata.blockTimestamp).getTime() >= startDate
+            (one) => new Date(one.metadata.blockTimestamp).getTime() >= startDate,
           )
           setSales(filteredSalesData)
         }

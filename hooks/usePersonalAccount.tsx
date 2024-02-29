@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { getIpfsLink, uploadToIpfs } from "onchain-magic"
 import { toast } from "react-toastify"
-import createCustomer from "../lib/firebase/createCustomer"
-import { useUserProvider } from "../providers/UserProvider"
+import createCustomer from "@/lib/firebase/createCustomer"
+import { useUserProvider } from "@/providers/UserProvider"
 
 export enum Screen {
   SELECT_UI = "SELECT_UI",
