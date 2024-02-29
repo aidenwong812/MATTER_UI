@@ -4,25 +4,18 @@ import getBusinessByCustomerId from "./getBusinessByCustomerId"
 
 const getCustomerAndBusinesses = async (customerId) => {
   try {
-    const getCustomer = async () => {
-      const customer = await getDoc(doc(db, "customers", customerId))
-      return {
-        customer: {
-          id: customer.id,
-          ...customer.data(),
-        },
-      }
-    }
-    const getBusiness = async () => {
-      const business = await getBusinessByCustomerId(customerId)
-      return {
-        business,
-      }
-    }
+    const customer = await getDoc(doc(db, "customers", customerId))
+    const business = await getBusinessByCustomerId(customerId)
 
-    return await Promise.all([getBusiness(), getCustomer()])
+    return {
+      customer: {
+        id: customer.id,
+        ...customer.data()
+      },
+      business
+    }
   } catch (error) {
-    return []
+    return null
   }
 }
 

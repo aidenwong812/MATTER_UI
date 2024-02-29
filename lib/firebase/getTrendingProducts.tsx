@@ -13,18 +13,14 @@ const getTrendingProducts = async () => {
     if (querySnapshot.size > 0) {
       const productsPromise = querySnapshot.docs
         .filter((one) => one.data().chainId === CHAIN_ID)
-        .map(async (data) => {
-          const response = await getCustomerAndBusinesses(data.data().customerId)
-          const { business } = response[0]
-          const { customer } = response[1]
-
-          return {
+        .map((data) =>
+          getCustomerAndBusinesses(data.data().customerId).then(({ business, customer }) => ({
             id: data.id,
             ...data.data(),
             customer,
             business,
-          }
-        })
+          })),
+        )
 
       return await Promise.all(productsPromise)
     }
