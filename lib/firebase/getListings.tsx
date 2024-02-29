@@ -1,31 +1,28 @@
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
+import { collection, getDocs, query, where } from "firebase/firestore"
+import { CHAIN_ID } from "@/lib/consts"
 import { db } from "./db"
-import getBusinessByCustomerId from "./getBusinessByCustomerId"
-import { CHAIN_ID } from "../consts"
+import getCustomerAndBusinesses from "./getCustomerAndBusinesses"
 
 const getListings = async (customerId) => {
   try {
-    const q = query(
-      collection(db, "products"),
-      where("customerId", "==", customerId),
-    )
+    const q = query(collection(db, "products"), where("customerId", "==", customerId))
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
-      const productsPromise = querySnapshot.docs.filter(one => one.data().chainId === CHAIN_ID).map(async (data) => {
-        const customer = await getDoc(doc(db, "customers", data.data().customerId))
-        const business = await getBusinessByCustomerId(data.data().customerId)
+      const productsPromise = querySnapshot.docs
+        .filter((one) => one.data().chainId === CHAIN_ID)
+        .map(async (data) => {
+          const response = await getCustomerAndBusinesses(data.data().customerId)
+          const { business } = response[0]
+          const { customer } = response[1]
 
-        return {
-          id: data.id,
-          ...data.data(),
-          customer: {
-            id: customer.id,
-            ...customer.data(),
-          },
-          business,
-        }
-      })
+          return {
+            id: data.id,
+            ...data.data(),
+            customer,
+            business,
+          }
+        })
 
       return await Promise.all(productsPromise)
     }

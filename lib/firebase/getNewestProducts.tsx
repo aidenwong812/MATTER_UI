@@ -1,31 +1,29 @@
-import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore"
+import { collection, getDocs, orderBy, query } from "firebase/firestore"
+import { CHAIN_ID } from "@/lib/consts"
 import { db } from "./db"
-import getBusinessByCustomerId from "./getBusinessByCustomerId"
-import { CHAIN_ID } from "../consts"
+import getCustomerAndBusinesses from "./getCustomerAndBusinesses"
 
 const getNewestProducts = async () => {
   try {
-    const q = query(
-      collection(db, "products"),
-      orderBy("timestamp", "desc"),
-    )
+    const q = query(collection(db, "products"), orderBy("timestamp", "desc"))
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot.size > 0) {
-      const productsPromise = querySnapshot.docs.filter(one => one.data().chainId === CHAIN_ID).slice(0, 10).map(async (data) => {
-        const customer = await getDoc(doc(db, "customers", data.data().customerId))
-        const business = await getBusinessByCustomerId(data.data().customerId)
+      const productsPromise = querySnapshot.docs
+        .filter((one) => one.data().chainId === CHAIN_ID)
+        .slice(0, 10)
+        .map(async (data) => {
+          const response = await getCustomerAndBusinesses(data.data().customerId)
+          const { business } = response[0]
+          const { customer } = response[1]
 
-        return {
-          id: data.id,
-          ...data.data(),
-          customer: {
-            id: customer.id,
-            ...customer.data(),
-          },
-          business,
-        }
-      })
+          return {
+            id: data.id,
+            ...data.data(),
+            customer,
+            business,
+          }
+        })
 
       return await Promise.all(productsPromise)
     }
