@@ -1,10 +1,9 @@
 import { AreaChart, Area, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts"
 import { useMeasure } from "react-use"
-import { chartData } from "./data"
 import XAxisTick from "./XAxisTick"
 import YAxisTick from "./YAxisTick"
 
-const TransactionChart = () => {
+const TransactionChart = (chartData) => {
   const [containerRef, { height }] = useMeasure()
 
   return (
