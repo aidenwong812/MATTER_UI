@@ -82,5 +82,5 @@ export const TOTAL_DAYS_PER_WEEK = 7
 
 export const ALCHEMY_API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY
 export const ALCHEMY_ENDPOINT = `https://${
-  IS_TESTNET ? "opt-goerli" : "base-mainnet"
+  IS_TESTNET ? "base-sepolia" : "base-mainnet"
 }.g.alchemy.com/v2/${ALCHEMY_API_KEY}`

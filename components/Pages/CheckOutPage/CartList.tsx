@@ -26,7 +26,7 @@ const CartList = () => {
       >
         {liveCart.map((cartData, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <CartItem key={i} data={cartData} cartId={cartData?.id} />
+          <CartItem key={i} data={cartData} cartId={cartData?.id} cartIndex={i} />
         ))}
       </div>
     </div>

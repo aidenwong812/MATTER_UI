@@ -1,12 +1,12 @@
-import { useState } from "react"
-import Input from "@/shared/Input"
 import useIsMobile from "@/hooks/useIsMobile"
+import { useCheckOut } from "@/providers/CheckOutProvider"
+import Input from "@/shared/Input"
 import ProductDetail from "./ProductDetail"
 import RemoveCartButton from "./RemoveCartButton"
 
-const CartItem = ({ data = null, cartId = null }: any) => {
-  const [quantity, setQuanity] = useState("1")
+const CartItem = ({ data = null, cartId = null, cartIndex }: any) => {
   const isMobile = useIsMobile()
+  const { handleQuantityChange } = useCheckOut()
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -37,11 +37,13 @@ const CartItem = ({ data = null, cartId = null }: any) => {
             </p>
           )}
           <Input
+            value={data.quantity}
+            type="number"
+            onChange={(e) => handleQuantityChange(e, cartIndex)}
+            placeholder="Quantity"
+            className="!border-gray_6 !bg-white !w-[100px]"
             id="qantity"
             name="qantity"
-            value={quantity}
-            className="!w-[100px]"
-            onChange={(e) => setQuanity(e.target.value)}
           />
         </div>
         <RemoveCartButton cartId={cartId} />

@@ -1,9 +1,9 @@
-import Image from "../../../shared/Image"
-import Icon from "../../../shared/Icon"
-import useIsMobile from "../../../hooks/useIsMobile"
-import { useCheckOut } from "../../../providers/CheckOutProvider"
-import CreditCardPayButton from "../../CreditCardPayButton"
-import usePurchaseByPrivy from "../../../hooks/usePurchaseByPrivy"
+import Image from "@/shared/Image"
+import Icon from "@/shared/Icon"
+import { useCheckOut } from "@/providers/CheckOutProvider"
+import useIsMobile from "@/hooks/useIsMobile"
+import usePurchaseByPrivy from "@/hooks/usePurchaseByPrivy"
+import CreditCardPayButton from "@/components/CreditCardPayButton"
 
 const CheckOutCard = () => {
   const isMobile = useIsMobile()

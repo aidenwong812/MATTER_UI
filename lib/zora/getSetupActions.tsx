@@ -3,10 +3,9 @@ import { getCallSaleData } from "onchain-magic"
 import dropAbi from "../abi/abi-ERC1155Drop.json"
 import { MINTER_ADDRESS, USDC_ADDRESS } from "../consts"
 
-const getSetupActions = (adminWallet, ipfsCid, totalSupply) => {
+const getSetupActions = (adminWallet, ipfsCid, pricePerToken, totalSupply) => {
   const dummyNextTokenId = 1
   const dummySaleStart = 0
-  const dummyPricePerToken = 100
 
   const adminPermissionArgs = [0, adminWallet, 2]
   const minterPermissionArgs = [0, MINTER_ADDRESS, 2]
@@ -22,7 +21,7 @@ const getSetupActions = (adminWallet, ipfsCid, totalSupply) => {
     saleStart: dummySaleStart,
     saleEnd: maxUint64,
     maxTokensPerAddress: openEdition,
-    pricePerToken: dummyPricePerToken,
+    pricePerToken,
     fundsRecipient: adminWallet,
     erc20Address: USDC_ADDRESS,
   })

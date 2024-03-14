@@ -4,10 +4,10 @@ import useCartData from "@/hooks/useCartData"
 const CheckOutContext = createContext(null)
 
 const CheckOutProvider = ({ children }) => {
-  const { getCart, cart: liveCart } = useCartData()
+  const { getCart, cart: liveCart, handleQuantityChange } = useCartData()
 
   const totalPrice = liveCart.reduce((acc, call) => {
-    return acc + parseFloat(call.product.priceInUsd)
+    return acc + parseFloat(call.product.priceInUsd) * call.quantity
   }, 0)
 
   const value = useMemo(
@@ -15,8 +15,9 @@ const CheckOutProvider = ({ children }) => {
       totalPrice,
       getCart,
       liveCart,
+      handleQuantityChange,
     }),
-    [totalPrice, getCart, liveCart],
+    [totalPrice, getCart, liveCart, handleQuantityChange],
   )
 
   return <CheckOutContext.Provider value={value}>{children}</CheckOutContext.Provider>

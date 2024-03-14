@@ -16,9 +16,17 @@ const useCartData = () => {
     const cartWithEthPrice = response.map((data) => ({
       ...data,
       ethPrice: getBigNumberString(getEthConversion(data.product.priceInUsd)),
+      quantity: 1,
     }))
     setCart(cartWithEthPrice)
   }, [userData])
+
+  const handleQuantityChange = (e, cartIndex) =>
+    setCart(
+      cart.map((item, index) =>
+        index === cartIndex ? { ...item, quantity: e.target.value } : item,
+      ),
+    )
 
   useEffect(() => {
     getCart()
@@ -27,6 +35,7 @@ const useCartData = () => {
   return {
     cart,
     getCart,
+    handleQuantityChange,
   }
 }
 

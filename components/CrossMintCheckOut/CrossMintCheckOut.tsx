@@ -1,7 +1,7 @@
 import { CrossmintPaymentElement } from "@crossmint/client-sdk-react-ui"
-import Input from "../../shared/Input"
-import useCrossMint from "../../hooks/useCrossMint"
-import { useDeliveryForm } from "../../providers/DeliveryFormProvider"
+import Input from "@/shared/Input"
+import useCrossMint from "@/hooks/useCrossMint"
+import { useDeliveryForm } from "@/providers/DeliveryFormProvider"
 
 const CrossMintCheckOut = ({ cart, totalPrice }) => {
   const { isCompletedDelivery } = useDeliveryForm()

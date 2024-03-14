@@ -19,11 +19,12 @@ const useCreate1155Contract = () => {
     chainId = CHAIN_ID,
     title = "",
     description = "",
+    pricePerToken = 100000000,
     totalSupply = "1000000",
   ) => {
     try {
       const ipfsCid = await store(cover, title, description, connectedWallet)
-      const setupActions = getSetupActions(connectedWallet, ipfsCid, totalSupply)
+      const setupActions = getSetupActions(connectedWallet, ipfsCid, pricePerToken, totalSupply)
       const args = [
         `ipfs://${ipfsCid}`,
         title,

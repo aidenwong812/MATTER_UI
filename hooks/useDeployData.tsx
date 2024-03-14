@@ -36,6 +36,7 @@ const useDeployData = () => {
       CHAIN_ID,
       productName,
       productDescription,
+      parseFloat(priceInUsd) * 10 ** 6,
       totalSupply,
     )
     const { error } = response as any
